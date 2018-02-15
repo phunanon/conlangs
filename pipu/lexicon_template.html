@@ -1,0 +1,31 @@
+<script type="text/javascript" src="pipu.js"></script>
+<script>
+
+function colour (char)
+{
+    return Math.floor(char * 3.1).toString(16);
+}
+
+function gen ()
+{
+    var i = 0, out = '';
+    var num = 0;
+    for (var c1 = 0, c1max = pipu_con.length; c1 < c1max; ++c1) {
+        out += '\n//\n';
+        for (var v1 = 0, v1max = pipu_vow.length; v1 < v1max; ++v1) {
+            for (var c2 = 0, c2max = pipu_con.length; c2 < c2max; ++c2) {
+                var is_valid_num = (c1 != 7 && c2 != 7);
+                var col = (c1 <= 5 && v1 <= 5 && c2 <= 5 ? '"#'+colour(c1)+colour(v1)+colour(c2)+'"' : 'null ');
+                out += '    { pipu: "'+ pipu_con[c1]+pipu_vow[v1]+pipu_con[c2] +'", root: "", type: "", verb: "", adj: "", pnoun: "", comment: "", num: '+ pad((is_valid_num ? num : 'NaN'), '    ') +', colour: '+ pad(col, '      ') +' },\n';
+                ++i;
+                if (is_valid_num) { ++num; }
+            }
+        }
+    }
+    document.getElementById('out').innerHTML = 'var pipu_lex = [\n'+ out +'\n]';
+}
+</script>
+<body onload="gen()">
+<pre id="out" style="font-family: monospace; white-space: pre;">
+</pre>
+</body>
