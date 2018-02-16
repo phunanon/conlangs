@@ -23,8 +23,9 @@ function loadPage ()
   //4. Lexicon
     var header = '<tr><th>pipu</th><th>Root</th><th>Type</th><th>Verb</th><th>Adjective</th><th>Prop-noun</th><th>Comment</th><th>Number</th><th>Colour</th></tr>';
     var unused = 0;
-    for (lex in pipu_lex) {
-        var pipu    = pipu_lex[lex].pipu;
+    var l = 0;
+    for (var lex in pipu_lex) {
+        var pipu    = lex
         var root    = pipu_lex[lex].root;
         var type    = pipu_lex[lex].type;
         var verb    = pipu_lex[lex].verb;
@@ -44,8 +45,9 @@ function loadPage ()
         }
         if (root == "") { root = "<span style='color: #aaa'>unused</span>"; ++unused; }
 
-        gE("#s4 #t1").innerHTML += (!(lex % 56) ? header : '')+
-        '<tr><td><speaker onmouseover="aud(\''+ pipu +'\')"></speaker> <pipu>'+ pipu +'</pipu></td>'+
+        if (root[0] != "<") {
+        gE("#s4 #t1").innerHTML += (!(l % 56) ? header : '')+
+        '<tr><td><speaker onclick="aud(\''+ pipu +'\')"></speaker> <pipu>'+ pipu +'</pipu></td>'+
         '<td>'+ root +'</td>'+
         '<td>'+ type +'</td>'+
         '<td>'+ verb +'</td>'+
@@ -55,6 +57,8 @@ function loadPage ()
         '<td>'+ number +'</td>'+
         '<td style="color: '+ fg_color +'; background-color: '+ bg_color +'">'+ colour +'</td>'+
         '</tr>';
+        }
+        ++l;
     }
     gE("#s4 #lex-used").innerHTML = pipu_lex.length - unused;
     gE("#s4 #lex-unused").innerHTML = unused;
