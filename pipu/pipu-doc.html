@@ -16,7 +16,7 @@ function loadPage ()
             '<td>'+ pipu_chr[c] +'</td>'+
             '<td>'+ pipu_num[c] +'</td>'+
             '<td>/'+ pipu_ipa[c] +'/ '+
-            (c ? '<speaker onmouseover="aud(\''+ pipu_chr[c] +'\')"></speaker>' : '')+
+            (c ? '<speaker onclick="aud(\''+ pipu_chr[c] +'\')"></speaker>' : '')+
             '</td>'+
             '</tr>';
     }
@@ -71,7 +71,7 @@ function loadPage ()
         if (gloss != "") {
             var pipu = gloss2pipu(gloss);
             gE("#s6 #corp"+ c +" pipu").innerHTML = pipu;
-            gE("#s6 #corp"+ c +" IPA").innerHTML = '<speaker onmouseover="aud(\''+ pipu +'\')"></speaker> /'+ pipu2IPA(pipu) +'/';
+            gE("#s6 #corp"+ c +" IPA").innerHTML = '<speaker onclick="aud(\''+ pipu +'\')"></speaker> /'+ pipu2IPA(pipu) +'/';
         }
     }
   //Speakers
@@ -126,7 +126,7 @@ td.comment { max-width: 8rem; overflow: hidden; white-space: nowrap; text-overfl
 speaker {
     display: inline-block;
     font-size: 1.1rem;
-    cursor: progress;
+    cursor: pointer;
 }
 speaker:after { content: "🔊"; }
 
