@@ -1,0 +1,3 @@
+        var shift_x = (val==1||val==4||val==5 ? SCRIPT_SIZE/2 : 0);
+        ctx.drawImage(script, clipx+shift_x, 0, RESOURCE_SIZE-shift_x, RESOURCE_SIZE, x, y*SCRIPT_SIZE, SCRIPT_SIZE-shift_x, SCRIPT_SIZE);
+        x += SCRIPT_SIZE / (val==1||val==2||val==4||val==5||val==8||val==10 ? 2 : 1);

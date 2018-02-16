@@ -1,0 +1,33 @@
+On a sunny morning after the summer solstice, we started for the mountains.
+special-adj sun summer early-adj afterwards we(exclusive) travel-past earth tall-adj
+
+
+One does not simply walk into Mordor.
+actor not walk-give mordor-propernoun
+ipe oke apot owoh
+
+As usual, school ruins everything.
+school bad-verb all normality-be
+ope ahup iki ekif
+
+-- OUTDATED --
+
+The people in the room ate three big green meals.
+room person mouth-take 003 food.past earth-adj 050
+ici ife ikip ipox ifot iwis isix
+
+Hello, my name is Patrick
+greet-give me name Patrick-prop
+itak ipi ike apah
+
+How are you?
+you state-be
+ipa ikof
+
+The world was peaceful.
+earth.past calm-be
+iwit isif
+
+You're going to burn the food!
+you burn-verb food.will
+ipa iwap ifok

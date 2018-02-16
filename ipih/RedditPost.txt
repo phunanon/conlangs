@@ -1,0 +1,585 @@
+- V A N adjective describe or selection in a collection?
+- Use extra number space to extend numbers? Show minus
+
+#This is very VERY long, and I apologise for that!
+
+Hello, everybody!
+
+I don't know what sparked me to come back to conlanging again after so long. I just needed the mental challenge, I suppose. Some of you may remember I had a previous conlang called 'zaz' which had the goal of being incredibly small, while retaining all information of a sentence. And it did pretty well! It was just an absolute pain to speak...
+
+So, I set myself out with a new task this week: to create a language which 'lossy' (as opposed to 'lossless') compresses text, in the form of an oligosynth. i.e. I get to cut a lot of corners :P
+
+Without further ado, I'll go over the phonology, grammar, etc, I have wrote down so far, and a hefty corpus of 70 sentences from the [218 sentences list](https://web.archive.org/web/20120427054736/http://fiziwig.com/conlang/syntax_tests.html). 
+
+-----
+
+##Phonology & Orthography
+
+Binary|Hex|Romanised|Numeric|IPA|
+:--|:--|:--|:--|:--|
+0000|0x0|[space]|NaN|/ /|
+0001|0x1|p|0|/p/|
+0010|0x2|t|1|/t/|
+0011|0x3|k|2|/k/|
+0100|0x4|f|3|/f/|
+0101|0x5|w|4|/θ/|
+0110|0x6|s|5|/s/|
+0111|0x7|c|N/A|/ʃ/|
+1000|0x8|x|N/A|/x/|
+1001|0x9|h|N/A|/ç/|
+1010|0xA|i|0|/i/|
+1011|0xB|e|1|/ɛ/|
+1100|0xC|a|2|/a/|
+1101|0xD|o|3|/ɔ/|
+1110|0xE|q|4|/ɒ/|
+1111|0xF|u|5|/u/|
+
+##Morphology
+
+A very simple VCV(C), giving 324 (6\*9\*6) possible roots.  
+(C) is optionally added for grammar
+
+The great benefit of this is that you don't need to use any spaces! You simply break between two V's or after two lots of C's.
+
+To make things even smaller, there is a list of paired vowel phonemes which are mixed into one phoneme, but as this is pretty long here's the [list of them](https://pastebin.com/yVZf1fBu) (the two vowels on the left, their combination on the right). Please comment on how I could improve this, as it's very slap-dash the moment! I basically ran out of vowels, by the time I reached the u's.
+
+**Numbers/Colours**
+
+Numbers are represented in a base-5 system, where you simply use the characters as numbers and pop an 'x' on the end. However, unlike my old conlang, zaz, of which this is inspired by (where zaz had *16* vowels *and* consonants to play with), the words cannot be longer than 3 characters. Ergo, you can only represent a number up to 125... eheh... I'll work on it later...  
+And for colours, it's an RGB system, where the numerics are used for each of those colours. This gives the language effectively 125 colours! :D  
+See the morphology examples.
+
+##Lexicon
+
+The lexicon, I won't post on here just yet. Essentially, I band together similar concepts based on characters. So, at the moment, I have:  
+i\*\* - "Language features: pronouns, clause dividers, conditionals"  
+e\*\* - "Life, nature, time"  
+a\*\* - "Humanity and its stuff"  
+o\*\* - "Communication, mathematics, direction"  
+q\*\* - "Buildings, furniture, structures, protocols, objects, locations"  
+u\*\* - *currently unlabeled*, though I do have 'metre,' 'square,' and 'circle' in there at the moment.
+
+##Grammar
+
+###As morphology
+
+! denotes lexicon lookup  
+**-(nothing)** !noun  
+**-p** !verb  
+**-t** !past  
+**-k** !will  
+**-f** be  
+**-w** of the subject  
+**-s** !adj  
+**-c** *currently unused*  
+**-x** !num/col  
+**-h** !proper noun  
+
+I did try other methods of saving space here, with the tensing of verbs, but it was just too common and clumsy to do it any other way.
+
+**Examples**
+
+atip - to want/wanting  
+atit - wanted  
+atik - will want  
+atif - X is desire  
+-w - see corpus #31  
+atis - desired  
+ipex - 001 (base 5) / 20% blue from black  
+ikih - "iki"
+
+###Rules
+
+**Adjective/noun placement:**
+
+1. Before the verb of a sentence, an adjective goes before the noun, and vice versa
+
+2. Adjectives follow the verb in order to describe it (c.f. #65)
+
+3. A number is identified as being before the noun, colour after noun (this is affected by 1.)
+
+4. For selection in a collection rather than describing the noun, place the adjective after the noun (this is affected by 1.)
+
+5. 'wood leg' is "leg wood" (walking stick), but 'leg wood' is 'wooden leg' (this is affected by 1.)
+
+6. The above will only span two nouns (c.f. #68 "above-adj collection plant head")
+
+**Possession:**
+
+me food - my food  
+you food - your food  
+me mouth-verb food you - I eat your food  
+animal food-of - the animal's food  
+me mouth-verb food-of animal - I eat the animal's food
+
+**Listing:**
+
+verb noun noun noun adjective - all nouns are affected by the verb and the adjective  
+noun noun noun verb - all nouns participate in the verb  
+See #68 for a case where three nouns in a row do not denote a list, as they are followed by an adjective before the verb
+
+**Direction:**
+
+- must use cardinal directions for 2D
+
+- can use 'up' and 'down' for 3D directions
+
+**That's all, folks!** The rest of it I play by ear, and will probably formalise later.
+
+-----
+
+##Scripts
+
+There are currently 6 scripts, which will be **illustrated through #207 of the corpus (riiiiiiiight at the bottom of this post), in [this link](https://i.imgur.com/n7Q8Y5I.png)**. All the scripts are based around the binary representation of the characters in each word.
+
+The binary of #207 is  11001000.11111010.10011111.11100111.11100010.11010010.11000110.10110010.10100110.10100111.10101010.00011011.10100111.11001100.10001110.10100111.11001100.10001101.10100001.11101000.10110001.10100010.11100100.10101011.00101011.01101110.00111111.11100011.11100000
+
+**Script 1** is 'handwriting' - look closely at the binary of the corpus excerpt, and how the characters of this script are formed. Apart from 's' (0110) and 'h' (1001), all the characters (hopefully) pass through their binary 1's, when the binary is formatted as:
+
+    00
+    00
+
+So, for example, 'c' is 0111, producing [this character](https://i.imgur.com/esketER.png).
+
+**Script 2** is 'circle' - just as the handwriting one, you can see that the circles represent the binary of each character, within ever decreasing circles of size, until a space is reached.
+
+**Script 3** is 'triangle', as inspired by /u/Shoninjv's 'Hex' [script](https://www.reddit.com/r/conlangs/comments/7dc93y/750th_just_used_5_minutes_of_your_day/dpwqw3b/). It's simply the binary representation of characters, as chains which flow downwards until after 4 words (in the example given).
+
+**Script 4** is 'isometric', also inspired by the above. It's the most complex, reading left-to-right, moving downwards per word. I've visually aided the break-down of it with colours: the blue is vowels, which are only 3-bits long. If you look at the binary representation of each character, you'll see each vowel's 4-bit binary always starts with a 1, so I've excluded it. So, the top line reads (1)100.1000.(1)111, as VCV.
+
+**'Script' 5** is 'barcode'. It's literally just the binary as laid out by solid bars, no spaces.
+
+**'Script' 6** is 'colourbar'. This is RGB (RedGreenBlue) colour rendered from each 3 bits, no spaces. As it's 4 bits per character, I just multiply its numeric value by 16 to get a value from 0 to 255. Oooor I just take the hex value and stick a hash on the front to make a colour such as #fff!
+
+**Bonus 'script'** is [**audio**](https://vocaroo.com/i/s1sYV2UXPtXy), from 256Hz (B3~C4) to 768Hz (F#~G5) sine wave - 16Hz between each character. Unfortunately I generate this from JavaScript, so there's a click after each sound which I can't seem to fix, but you get the gist!
+
+I think that's all, for now... Any questions, comments, etc, are welcome :)
+
+-----
+-----
+
+##Corpus
+
+The corpus is formatted as *n. English,* transcoded for ipih, ***ipih translated,*** /long IPA/, /compact IPA/
+
+*1. The sun shines. The sun is shining.*  
+sun sun-verb (now)  
+***esi esip***  
+/ɛsi ɛsip/  
+/ɛsøsip/
+
+*2. The sun shone.*  
+sun sun-past  
+***esi esit***  
+/ɛsi ɛsit/  
+/ɛsøsit/
+
+*3. The sun will shine.*  
+sun sun-will  
+***esi esik***  
+/ɛsi ɛsik/  
+/ɛsøsik/
+
+*4. The sun has been shining.*  
+sun sun-past  
+***esi esit***  
+/ɛsi ɛsit/  
+/ɛsøsit/
+
+*5. The sun is shining again.*  
+sun sun-verb new  
+***esi esip ehq***  
+/ɛsi ɛsip ɛçɒ/  
+/ɛsøsipɛçɒ/
+
+*6. The sun will shine tomorrow.*  
+sun sun-will tomorrow  
+***esi esik exu***  
+/ɛsi ɛsik ɛxu/  
+/ɛsøsikɛxu/
+
+*7. The sun shines brightly.*  
+sun sun-verb fire-adj  
+***esi esip etas***  
+/ɛsi ɛsip ɛtas/  
+/ɛsøsipɛtas/
+
+*8. The bright sun shines.*  
+fire-adj sun sun-verb  
+***etas esi esip***  
+/ɛtas ɛsi ɛsip/  
+/ɛtasɛsøsip/
+
+*9. The sun is rising now.*  
+sun up-verb now  
+***esi otip exe***  
+/ɛsi ɔtip ɛxɛ/  
+/ɛsətipɛxɛ/
+
+*10. All the people shouted.*  
+person all noise-past  
+***epe iki etot***  
+/ɛpɛ iki ɛtɔt/  
+/ɛpekøtɔt/
+
+*11. Some of the people shouted.*  
+person partial-adj noise-past  
+***epe ikas etot***  
+/ɛpɛ ikas ɛtɔt/  
+/ɛpekasɛtɔt/
+
+*12. Many of the people shouted twice.*  
+person all-adj noise-past 002  
+***epe ikis etot ipax***  
+/ɛpɛ ikis ɛtɔt ipax/  
+/ɛpekisɛtɔtipɛx/
+
+*13. Happy people often shout.*  
+person positive-adj noise-verb sometimes  
+***epe okis etop ika***  
+/ɛpɛ ɔkis ɛtɔp ika/  
+/ɛpʌkisɛtɔpika/
+
+*14. The kitten jumped up.*  
+animal up-past  
+***epa otit***  
+/ɛpa ɔtit/  
+/ɛpɶtit/
+
+*15. The kitten jumped down.*  
+animal down-past  
+***epa otet***  
+/ɛpa ɔtɛt/  
+/ɛpɶtɛt/
+
+*16. The kitten jumped onto the table.*  
+animal up-past  
+***epa otit***  
+/ɛpa ɔtit/  
+/ɛpɶtit/
+
+*17. My little kitten walked away.*  
+me water-adj animal there-verb  
+***ipi etes epa itop***  
+/ipi ɛtɛs ɛpa itɔp/  
+/ipøtɛsɛpaitɔp/
+
+*18. It's raining.*  
+rain-verb  
+***etep***  
+/ɛtɛp/  
+/ɛtɛp/
+
+*19. The rain came down.*  
+rain down-past  
+***ete otet***  
+/ɛtɛ ɔtɛt/  
+/ɛtʌtɛt/
+
+*20. The kitten is playing in the rain.*  
+animal happiness-verb within rain  
+***epa awip owi ete***  
+/ɛpa aθip ɔθi ɛtɛ/  
+/ɛpaːθipɔθøtɛ/
+
+*21. The rain has stopped.*  
+rain stop-verb  
+***ete ofop***  
+/ɛtɛ ɔfɔp/  
+/ɛtʌfɔp/
+
+*22. Soon the rain will stop.*  
+rain stop-verb time-adj  
+***ete ofop ofis***  
+/ɛtɛ ɔfɔp ɔfis/  
+/ɛtʌfɔpɔfis/
+
+*23. I hope the rain stops soon.*  
+I desire-verb rain stop-verb time-adj  
+***atip ete ofop ofis***  
+/atip ɛtɛ ɔfɔp ɔfis/  
+/atipɛtʌfɔpɔfis/
+
+*24. Once wild animals lived here.*  
+animal life-adj life-past here  
+***epa epis epit ita***  
+/ɛpa ɛpis ɛpit ita/  
+/ɛpæpisɛpitita/
+
+*25. Slowly she looked around.*  
+she eye-verb here-adj  
+***axq apep itas***  
+/axɒ apɛp itas/  
+/axɜpɛpitas/
+
+*26. Go away!*  
+you there-verb  
+***ipa itop***  
+/ipa itɔp/  
+/ipaitɔp/
+
+*27. Let's go!*  
+we_inclusive there-verb  
+***ipq itop***  
+/ipɒ itɔp/  
+/ipɞtɔp/
+
+*28. You should go.*  
+you there-verb if_then-adj  
+***ipa itop icos***  
+/ipa itɔp iʃɔs/  
+/ipaitɔpiʃɔs/
+
+*29. I will be happy to go.*  
+I happiness-be there-verb  
+***awif itop***  
+/aθif itɔp/  
+/aθifitɔp/
+
+*30. He will arrive soon.*  
+he here-will time-adj  
+***axu itak ofis***  
+/axu itak ɔfis/  
+/axɯtakɔfis/
+
+*31. The baby's ball has rolled away.*  
+child circle-of there-past  
+***axo upaw itot***  
+/axɔ upaθ itɔt/  
+/axɔupaθitɔt/
+
+*32. The two boys are working together.*  
+child 002 work-verb unison-adj  
+***axo ipex okqp acqs***  
+/axɔ ipɛx ɔkɒp aʃɒs/  
+/axɘpɛxɔkɒpaʃɒs/
+
+*33. This mist will probably clear away.*  
+this rain light-adj there-verb ease-adj  
+***iti ete etas itop okas***  
+/iti ɛtɛ ɛtas itɔp ɔkas/  
+/itøtɛːtasitɔpɔkas/
+
+*34. Lovely flowers are growing everywhere.*  
+plant happiness-adj plant-verb everywhere  
+***epo awis epop qpi***  
+/ɛpɔ aθis ɛpɔp ɒpi/  
+/ɛpɐθisɛpɔpɒpi/
+
+*35. We should eat more slowly.*  
+we_inclusive mouth-verb start-adj if_then-adj  
+***ipq apip ofas icos***  
+/ipɒ apip ɔfas iʃɔs/  
+/ipɜpipɔfasiʃɔs/
+
+*36. You have come too soon.*  
+you here-verb time-adj tall-adj  
+***ipa itap ofis oxes***  
+/ipa itap ɔfis ɔxɛs/  
+/ipaitapɔfisɔxɛs/
+
+*37. You must write more neatly.*  
+you hand-verb good-adj adult-adj if_then-adj  
+***ipa apqp ahqs axas icos***  
+/ipa apɒp açɒs axas iʃɔs/  
+/ipaːpɒpaçɒsaxasiʃɔs/
+
+*38. Directly opposite stands a wonderful palace.*  
+there opposite building-be happiness-adj  
+***ito qpe qfif awis***  
+/itɔ ɒpɛ ɒfif aθis/  
+/itɔɒpɛɒfifaθis/
+
+*39. Henry's dog is lost.*  
+ehe-prop animal unknown_location-adj  
+***ehex epa qpas***  
+/ɛçɛx ɛpa ɒpas/  
+/ɛçɛxɛpɑpas/
+
+*40. My cat is black.*  
+me animal 000  
+***ipi epa ipix***  
+/ipi ɛpa ipix/  
+/ipøpaipix/
+
+*41. The little girl's doll is broken.*  
+child female toy-of destroy-adj  
+***axo axq qsiw ehos***  
+/axɔ axɒ ɒsiθ ɛçɔs/  
+/axɐxɒːsiθɛçɔs/
+
+*42. I usually sleep soundly.*  
+me night normality normality-adj  
+***ipi ese eki ekis***  
+/ipi ɛsɛ ɛki ɛkis/  
+/ipøsɛːkøkis/
+
+*43. The children ran after Jack.*  
+child leg-past speed-adj awa-prop unison-adj  
+***axo apot ofos awax acqs***  
+/axɔ apɔt ɔfɔs aθax aʃɒs/  
+/axɐpɔtɔfɔsaθaxaʃɒs/
+
+*44. I can play after school.*  
+I toy-will positive-adj afterwards education  
+***qsik okis exa ope***  
+/ɒsik ɔkis ɛxa ɔpɛ/  
+/ɒsikɔkisɛxɶpɛ/
+
+*45. We went to the village for a visit.*  
+we_exclusive here-past village for visit  
+***ipu itat qce ihi qxi***  
+/ipu itat ɒʃɛ içi ɒxi/  
+/ipɯtatɒʃeçʏxi/
+
+*46. We arrived at the river.*  
+we_exclusive here-past river  
+***ipu itat ete***  
+/ipu itat ɛtɛ/  
+/ipɯtatɛtɛ/
+
+*47. I have been waiting for you.*  
+I later-past for you  
+***exat ihi ipa***  
+/ɛxat içi ipa/  
+/ɛxatiçiːpa/
+
+*48. The campers sat around the fire.*  
+person nature calm-verb here-adj fire  
+***epe epi ekip itas eta***  
+/ɛpɛ ɛpi ɛkip itas ɛta/  
+/ɛpɛːpøkipitasɛta/
+
+*49. A little girl with a kitten sat near me.*  
+child female and animal calm-verb here-adj me  
+***axo axq ice epa ekip itas ipi***  
+/axɔ axɒ iʃɛ ɛpa ɛkip itas ipi/  
+/axɐxɞʃɛːpækipitasipi/
+
+*50. The child waited at the door for her father.*  
+child door later-past for adult actor  
+***axo qfe exat ihi axa ipe***  
+/axɔ ɒfɛ ɛxat içi axa ipɛ/  
+/axɔɒfɛːxatiçɪxaipɛ/
+
+*51. Yesterday the oldest girl in the village lost her kitten.*  
+child female village old-adj level-adj unknown_location-past animal actor yesterday  
+***axo axq qce ehus oxis qpat epa ipe exo***  
+/axɔ axɒ ɒʃɛ ɛçus ɔxis ɒpat ɛpa ipɛ ɛxɔ/  
+/axɐxɒːʃɛːçusɔxisɒpatɛpaipɛːxɔ/
+
+*52. Were you born in this village?*  
+you birth-past question within this village  
+***ipa ehat ihe owi iti qce***  
+/ipa ɛçat içɛ ɔθi iti ɒʃɛ/  
+/ipæçatiçʌθiːtʏʃɛ/
+
+*53. Can your brother dance well?*  
+you family male happiness-verb good-adj question  
+***ipa axi axu awip ahqs ihe***  
+/ipa axi axu aθip açɒs içɛ/  
+/ipaːxɪxɤθipaçɒsiçɛ/
+
+*54. Did the man leave?*  
+male there-past question  
+***axu itot ihe***  
+/axu itɔt içɛ/  
+/axɯtɔtiçɛ/
+
+*55. Is your sister coming for you?*  
+you family female here-will for you  
+***ipa axi axq itak ihi ipa***  
+/ipa axi axɒ itak içi ipa/  
+/ipaːxɪxɞtakiçiːpa/
+
+*56. Can you come tomorrow?*  
+you here-will positive-adj tomorrow  
+***ipa itak okis exu***  
+/ipa itak ɔkis ɛxu/  
+/ipaitakɔkisɛxu/
+
+*57. Have the neighbors gone away for the winter?*  
+neighbour there-past question for winter  
+***axe itot ihe ihi etq***  
+/axɛ itɔt içɛ içi ɛtɒ/  
+/axetɔtiçeçøtɒ/
+
+*58. Does the robin sing in the rain?*  
+animal music-verb question within rain  
+***epa akip ihe owi ete***  
+/ɛpa akip içɛ ɔθi ɛtɛ/  
+/ɛpaːkipiçʌθøtɛ/
+
+*59. Are you going with us to the concert?*  
+you question with we_exclusive there-verb music  
+***ipa ihe owe ipu itop aki***  
+/ipa içɛ ɔθɛ ipu itɔp aki/  
+/ipaiçʌθepɯtɔpaki/
+
+*60. Have you ever travelled in the jungle?*  
+you travel-past within nature before question  
+***ipa ofet owi epi exi ihe***  
+/ipa ɔfɛt ɔθi ɛpi ɛxi içɛ/  
+/ipɶfɛtɔθøpøxiːçɛ/
+
+*61. We sailed down the river for several miles.*  
+we_exclusive travel-past river south metre earth-adj nothing-adj  
+***ipu ofet ete otq upi etis ikes***  
+/ipu ɔfɛt ɛtɛ ɔtɒ upi ɛtis ikɛs/  
+/ipofɛtɛtʌtɒupøtisikɛs/
+
+*62. Everybody knows about hunting.*  
+person all neighbour-verb animal-verb  
+***epe iki axep epap***  
+/ɛpɛ iki axɛp ɛpap/  
+/ɛpekɪxɛpɛpap/
+
+*63. On a Sunny morning after the solstice we started for the mountains.*  
+special-adj sun summer earlier-adj afterwards we_exclusive travel-past earth tall-adj  
+***ehis esi eta exis exa ipu ofet eti oxes***  
+/ɛçis ɛsi ɛta ɛxis ɛxa ipu ɔfɛt ɛti ɔxɛs/  
+/ɛçisɛsøtæxisɛxaipofɛtɛtəxɛs/
+
+*64. Tom laughed at the monkey's tricks.*  
+oto-prop child-past animal chaos  
+***otox axot epa eke***  
+/ɔtɔx axɔt ɛpa ɛkɛ/  
+/ɔtɔxaxɔtɛpækɛ/
+
+*65. An old man with a walking stick stood beside the fence.*  
+male old with wood leg calm-past opposite-adj fence  
+***axu ehu owe qku apo ekit qpes qcu***  
+/axu ɛçu ɔθɛ ɒku apɔ ɛkit ɒpɛs ɒʃu/  
+/axɵçoθɛɒkɤpɞkitɒpɛsɒʃu/
+
+*66. The squirrel's nest was hidden by drooping boughs.*  
+animal nest-of night-past by nest-adj tree  
+***epa ekaw eset iho ekas qku***  
+/ɛpa ɛkaθ ɛsɛt içɔ ɛkas ɒku/  
+/ɛpækaθɛsɛtiçɞkasɒku/
+
+*67. The little seeds waited patiently under the snow for the warm spring sun.*  
+water-adj plant new later-past down-adj positive-adj snow for spring sun sun-adj  
+***etes epo ehq exat otes okis etq ihi ete esi esis***  
+/ɛtɛs ɛpɔ ɛçɒ ɛxat ɔtɛs ɔkis ɛtɒ içi ɛtɛ ɛsi ɛsis/  
+/ɛtɛsɛpɞçɒɛxatɔtɛsɔkisɛtɞçøtɛːsøsis/
+
+*68. Many little girls with wreaths of flowers on their heads danced around the bonfire.*  
+water-adj child female all-adj with up-adj collection plant head music-past here-adj fire  
+***etes axo axq ikis owe otis qxe epo apu akit itas eta***  
+/ɛtɛs axɔ axɒ ikis ɔθɛ ɔtis ɒxɛ ɛpɔ apu akit itas ɛta/  
+/ɛtɛsaxɐxɞkisɔθʌtisɒxɛːpɐpɤkititasɛta/
+
+*206. She has more friends than enemies.*  
+she adult-adj friend compare_to enemy  
+***axq axas acq icq acu***  
+/axɒ axas aʃɒ iʃɒ aʃu/  
+/axɜxasaʃɞʃɜʃu/
+
+*207. He was very poor, and with his wife and five children lived in a little low cabin of logs and stones.*  
+he state-past north-adj earth-adj also actor soft_and female soft_and child 005 life-past building water-adj tree rock  
+***axu ihut otas etis ici ipe ica axq ica axo ipqx epit qfi etes qku qkq***  
+/axu içut ɔtas ɛtis iʃi ipɛ iʃa axɒ iʃa axɔ ipɒx ɛpit ɒfi ɛtɛs ɒku ɒkɒ/  
+/axɯçutɔtasɛtisiʃiːpeʃaːxɞʃaːxɘpɒxɛpitɒføtɛsɒkʊkɒ/
+
+Wew... I apologise for how long that was!

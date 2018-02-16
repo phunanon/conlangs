@@ -1,0 +1,568 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>ipih Showcaser</title>
+        <script type="text/javascript" src="ipih_lexicon.js"></script>
+        <script>
+var SOUND_LEN = .2;
+var sound_bytes = [];
+var sound_s = 0;
+function play_note ()
+{
+    if (sound_s++ < sound_bytes.length) {
+        doSound(256 + (sound_bytes[sound_s]*32), SOUND_LEN, "sine");
+        setTimeout(play_note, SOUND_LEN*1000);
+    }
+}
+function playSound ()
+{
+    sound_s = 0;
+    sound_interval = setTimeout(play_note, SOUND_LEN*1000);
+}
+
+
+function openImages ()
+{
+    var PAD = 16;
+
+    var all = gE('ipih_all_scripts');
+    var han = gE('ipih_handwriting_script');
+    var cir = gE('ipih_circle_script');
+    var tri = gE('ipih_triangle_script');
+    var iso = gE('ipih_isometric_script');
+    var bar = gE('ipih_barcode');
+    var co8 = gE('ipih_8bitbar');
+    var ctx = all.getContext('2d');
+    
+    all.width = (Math.max(han.width, cir.width, tri.width + iso.width, bar.width, co8.width)) + PAD*2;
+    all.height = (han.height + cir.height + Math.max(tri.height, iso.height) + bar.height + co8.height + PAD*2) + PAD*2;
+    var y = PAD;
+    ctx.drawImage(han, PAD, y);
+    ctx.drawImage(cir, PAD, y += han.height);
+    ctx.drawImage(tri, PAD, y += cir.height);
+    ctx.drawImage(iso, tri.width + PAD*2, y);
+    ctx.drawImage(bar, PAD, y += Math.max(tri.height, iso.height) + PAD);
+    ctx.drawImage(co8, PAD, y += bar.height + PAD);
+    
+    window.open(all.toDataURL("image/png"), '_blank');
+}
+
+
+function translate ()
+{
+    var tran = gE('transcoded_in').value;
+    var ipih = tranToIpih(tran);
+    gE('ipih_in').value = ipih;
+    display();
+}
+
+
+function display ()
+{
+    var engl = gE('english_in').value;
+    var ipih = gE('ipih_in').value.trim().toLowerCase();
+    
+  //Transcoded
+    var tran = gE('transcoded_in').value.trim().toLowerCase();
+    gE('tr_transcoded').style.display = 'none';
+    if (tran) {
+        gE('transcoded_out').innerHTML = tran;
+        gE('tr_transcoded').style.display = 'table-row';
+    }
+  //Austere English
+    var aust = gE('austere_in').value.trim().toLowerCase();
+    gE('tr_austere').style.display = 'none';
+    if (aust) {
+        gE('austere_out').innerHTML = aust;
+        gE('austere_size').innerHTML = aust.length +'B';
+        gE('tr_austere').style.display = 'table-row';
+    }
+  //ipih to IPA, whitelist ipih and ipih_ipa
+    var to_ipih_ipa = ipih;
+    for (c in ipih_chr) {
+        to_ipih_ipa = to_ipih_ipa.split(ipih_chr[c]).join(ipih_ipa[c]);
+    }
+    to_ipih_ipa = to_ipih_ipa.replace(new RegExp('[^'+ ipih_ipa.join('') +']', 'g'), '');
+    gE('ipih_ipa_out').innerHTML = '/'+ to_ipih_ipa +'/';
+    gE('ipih_ipa_size').innerHTML = to_ipih_ipa.replace(/ /g, '').length +'ph';
+    ipih = ipih.replace(new RegExp('[^'+ ipih_chr.join('') +']', 'gi'), '');
+    var ipih_compact = ipih.replace(/ /g, '');
+  //ipih_compact subtle seperation
+    var ipih_binary_bits;
+    gE('ipih_compact_size').innerHTML = ipih_compact.length +'B';
+    gE('ipih_binary_size').innerHTML = (ipih_binary_bits = Math.round(ipih_compact.length*4)) +'b';
+    var vow_r = '['+ ipih_vow.join('') +']';
+    var con_r = '['+ ipih_con.join('') +']';
+    var ipih_compact_preserve = ipih_compact;
+    ipih_compact = '<v1>'+ ipih_compact.replace(new RegExp('('+ con_r + con_r +'.{2})', 'g'), '$1<v1/>');
+    ipih_compact = ipih_compact.replace(new RegExp('('+ vow_r +')('+ vow_r +')', 'g'), '$1<v1/>$2');
+    ipih_compact = ipih_compact.replace(new RegExp('('+ vow_r + con_r + vow_r + con_r +')', 'g'), '$1<v1/>') + '<v1/>';
+  //ipih compact IPA
+    var ipih_compact_ipa = toCompactIPA(to_ipih_ipa);
+    gE('ipih_compact_ipa').innerHTML = '/'+ ipih_compact_ipa +'/';
+    gE('ipih_compact_ipa_size').innerHTML = ipih_compact_ipa.match(new RegExp('['+ ipih_ipa.join('') +']', 'g')).join('').length +'ph';
+  //ipih_binary
+    var ipih_binary = ipih_compact_preserve;
+    var ipih_indexes = ipih;
+    for (var c = 0, clen = ipih_chr.length; c < clen; ++c) {
+        ipih_binary = ipih_binary.replace(new RegExp(ipih_chr[c], 'g'), paddy(c.toString(2), 4));
+        ipih_indexes = ipih_indexes.replace(new RegExp(ipih_chr[c], 'g'), c+'.');
+    }
+    ipih_indexes = ipih_indexes.split('.');
+    var ipih_binary_preserve = ipih_binary;
+    //Subtle seperation
+    ipih_binary = ipih_binary.replace(new RegExp('(.{4})', 'g'), '$1<v1/>');
+    ipih_binary = ipih_binary.split(new RegExp('(.{18})', 'g')).filter(function(n){ return n != "" }).join('<v1/>');
+    ipih_binary = '<v2>'+ ipih_binary.split('<v1/><v1/>').join('<v2/>') +'#';
+    ipih_binary = ipih_binary.split('<v1/>#').join('<v2/>');
+    if (ipih_binary_preserve.length % 8 != 0) {
+        ipih_binary_preserve += '0000';
+        ipih_binary += '0000<v2/>';
+    }
+  //Hex
+    var ipih_hex = binaryToHex(ipih_binary_preserve).result;
+    //if (ipih_hex[ipih_hex.length-1] == "0") { ipih_hex = ipih_hex.substr(0, ipih_hex.length-1); }
+    gE("ipih_hex").innerHTML = '0x'+ ipih_hex;
+    gE('ipih_hex_size').innerHTML = ipih_hex.length/2 +'B';
+  //ASCII
+    var ipih_bytes = ipih_binary_preserve.split(/(.{8})/).filter(function(n){ return n != "" });
+    var ipih_ascii = '';
+    for (b in ipih_bytes) {
+        ipih_ascii += String.fromCharCode(parseInt(+ipih_bytes[b], 2));
+    }
+    gE('ipih_ascii_size').innerHTML = ipih_ascii.length +'B';
+  //Audio
+    sound_bytes = [];
+    for (c in ipih_hex) {
+        sound_bytes.push(parseInt(ipih_hex[c], 16));
+    }
+  //Spaces count (ipih_wordc)
+    var ipih_wordc = 1;
+    for (c in ipih) {
+        if (ipih[c] == ' ') { ++ipih_wordc; }
+    }
+  //Handwriting Script
+var SCRIPT_LEN = 16;
+var RES_W = 16;
+var RES_H = 24;
+var SCR_W = 32;
+var SCR_H = 48;
+var SCR_PAD = 8;
+    var can = gE('ipih_handwriting_script');
+    var ctx = can.getContext('2d');
+    var script = gE('ipih_handwriting_script_image');
+    var spaces = gE('ipih_script_spaces').checked;
+    var wrap = gE('ipih_SCR_Wrap').checked && spaces;
+    can.width = (ipih_indexes.length <= SCRIPT_LEN ? ipih_indexes.length - 1 : SCRIPT_LEN)*SCR_W +SCR_PAD*2;
+    can.height = SCR_H*Math.floor((ipih_indexes.length-1)/SCRIPT_LEN+1) +SCR_PAD*2;
+    var x = SCR_PAD, y = SCR_PAD;
+    var max_width = SCRIPT_LEN*SCR_W;
+    for (c in ipih_indexes) {
+        c = parseInt(c);
+        var val = ipih_indexes[c];
+        if (!spaces && val == 0) { continue; }
+        var need_wrap = (val == 0 && wrap && x + 4*SCR_W > max_width);
+        if (x >= max_width || need_wrap) {
+            y += SCR_H;
+            x = SCR_PAD;
+            if (val == 0) { ++c; continue; }
+        }
+        if (need_wrap) { continue; }
+        
+        ctx.drawImage(script, val*RES_W, 0, RES_W, RES_H, x, y, SCR_W, SCR_H);
+        x += SCR_W;
+    }
+    //Circle Script
+SCRIPT_LEN = 8;
+RES_W = 64;
+RES_H = 64;
+SCR_W = 64;
+SCR_H = 64;
+SCR_PAD = 8;
+var t1 = 4; //Thickness
+var t2 = t1*2;
+    can = gE('ipih_circle_script');
+    ctx = can.getContext('2d');
+    script = gE('ipih_circle_script_image');
+    can.width = SCRIPT_LEN*SCR_W + (SCR_PAD*2) + (SCRIPT_LEN*SCR_PAD);
+    can.height = (SCR_H+SCR_PAD)*Math.floor((ipih.split(' ').length-1)/SCRIPT_LEN+1) +SCR_PAD*2;
+    x = SCR_PAD, y = SCR_PAD;
+    var xnum = 0;
+    l = 0;
+    for (c in ipih_indexes) {
+        c = parseInt(c);
+        var val = ipih_indexes[c];
+        
+        ctx.drawImage(script, val*RES_W, 0, RES_W, RES_H, x + (l*t1) + (xnum*SCR_PAD), y+(l*t1), SCR_W-(l*t2), SCR_H-(l*t2));
+        l += 1.25;
+        if (val == 0) {
+            x += SCR_W;
+            ++xnum;
+            l = 0;
+            if (x >= SCRIPT_LEN*SCR_W) {
+                x = SCR_PAD;
+                xnum = 0;
+                y += SCR_H + SCR_PAD;
+            }
+        }
+    }
+    //Triangle Script
+SCR_W = 16;
+SCR_H = 16;
+SCR_PAD = 8;
+SCR_LEN = 4;
+y = 0;
+col = 0;
+    can = gE('ipih_triangle_script');
+    ctx = can.getContext('2d');
+    can.width = SCR_W*3 * Math.max(1, Math.round(ipih_wordc/SCR_LEN)) - SCR_W + SCR_PAD*2;
+    can.height = SCR_H*5*(SCR_LEN) + SCR_PAD*2;
+    var wordc = 0;
+    for (c in ipih_indexes) {
+        c = parseInt(c);
+        var val = ipih_indexes[c];
+        if (val == 0) {
+            ++wordc;
+            if (!spaces) { continue; }
+        }
+
+        x = col*SCR_W*3 + SCR_PAD;
+        for (var b = 0; b < 4; ++b) {
+            ctx.beginPath();
+            ctx.moveTo(x+0, y+0 + SCR_PAD);
+            ctx.lineTo(x+SCR_W, y+SCR_H+ SCR_PAD);
+            if (b%2) {
+                ctx.lineTo(x+SCR_W, y+0 + SCR_PAD);
+                x += SCR_W;
+            } else {
+                ctx.lineTo(x+0, y+SCR_H + SCR_PAD);
+            }
+            ctx.closePath();
+            
+            //Outline
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = '#888';
+            //ctx.stroke();
+             
+            //Fill
+            ctx.fillStyle = '#000';
+            if (val >> 3-b & 1) { ctx.fill(); }
+        }
+        y += SCR_H;
+        
+        if (wordc >= SCR_LEN) {
+            wordc = 0;
+            y = 0;
+            ++col;
+        }
+    }
+    //Isometric Script
+SCR_W = 16;
+SCR_H = 16;
+SCR_PAD = 8;
+SCR_LEN = 4;
+col = 0, true_col = 0;
+row = 0;
+    can = gE('ipih_isometric_script');
+    ctx = can.getContext('2d');
+    can.width = SCR_W*14 + SCR_PAD*2;
+    can.height = SCR_H/2*(ipih_wordc+1) + SCR_PAD*2;
+    var wordc = 0;
+    for (c in ipih_indexes) {
+        c = parseInt(c);
+        var val = parseInt(ipih_indexes[c]);
+        
+        if (isNaN(val)) { break; }
+        if (val == 0) {
+            ++row;
+            col = true_col = 0;
+            continue;
+        }
+        
+        var y = row*SCR_H/2 + SCR_PAD;
+        var vowel = !(Math.floor(true_col/4) % 2);
+        if (vowel){ true_col++; }
+        for (var b = vowel; b < 4; ++b) {
+            ctx.beginPath();
+            x = SCR_PAD + col*SCR_W;
+            if (col%2 == row%2) {
+                ctx.moveTo(x+0, y+0);
+                ctx.lineTo(x+SCR_W, y+SCR_H/2);
+                ctx.lineTo(x+0, y+SCR_H);
+            } else {
+                ctx.moveTo(x+SCR_W, y+0);
+                ctx.lineTo(x+0, y+SCR_H/2);
+                ctx.lineTo(x+SCR_W, y+SCR_H);
+            }
+            ctx.closePath();
+            
+            //Outline
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = '#888';
+            //ctx.stroke();
+             
+            //Fill
+            ctx.fillStyle = (vowel ? '#008' : '#800');
+            if (val >> 3-b & 1) { ctx.fill(); }
+            
+            ++col;
+            ++true_col;
+        }
+    }
+  //Barcode
+    var can = gE('ipih_barcode');
+    var ctx = can.getContext('2d');
+    ctx.clearRect(0, 0, can.width, can.height);
+    var w = 2;
+    can.width = ipih_binary_preserve.length*w;
+    for (b in ipih_binary_preserve) {
+        if (!!+ipih_binary_preserve[b]) { ctx.fillRect(b*w, 0, w, can.height); }
+        if (b % 16 >= 8) { ctx.clearRect(b*w, can.height-w, w, w); }
+    }
+  //8-bit colourbar
+    var can = gE('ipih_8bitbar');
+    var ctx = can.getContext('2d');
+    ctx.clearRect(0, 0, can.width, can.height);
+    w = 4;
+    can.width = ipih_bytes.length*w;
+    for (b in ipih_bytes) {
+        ctx.fillStyle = '#'+ (parseInt(ipih_bytes[b], 2)*16).toString(16);
+        ctx.fillRect(b*w, 0, w, can.height);
+        if (b % 2) { ctx.clearRect(b*w, can.height-w, w, w); }
+    }
+    
+    gE('english_out').innerHTML = '<u>'+ engl +'<u>';
+    gE('ipih_out').innerHTML = '<u>'+ ipih +'<u>';
+    gE('ipih_compact').innerHTML = ipih_compact;
+    gE('ipih_binary').innerHTML = ipih_binary;
+    gE('ipih_ascii').innerHTML = ipih_ascii;
+    gE('english_size').innerHTML = engl.length +'B';
+    gE('ipih_size').innerHTML = ipih.length +'B';
+    
+  //Reddit formatting
+    var reddit = '###ipih /ipiç/\n\n';
+    reddit += '**English** ('+ engl.length +'B): *'+ engl +'*  \n';
+    if (aust) { reddit += '**Austere English** ('+ aust.length +'B): *'+ aust +'*  \n'; }
+    reddit += '**Transcoded**: '+ tran +'  \n';
+    reddit += '**ipih Romanised** ('+ ipih.length +'B): ***'+ ipih +'***  \n';
+    reddit += '**ipih IPA**: ('+ to_ipih_ipa.length +'ph) /'+ to_ipih_ipa +'/  \n';
+    //reddit += '**ipih compact** ('+ ipih_compact.length +'B): '+ ipih_compact +'  \n';
+    reddit += '**ipih compact IPA** ('+ ipih_compact_ipa.length +'ph): /' + ipih_compact_ipa +'/  \n';
+    reddit += '**ipih binary** ('+ ipih_binary_bits +'b): '+ stripHtmlToText(ipih_binary).replace(new RegExp(/(.{8})/, 'g'), '$1.') +'  \n';
+    //reddit += '**ipih hex** ('+ ipih_hex.length/2 +'B): 0x'+ ipih_hex +'  \n';
+    reddit += '**ipih ASCII** ('+ ipih_ascii.length +'B): '+ ipih_ascii +'\n\n';
+    reddit += '**Scripts and barcodes**:';
+    gE('reddit_out').innerHTML = reddit;
+}
+
+function gE (e) { return document.getElementById(e); }
+function paddy (n, p, c) { var pad_char = typeof c !== 'undefined' ? c : '0'; var pad = new Array(1 + p).join(pad_char); return (pad + n).slice(-pad.length); }
+function binaryToHex (r) {var t,n,i,e,a="";for(t=r.length-1;t>=3;t-=4){for(i=r.substr(t+1-4,4),e=0,n=0;4>n;n+=1){if("0"!==i[n]&&"1"!==i[n])return{valid:!1};e=2*e+parseInt(i[n],10)}a=e>=10?String.fromCharCode(e-10+"A".charCodeAt(0))+a:String(e)+a}if(t>=0){for(e=0,n=0;t>=n;n+=1){if("0"!==r[n]&&"1"!==r[n])return{valid:!1};e=2*e+parseInt(r[n],10)}a=String(e)+a}return{valid:!0,result:a}}
+//@license textAngular
+//Author : Austin Anderson
+//License : 2013 MIT
+//Version 1.5.16
+// turn html into pure text that shows visiblity
+function stripHtmlToText(html)
+{
+    var tmp = document.createElement("DIV");
+    tmp.innerHTML = html;
+    var res = tmp.textContent || tmp.innerText || '';
+    res.replace('\u200B', ''); // zero width space
+    res = res.trim();
+    return res;
+}
+
+function doSound (frequency, length, type)
+{
+    var ctx = new AudioContext();
+    o = ctx.createOscillator();
+    g = ctx.createGain();
+    o.type = type;
+    o.connect(g);
+    o.frequency.value = frequency;
+    g.connect(ctx.destination);
+    g.gain.value = 0.5;
+    o.start(0);
+    g.gain.exponentialRampToValueAtTime(0.00001, ctx.currentTime + length);
+}
+
+        </script>
+        <style>
+@font-face {
+    font-family: barcode;
+    src: url('code128.ttf');
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    font-size: 1rem;
+    text-align: left;
+}
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+canvas {
+    border: .1rem solid #000;
+    /*background-image: url('bg.png');*/
+    background-color: #eff;
+}
+#ipih_all_scripts {
+    width: 16rem;
+    height: 16rem;
+}
+
+inputs, outputs {
+    display: block;
+    padding: 1rem;
+}
+td, th {
+    padding: .5rem;
+}
+
+v1, v2 {
+    margin-left: -.1rem;
+}
+v1 {
+    border-left: .1rem solid rgba(0, 0, 0, 0.2);
+}
+v2 {
+    border-left: .12rem solid rgba(0, 0, 0, 1);
+}
+
+inputs textarea {
+    display: block;
+    width: 100%;
+}
+pre {
+    width: 48ch;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+pre#ipih_barcode {
+    font-family: barcode;
+}
+pre#ipih_ascii {
+    display: inline;
+    background-color: #ccc;
+}
+        </style>
+    </head>
+    <body onload="display();">
+        <inputs>
+            <textarea type="text" id="english_in"    onkeyup="display()"></textarea>
+            <textarea type="text" id="austere_in"    onkeyup="display()"></textarea>
+            <textarea type="text" id="transcoded_in" onkeyup="display()"></textarea>
+            <textarea type="text" id="ipih_in"       onkeyup="display()"></textarea>
+        </inputs>
+        <button onclick="translate()">Attempt translation</button>
+        <button onclick="gE('english_in').value = 'He was very poor, and with his wife and five children lived in a little low cabin of logs and stones.'; gE('austere_in').value = 'he was very poor and lived in little low stone log cabin with wife and five child'; gE('transcoded_in').value = 'he state-past north-adj earth-adj also actor soft_and female soft_and child 005 life-past building water-adj tree rock'; translate(); display();">Load Example</button>
+        <outputs>
+            <table>
+                <tr>
+                    <th></th>
+                    <th>Size</th>
+                </tr>
+                <tr>
+                    <th>English</th>
+                    <td id="english_size"></td>
+                    <td><pre id="english_out"></pre></td>
+                </tr>
+                <tr id="tr_austere">
+                    <th>Austere English</th>
+                    <td id="austere_size"></td>
+                    <td><pre id="austere_out"></pre></td>
+                </tr>
+                <tr id="tr_transcoded">
+                    <th>Transcoded</th>
+                    <td></td>
+                    <td><pre id="transcoded_out"></pre></td>
+                </tr>
+                <tr>
+                    <th>ipih Romanised</th>
+                    <td id="ipih_size"></td>
+                    <td><pre id="ipih_out"></pre></td>
+                </tr>
+                <tr>
+                    <th>ipih IPA</th>
+                    <td id="ipih_ipa_size"></td>
+                    <td><pre id="ipih_ipa_out"></pre></td>
+                </tr>
+                <tr>
+                    <th>ipih compact</th>
+                    <td id="ipih_compact_size"></td>
+                    <td><pre id="ipih_compact"></pre></td>
+                </tr>
+                <tr>
+                    <th>ipih compact IPA</th>
+                    <td id="ipih_compact_ipa_size"></td>
+                    <td><pre id="ipih_compact_ipa"></pre></td>
+                </tr>
+                <tr>
+                    <th>ipih binary</th>
+                    <td id="ipih_binary_size"></td>
+                    <td><pre id="ipih_binary"></pre></td>
+                </tr>
+                <tr>
+                    <th>ipih hex</th>
+                    <td id="ipih_hex_size"></td>
+                    <td><pre id="ipih_hex"></pre></td>
+                </tr>
+                <tr>
+                    <th>ipih ascii</th>
+                    <td id="ipih_ascii_size"></td>
+                    <td><pre id="ipih_ascii"></pre></td>
+                </tr>
+                <tr>
+                    <th>
+                        ipih scripts
+                        <br/>
+                        <input id="ipih_script_spaces" type="checkbox" onchange="display();" checked/> with spaces
+                        <br/>
+                        <input id="ipih_SCR_Wrap" type="checkbox" onchange="display();" checked/> word wrap
+                    </th>
+                    <td></td>
+                    <td>
+                        <canvas id="ipih_handwriting_script" height="64">No HTML5 canvas support.</canvas>
+                        <br/>
+                        <canvas id="ipih_circle_script" height="64">No HTML5 canvas support.</canvas>
+                        <br/>
+                        <canvas id="ipih_triangle_script" height="64">No HTML5 canvas support.</canvas>
+                        <br/>
+                        <canvas id="ipih_isometric_script" height="64">No HTML5 canvas support.</canvas>
+                    </td>
+                </tr>
+                <tr>
+                    <th>ipih barcode</th>
+                    <td></td>
+                    <td><canvas id="ipih_barcode" height="64">No HTML5 canvas support.</canvas></td>
+                </tr>
+                <tr>
+                    <th>ipih 8-bit colourbar</th>
+                    <td></td>
+                    <td><canvas id="ipih_8bitbar" height="64">No HTML5 canvas support.</canvas></td>
+                </tr>
+                <tr>
+                    <th>ipih all scripts</th>
+                    <td></td>
+                    <td><canvas id="ipih_all_scripts" onclick="openImages();">No HTML5 canvas support.</canvas></td>
+                </tr>
+                <tr>
+                    <th>ipih 4-bit audio</th>
+                    <td></td>
+                    <td><audio id="ipih_4bitaudio">No HTML5 audio support.</audio><button onclick="playSound()">Play</button></td>
+                </tr>
+            </table>
+            <pre id="reddit_out">
+
+            </pre>
+            <img id="ipih_handwriting_script_image" src="script.svg" hidden></img>
+            <img id="ipih_circle_script_image" src="script2.svg" hidden></img>
+        </outputs>
+    </body>
+</html>

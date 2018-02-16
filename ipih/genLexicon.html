@@ -1,0 +1,35 @@
+<script>
+var con = ['p', 't', 'k', 'f', 'w', 's', 'c', 'x', 'h'];
+var vow = ['i', 'e', 'a', 'o', 'q', 'u'];
+
+function colour (char)
+{
+    return Math.floor(char * 3.1).toString(16);
+}
+
+function gen ()
+{
+    var i = 0, out = '';
+    for (var a = 0, alen = 6; a < alen; ++a) {
+        for (var b = 0, blen = 9; b < blen; ++b) {
+            for (var c = 0, clen = 6; c < clen; ++c) {
+                var col = (b <= 5 ? '"#'+colour(a)+colour(b)+colour(c)+'"' : 'undefined');
+                out += '    '+ vow[a]+con[b]+vow[c] +': { root: "", type: "", verb: "", adjective: "", pnoun: "", give: "", take: "", comment: "", numeric: "'+i+'", colour: '+col+' },\n';
+                ++i;
+            }
+        }
+        out += '\n//\n';
+    }
+    document.getElementById('out').innerHTML = 'var ipih_lexicon = {\n'+ out +'\n}';
+}
+</script>
+<body onload="gen()">
+<pre id="out" style="font-family: monospace; white-space: pre;">
+var out = '';
+for (i in ipih_lexicon) {
+    ip = ipih_lexicon[i];
+    out += i +": { root: '"+ ip.root +"', type: '"+ ip.type +"', verb: '"+ip.verb+"', adjective: '"+ip.adjective+"', pnoun: '', comment: '"+ip.comment+"', numeric: "+ip.numeric+", colour: '"+ip.colour+"' },\n";
+}
+document.body.innerHTML = '<pre>'+ out +"</pre>";
+</pre>
+</body>
