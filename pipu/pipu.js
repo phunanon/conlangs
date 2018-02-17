@@ -1,24 +1,24 @@
 var pipu_lex = {
 
 //Language features: pronouns, clause dividers, conditionals
-    pip: { root: "me/I", type: "", verb: "", adj: "", pnoun: "", comment: "", num:    0, colour: "#000" },
-    pit: { root: "you", type: "", verb: "", adj: "", pnoun: "", comment: "", num:    1, colour: "#003" },
-    pik: { root: "actor", type: "", verb: "", adj: "", pnoun: "", comment: "Refers to the actor of actions taken in the sentence", num:    2, colour: "#006" },
-    pif: { root: "", type: "", verb: "", adj: "", pnoun: "", comment: "", num:    3, colour: "#009" },
-    piw: { root: "", type: "", verb: "", adj: "", pnoun: "", comment: "", num:    4, colour: "#00c" },
-    pis: { root: "", type: "", verb: "", adj: "", pnoun: "", comment: "", num:    5, colour: "#00f" },
-    pic: { root: "", type: "", verb: "", adj: "", pnoun: "", comment: "", num:    6, colour:  null  },
+    pip: { root: "me/I", type: "pronoun", verb: "am", adj: "", pnoun: "", comment: "", num:    0, colour: "#000" },
+    pit: { root: "you", type: "pronoun", verb: "are", adj: "", pnoun: "", comment: "", num:    1, colour: "#003" },
+    pik: { root: "actor", type: "pronoun", verb: "is", adj: "", pnoun: "", comment: "Refers to the actor of actions taken in the sentence", num:    2, colour: "#006" },
+    pif: { root: "it/that/this", type: "pronoun", verb: "is", adj: "", pnoun: "", comment: "", num:    3, colour: "#009" },
+    piw: { root: "they/them", type: "pronoun", verb: "are", adj: "", pnoun: "", comment: "", num:    4, colour: "#00c" },
+    pis: { root: "us_inclusive/we_inclusive", type: "pronoun", verb: "are", adj: "", pnoun: "", comment: "", num:    5, colour: "#00f" },
+    pic: { root: "us_exclusive/we_exclusive", type: "pronoun", verb: "are", adj: "", pnoun: "", comment: "", num:    6, colour:  null  },
     pix: { root: "", type: "", verb: "", adj: "", pnoun: "", comment: "", num:  NaN, colour:  null  },
-    pep: { root: "", type: "", verb: "", adj: "", pnoun: "", comment: "", num:    7, colour: "#030" },
-    pet: { root: "", type: "", verb: "", adj: "", pnoun: "", comment: "", num:    8, colour: "#033" },
-    pek: { root: "", type: "", verb: "", adj: "", pnoun: "", comment: "", num:    9, colour: "#036" },
-    pef: { root: "", type: "", verb: "", adj: "", pnoun: "", comment: "", num:   10, colour: "#039" },
+    pep: { root: "all/everything/always/any", type: "", verb: "", adj: "many", pnoun: "", comment: "", num:    7, colour: "#030" },
+    pet: { root: "nothing/never", type: "", verb: "", adj: "few", pnoun: "", comment: "", num:    8, colour: "#033" },
+    pek: { root: "partial/sometimes", type: "", verb: "", adj: "some", pnoun: "", comment: "", num:    9, colour: "#036" },
+    pef: { root: "only/just", type: "", verb: "", adj: "", pnoun: "", comment: "", num:   10, colour: "#039" },
     pew: { root: "", type: "", verb: "", adj: "", pnoun: "", comment: "", num:   11, colour: "#03c" },
     pes: { root: "", type: "", verb: "", adj: "", pnoun: "", comment: "", num:   12, colour: "#03f" },
     pec: { root: "", type: "", verb: "", adj: "", pnoun: "", comment: "", num:   13, colour:  null  },
     pex: { root: "", type: "", verb: "", adj: "", pnoun: "", comment: "", num:  NaN, colour:  null  },
-    pap: { root: "", type: "", verb: "", adj: "", pnoun: "", comment: "", num:   14, colour: "#060" },
-    pat: { root: "", type: "", verb: "", adj: "", pnoun: "", comment: "", num:   15, colour: "#063" },
+    pap: { root: "here", type: "spatial", verb: "move_close/go_to", adj: "close/near", pnoun: "", comment: "", num:   14, colour: "#060" },
+    pat: { root: "there", type: "spatial", verb: "move_away/go_from", adj: "far_away/distant", pnoun: "", comment: "", num:   15, colour: "#063" },
     pak: { root: "", type: "", verb: "", adj: "", pnoun: "", comment: "", num:   16, colour: "#066" },
     paf: { root: "", type: "", verb: "", adj: "", pnoun: "", comment: "", num:   17, colour: "#069" },
     paw: { root: "", type: "", verb: "", adj: "", pnoun: "", comment: "", num:   18, colour: "#06c" },
@@ -49,14 +49,14 @@ var pipu_lex = {
     pus: { root: "", type: "", verb: "", adj: "", pnoun: "", comment: "", num:   40, colour: "#0ff" },
     puc: { root: "", type: "", verb: "", adj: "", pnoun: "", comment: "", num:   41, colour:  null  },
     pux: { root: "", type: "", verb: "", adj: "", pnoun: "", comment: "", num:  NaN, colour:  null  },
-    php: { root: "", type: "", verb: "", adj: "", pnoun: "", comment: "", num:   42, colour:  null  },
-    pht: { root: "", type: "", verb: "", adj: "", pnoun: "", comment: "", num:   43, colour:  null  },
-    phk: { root: "", type: "", verb: "", adj: "", pnoun: "", comment: "", num:   44, colour:  null  },
-    phf: { root: "", type: "", verb: "", adj: "", pnoun: "", comment: "", num:   45, colour:  null  },
-    phw: { root: "", type: "", verb: "", adj: "", pnoun: "", comment: "", num:   46, colour:  null  },
-    phs: { root: "", type: "", verb: "", adj: "", pnoun: "", comment: "", num:   47, colour:  null  },
-    phc: { root: "", type: "", verb: "", adj: "", pnoun: "", comment: "", num:   48, colour:  null  },
-    phx: { root: "", type: "", verb: "", adj: "", pnoun: "", comment: "", num:  NaN, colour:  null  },
+    php: { root: "also", type: "conjunction", verb: "", adj: "opposite", pnoun: "", comment: "Used to seperate clauses", num:   42, colour:  null  },
+    pht: { root: "and/&", type: "conjunction", verb: "", adj: "same", pnoun: "", comment: "Used to list", num:   43, colour:  null  },
+    phk: { root: "soft_and", type: "conjunction", verb: "", adj: "", pnoun: "", comment: "Used to list, retaining and extending adjectives, possession, and etc. See -206.", num:   44, colour:  null  },
+    phf: { root: "if_then", type: "conjunction", verb: "", adj: "should", pnoun: "", comment: "Used to denote an if-then relationship between the leading and following clauses", num:   45, colour:  null  },
+    phw: { root: "compare_to", type: "", verb: "", adj: "", pnoun: "", comment: "Used to denote a comparison between the leading and following clause", num:   46, colour:  null  },
+    phs: { root: "soft_also", type: "", verb: "", adj: "", pnoun: "", comment: "", num:   47, colour:  null  },
+    phc: { root: "however", type: "", verb: "", adj: "would", pnoun: "", comment: "", num:   48, colour:  null  },
+    phx: { root: "?", type: "question", verb: "", adj: "", pnoun: "", comment: "", num:  NaN, colour:  null  },
 
 //
     tip: { root: "", type: "", verb: "", adj: "", pnoun: "", comment: "", num:   49, colour: "#300" },
@@ -234,15 +234,15 @@ var pipu_lex = {
 
 //Life, nature, time
 /*
-etq: { root: 'snow/winter', type: '', verb: '', adjective: '', pnoun: '', comment: '', numeric: 64, colour: '#33c' },
-etu: { root: '', type: '', verb: '', adjective: '', pnoun: '', comment: '', numeric: 65, colour: '#33f' },
-eki: { root: 'normality/calm/peace', type: '', verb: 'rest', adjective: 'normal/quiet', pnoun: '', comment: '', numeric: 66, colour: '#360' },
-eke: { root: 'change/chaos', type: '', verb: '', adjective: '', pnoun: '', comment: '', numeric: 67, colour: '#363' },
-eka: { root: 'nest/bed', type: '', verb: '', adjective: 'low', pnoun: '', comment: '', numeric: 68, colour: '#366' },
-eko: { root: 'sky', type: '', verb: '', adjective: 'high', pnoun: '', comment: '', numeric: 69, colour: '#369' },
-ekq: { root: '', type: '', verb: '', adjective: '', pnoun: '', comment: '', numeric: 70, colour: '#36c' },
-eku: { root: '', type: '', verb: '', adjective: '', pnoun: '', comment: '', numeric: 71, colour: '#36f' },
-efi: { root: 'machine/process', type: '', verb: '', adjective: '', pnoun: '', comment: '', numeric: 72, colour: '#390' },*/
+etq: { root: "snow/winter", type: "", verb: "", adjective: "", pnoun: "", comment: "", numeric: 64, colour: "#33c" },
+etu: { root: "", type: "", verb: "", adjective: "", pnoun: "", comment: "", numeric: 65, colour: "#33f" },
+eki: { root: "normality/calm/peace", type: "", verb: "rest", adjective: "normal/quiet", pnoun: "", comment: "", numeric: 66, colour: "#360" },
+eke: { root: "change/chaos", type: "", verb: "", adjective: "", pnoun: "", comment: "", numeric: 67, colour: "#363" },
+eka: { root: "nest/bed", type: "", verb: "", adjective: "low", pnoun: "", comment: "", numeric: 68, colour: "#366" },
+eko: { root: "sky", type: "", verb: "", adjective: "high", pnoun: "", comment: "", numeric: 69, colour: "#369" },
+ekq: { root: "", type: "", verb: "", adjective: "", pnoun: "", comment: "", numeric: 70, colour: "#36c" },
+eku: { root: "", type: "", verb: "", adjective: "", pnoun: "", comment: "", numeric: 71, colour: "#36f" },
+efi: { root: "machine/process", type: "", verb: "", adjective: "", pnoun: "", comment: "", numeric: 72, colour: "#390" },*/
     wip: { root: "life/nature", type: "", verb: "live", adj: "natural/wild", pnoun: "", comment: "", num:  196, colour: "#c00" },
     wit: { root: "person", type: "", verb: "", adj: "", pnoun: "", comment: "", num:  197, colour: "#c03" },
     wik: { root: "animal", type: "", verb: "hunt", adj: "", pnoun: "", comment: "", num:  198, colour: "#c06" },
@@ -481,12 +481,12 @@ efi: { root: 'machine/process', type: '', verb: '', adjective: '', pnoun: '', co
 
 
 
-var pipu_con = ['p', 't', 'k', 'f', 'w', 's', 'c', 'x'];
-var pipu_vow = ['i', 'e', 'a', 'o', 'q', 'u', 'h'];
-var pipu_chr = [' '].concat(pipu_con.concat(pipu_vow));
-var pipu_ipa = [' ', 'p', 't', 'k', 'f', 'θ', 's', 'ʃ', 'x', 'i', 'ɛ', 'a', 'ɔ', 'ɒ', 'u', 'ə'];
-var pipu_spk = [' ', 'p', 't', 'k', 'f', 'T', 's', 'S', 'x', 'i', 'E', 'a', 'O', '0', 'u', '@'];
-var ipa_aud = ['']
+var pipu_con = ["p", "t", "k", "f", "w", "s", "c", "x"];
+var pipu_vow = ["i", "e", "a", "o", "q", "u", "h"];
+var pipu_chr = [" "].concat(pipu_con.concat(pipu_vow));
+var pipu_ipa = [" ", "p", "t", "k", "f", "θ", "s", "ʃ", "x", "i", "ɛ", "a", "ɔ", "ɒ", "u", "ə"];
+var pipu_spk = [" ", "p", "t", "k", "f", "T", "s", "S", "x", "i", "E", "a", "O", "0", "u", "@"];
+var ipa_aud = [""]
 var pipu_num = [NaN, 0, 1, 2, 3, 4, 5, 6, NaN, 0, 1, 2, 3, 4, 5, 6];
 
 var gloss_pipu = {
@@ -495,6 +495,7 @@ var gloss_pipu = {
     past: "e",
     will: "a",
     adj: "q",
+    of: "u",
     num: "h"
 };
 
@@ -546,15 +547,15 @@ function word2pipu (word)
         }
     } else {
         for (lex in pipu_lex) {
-            var roots = pipu_lex[lex].root.split('/');
+            var roots = pipu_lex[lex].root.split("/");
             for (r in roots) {
-                if (roots[r] == word) {
+                if (roots[r].toLowerCase() == word) {
                     return lex;
                 }
             }
         }
     }
-    return '?';
+    return "?";
 }
 
 
@@ -564,11 +565,11 @@ function gloss2pipu (gloss)
     var pipu = "";
     for (g in gloss) {
         var gl = gloss[g].split("-");
-        var grammar = (gl.length > 1 ? gl[1] : 'root');
+        var grammar = (gl.length > 1 ? gl[1] : "root");
         if (grammar == "prop") { //Is a proper noun
-            pipu += ' '+ gl[0];
+            pipu += " "+ gl[0];
         } else {
-            pipu += ' '+ word2pipu(gl[0]) + gloss_pipu[grammar];
+            pipu += " "+ word2pipu(gl[0]) + gloss_pipu[grammar];
         }
     }
     return pipu.trim();
