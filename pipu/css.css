@@ -1,0 +1,48 @@
+*:not(ol) {
+    margin: 0;
+    padding: 0;
+}
+body {
+    padding: 1vw;
+}
+
+h1, h2, h3, h4 { margin: 1rem 1rem .5rem 1rem; }
+p { padding: .25rem; }
+.mono { font-family: monospace; }
+
+/*Tables*/
+table {
+    border-spacing: 0;
+    border: .1rem solid #000;
+    max-height: 40rem;
+    overflow-y: auto;
+    display: inline-block;
+}
+table:after { content: ' '; display: block; }
+tr:nth-child(odd) { background-color: #dedede; }
+th, td { padding: .1rem .5rem; height: 1.25rem; line-height: 1.25rem; }
+th { border-left: .1rem solid #000; font-size: 1rem; padding: .25rem;}
+th:first-child { border-left: none; }
+.datatable td { font-family: monospace; }
+td.type, td.verb, td.adj, td.comment { max-width: 8rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+
+speaker {
+    display: inline-block;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+speaker:after { content: "🔊"; font-weight: normal; font-style: normal; }
+
+example {
+    display: inline-block;
+    margin: .25rem .1rem;
+    background-color: #dedede;
+    padding: .5rem;
+}
+example *:not(speaker) { display: block; }
+example:nth-child(odd) { background-color: #dedede; }
+example gloss { margin-left: .5rem; }
+example pipu { margin-left: 1rem; }
+
+english, .english { font-style: italic; }
+pipu, .pipu { font-weight: bold; font-style: italic; }

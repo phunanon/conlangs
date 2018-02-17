@@ -6,6 +6,7 @@
         <script type="text/javascript" src="pipu.js"></script>
         <script type="text/javascript" src="pipu_examples.js"></script>
         <script type="text/javascript" src="mespeak/mespeak.js"></script>
+        <link rel="stylesheet" type="text/css" href="css.css">
         <script>
 function loadPage ()
 {
@@ -49,7 +50,7 @@ function loadPage ()
         if (root[0] != "<") {
             gE("#s4 #t1").innerHTML += '<tr><td class="pipu"><speaker onclick="aud(\''+ pipu +'\')"></speaker>'+ pipu +'</td>'+
                 '<td class="english">'+ root +'</td>'+
-                '<td>'+ type +'</td>'+
+                '<td class="type">'+ type +'</td>'+
                 '<td class="english verb" title="'+ verb +'">'+ verb +'</td>'+
                 '<td class="english adj" title="'+ adj +'">'+ adj +'</td>'+
                 '<td class="english">'+ pnoun +'</td>'+
@@ -79,7 +80,7 @@ function loadPage ()
   //Speakers
     meSpeak.loadConfig("mespeak/mespeak_config.json");
     meSpeak.loadVoice("mespeak/en-rp.json");
-    
+
 }
 
 
@@ -103,61 +104,11 @@ function gE  (e) { return document.querySelector(e); }
 function pad (n, p) { return (p + n).slice(-p.length); }
 function determineLumApprox (r, g, b) { return (0.33 * r) + (0.5 * g) + (0.16 * b); }
         </script>
-        <style>
-*:not(ol) {
-    margin: 0;
-    padding: 0;
-}
-body {
-    padding: 1vw;
-}
-
-h1, h2, h3, h4 { margin: 1rem 1rem .5rem 1rem; }
-p { padding: .25rem; }
-.mono { font-family: monospace; }
-
-/*Tables*/
-table {
-    border-spacing: 0;
-    border: .1rem solid #000;
-    max-height: 40rem;
-    overflow-y: auto;
-    display: inline-block;
-}
-table:after { content: ' '; display: block; }
-tr:nth-child(odd) { background-color: #dedede; }
-th, td { padding: .1rem .5rem; height: 1.25rem; line-height: 1.25rem; }
-th { border-left: .1rem solid #000; font-size: 1rem; padding: .25rem;}
-th:first-child { border-left: none; }
-.datatable td { font-family: monospace; }
-td.comment, td.verb, td.adj { max-width: 8rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
-
-speaker {
-    display: inline-block;
-    font-size: 1.1rem;
-    cursor: pointer;
-}
-speaker:after { content: "🔊"; font-weight: normal; font-style: normal; }
-
-example {
-    display: inline-block;
-    margin: .25rem .1rem;
-    background-color: #dedede;
-    padding: .5rem;
-}
-example *:not(speaker) { display: block; }
-example:nth-child(odd) { background-color: #dedede; }
-example gloss { margin-left: .5rem; }
-example pipu { margin-left: 1rem; }
-
-english, .english { font-style: italic; }
-pipu, .pipu { font-weight: bold; font-style: italic; }
-        </style>
     </head>
     <body onload="loadPage()">
         <h1>pipu</h1>
         <h2>Oligosynthetic Constructed Language<br>Documentation & Interactive tools</h2>
-        
+
         <h3>0. Abstract</h3>
         <p>A constructed language for lossy compression of common human communication, both phonetically and digitally.</p>
         <section id="s1">
@@ -208,8 +159,8 @@ pipu, .pipu { font-weight: bold; font-style: italic; }
 
 **Listing:**
 
-verb noun noun noun adjective - all nouns are affected by the verb and the adjective  
-noun noun noun verb - all nouns participate in the verb  
+verb noun noun noun adjective - all nouns are affected by the verb and the adjective
+noun noun noun verb - all nouns participate in the verb
 See #68 for a case where three nouns in a row do not denote a list, as they are followed by an adjective before the verb
 
 **Direction:**
@@ -246,7 +197,7 @@ Questions
             </tool>
             <tool>
                 <h4>Number maker</h4>
-                
+
             </tool>
         </section>
         <section id="s6">
