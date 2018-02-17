@@ -79,13 +79,14 @@ function loadPage ()
   //Speakers
     meSpeak.loadConfig("mespeak/mespeak_config.json");
     meSpeak.loadVoice("mespeak/en-rp.json");
+    
 }
 
 
 //http://www.masswerk.at/mespeak/
 function aud (text)
 {
-    meSpeak.speak(pipu2spk(text), {speed: 30});
+    meSpeak.speak(pipu2spk(text), {speed: 30, wordgap: 0});
 }
 
 
@@ -166,6 +167,7 @@ pipu, .pipu { font-weight: bold; font-style: italic; }
         <section id="s2">
             <h3>2. Morphology</h3>
             <p>CVC(V), giving 448 (8*7*8) possible roots. The (V) is optional, for grammar.</p>
+            <p>This structure can be progressively broken down from to VC(V), C(V), or V, if the previous word started with the same characters. This method must include a space before the broken down structure</p>
             <table>
                 <tbody id="t1">
                     <tr><th>V Suffix</th><th>Gloss</th><th>Meaning</th><th>Example</th></tr>
@@ -182,16 +184,17 @@ pipu, .pipu { font-weight: bold; font-style: italic; }
         </section>
         <section id="s3">
             <h3>3. Grammar</h3>
-            <h4>Adjective/Noun Placement</h4>
+            <h4>3.1.Adjective/Noun Placement</h4>
             <ol>
                 <li>Before the verb of a sentence, an adjective goes before the noun, and vice versa</li>
-                <li>Adjectives follow the verb in order to describe it (c.f. #65)</li>
-                <li>A number is identified as being before the noun, colour after noun (affected by 1.)</li>
                 <li>For selection in a collection rather than describing the noun, place the adjective after the noun (affected by 1.)</li>
+                <li>Adjectives follow the verb in order to describe it (c.f. #65). This makes it impossible to describe a noun being affected by a verb, rather only select.</li>
+                <li>A number is identified as being before the noun, colour after noun (affected by 1.)</li>
                 <li>'wood leg' is "leg wood" ("walking stick"), but 'leg wood' is "wooden leg" (affected by 1.)</li>
                 <li>5. will only span two nouns (c.f. #68 "above-adj collection plant head")</li>
             </ol>
             <h4>Possession</h4>
+            <p>These rules are affected by 3.1.1.</p>
             <table>
                 <tbody>
                     <tr><th>pipu gloss</th><th>English</th></tr>
@@ -213,7 +216,17 @@ See #68 for a case where three nouns in a row do not denote a list, as they are 
 
 - must use cardinal directions for 2D
 
-- can use 'up' and 'down' for 3D directions</p>
+- can use 'up' and 'down' for 3D directions
+
+Copula: use pronoun verbs, or just describe like noun adj
+
+Plural is done like: "animal animal" and is rare
+
+Imperative simply states the subject doing something
+
+Questions
+
+</p>
         </section>
         <section id="s4">
             <h3>4. Lexicon</h3>
