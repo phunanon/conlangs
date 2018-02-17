@@ -41,7 +41,8 @@ function loadPage ()
             colour = "<span style='color: #aaa'>unused</span>";
         } else {
             bg_color = colour;
-            fg_color = ((parseInt(colour.substr(1, 1), 16) < 9 || parseInt(colour.substr(1, 1), 16) > 14) && parseInt(colour.substr(2, 1), 16) < 9 && parseInt(colour.substr(3, 1), 16) <= 16 ? "#fff" : fg_color);
+            var r = parseInt(colour.substr(1, 1), 16)/16, g = parseInt(colour.substr(2, 1), 16)/16, b = parseInt(colour.substr(3, 1), 16)/16;
+            fg_color = (determineLumApprox(r, g, b) < .4 ? "#fff" : fg_color);
         }
         if (root == "") { root = "<span style='color: #aaa'>unused</span>"; ++unused; }
 
@@ -98,6 +99,7 @@ function tool_speaker_speak ()
 function gEs (e) { return document.querySelectorAll(e); }
 function gE  (e) { return document.querySelector(e); }
 function pad (n, p) { return (p + n).slice(-p.length); }
+function determineLumApprox (r, g, b) { return (0.33 * r) + (0.5 * g) + (0.16 * b); }
         </script>
         <style>
 *:not(ol) {
