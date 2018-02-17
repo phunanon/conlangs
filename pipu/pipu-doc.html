@@ -48,15 +48,15 @@ function loadPage ()
 
         if (root[0] != "<") {
         gE("#s4 #t1").innerHTML += (!(l % 56) ? header : '')+
-        '<tr><td><speaker onclick="aud(\''+ pipu +'\')"></speaker> <pipu>'+ pipu +'</pipu></td>'+
-        '<td>'+ root +'</td>'+
+        '<tr><td class="pipu"><speaker onclick="aud(\''+ pipu +'\')"></speaker>'+ pipu +'</td>'+
+        '<td class="english">'+ root +'</td>'+
         '<td>'+ type +'</td>'+
-        '<td>'+ verb +'</td>'+
-        '<td>'+ adj +'</td>'+
-        '<td>'+ pnoun +'</td>'+
+        '<td class="english">'+ verb +'</td>'+
+        '<td class="english">'+ adj +'</td>'+
+        '<td class="english">'+ pnoun +'</td>'+
         '<td class="comment" title="'+ comment +'">'+ comment +'</td>'+
-        '<td>'+ number +'</td>'+
-        '<td style="color: '+ fg_color +'; background-color: '+ bg_color +'">'+ colour +'</td>'+
+        '<td class="mono">'+ number +'</td>'+
+        '<td class="mono" style="color: '+ fg_color +'; background-color: '+ bg_color +'">'+ colour +'</td>'+
         '</tr>';
         }
         ++l;
@@ -71,6 +71,8 @@ function loadPage ()
         var gloss = gE("#s6 #corp"+ c +" gloss").innerHTML;
         if (gloss != "") {
             var pipu = gloss2pipu(gloss);
+            var elm_eng = gE("#s6 #corp"+ c +" english");
+            elm_eng.innerHTML = (c+1) +". "+ elm_eng.innerHTML;
             gE("#s6 #corp"+ c +" pipu").innerHTML = pipu;
             gE("#s6 #corp"+ c +" IPA").innerHTML = '<speaker onclick="aud(\''+ pipu +'\')"></speaker> /'+ pipu2IPA(pipu) +'/';
         }
@@ -112,15 +114,16 @@ body {
 
 h1, h2, h3, h4 { margin: 1rem 1rem .5rem 1rem; }
 p { padding: .25rem; }
+.mono { font-family: monospace; }
 
 /*Tables*/
 table {
     border-spacing: 0;
     border: .1rem solid #000;
 }
-tr:nth-child(odd) { background-color: #dadada; }
+tr:nth-child(odd) { background-color: #dedede; }
 th, td { padding: .1rem .5rem; height: 1.25rem; line-height: 1.25rem; }
-th { border-left: .1rem solid #000; }
+th { border-left: .1rem solid #000; font-size: 1.1rem; padding: .25rem;}
 th:first-child { border-left: none; }
 .datatable td { font-family: monospace; }
 td.comment { max-width: 8rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
@@ -130,16 +133,21 @@ speaker {
     font-size: 1.1rem;
     cursor: pointer;
 }
-speaker:after { content: "🔊"; }
+speaker:after { content: "🔊"; font-weight: normal; font-style: normal; }
 
 corp {
-    display: block;
-    padding-bottom: .2rem;
+    display: inline-block;
+    margin: .25rem .1rem;
+    background-color: #dedede;
+    padding: .5rem;
 }
 corp *:not(speaker) { display: block; }
-corp:nth-child(odd) { background-color: #dadada; }
+corp:nth-child(odd) { background-color: #dedede; }
 corp gloss { margin-left: .5rem; }
 corp pipu { margin-left: 1rem; }
+
+english, .english { font-style: italic; }
+pipu, .pipu { font-weight: bold; font-style: italic; }
         </style>
     </head>
     <body onload="loadPage()">
