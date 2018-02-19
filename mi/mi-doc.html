@@ -34,7 +34,7 @@
             <table>
                 <tr><th>Bits</th><td>00</td><td>01</td><td>10</td><td>11</td></tr>
                 <tr><th>Tense</th><td>(n)one</td><td>(p)ast</td><td>(i)mmediate</td><td>(f)uture</td></tr>
-                <tr><th>Evidentiality</th><td>non-visual (s)ensory</td><td>infe(r)ential</td><td>(h)earsay</td><td>(d)irect knowledge</td></tr>
+                <tr><th>Evidentiality</th><td>(d)irect knowledge</td><td>non-visual (s)ensory</td><td>infe(r)ential</td><td>(h)earsay</td></tr>
             </table>
             <p>Evidentiality becomes second-person when the sentence is a question.</p>
             <h4>Byte structure</h4>
@@ -45,20 +45,25 @@
         <section id="s3">
             <h3>3. Grammar</h3>
             <h4>Possession</h4>
+            <table>
+                <tbody>
+                    <tr><th>Gloss</th><th>English</th></tr>
+                    <tr><td class="gloss">n!me n:food</td><td class="english">My food</td></tr>
+                    <tr><td class="gloss">n!you n:food</td><td class="english">Your food</td></tr>
+                    <tr><td class="gloss">n:me v:eat n:you n:food</td><td class="english">I eat your food</td></tr>
+                    <tr><td class="gloss">n!animal n:food</td><td class="english">The animal's food</td></tr>
+                    <tr><td class="gloss">n:me v:eat n:animal n:food</td><td class="english">I eat the animal's food</td></tr>
+                </tbody>
+            </table>
+            <h4>Plurality</h4>
+            <p>Simply repeat a noun twice to make it plural (e.g. <gloss>n:animal n:animal</gloss>)</p>
+            <h4>Direction</h4>
+            <ul>
+                <li>Use cardinal directions for 2D</li>
+                <li>Use 'up' and 'down' for 3D directions</li>
+            </ul>
 
-**Direction:**
-
-- must use cardinal directions for 2D
-
-- can use 'up' and 'down' for 3D directions
-
-Copula: use pronoun verbs, or just describe like noun adj
-
-Plural is done like: "animal animal" and is rare
-
-Imperative simply states the subject doing something
-
-Questions
+<!--Copula: use pronoun verbs, or just describe like noun adj-->
 
 </p>
         </section>
@@ -76,6 +81,8 @@ Questions
             <h3>5. Tools</h3>
             <tool id="sentence-maker">
                 <h4>Sentence maker</h4>
+                <h5>English original</h5>
+                <textarea>My wooden toy is difficult to use.</textarea>
                 <h5>Head</h4>
                 <options>
                     <p>Tense:
@@ -88,10 +95,10 @@ Questions
                     </p>
                     <p>Evidentiality:
                         <select id="evidentiality" onchange="setTimeout(updateSentence, 1)">
+                            <option value="d">Direct Knowledge</option>
                             <option value="s">Non-visual Sensory</option>
                             <option value="r">Inferential</option>
                             <option value="h">Hearsay</option>
-                            <option value="d">Direct Knowledge</option>
                         </select>
                     </p>
                     <p>Is imperative:
@@ -108,7 +115,7 @@ Questions
                     </p>
                 </options>
                 <h5>Gloss</h5>
-                <textarea id="input" onkeydown="setTimeout(updateSentence, 1)"></textarea>
+                <textarea id="input" onkeydown="setTimeout(updateSentence, 1)">!me !wood toy has !difficult use</textarea>
                 <h5>Output</h5>
                 <p>Key: <mihead>Head</mihead> <onoun>Optional noun</onoun> <noun>Noun</noun> <adj>Adj</adj> <verb>Verb</verb></p>
                 <preview></preview>
@@ -116,6 +123,7 @@ Questions
                     <tr><th>Gloss</th><td class="gloss" id="glossout"></td></tr>
                     <tr><th>Binary</th><td><pre id="binout"></pre></td></tr>
                     <tr><th>Hex</th><td><pre id="hexout"></pre></td></tr>
+                    <tr><th>ASCII</th><td><pre id="asciiout"></pre></td></tr>
                     <tr><th>Latin & IPA</th><td><pre id="latinout"></pre></td></tr>
                     <tr><th>Script</th><td><canvas id="scriptout"></canvas></td></tr>
                 </table>
@@ -128,48 +136,8 @@ Questions
         <section id="s6">
             <h3>6. Examples</h3>
             <examples>
-<pre>
-                        "Is this the correct walking stick?"
-                        i n:wood n:leg a:correct
-                        head !noun noun !adj
-
-                        "She walked calmly to the door"
-                        p she walk !calm door
-                        head noun verb !adj noun
-
-                        "Him and his white cat flew fast"
-                        p him him cat white flew fast
-                        head !noun !noun noun !adj verb !adj
-
-                        "Are you sure this is the correct white walking stick?"
-                        iq you sure wood leg white correct
-                        head noun verb !noun noun !adj verb
-
-                        "You sure this bus is coming?"
-                        iq you sure bus coming
-                        head noun verb noun verb
-
-                        "Are you sure this is our bus?"
-                        iq you sure bus owned us
-                        head noun verb noun verb noun
-
-                        "The white witch waits patiently"
-                        i witch white waits patient
-                        head noun !adj verb !adj
-
-                        "I cannot eat this spoon"
-                        i I eat not can spoon
-                        head noun verb !adj !adj noun
-
-                        "Socialism will win"
-                        f socialism win
-                        head noun verb !adj
-
-                        "The dogs lie on the ground"
-                        i dog dog calm ground on
-                        head !noun noun verb noun !adj
-</pre>
             </examples>
         </section>
+        <img id="script_image" src="script.svg" hidden></img>
     </body>
 </html>

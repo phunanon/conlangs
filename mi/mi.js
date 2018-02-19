@@ -58,7 +58,7 @@ var _lex = [
     { noun: "person", type: "", verb: "", adj: "", comment: "" },
     { noun: "animal", type: "", verb: "hunt", adj: "", comment: "" },
     { noun: "plant", type: "", verb: "grow", adj: "", comment: "" },
-    { noun: "food", type: "", verb: "cook", adj: "cooked", comment: "" },
+    { noun: "food", type: "", verb: "eat", adj: "eaten", comment: "" },
     { noun: "earth/mountain", type: "", verb: "", adj: "large/big/much", comment: "" },
     { noun: "water/rain/river/Spring", type: "rain/drink", verb: "wet", adj: "", comment: "" },
     { noun: "fire/light/Summer ", type: "", verb: "burn", adj: "bright", comment: "" },
@@ -107,7 +107,7 @@ var _lex = [
     { noun: "city", type: "", verb: "", adj: "", comment: "" },
     { noun: "country", type: "", verb: "", adj: "", comment: "" },
     { noun: "wall/fence", type: "", verb: "", adj: "", comment: "" },
-    { noun: "null", type: "null", verb:"to ignore", adj: "ignored", comment: "Used in place of a noun upon repeating grammar pattern" }
+    { noun: "null", type: "null", verb:"ignore", adj: "ignored", comment: "Used in place of a noun upon repeating grammar pattern" }
 ];
 
 
@@ -125,7 +125,7 @@ var _num = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, NaN, 0, 1, 2, 3, 4
 function chrFind (chr, set)
 {
     for (c in set) {
-        if (set[c] == chr) { return c; }
+        if (set[c] == chr) { return parseInt(c); }
     }
     return -1;
 }
@@ -166,7 +166,7 @@ function gloss2rootIndex (gloss, feature)
 
 function gloss2multi (gloss)
 {
-    var bin_html = [], bin = [], hex_html = [], hex = [], latin_html = [], latin = [];
+    var bin_html = [], bin = [], hex_html = [], hex = [], latin_html = [], latin = [], ascii = [];
     gloss = gloss.split(" ");
     var head = gloss.splice(0, 1)[0];
     head = head.substr(2, head.length - 2).split("");
@@ -177,9 +177,9 @@ function gloss2multi (gloss)
             case "p": bin_head |= 64;  break;
             case "i": bin_head |= 128; break;
             case "f": bin_head |= 192; break;
-            case "r": bin_head |= 4;   break;
-            case "h": bin_head |= 8;   break;
-            case "d": bin_head |= 12;  break;
+            case "s": bin_head |= 4;   break;
+            case "r": bin_head |= 8;   break;
+            case "h": bin_head |= 12;  break;
             case "m": bin_head |= 2;   break;
             case "q": bin_head |= 1;   break;
         }
@@ -212,11 +212,13 @@ function gloss2multi (gloss)
             var full_root = (optional ? 128 : 0) + root;
             var root_bin = pad(full_root.toString(2), "00000000");
             var root_hex = pad(full_root.toString(16), "00");
+            var root_ascii = '&#'+ full_root +';';
             var root_latin = index2latin(full_root);
 
             bin.push(root_bin);
             hex.push(root_hex);
-            latin.push(root_latin)
+            latin.push(root_latin);
+            ascii.push(root_ascii);
             bin_html.push('<'+ feature +'>'+ root_bin +'</'+ feature +'>');
             hex_html.push('<'+ feature +'>'+ root_hex +'</'+ feature +'>');
             latin_html.push('<'+ feature +'>'+ root_latin +'</'+ feature +'>');
@@ -232,8 +234,9 @@ function gloss2multi (gloss)
   //Return binary
     return { bin_html: bin_html.join(""), bin: bin.join(""),
             hex_html: "0x"+ hex_html.join(""), hex: "0x"+ hex.join(""),
+            ascii: ascii.join(""),
             latin_html: latin_html.join(""), latin: latin.join(" "),
-            IPA: latin2IPA(latin.join(" "))
+            ipa: latin2IPA(latin.join(" "))
         };
 }
 
