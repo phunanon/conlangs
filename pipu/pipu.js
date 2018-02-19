@@ -507,7 +507,6 @@ var pipu_vow = ["i", "e", "a", "o", "q", "u", "h"];
 var pipu_chr = [" "].concat(pipu_con.concat(pipu_vow));
 var pipu_ipa = [" ", "p", "t", "k", "f", "θ", "s", "ʃ", "x", "i", "ɛ", "a", "ɔ", "ɒ", "u", "ə"];
 var pipu_spk = [" ", "p", "t", "k", "f", "T", "s", "S", "x", "i", "E", "a", "O", "0", "u", "@"];
-var ipa_aud = [""]
 var pipu_num = [NaN, 0, 1, 2, 3, 4, 5, 6, NaN, 0, 1, 2, 3, 4, 5, 6];
 
 var gloss_pipu = {
