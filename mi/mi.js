@@ -12,7 +12,7 @@ var _lex = [
     { noun: "all/always", type: "quantity, time", verb: "", adj: "many", comment: "" },
     { noun: "nothing/never", type: "quantity, time", verb: "", adj: "few", comment: "" },
     { noun: "partial/sometimes", type: "quantity, time", verb: "", adj: "some", comment: "" },
-    { noun: "only/just", type: "quantity, time", verb: "", adj: "", comment: "" },
+    { noun: "only/just", type: "quantity, time", verb: "", adj: "only", comment: "" },
     { noun: "any", type: "quantity", verb: "", adj: "", comment: "" },
     { noun: "every", type: "quantity", verb: "", adj: "", comment: "" },
     { noun: "here", type: "spatial", verb: "move_close/go_to", adj: "close/near", comment: "" },
