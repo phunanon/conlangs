@@ -2,7 +2,7 @@
 function loadPage ()
 {
   //1. Phonology & Orthography
-    for (var c = 0, clen = _chr.length; c < clen; ++c) {
+    for (var c = 0, clen = _chr.length - 1; c < clen; ++c) {
         var is_special = (_chr[c] == "y" || _chr[c] == "q");
         var is_vow = (c > _con.length);
         var is_con = !is_vow;
@@ -54,7 +54,7 @@ function loadPage ()
 }
 
 
-function isSpace (chr) { return chr == -1; }
+function isSpace (chr) { return chr == 32; }
 function drawScript (text)
 {
 
@@ -78,8 +78,8 @@ function drawScript (text)
     for (c in text) {
         c = parseInt(c);
         var index = chrFind(text[c], _chr);
-        if (index > 15) { index -= 16; }
         if (isSpace(index)) { x += SPACE; continue; }
+        if (index > 15) { index -= 16; }
         x += KERN;
         if (x + KERN >= MAX_W) {
             y += CHR_H;
