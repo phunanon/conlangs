@@ -138,40 +138,46 @@ function updateSentence ()
     var evidentiality = gE("tool#sentence-maker #evidentiality").value;
     var imperative = gE("tool#sentence-maker #imperative").value;
     var question = gE("tool#sentence-maker #question").value;
-    gloss = tense + evidentiality + imperative + question +" "+ gloss;
-  //Generate bytes
-    var input = gloss.split(" ");
-    gloss = input;
-    var part = 0; //0 head, 1 (noun) noun, 2 (adj) verb, 3 (adj) noun/null ...
-    var was_number = false;
-    for (w in input) {
-        var word = input[w];
-        var optional = (word[0] == "!");
-        var feature; //either HEAD, NOUN, ONOUN, ADJ, or VERB
-        switch (part) {
-            case 0: feature = HEAD; break;
-            case 1: feature = (optional ? ONOUN : NOUN); break;
-            case 2: feature = (optional ? ADJ : VERB); break;
-            case 3: feature = (optional ? ADJ : NOUN); break;
+  //Generate gloss
+    if (gE("tool#sentence-maker #preglossed").checked) {
+        gE("tool#sentence-maker preview").innerHTML = "";
+        gE("tool#sentence-maker #glossout").innerHTML = gloss;
+    } else {
+        gloss = tense + evidentiality + imperative + question +" "+ gloss; //Head
+        var input = gloss.split(" ");
+        gloss = input;
+        var part = 0; //0 head, 1 (noun) noun, 2 (adj) verb, 3 (adj) noun/null ...
+        var was_number = false;
+        for (w in input) {
+            var word = input[w];
+            var optional = (word[0] == "!");
+            var feature; //either HEAD, NOUN, ONOUN, ADJ, or VERB
+            switch (part) {
+                case 0: feature = HEAD; break;
+                case 1: feature = (optional ? ONOUN : NOUN); break;
+                case 2: feature = (optional ? ADJ : VERB); break;
+                case 3: feature = (optional ? ADJ : NOUN); break;
+            }
+            if (!optional) {
+                ++part;
+                if (part > 3) { part = 1; }
+            }
+
+            gloss[w] = { "MIHEAD":"h:", "NOUN":"n:", "ONOUN":"n", "ADJ":"a", "VERB":"v:" }[feature] + gloss[w];
+
+          //Prepare if was/is number
+            if (was_number) { feature = NUMBER; }
+            was_number = (gloss[w] == "n:number");
+            if (was_number) { feature = NUMBER; }
+
+            preview.push('<'+ feature +'>'+ word +'</'+ feature +'>');
         }
-        if (!optional) {
-            ++part;
-            if (part > 3) { part = 1; }
-        }
 
-        gloss[w] = { "MIHEAD":"h:", "NOUN":"n:", "ONOUN":"n", "ADJ":"a", "VERB":"v:" }[feature] + gloss[w];
-
-      //Prepare if was/is number
-        if (was_number) { feature = NUMBER; }
-        was_number = (gloss[w] == "n:number");
-        if (was_number) { feature = NUMBER; }
-
-        preview.push('<'+ feature +'>'+ word +'</'+ feature +'>');
+        gloss = gloss.join(" ");
+        gE("tool#sentence-maker preview").innerHTML = preview.join("");
+        gE("tool#sentence-maker #glossout").innerHTML = gloss;
     }
 
-    gloss = gloss.join(" ");
-    gE("tool#sentence-maker preview").innerHTML = preview.join("");
-    gE("tool#sentence-maker #glossout").innerHTML = gloss;
     var multiout = gloss2multi(gloss);
     gE("tool#sentence-maker #binout").innerHTML = multiout.bin_html +"<br>"+ multiout.bin;
     gE("tool#sentence-maker #hexout").innerHTML = multiout.hex_html +"<br>"+ multiout.hex;

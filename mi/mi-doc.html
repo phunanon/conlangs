@@ -134,7 +134,7 @@
                     </p>
                 </options>
                 <h5>Gloss</h5>
-                <p><input type="checkbox"> Pre-processed gloss</p>
+                <p><input id="preglossed" onchange="setTimeout(updateSentence, 1)" type="checkbox"> Pre-processed gloss</p>
                 <textarea id="input" onkeydown="setTimeout(updateSentence, 1)">I meet village girl !little they_are number 8 !old say she</textarea>
                 <h5>Output</h5>
                 <p>Key: <mihead>Head</mihead> <onoun>Optional noun</onoun> <noun>Noun</noun> <adj>Adj</adj> <verb>Verb</verb> <number>Number</number></p>
