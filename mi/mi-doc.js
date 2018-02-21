@@ -3,21 +3,20 @@ function loadPage ()
 {
   //1. Phonology & Orthography
     for (var c = 0, clen = _chr.length; c < clen; ++c) {
-        var is_space = (_chr[c] == " ");
+        var is_special = (_chr[c] == "y" || _chr[c] == "q");
         var is_vow = (c > _con.length);
         var is_con = !is_vow;
-        gE("#s1 #t1").innerHTML += '<tr><td>'+ (is_con ? (is_space ? 'space' : 'C') : (is_space ? 'space' : 'V')) +'</td>'+
-            '<td>'+ pad(c.toString(2), '0000') +'</td>'+
-            '<td>0x'+ pad(c.toString(16).toUpperCase(), '0') +'</td>'+
+        var num = (c << is_con*4 & (is_vow ? 0x0F : 0xF0));
+        gE("#s1 #t1").innerHTML += '<tr><td>'+ (is_con ? (is_special ? 'C*' : 'C') : (is_special ? 'V*' : 'V')) +'</td>'+
+            '<td>'+ pad(num.toString(2), '00000000') +'</td>'+
+            '<td>0x'+ pad(num.toString(16).toUpperCase(), '00') +'</td>'+
             '<td>'+ _chr[c] +'</td>'+
-            '<td>'+ _num[c] +'</td>'+
-            '<td>'+ (!is_space ? '<speaker onclick="aud(\''+ _chr[c] + (is_con ? 'a' : '') +'\', 10)"></speaker>' : '')+
+            '<td><speaker onclick="aud(\''+ _chr[c] + (is_con ? 'a' : '') +'\', 10)"></speaker>'+
             ' /'+ _ipa[c] +'/'+
             '</td>'+
             '</tr>';
     }
   //4. Lexicon
-    var number = 0;
     var mi_index = 0;
     for (var lex in _lex) {
         var mi      = index2latin(mi_index);
@@ -40,10 +39,8 @@ function loadPage ()
             '<td class="english verb" title="'+ verb +'">'+ verb +'</td>'+
             '<td class="english adj" title="'+ adj +'">'+ adj +'</td>'+
             '<td class="comment" title="'+ comment +'">'+ comment +'</td>'+
-            '<td class="mono">'+ number +'</td>'+
             '<td class="mono" style="color: '+ fg_colour +'; background-color: '+ bg_colour +'">'+ bg_colour +'</td>'+
             '</tr>';
-        ++number;
         ++mi_index;
         if (!((mi_index + 1) % 16)) { ++mi_index; }
     }
@@ -57,7 +54,7 @@ function loadPage ()
 }
 
 
-function isSpace (chr) { return chr == 15 || chr == 31; }
+function isSpace (chr) { return chr == -1; }
 function drawScript (text)
 {
 
@@ -131,7 +128,7 @@ function aud (text, speed = 220, spaces = true)
 }
 
 
-var HEAD = "MIHEAD", NOUN = "NOUN", ONOUN = "ONOUN", ADJ = "ADJ", VERB = "VERB";
+var HEAD = "MIHEAD", NOUN = "NOUN", ONOUN = "ONOUN", ADJ = "ADJ", VERB = "VERB", NUMBER = "NUMBER";
 function updateSentence ()
 {
     var preview = [];
@@ -146,6 +143,7 @@ function updateSentence ()
     var input = gloss.split(" ");
     gloss = input;
     var part = 0; //0 head, 1 (noun) noun, 2 (adj) verb, 3 (adj) noun/null ...
+    var was_number = false;
     for (w in input) {
         var word = input[w];
         var optional = (word[0] == "!");
@@ -162,6 +160,11 @@ function updateSentence ()
         }
 
         gloss[w] = { "MIHEAD":"h:", "NOUN":"n:", "ONOUN":"n", "ADJ":"a", "VERB":"v:" }[feature] + gloss[w];
+
+      //Prepare if was/is number
+        if (was_number) { feature = NUMBER; }
+        was_number = (gloss[w] == "n:number");
+        if (was_number) { feature = NUMBER; }
 
         preview.push('<'+ feature +'>'+ word +'</'+ feature +'>');
     }
@@ -187,9 +190,3 @@ function tool_speaker_speak ()
 {
     aud(gE("#tool-speaker-input").value);
 }
-
-
-function gEs (e) { return document.querySelectorAll(e); }
-function gE  (e) { return document.querySelector(e); }
-function pad (n, p) { return (p + n).slice(-p.length); }
-function determineLumApprox (r, g, b) { return (0.33 * r) + (0.5 * g) + (0.16 * b); }

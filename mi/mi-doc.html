@@ -4,7 +4,8 @@
         <title>mi</title>
         <meta charset="UTF-8">
         <script type="text/javascript" src="mi-doc.js"></script>
-        <script type="text/javascript" src="mi.js"></script>
+        <script type="text/javascript" src="mi-common.js"></script>
+        <script type="text/javascript" src="mi-lex.js"></script>
         <script type="text/javascript" src="mespeak/mespeak.js"></script>
         <link rel="stylesheet" type="text/css" href="css.css">
     </head>
@@ -16,7 +17,12 @@
         <p>A constructed language for incredibly lossy, strict subset compression of common human communication, both phonetically and digitally.</p>
         <section id="s1">
             <h3>1. Phonology & Orthography</h3>
-            <table class="datatable"><tbody id="t1"><tr><th>Mode</th><th>Binary</th><th>Hex</th><th>Latin</th><th>Num</th><th style="min-width: 4rem">IPA</th></tr></tbody></table>
+            <table class="datatable">
+                <tbody id="t1">
+                    <tr><th>Mode</th><th>Binary</th><th>Hex</th><th>Latin</th><th style="min-width: 4rem">IPA</th></tr>
+                </tbody>
+            </table>
+            <p>* Used only in numbers/colours</p>
         </section>
         <section id="s2">
             <h3>2. Sentence Structure & Morphology</h3>
@@ -46,6 +52,8 @@
         </section>
         <section id="s3">
             <h3>3. Grammar</h3>
+            <h4>Word order</h4>
+            <p>Word order is fixed SVO.</p>
             <h4>Possession</h4>
             <table>
                 <tbody>
@@ -64,8 +72,16 @@
                 <li>Use cardinal directions for 2D</li>
                 <li>Use 'up' and 'down' for 3D directions</li>
             </ul>
-            <!--<h4>Numbers</h4>-->
+            <h4>Numbers</h4>
+            <p>Numbers are expressed by first stating the noun "number", followed by a binary number as described below.</p>
+            <p>Where <mono>x</mono> is equal to <mono>7*n</mono>, where <mono>n</mono> is the number of bytes to the right.</p>
+            <table>
+                <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                <tr class="mono"><td class="regular">Overflow?</td><td>2^(6+x)</td><td>2^(5+x)</td><td>2^(4+x)</td><td>2^(3+x)</td><td>2^(2+x)</td><td>2^(1+x)</td><td>2^(0+x)</td></tr>
+            </table>
+            <p>Numbers are treated as independent strings of bytes, where the first bits states whether another number byte is to follow. Bytes 'overflow' after 01111111b, becoming 10000000 00000000b, treated as a 14-bit number with the first bit again stating whether there is another byte to follow.</p>
             <!--<h4>Colours</h4>-->
+            <!--<h4>Question asking</h4>-->
 <!--Copula: use pronoun verbs, or just describe like noun adj-->
 
 </p>
@@ -76,7 +92,7 @@
             <p>Hover to see comments.</p>
             <table>
                 <tbody id="t1">
-                    <tr><th>Binary</th><th style="min-width: 4rem;">mi</th><th>Root</th><th>Type</th><th>Verb</th><th>Adjective</th><th>Comment</th><th>Number</th><th>Colour</th></tr>
+                    <tr><th>Binary</th><th style="min-width: 4rem;">mi</th><th>Root</th><th>Type</th><th>Verb</th><th>Adjective</th><th>Comment</th><th>Colour</th></tr>
                 </tbody>
             </table>
         </section>
@@ -85,13 +101,13 @@
             <tool id="sentence-maker">
                 <h4>Sentence maker</h4>
                 <h5>English original</h5>
-                <textarea>My wooden door is difficult to use.</textarea>
+                <textarea>I met a little cottage girl; she was eight years old, she said.</textarea>
                 <h5>Head</h4>
                 <options>
                     <p>Tense:
                         <select id="tense" onchange="setTimeout(updateSentence, 1)">
                             <option value="n">None</option>
-                            <option value="p">Past</option>
+                            <option value="p" selected>Past</option>
                             <option value="i">Immediate</option>
                             <option value="f">Future</option>
                         </select>
@@ -118,7 +134,8 @@
                     </p>
                 </options>
                 <h5>Gloss</h5>
-                <textarea id="input" onkeydown="setTimeout(updateSentence, 1)">!me !wood door has !difficult use</textarea>
+                <p><input type="checkbox"> Pre-processed gloss</p>
+                <textarea id="input" onkeydown="setTimeout(updateSentence, 1)">I meet village girl !little they_are number 8 !old say she</textarea>
                 <h5>Output</h5>
                 <p>Key: <mihead>Head</mihead> <onoun>Optional noun</onoun> <noun>Noun</noun> <adj>Adj</adj> <verb>Verb</verb></p>
                 <preview></preview>
@@ -147,6 +164,11 @@
         <section id="s6">
             <h3>6. Examples</h3>
             <examples>
+["I ate the same food he ate.", "h:pd n:me v:eat n:he n:food a!same"],
+["The road I walked was long.", "h:pd n!my n:road v:it_is a!long"],
+["How did you get here?", "h:pdq n:you v:travel a!how n:here"],
+["I met a little cottage girl; she was eight years old, she said.", "h:pd n:I v:meet n:village n:girl a!little v:they_are n:number n:8 a!old v:say n:she"]
+
             </examples>
         </section>
         <img id="script_image" src="script.svg" hidden></img>

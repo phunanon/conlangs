@@ -4,11 +4,13 @@
 }
 body {
     padding: 1vw;
+    font-family: sans;
 }
 
 h1, h2, h3, h4, h5 { margin: 1rem 1rem .5rem 1rem; }
 p { padding: .25rem; }
-.mono { font-family: monospace; }
+mono, .mono { font-family: monospace; }
+.regular { font-family: sans; }
 
 /*Tables*/
 table {
@@ -16,6 +18,7 @@ table {
     border: .1rem solid #000;
     max-height: 40rem;
     overflow-y: auto;
+    overflow-x: hidden;
     display: inline-block;
 }
 
@@ -64,12 +67,14 @@ tool#sentence-maker onoun { background-color: #aff; border: .1rem dashed #000; }
 tool#sentence-maker noun { background-color: #aaf; }
 tool#sentence-maker adj { background-color: #afa; border: .1rem dashed #000; }
 tool#sentence-maker verb { background-color: #faa; }
+tool#sentence-maker number { background-color: #000; color: #fff; }
 
 tool#sentence-maker mihead,
 tool#sentence-maker onoun,
 tool#sentence-maker noun,
 tool#sentence-maker adj,
-tool#sentence-maker verb { padding: .2rem; line-height: 2rem;}
+tool#sentence-maker verb,
+tool#sentence-maker number { padding: .2rem; line-height: 2rem;}
 
 
 #s2 #t1 td { border-left: .1rem solid #000; }
