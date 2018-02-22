@@ -51,7 +51,7 @@ function gloss2rootIndex (gloss, feature)
 
 function gloss2multi (gloss)
 {
-    var bin_html = [], bin = [], hex_html = [], hex = [], latin_html = [], latin = [], ascii = [];
+    var bin_html = [], bin = [], hex_html = [], hex = [], latin_html = [], latin = [], ascii_html = [], ascii = [];
     gloss = gloss.split(" ");
     var head = gloss.splice(0, 1)[0];
     head = head.substr(2, head.length - 2).split("");
@@ -128,7 +128,7 @@ function gloss2multi (gloss)
             var full_root = (optional ? 128 : 0) + root;
             var root_bin = pad(full_root.toString(2), "00000000");
             var root_hex = pad(full_root.toString(16), "00");
-            var root_ascii = '&#'+ full_root +';';
+            var root_ascii = num2ascii(full_root);
             var root_latin = index2latin(full_root);
 
             bin.push(root_bin);
@@ -138,6 +138,7 @@ function gloss2multi (gloss)
             bin_html.push('<'+ feature +'>'+ root_bin +'</'+ feature +'>');
             hex_html.push('<'+ feature +'>'+ root_hex +'</'+ feature +'>');
             latin_html.push('<'+ feature +'>'+ root_latin +'</'+ feature +'>');
+            ascii_html.push(num2ascii_html(full_root));
         } else {
             bin.push(pad((optional ? '1' : '0') + "???????", "00000000"));
             hex.push("??");
@@ -150,7 +151,7 @@ function gloss2multi (gloss)
   //Return binary
     return { bin_html: bin_html.join(""), bin: bin.join(""),
             hex_html: "0x"+ hex_html.join(""), hex: "0x"+ hex.join(""),
-            ascii: ascii.join(""),
+            ascii_html: ascii_html.join(""), ascii: ascii.join(""),
             latin_html: latin_html.join(""), latin: latin.join(" "),
             ipa: latin2IPA(latin.join(" "))
         };
@@ -194,6 +195,18 @@ function num2mi_bin (num)
     return num_out
 }
 
+
+function num2ascii (num)
+{
+    return "&#"+ num +";";
+}
+function num2ascii_html (num)
+{
+    copyable = num2ascii(num);
+    var is_invisible = num < 32;
+    if (is_invisible) { num += 0x2400; }
+    return "<char data-show='"+ num2ascii(num) +"'"+ (is_invisible ? " style='margin: 0 .15rem'" : "") +">"+ copyable +"</char>";
+}
 
 
 

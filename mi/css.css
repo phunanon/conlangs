@@ -50,6 +50,17 @@ example pipu { margin-left: 1rem; }
 english, .english { font-style: italic; }
 mi, .mi { font-weight: bold; font-style: italic; }
 
+char {
+    position: relative;
+    color: transparent;
+}
+char::after {
+    content: attr(data-show);
+    position: absolute;
+    left: 0;
+    color: black;
+}
+
 tool {
     display: block;
     border: .1rem solid #000;
