@@ -110,8 +110,8 @@ var spk_words = [];
 var spk_syllables = [];
 var spk_w = 0, spk_s = 0;
 var spk_speed = 150;
-var WORD_GAP = 50;
-var SYLL_WAIT = 150;
+var WORD_GAP = 200;
+var SYLL_WAIT = 200;
 function speakNext ()
 {
     if (spk_w < spk_words.length) {
@@ -120,7 +120,7 @@ function speakNext ()
         }
         if (spk_s < spk_syllables.length) { //Continue speaking syllables
             speakPart(spk_syllables[spk_s]);
-            setTimeout(speakNext, SYLL_WAIT*(spk_syllables[spk_s].length/2));
+            setTimeout(speakNext, SYLL_WAIT*(spk_syllables[spk_s].replace(/˥|˩/g, "").length/2));
             ++spk_s;
         } else { //Finish speaking syllables
             spk_s = 0;
@@ -129,7 +129,7 @@ function speakNext ()
         }
     }
 }
-function speakPart (part, speed)
+function speakPart (part)
 {
   //Handle tone, by converting to pitch
     var pitch = 50;
@@ -142,7 +142,7 @@ function speakPart (part, speed)
         word = part.substr(0, part.length - 1);
     }
   //Actually speak, with callback for next syllable
-    meSpeak.speak("[["+ part +"]]", {speed: speed, pitch: pitch, wordgap: 0, nostop: true});
+    meSpeak.speak("[["+ part +"]]", {speed: spk_speed, pitch: pitch, wordgap: 0, nostop: true});
 }
 function spk (text, speed = 100) //Speaks faux-tonal Latin-script mi
 {
