@@ -64,32 +64,43 @@ function drawScript (text)
     var CHR_W = 32;
     var CHR_H = 48;
     var CHR_PAD = 8;
-    var MAX_W = 420;
+    var MAX_W = 320;
     var MAX_CHR = MAX_W / CHR_W;
     var KERN = CHR_W*.4;
-    var SPACE = CHR_W*.7;
+    var PAIRKERN = CHR_W*.7;
+    var SPACE = CHR_W*.6;
 
     var can = gE("canvas#scriptout");
     var ctx = can.getContext('2d');
     var script = gE('#script_image');
-    can.width = Math.min(text.length * CHR_W, MAX_W) + (CHR_PAD*2);
-    can.height = (Math.ceil(text.length / MAX_CHR)*CHR_H) + CHR_PAD*2;
+    can.width = MAX_W;
+
     var x = CHR_PAD - KERN, y = CHR_PAD;
+    var chr = 0;
     for (c in text) {
         c = parseInt(c);
         var index = chrFind(text[c], _chr);
         if (isSpace(index)) { x += SPACE; continue; }
         if (index > 15) { index -= 16; }
-        x += KERN;
-        if (x + KERN >= MAX_W) {
+        x += (chr % 2 ? KERN : PAIRKERN);
+        if (x + (chr % 2 ? CHR_W : CHR_W+PAIRKERN) >= MAX_W) {
             y += CHR_H;
             x = CHR_PAD;
-            if (isSpace(index)) { ++c; continue; } //Skip space
         }
+        ++chr;
 
         ctx.drawImage(script, index*RES_W, 0, RES_W, RES_H, x, y, CHR_W, CHR_H);
     }
-    ctx.drawImage(script, 15*RES_W, 0, RES_W, RES_H, x+SPACE*1.5, y, CHR_W, CHR_H);
+    var data = can.toDataURL();
+    can.width = MAX_W;
+    can.height = y + CHR_H;
+    var img=new Image();
+        img.onload=function(){
+            ctx.drawImage(img,0,0,img.width,img.height,0,0,img.width,img.height);
+        }
+    img.src=data;
+    ctx.drawImage(script, 15*RES_W, 0, RES_W, RES_H, x+SPACE*1.5, y, CHR_W, CHR_H);       //
+    ctx.drawImage(script, 15*RES_W, 0, RES_W, RES_H, KERN+(x+SPACE*1.5), y, CHR_W, CHR_H); //Ending lines
 }
 
 
