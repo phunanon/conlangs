@@ -110,11 +110,11 @@ function aud (text, speed = 220, spaces = true)
               //Handle tone, by converting to pitch
                 var pitch = 50;
                 if (word.slice(-1) == "˥") {
-                    pitch = 80;
+                    pitch = 90;
                     word = word.substr(0, word.length - 1);
                 }
                 if (word.slice(-1) == "˩") {
-                    pitch = 20;
+                    pitch = 10;
                     word = word.substr(0, word.length - 1);
                 }
               //Actually speak, with callback for next word
