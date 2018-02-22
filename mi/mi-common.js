@@ -49,9 +49,16 @@ function gloss2rootIndex (gloss, feature)
     return "?";
 }
 
+var latin_space_rules = {
+    NUMBER_NUMBER: false, NUMBER_NOUN: false, NUMBER_ONOUN: false, NUMBER_VERB: true, NUMBER_ADJ: true,
+    NOUN_NUMBER: true, NOUN_NOUN: false, NOUN_ONOUN: false, NOUN_VERB: true, NOUN_ADJ: false,
+    ONOUN_NUMBER: true, ONOUN_NOUN: false, ONOUN_ONOUN: false, ONOUN_VERB: true, ONOUN_ADJ: false,
+    VERB_NUMBER: true, VERB_NOUN: true, VERB_ONOUN: true, VERB_ADJ: false,
+    ADJ_NUMBER: true, ADJ_NOUN: false, ADJ_ONOUN: false, ADJ_VERB: true, ADJ_ADJ: false
+};
 function gloss2multi (gloss)
 {
-    var bin_html = [], bin = [], hex_html = [], hex = [], latin_html = [], latin = [], ascii = [];
+    var bin_html = [], bin = [], hex_html = [], hex = [], latin_html = [], latin_styled = "", latin = [], ascii = [];
     gloss = gloss.split(" ");
     var head = gloss.splice(0, 1)[0];
     head = head.substr(2, head.length - 2).split("");
@@ -83,7 +90,7 @@ function gloss2multi (gloss)
     latin_html.push('<mihead>'+ root_latin +'</mihead>');
   //Process words
     var regular = NOUN;
-    var last_feature = NOUN;
+    var prev_feature = HEAD;
     var is_numbering = false, number = [], n = 0;
 
     function getGlossRoot (w) { return gloss[w].substr(2, gloss[w].length - 2); }
@@ -138,6 +145,7 @@ function gloss2multi (gloss)
             bin_html.push('<'+ feature +'>'+ root_bin +'</'+ feature +'>');
             hex_html.push('<'+ feature +'>'+ root_hex +'</'+ feature +'>');
             latin_html.push('<'+ feature +'>'+ root_latin +'</'+ feature +'>');
+            latin_styled += (latin_space_rules[prev_feature+"_"+feature] ? " " : "") + root_latin;
         } else {
             bin.push(pad((optional ? '1' : '0') + "???????", "00000000"));
             hex.push("??");
@@ -146,12 +154,13 @@ function gloss2multi (gloss)
             hex_html.push('<'+ feature +'>??</'+ feature +'>');
             latin_html.push('<'+ feature +'>?</'+ feature +'>');
         }
+        prev_feature = feature;
     }
   //Return binary
     return { bin_html: bin_html.join(""), bin: bin.join(""),
             hex_html: "0x"+ hex_html.join(""), hex: "0x"+ hex.join(""),
             ascii: ascii.join(""),
-            latin_html: latin_html.join(""), latin: latin.join(" "),
+            latin_html: latin_html.join(""), latin_styled: latin_styled.trim(), latin: latin.join(" "),
             ipa: latin2IPA(latin.join(" "))
         };
 }

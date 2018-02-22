@@ -179,16 +179,17 @@ function updateSentence ()
     }
 
     var multiout = gloss2multi(gloss);
+    gE("tool#sentence-maker #englishout").innerHTML = "<span class='focus'>"+ gE("tool#sentence-maker #englishin").value +"</span>";
     gE("tool#sentence-maker #binout").innerHTML = multiout.bin_html +"<br>"+ multiout.bin;
     gE("tool#sentence-maker #hexout").innerHTML = multiout.hex_html +"<br>"+ multiout.hex;
     gE("tool#sentence-maker #asciiout").innerHTML = "<input value='"+ multiout.ascii +"' readonly>";
     gE("tool#sentence-maker #latinout").innerHTML = multiout.latin_html +"<br>"+
-        "<span style='font-size: 1.1rem;'>"+ multiout.latin +"</span><br>"+
+        "<span class='focus'>"+ multiout.latin_styled +"</span><br>"+
         "/"+ multiout.ipa +'/ <speaker onclick="aud(\''+ multiout.latin.split("?").join("") +'\')"></speaker><br>';
         /*multiout.latin.split(" ").join("") +"<br>"+
         "/"+ multiout.IPA.split(" ").join("") +'/ <speaker onclick="aud(\''+ multiout.latin.split("?").join("").split(" ").join("") +'\', 220, false)"></speaker>'
         ;*/
-    drawScript(multiout.latin);
+    drawScript(multiout.latin_styled);
 }
 
 

@@ -101,7 +101,7 @@
             <tool id="sentence-maker">
                 <h4>Sentence maker</h4>
                 <h5>English original</h5>
-                <textarea>I met a little cottage girl; she was eight years old, she said.</textarea>
+                <textarea id="englishin">I met a little cottage girl; she was eight years old, she said.</textarea>
                 <h5>Head</h4>
                 <options>
                     <p>Tense:
@@ -135,11 +135,12 @@
                 </options>
                 <h5>Gloss</h5>
                 <p><input id="preglossed" onchange="setTimeout(updateSentence, 1)" type="checkbox"> Pre-processed gloss</p>
-                <textarea id="input" onkeydown="setTimeout(updateSentence, 1)">I meet village girl !little they_are number 8 !old say she</textarea>
+                <textarea id="input" onkeydown="setTimeout(updateSentence, 1)">I meet village girl !little they_are number 8 say she</textarea>
                 <h5>Output</h5>
                 <p>Key: <mihead>Head</mihead> <onoun>Optional noun</onoun> <noun>Noun</noun> <adj>Adj</adj> <verb>Verb</verb> <number>Number</number></p>
                 <preview></preview>
                 <table>
+                    <tr><th>English</th><td class="english" id="englishout"></td></tr>
                     <tr><th>Gloss</th><td class="gloss" id="glossout"></td></tr>
                     <tr><th>Binary</th><td><pre id="binout"></pre></td></tr>
                     <tr><th>Hex</th><td><pre id="hexout"></pre></td></tr>
