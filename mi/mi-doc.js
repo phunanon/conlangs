@@ -11,7 +11,7 @@ function loadPage ()
             '<td>'+ pad(num.toString(2), '00000000') +'</td>'+
             '<td>0x'+ pad(num.toString(16).toUpperCase(), '00') +'</td>'+
             '<td>'+ _chr[c] +'</td>'+
-            '<td><speaker onclick="aud(\''+ _chr[c] + (is_con ? 'a' : '') +'\', 10)"></speaker>'+
+            '<td><speaker onclick="spk(\''+ _chr[c] + (is_con ? 'a' : '') +'\', 10)"></speaker>'+
             ' /'+ _ipa[c] +'/'+
             '</td>'+
             '</tr>';
@@ -33,7 +33,7 @@ function loadPage ()
 
         gE("#s4 #t1").innerHTML += '<tr>'+
             '<td class="binary">'+ pad(parseInt(mi_index).toString(2), "0000000") +'</td>'+
-            '<td class="mi"><speaker onclick="aud(\''+ mi +'\')"></speaker> '+ mi +'</td>'+
+            '<td class="mi"><speaker onclick="spk(\''+ mi +'\')"></speaker> '+ mi +'</td>'+
             '<td class="english">'+ noun +'</td>'+
             '<td class="type">'+ type +'</td>'+
             '<td class="english verb" title="'+ verb +'">'+ verb +'</td>'+
@@ -104,39 +104,59 @@ function drawScript (text)
 }
 
 
+
 //http://www.masswerk.at/mespeak/
-function aud (text, speed = 220, spaces = true)
+var spk_words = [];
+var spk_syllables = [];
+var spk_w = 0, spk_s = 0;
+var spk_speed = 150;
+var WORD_GAP = 50;
+var SYLL_WAIT = 150;
+function speakNext ()
 {
-  //Seperate text into different pitches
-  //Speak seperate parts
-    function speakWords(txt) {
-        if (!spaces) { txt = txt.replace(/(.˥)|(.˩)/g, " $1 "); } //e.g., "mifi˥du˥mɒzapɒ"" -> "mif i˥ d u˥ mɒzapɒ"
-        //  ˥[^˩]+˥  e.g. "mif i˥ d u˥ mɒzapɒ" -> "mif i˥du˥ mɒzapɒ"
-        var words = txt.split(" ");
-//console.log(words);
-
-        function speakNext () {
-            if (words.length) {
-                var word = words.shift();
-              //Handle tone, by converting to pitch
-                var pitch = 50;
-                if (word.slice(-1) == "˥") {
-                    pitch = 90;
-                    word = word.substr(0, word.length - 1);
-                }
-                if (word.slice(-1) == "˩") {
-                    pitch = 10;
-                    word = word.substr(0, word.length - 1);
-                }
-              //Actually speak, with callback for next word
-                meSpeak.speak("[["+ word +"]]", {speed: speed, pitch: pitch, wordgap: 0, nostop: true}, speakNext);
-            }
+    if (spk_w < spk_words.length) {
+        if (spk_s == 0) { //Prepare syllables
+            spk_syllables = spk_words[spk_w].replace(/(.{2})(˥|˩)/g, " $1$2 ").replace(/\s+/g, " ").split(" "); // "dɛ˩kuda˥ʒɛ"  -> ["dɛ˩", "kuda˥", "ʒɛ"]
         }
-        speakNext();
+        if (spk_s < spk_syllables.length) { //Continue speaking syllables
+            speakPart(spk_syllables[spk_s]);
+            setTimeout(speakNext, SYLL_WAIT*(spk_syllables[spk_s].length/2));
+            ++spk_s;
+        } else { //Finish speaking syllables
+            spk_s = 0;
+            ++spk_w;
+            setTimeout(speakNext, WORD_GAP);
+        }
     }
-
-    speakWords(latin2spk(text));
 }
+function speakPart (part, speed)
+{
+  //Handle tone, by converting to pitch
+    var pitch = 50;
+    if (part.slice(-1) == "˥") {
+        pitch = 90;
+        word = part.substr(0, part.length - 1);
+    }
+    if (part.slice(-1) == "˩") {
+        pitch = 10;
+        word = part.substr(0, part.length - 1);
+    }
+  //Actually speak, with callback for next syllable
+    meSpeak.speak("[["+ part +"]]", {speed: speed, pitch: pitch, wordgap: 0, nostop: true});
+}
+function spk (text, speed = 100) //Speaks faux-tonal Latin-script mi
+{
+    spk_speed = speed;
+  //Convert to espeak format
+    text = latin2spk(text);
+  //Split into words
+    spk_words = text.split(" ");
+  //Begin speech process
+    spk_w = 0;
+    spk_s = 0;
+    speakNext();
+}
+
 
 
 var HEAD = "MIHEAD", NOUN = "NOUN", ONOUN = "ONOUN", ADJ = "ADJ", VERB = "VERB", NUMBER = "NUMBER";
@@ -196,15 +216,12 @@ function updateSentence ()
     gE("tool#sentence-maker #asciiout").innerHTML = "<input value='"+ multiout.ascii +"' readonly>";
     gE("tool#sentence-maker #latinout").innerHTML = multiout.latin_html +"<br>"+
         "<span class='focus'>"+ multiout.latin_styled +"</span><br>"+
-        "/"+ multiout.ipa +'/ <speaker onclick="aud(\''+ multiout.latin.split("?").join("") +'\')"></speaker><br>';
-        /*multiout.latin.split(" ").join("") +"<br>"+
-        "/"+ multiout.IPA.split(" ").join("") +'/ <speaker onclick="aud(\''+ multiout.latin.split("?").join("").split(" ").join("") +'\', 220, false)"></speaker>'
-        ;*/
+        "/"+ multiout.ipa +'/ <speaker onclick="spk(\''+ multiout.latin_styled.split("?").join("") +'\')"></speaker><br>';
     drawScript(multiout.latin_styled);
 }
 
 
 function tool_speaker_speak ()
 {
-    aud(gE("#tool-speaker-input").value);
+    spk(gE("#tool-speaker-input").value);
 }

@@ -161,7 +161,7 @@ function gloss2multi (gloss)
             hex_html: "0x"+ hex_html.join(""), hex: "0x"+ hex.join(""),
             ascii: ascii.join(""),
             latin_html: latin_html.join(""), latin_styled: latin_styled.trim(), latin: latin.join(" "),
-            ipa: latin2IPA(latin.join(" "))
+            ipa: latin2IPA(latin_styled)
         };
 }
 
