@@ -39,9 +39,11 @@ speaker:after { content: "🔊"; font-weight: normal; font-style: normal; }
 
 example {
     display: inline-block;
-    margin: .25rem .1rem;
+    margin: .5rem;
     background-color: #dedede;
     padding: .5rem;
+    max-width: 30rem;
+    vertical-align: top;
 }
 example *:not(speaker) { display: block; }
 example:nth-child(odd) { background-color: #dedede; }
