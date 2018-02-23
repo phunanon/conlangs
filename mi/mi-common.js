@@ -52,7 +52,7 @@ var latin_space_rules = {
     NOUN_NUMBER: true, NOUN_NOUN: false, NOUN_ONOUN: false, NOUN_VERB: true, NOUN_ADJ: false,
     ONOUN_NUMBER: true, ONOUN_NOUN: false, ONOUN_ONOUN: false, ONOUN_VERB: true, ONOUN_ADJ: false,
     VERB_NUMBER: true, VERB_NOUN: true, VERB_ONOUN: true, VERB_ADJ: false,
-    ADJ_NUMBER: true, ADJ_NOUN: false, ADJ_ONOUN: false, ADJ_VERB: true, ADJ_ADJ: false
+    ADJ_NUMBER: true, ADJ_NOUN: true, ADJ_ONOUN: false, ADJ_VERB: true, ADJ_ADJ: false
 };
 function gloss2multi (gloss)
 {
