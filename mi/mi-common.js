@@ -40,8 +40,6 @@ function gloss2rootIndex (gloss, feature)
         for (r in roots) {
             if (roots[r].toLowerCase() == gloss.toLowerCase()) {
                 var index = parseInt(l);
-              //Shift past all possibilities of 1111
-                index += parseInt(index / 16);
                 return index;
             }
         }

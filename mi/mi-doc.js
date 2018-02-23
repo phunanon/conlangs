@@ -3,11 +3,10 @@ function loadPage ()
 {
   //1. Phonology & Orthography
     for (var c = 0, clen = _chr.length - 1; c < clen; ++c) {
-        var is_special = (_chr[c] == "y" || _chr[c] == "q");
         var is_vow = (c > _con.length);
         var is_con = !is_vow;
         var num = (c << is_con*4 & (is_vow ? 0x0F : 0xF0));
-        gE("#s1 #t1").innerHTML += '<tr><td>'+ (is_con ? (is_special ? 'C*' : 'C') : (is_special ? 'V*' : 'V')) +'</td>'+
+        gE("#s1 #t1").innerHTML += '<tr><td>'+ (is_con ? 'C' : 'V') +'</td>'+
             '<td>'+ pad(num.toString(2), '00000000') +'</td>'+
             '<td>0x'+ pad(num.toString(16).toUpperCase(), '00') +'</td>'+
             '<td>'+ _chr[c] +'</td>'+
@@ -42,7 +41,6 @@ function loadPage ()
             '<td class="mono" style="color: '+ fg_colour +'; background-color: '+ bg_colour +'">'+ bg_colour +'</td>'+
             '</tr>';
         ++mi_index;
-        if (!((mi_index + 1) % 16)) { ++mi_index; }
     }
     var lex_count = Object.keys(_lex).length;
     gE("#s4 #lex-total").innerHTML = lex_count;
