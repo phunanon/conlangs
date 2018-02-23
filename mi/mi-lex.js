@@ -21,7 +21,7 @@ var _lex = [
     { noun: "soft_and", type: "conjunction", verb: "", adj: "", comment: "Used to list, retaining and extending adjectives, possession, and etc. See -206." },
     { noun: "if_then", type: "conjunction", verb: "", adj: "should", comment: "Used to denote an if-then relationship between the leading and following clauses" },
     { noun: "compare_to", type: "", verb: "", adj: "must", comment: "Used to denote a comparison between the leading and following clause" },
-    { noun: "soft_also", type: "", verb: "", adj: "", comment: "" },
+    { noun: "soft_also", type: "", verb: "", adj: "for", comment: "" },
     { noun: "however", type: "", verb: "", adj: "would", comment: "" },
     { noun: "question/?", type: "question", verb: "question", adj: "", comment: "" },
 
@@ -45,7 +45,7 @@ var _lex = [
     { noun: "end/stop/speed", type: "", verb: "end/stop", adj: "fast", comment: "" },
     { noun: "positive", type: "", verb: "", adj: "possible/happy/can", comment: "" },
     { noun: "negative/not", type: "", verb: "", adj: "impossible/unable/cannot/sad", comment: "Used to negate a situation" },
-    { noun: "within/in", type: "", verb: "", adj: "", comment: "" },
+    { noun: "within/in", type: "spacial, preposition", verb: "within", adj: "within", comment: "" },
     { noun: "with", type: "", verb: "", adj: "", comment: "" },
 
 //Life, nature, time
@@ -58,9 +58,9 @@ var _lex = [
     { noun: "person", type: "", verb: "say/talk", adj: "who", comment: "" },
     { noun: "animal", type: "", verb: "hunt", adj: "", comment: "" },
     { noun: "plant", type: "", verb: "grow", adj: "what", comment: "" },
-    { noun: "food", type: "", verb: "eat", adj: "eaten", comment: "" },
+    { noun: "food", type: "", verb: "eat/drink/consume", adj: "eaten/drank/consumed", comment: "" },
     { noun: "earth/mountain", type: "", verb: "", adj: "large/big/much", comment: "" },
-    { noun: "water/rain/river/Spring", type: "rain/drink", verb: "wet", adj: "", comment: "" },
+    { noun: "water/rain/river/Spring", type: "", verb: "wet/pour", adj: "", comment: "" },
     { noun: "fire/light/Summer ", type: "", verb: "burn", adj: "bright", comment: "" },
     { noun: "air/wind/Autumn", type: "", verb: "blow", adj: "windy", comment: "" },
     { noun: "snow/Winter", type: "", verb: "snow", adj: "", comment: "" },
@@ -95,7 +95,7 @@ var _lex = [
     { noun: "toy", type: "", verb: "play", adj: "", comment: "" },
     { noun: "meeting/visit", type: "", verb: "meet", adj: "", comment: "" },
     { noun: "collection", type: "", verb: "", adj: "", comment: "" },
-    { noun: "metre", type: "", verb: "", adj: "", comment: "" },
+    { noun: "glass/cup/bottle/bowl/container", type: "", verb: "", adj: "", comment: "" },
     { noun: "square", type: "", verb: "", adj: "", comment: "" },
     { noun: "circle", type: "", verb: "", adj: "", comment: "" },
     { noun: "place", type: "", verb: "", adj: "where", comment: "" },
@@ -109,3 +109,9 @@ var _lex = [
     { noun: "wall/fence", type: "", verb: "", adj: "", comment: "" },
     { noun: "null", type: "null", verb:"ignore", adj: "ignored", comment: "Used in place of a noun upon repeating grammar pattern" }
 ];
+
+/*
+var _lex_multi = [
+    { noun: "coffee", nouns: "water plant"}
+];
+*/

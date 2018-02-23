@@ -82,6 +82,7 @@
             <p>Numbers are treated as independent strings of bytes, where the first bits states whether another number byte is to follow. Bytes 'overflow' after 01111111b, becoming 10000000 00000000b, treated as a 14-bit number with the first bit again stating whether there is another byte to follow.</p>
             <!--<h4>Colours</h4>-->
             <!--<h4>Question asking</h4>-->
+            <!--<h4>Proper nouns</h4>-->
 <!--Copula: use pronoun verbs, or just describe like noun adj-->
 
 </p>
@@ -101,14 +102,14 @@
             <tool id="sentence-maker">
                 <h4>Sentence maker</h4>
                 <h5>English original</h5>
-                <textarea id="englishin">I met a little cottage girl; she was eight years old, she said.</textarea>
+                <textarea id="englishin" onkeyup="setTimeout(updateSentence, 1)">I met a little cottage girl; she was eight years old, she said.</textarea>
                 <h5>Head</h4>
                 <options>
                     <p>Tense:
                         <select id="tense" onchange="setTimeout(updateSentence, 1)">
                             <option value="n">None</option>
                             <option value="p" selected>Past</option>
-                            <option value="i">Immediate</option>
+                            <option value="i">Now</option>
                             <option value="f">Future</option>
                         </select>
                     </p>
@@ -137,12 +138,13 @@
                 <p><input id="preglossed" onchange="setTimeout(updateSentence, 1)" type="checkbox"> Pre-processed gloss</p>
                 <textarea id="input" onkeydown="setTimeout(updateSentence, 1)">I meet village girl !little they_are number 8 say she</textarea>
                 <h5>Output</h5>
-                <p>Key: <mihead>Head</mihead> <onoun>Optional noun</onoun> <noun>Noun</noun> <adj>Adj</adj> <verb>Verb</verb> <number>Number</number></p>
                 <preview></preview>
                 <table>
+                    <tr><th>Key</th><td><mihead>Head</mihead> <onoun>Optional noun</onoun> <noun>Noun</noun> <adj>Adj</adj> <verb>Verb</verb> <number>Number</number></td></tr>
                     <tr><th>English</th><td class="english" id="englishout"></td></tr>
+                    <tr><th>Header</th><td id="headerout"></td></tr>
                     <tr><th>Gloss</th><td class="gloss" id="glossout"></td></tr>
-                    <tr><th>Binary</th><td><pre id="binout"></pre></td></tr>
+                    <tr class="hr"><th>Binary</th><td><pre id="binout"></pre></td></tr>
                     <tr><th>Hex</th><td><pre id="hexout"></pre></td></tr>
                     <tr><th>ASCII</th><td><pre id="asciiout"></pre></td></tr>
                     <tr><th>Latin & IPA</th><td><pre id="latinout"></pre></td></tr>
@@ -168,6 +170,7 @@
 ["I ate the same food he ate.", "h:pd n:me v:eat n:he n:food a!same"],
 ["The road I walked was long.", "h:pd n!my n:road v:it_is a!long"],
 ["How did you get here?", "h:pdq n:you v:travel a!how n:here"],
+["He poured coffee into his mug.", "h:pdq n:he v:pour n:water n:plant v:within n:cup"],
 ["I met a little cottage girl; she was eight years old, she said.", "h:pd n:I v:meet n:village n:girl a!little v:they_are n:number n:8 a!old v:say n:she"]
 
             </examples>

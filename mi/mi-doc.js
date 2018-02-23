@@ -160,6 +160,8 @@ function spk (text, speed = 100) //Speaks faux-tonal Latin-script mi
 
 
 var HEAD = "MIHEAD", NOUN = "NOUN", ONOUN = "ONOUN", ADJ = "ADJ", VERB = "VERB", NUMBER = "NUMBER";
+var _evi = { d: "direct knowledge", s: "non-visual sensory", r: "inferential", h: "hearsay" };
+var _tense = { n: "none", p: "past", i: "now", f:"future" }
 function updateSentence ()
 {
     var preview = [];
@@ -169,6 +171,9 @@ function updateSentence ()
     var evidentiality = gE("tool#sentence-maker #evidentiality").value;
     var imperative = gE("tool#sentence-maker #imperative").value;
     var question = gE("tool#sentence-maker #question").value;
+
+    function tf (bool) { return (bool ? "true" : "false"); }
+    gE("tool#sentence-maker #headerout").innerHTML = "tense: "+ _tense[tense] +", evident: "+ _evi[evidentiality] +", order: "+ tf(imperative) +", ask: "+ tf(question);
   //Generate gloss
     if (gE("tool#sentence-maker #preglossed").checked) {
         gE("tool#sentence-maker preview").innerHTML = "";

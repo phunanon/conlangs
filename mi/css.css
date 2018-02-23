@@ -15,7 +15,7 @@ mono, .mono { font-family: monospace; }
 /*Tables*/
 table {
     border-spacing: 0;
-    border: .1rem solid #000;
+    border: .15rem solid #000;
     max-height: 40rem;
     overflow-y: auto;
     overflow-x: hidden;
@@ -23,6 +23,7 @@ table {
 }
 
 tr:nth-child(odd) { background-color: #dedede; }
+tr.hr th, tr.hr td { border-top: .1rem solid #000; }
 th, td { padding: .1rem .5rem; height: 1.25rem; line-height: 1.25rem; }
 th { border-left: .1rem solid #000; font-size: 1rem; padding: .25rem;}
 th:first-child { border-left: none; }
