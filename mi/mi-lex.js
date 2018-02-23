@@ -3,7 +3,7 @@ var _lex = [
 //Language features: pronouns, clause dividers, conditionals
     { noun: "me/I/my", type: "pronoun", verb: "I_am", adj: "", comment: "" },
     { noun: "you/your", type: "pronoun", verb: "you_are", adj: "", comment: "" },
-    { noun: "actor", type: "pronoun", verb: "has", adj: "", comment: "Refers to the actor of actions taken in the sentence" },
+    { noun: "actor", type: "pronoun", verb: "has", adj: "by", comment: "Refers to the actor of actions taken in the sentence" },
     { noun: "it/that/this/its", type: "pronoun", verb: "it_is", adj: "", comment: "" },
     { noun: "they/them/their", type: "pronoun", verb: "they_are", adj: "", comment: "" },
     { noun: "us_inclusive/we_inclusive/our_inclusive", type: "pronoun", verb: "we_in_are", adj: "", comment: "" },
@@ -21,7 +21,7 @@ var _lex = [
     { noun: "soft_and", type: "conjunction", verb: "", adj: "", comment: "Used to list, retaining and extending adjectives, possession, and etc. See -206." },
     { noun: "if_then", type: "conjunction", verb: "", adj: "should", comment: "Used to denote an if-then relationship between the leading and following clauses" },
     { noun: "compare_to", type: "", verb: "", adj: "must", comment: "Used to denote a comparison between the leading and following clause" },
-    { noun: "soft_also", type: "", verb: "", adj: "for", comment: "" },
+    { noun: "soft_also", type: "", verb: "", adj: "for", comment: "Used to start a new clause, retaining the subject" },
     { noun: "however", type: "", verb: "", adj: "would", comment: "" },
     { noun: "question/?", type: "question", verb: "question", adj: "", comment: "" },
 
