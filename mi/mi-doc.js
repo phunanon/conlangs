@@ -46,6 +46,16 @@ function loadPage ()
     }
     var lex_count = Object.keys(_lex).length;
     gE("#s4 #lex-total").innerHTML = lex_count;
+  //6. Examples
+    var examples_html = "";
+    for (e in _examples) {
+        var multiout = gloss2multi(_examples[e][1]);
+        examples_html += "<example><english>"+ _examples[e][0] +"</english>"+
+            "<gloss>"+ _examples[e][1] +"</gloss>"+
+            "<mi>"+ multiout.latin_styled +"</mi>"+
+            "<ipa><speaker onclick='spk(\""+ multiout.latin_styled +"\")''></speaker> /"+ multiout.ipa +"/</ipa></example>";
+    }
+    gE("#s6 examples").innerHTML = examples_html;
   //Speakers
     meSpeak.loadConfig("mespeak/mespeak_config.json");
     meSpeak.loadVoice("mespeak/en-rp.json");

@@ -156,7 +156,7 @@ function gloss2multi (gloss)
         }
         prev_feature = feature;
     }
-  //Return binary
+  //Return processed results
     return { bin_html: bin_html.join(""), bin: bin.join(""),
             hex_html: "0x"+ hex_html.join(""), hex: "0x"+ hex.join(""),
             ascii: ascii.join(""),
