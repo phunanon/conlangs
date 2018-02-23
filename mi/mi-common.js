@@ -88,6 +88,7 @@ function gloss2multi (gloss)
     var root_latin = index2latin(bin_head);
     latin.push(root_latin);
     latin_html.push('<mihead>'+ root_latin +'</mihead>');
+    latin_styled += root_latin +" ";
   //Process words
     var regular = NOUN;
     var prev_feature = HEAD;
