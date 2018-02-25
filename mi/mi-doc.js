@@ -80,7 +80,7 @@ function speakNext ()
 {
     if (spk_w < spk_words.length) {
         if (spk_s == 0) { //Prepare syllables
-            spk_syllables = spk_words[spk_w].replace(/(.{2})(˥|˩)/g, " $1$2 ").replace(/\s+/g, " ").split(" "); // "dɛ˩kuda˥ʒɛ"  -> ["dɛ˩", "kuda˥", "ʒɛ"]
+            spk_syllables = spk_words[spk_w].replace(/(.{2})(\u030B|\u030F)/g, " $1$2 ").replace(/\s+/g, " ").split(" "); // "dɛ̏kudȁʒɛ"  -> ["dɛ̏", "kudȁ", "ʒɛ"]
         }
         if (spk_s < spk_syllables.length) { //Continue speaking syllables
             speakPart(spk_syllables[spk_s]);
@@ -97,12 +97,12 @@ function speakPart (part)
 {
   //Handle tone, by converting to pitch
     var pitch = 50;
-    if (part.slice(-1) == "˥") {
         pitch = 90;
+    if (part.slice(-1) == "\u030B") {
         word = part.substr(0, part.length - 1);
     }
-    if (part.slice(-1) == "˩") {
         pitch = 10;
+    if (part.slice(-1) == "\u030F") {
         word = part.substr(0, part.length - 1);
     }
   //Actually speak, with callback for next syllable
