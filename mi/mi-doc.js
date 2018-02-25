@@ -26,10 +26,9 @@ function loadPage ()
         var adj     = _lex[lex].adj;
         var comment = _lex[lex].comment;
 
-        var fg_colour = "#000";
-        bg_colour = "#"+ (((mi_index & 0x30) >> 4) * 5).toString(16) + (((mi_index & 0xC) >> 2) * 5).toString(16) + ((mi_index & 0x3) * 5).toString(16);
-        var r = parseInt(bg_colour.substr(1, 1), 16)/16, g = parseInt(bg_colour.substr(2, 1), 16)/16, b = parseInt(bg_colour.substr(3, 1), 16)/16;
-        fg_colour = (determineLumApprox(r, g, b) < .4 ? "#fff" : fg_colour);
+        var r = (mi_index >> 5) * 36,  g = ((mi_index >> 2) & 0x07) * 36,  b = (mi_index & 0x03) * 85;
+        var bg_colour = "#"+ Math.floor(r/16).toString(16) + Math.floor(g/16).toString(16) + Math.floor(b/16).toString(16);
+        var fg_colour = (determineLumApprox(r/255, g/255, b/255) < .4 ? "#fff" : "#000");
 
         gE("#s4 #t1").innerHTML += '<tr>'+
             '<td class="hex">0x'+ pad(parseInt(mi_index).toString(16), "00") +'</td>'+

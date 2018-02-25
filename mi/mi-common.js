@@ -232,3 +232,4 @@ function gE  (e) { return document.querySelector(e); }
 function pad (n, p) { return (p + n).slice(-p.length); }
 function determineLumApprox (r, g, b) { return (0.33 * r) + (0.5 * g) + (0.16 * b); }
 function insertArrayAt (array, index, insert) { Array.prototype.splice.apply(array, [index, 0].concat(insert)); }
+function rt (num, multiple) { return multiple*Math.round(num/multiple); } //Round to multiple
