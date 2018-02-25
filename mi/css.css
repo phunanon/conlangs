@@ -72,12 +72,17 @@ example {
     vertical-align: top;
 }
 example *:not(speaker) { display: block; }
-example gloss { margin-left: .5rem; }
-example mi { margin-left: 1rem; }
+example gloss { margin-left: .75rem; }
+example mi { margin-left: 1.5rem; }
+example .native:hover { font-family: sans !important; letter-spacing: 0; }
 
 english, .english { font-style: italic; }
 mi, .mi { font-weight: bold; font-style: italic; }
-native, .native { font-weight: bold; font-family: mi-native !important; }
+native, .native {
+    font-family: mi-native !important;
+    font-style: unset;
+    letter-spacing: -.1em;
+}
 
 tool {
     display: block;

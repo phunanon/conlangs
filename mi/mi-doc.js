@@ -56,7 +56,7 @@ function loadPage ()
         var multiout = gloss2multi(_examples[e][1]);
         examples_html += "<example><english>"+ _examples[e][0] +"</english>"+
             "<gloss>"+ _examples[e][1] +"</gloss>"+
-            "<mi>"+ multiout.latin_styled +"</mi>"+
+            "<mi class='native'>"+ multiout.latin_styled +"</mi>"+
             "<ipa><speaker onclick='spk(\""+ multiout.latin_styled +"\")''></speaker> /"+ multiout.ipa +"/</ipa></example>";
     }
     gE("#s6 examples").innerHTML = examples_html;
@@ -137,7 +137,7 @@ function updateSentence ()
     var question = gE("tool#sentence-maker #question").value;
 
     function tf (bool) { return (bool ? "true" : "false"); }
-    gE("tool#sentence-maker #headerout").innerHTML = "<b>"+ _tense[tense] +" tense</b>, <b>"+ _evi[evidentiality] +"</b>, <b>"+ (imperative ? "is order" : "not order") +"</b>, <b>"+ (question ? "is ask" : "not ask") +"</b>";
+    gE("tool#sentence-maker #headerout").innerHTML = _tense[tense] +" tense, "+ _evi[evidentiality] +", "+ (imperative ? "is order" : "not order") +", "+ (question ? "is ask" : "not ask");
   //Generate gloss
     if (gE("tool#sentence-maker #preglossed").checked) {
         gE("tool#sentence-maker preview").innerHTML = "";
