@@ -32,13 +32,13 @@ function loadPage ()
         fg_colour = (determineLumApprox(r, g, b) < .4 ? "#fff" : fg_colour);
 
         gE("#s4 #t1").innerHTML += '<tr>'+
-            '<td class="binary">'+ pad(parseInt(mi_index).toString(2), "0000000") +'</td>'+
+            '<td class="hex">0x'+ pad(parseInt(mi_index).toString(16), "00") +'</td>'+
             '<td class="mi"><speaker onclick="spk(\''+ mi +'\')"></speaker> '+ mi +'</td>'+
-            '<td class="english">'+ noun +'</td>'+
-            '<td class="type">'+ type +'</td>'+
-            '<td class="english verb" title="'+ verb +'">'+ verb +'</td>'+
-            '<td class="english adj" title="'+ adj +'">'+ adj +'</td>'+
-            '<td class="comment" title="'+ comment +'">'+ comment +'</td>'+
+            '<td class="english cutoff" title="'+ noun +'">'+ noun +'</td>'+
+            '<td class="type cutoff" title="'+ type +'">'+ type +'</td>'+
+            '<td class="english verb cutoff" title="'+ verb +'">'+ verb +'</td>'+
+            '<td class="english adj cutoff" title="'+ adj +'">'+ adj +'</td>'+
+            '<td class="comment cutoff" title="'+ comment +'">'+ comment +'</td>'+
             '<td class="mono" style="color: '+ fg_colour +'; background-color: '+ bg_colour +'">'+ bg_colour +'</td>'+
             '</tr>';
         ++mi_index;

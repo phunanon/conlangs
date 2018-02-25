@@ -35,7 +35,7 @@ th, td { padding: .1rem .5rem; height: 1.25rem; line-height: 1.25rem; }
 th { border-left: .1rem solid #000; font-size: 1rem; padding: .25rem;}
 th:first-child { border-left: none; }
 .datatable td { font-family: monospace; }
-td.type, td.verb, td.adj, td.comment { max-width: 8rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.cutoff { max-width: 8rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 
 speaker {
     display: inline-block;
@@ -59,17 +59,6 @@ example mi { margin-left: 1rem; }
 english, .english { font-style: italic; }
 mi, .mi { font-weight: bold; font-style: italic; }
 native, .native { font-weight: bold; font-family: mi-native !important; }
-
-char {
-    position: relative;
-    color: transparent;
-}
-char::after {
-    content: attr(data-show);
-    position: absolute;
-    left: 0;
-    color: black;
-}
 
 tool {
     display: block;
