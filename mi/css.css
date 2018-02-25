@@ -88,7 +88,7 @@ tool#sentence-maker options p { display: inline-block; border: .1rem solid #000;
 tool#sentence-maker preview { display: block; padding: .5rem; }
 tool#sentence-maker mihead { background-color: #dd0; }
 tool#sentence-maker onoun { background-color: #aff; border: .1rem dashed #000; }
-tool#sentence-maker noun { background-color: #aaf; }
+tool#sentence-maker noun { background-color: #bbf; }
 tool#sentence-maker adj { background-color: #afa; border: .1rem dashed #000; }
 tool#sentence-maker verb { background-color: #faa; }
 tool#sentence-maker number { background-color: #000; color: #fff; }

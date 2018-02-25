@@ -21,9 +21,10 @@ var _lex = [
     { noun: "soft_and", type: "conjunction", verb: "", adj: "", comment: "Used to list, retaining and extending adjectives, possession, and etc. See -206." },
     { noun: "if_then", type: "conjunction", verb: "", adj: "should", comment: "Used to denote an if-then relationship between the leading and following clauses" },
     { noun: "compare_to", type: "", verb: "", adj: "must", comment: "Used to denote a comparison between the leading and following clause" },
+    { noun: "therefore", type: "", verb: "therefore", adj: "therefore", comment: "" },
     { noun: "soft_also", type: "", verb: "", adj: "for", comment: "Used to start a new clause, retaining the subject" },
     { noun: "however", type: "", verb: "than", adj: "would", comment: "" },
-    { noun: "question/?", type: "question", verb: "question", adj: "", comment: "" },
+    { noun: "question/?", type: "question", verb: "question", adj: "why", comment: "" },
     { noun: "within/in", type: "spacial, preposition", verb: "within", adj: "within", comment: "" },
     { noun: "with", type: "", verb: "", adj: "", comment: "" },
 
@@ -55,16 +56,16 @@ var _lex = [
     { noun: "sky", type: "", verb: "", adj: "high", comment: "" },
     { noun: "machine/process", type: "", verb: "", adj: "", comment: "" },
     { noun: "life/nature", type: "", verb: "live", adj: "natural/wild", comment: "" },
-    { noun: "person", type: "", verb: "say/talk", adj: "who", comment: "" },
+    { noun: "person/body", type: "", verb: "say/talk", adj: "who", comment: "" },
     { noun: "animal", type: "", verb: "hunt", adj: "", comment: "" },
     { noun: "plant", type: "", verb: "grow", adj: "what", comment: "" },
     { noun: "food/possession", type: "", verb: "eat/drink/consume", adj: "eaten/drank/consumed", comment: "" },
     { noun: "earth/mountain", type: "", verb: "", adj: "large/big/much", comment: "" },
-    { noun: "water/rain/river/Spring", type: "", verb: "wet/pour", adj: "", comment: "" },
+    { noun: "water/rain/river/Spring", type: "", verb: "wet/pour/wash", adj: "", comment: "" },
     { noun: "fire/light/Summer ", type: "", verb: "burn", adj: "bright", comment: "" },
     { noun: "air/wind/Autumn", type: "", verb: "blow", adj: "windy", comment: "" },
     { noun: "snow/Winter", type: "", verb: "snow", adj: "", comment: "" },
-    { noun: "noise", type: "", verb: "", adj: "loud", comment: "" },
+    { noun: "noise", type: "", verb: "echo", adj: "loud", comment: "" },
     { noun: "sun/day", type: "", verb: "shine", adj: "hot", comment: "" },
     { noun: "earlier/before", type: "", verb: "", adj: "early", comment: "" },
     { noun: "now", type: "", verb: "", adj: "little/small", comment: "" },
@@ -77,9 +78,9 @@ var _lex = [
     { noun: "old", type: "", verb: "", adj: "old", comment: "" },
     { noun: "new", type: "", verb: "", adj: "new", comment: "" },
 //Humanity and its stuff
-    { noun: "desire/want/pleasure", type: "", verb: "desire/want/like", adj: "why", comment: "" },
+    { noun: "desire/want/pleasure", type: "", verb: "desire/want/like", adj: "", comment: "" },
     { noun: "friend/unison", type: "", verb: "", adj: "friendly/in unison", comment: "" },
-    { noun: "enemy", type: "", verb: "", adj: "hostile", comment: "" },
+    { noun: "music", type: "", verb: "play", adj: "musical", comment: "" },
     { noun: "family", type: "", verb: "know_person", adj: "familiar", comment: "" },
     { noun: "neighbour", type: "", verb: "know_thing", adj: "", comment: "" },
     { noun: "adult", type: "", verb: "", adj: "more", comment: "" },
@@ -92,8 +93,8 @@ var _lex = [
     { noun: "building/room", type: "", verb: "", adj: "", comment: "" },
     { noun: "door/entry", type: "", verb: "enter", adj: "", comment: "" },
     { noun: "table/platform", type: "", verb: "", adj: "", comment: "" },
-    { noun: "toy", type: "", verb: "play", adj: "", comment: "" },
-    { noun: "meeting/visit", type: "", verb: "meet", adj: "", comment: "" },
+    { noun: "instrument/toy", type: "", verb: "play", adj: "", comment: "" },
+    { noun: "meeting/visit", type: "", verb: "meet", adj: "good", comment: "" },
     { noun: "collection", type: "", verb: "", adj: "", comment: "" },
     { noun: "glass/cup/bottle/bowl/container", type: "", verb: "", adj: "", comment: "" },
     { noun: "square", type: "", verb: "", adj: "", comment: "" },
@@ -106,12 +107,13 @@ var _lex = [
     { noun: "town", type: "", verb: "", adj: "", comment: "" },
     { noun: "city", type: "", verb: "", adj: "", comment: "" },
     { noun: "country", type: "", verb: "", adj: "", comment: "" },
-    { noun: "wall/fence", type: "", verb: "", adj: "", comment: "" },
+    { noun: "wall/fence", type: "", verb: "", adj: "bad", comment: "" },
     { noun: "null", type: "null", verb:"ignore", adj: "ignored", comment: "Used in place of a noun upon repeating grammar pattern" }
 ];
 
 /*
 var _lex_multi = [
-    { noun: "coffee", nouns: "water plant"}
+    { noun: "coffee", nouns: "water plant"},
+    { noun: "drum", nouns: "instrument noise"}
 ];
 */
