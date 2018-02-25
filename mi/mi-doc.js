@@ -18,7 +18,7 @@ function loadPage ()
   //4. Lexicon
     var mi_index = 0;
     for (var lex in _lex) {
-        var mi      = index2latin(mi_index);
+        var mi      = index2latin(mi_index) +"/"+ index2latin(mi_index+128);
         var noun    = _lex[lex].noun;
         var type    = _lex[lex].type;
         var verb    = _lex[lex].verb;
