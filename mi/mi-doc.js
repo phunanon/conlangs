@@ -132,7 +132,7 @@ function updateSentence ()
     var question = gE("tool#sentence-maker #question").value;
 
     function tf (bool) { return (bool ? "true" : "false"); }
-    gE("tool#sentence-maker #headerout").innerHTML = "<b>"+ _tense[tense] +" tense</b>, <b>"+ _evi[evidentiality] +"</b>, <b>"+ (tf(imperative) ? "is order" : "not order") +"</b>, <b>"+ (tf(question) ? "is ask" : "not ask") +"</b>";
+    gE("tool#sentence-maker #headerout").innerHTML = "<b>"+ _tense[tense] +" tense</b>, <b>"+ _evi[evidentiality] +"</b>, <b>"+ (imperative ? "is order" : "not order") +"</b>, <b>"+ (question ? "is ask" : "not ask") +"</b>";
   //Generate gloss
     if (gE("tool#sentence-maker #preglossed").checked) {
         gE("tool#sentence-maker preview").innerHTML = "";
