@@ -5,6 +5,8 @@ var _con = ["m", "n", "p", "b", "t", "d", "k", "g", "w", "s", "z", "c", "j", "f"
 var _chr = _con.concat(_vow).concat(" ");
 var _ipa = ["m", "n", "p", "b", "t", "d", "k", "g", "θ", "s", "z", "ʃ", "ʒ", "f", "v", "ð", "i", "ɛ", "a", "ɒ", "u", "i˥", "ɛ˥", "a˥", "ɒ˥", "u˥", "i˩", "ɛ˩", "a˩", "ɒ˩", "u˩", "ə", " "];
 var _spk = ["m", "n", "p", "b", "t", "d", "k", "g", "T", "s", "z", "S", "Z", "f", "v", "D", "i", "E", "a", "0", "u", "i˥", "E˥", "a˥", "0˥", "u˥", "i˩", "E˩", "a˩", "0˩", "u˩", "@", " "];
+var HEAD = "MIHEAD", NOUN = "NOUN", ONOUN = "ONOUN", ADJ = "ADJ", VERB = "VERB", NUMBER = "NUMBER";
+
 
 
 function chrFind (chr, set)
@@ -26,8 +28,26 @@ function latin2IPA (latin)
 }
 
 
+function determineGlossFeatures (gloss)
+{
+    return { optional: (gloss[1] == "!"), feature: {"h:":HEAD, "n:":NOUN, "n!":ONOUN, "a!":ADJ, "v:":VERB}[gloss.substr(0, 2)] }
+}
 
-var HEAD = "MIHEAD", NOUN = "NOUN", ONOUN = "ONOUN", ADJ = "ADJ", VERB = "VERB", NUMBER = "NUMBER";
+
+function gloss2html (gloss)
+{
+    gloss = gloss.split(" ");
+    var gloss_html = ""
+    for (g in gloss) {
+        var feature = determineGlossFeatures(gloss[g]).feature;
+        gloss_html += "<"+ feature +">"+
+            "<span class='feature'>"+ gloss[g].substr(0, 2) +"</span>"+
+            gloss[g].substr(2, gloss[g].length-2) +
+            "</"+ feature +">";
+    }
+    return gloss_html;
+}
+
 
 function gloss2rootIndex (gloss, feature)
 {
@@ -96,9 +116,9 @@ function gloss2multi (gloss)
 
     var gloss_len = gloss.length;
     for (var w = 0; w < gloss_len; ++w) {
-        var feature = gloss[w].substr(0, 2);
-        var optional = (gloss[w][1] == "!");
-        feature = {"h:":HEAD, "n:":NOUN, "n!":ONOUN, "a!":ADJ, "v:":VERB}[feature];
+        var features = determineGlossFeatures(gloss[w]);
+        var feature = features.feature;
+        var optional = features.optional;
         var root = "?";
         var gloss_root = "";
 
@@ -160,7 +180,8 @@ function gloss2multi (gloss)
             hex_html: "0x"+ hex_html.join(""), hex: "0x"+ hex.join(""),
             ascii: ascii.join(""),
             latin_html: latin_html.join(""), latin_styled: latin_styled.trim(), latin: latin.join(" "),
-            ipa: latin2IPA(latin_styled)
+            ipa: latin2IPA(latin_styled),
+            bytes: hex.length, chars: hex.length*2
         };
 }
 

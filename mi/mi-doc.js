@@ -9,7 +9,8 @@ function loadPage ()
         gE("#s1 #t1").innerHTML += '<tr><td>'+ (is_con ? 'C' : 'V') +'</td>'+
             '<td>'+ pad(num.toString(2), '00000000') +'</td>'+
             '<td>0x'+ pad(num.toString(16).toUpperCase(), '00') +'</td>'+
-            '<td>'+ _chr[c] +'</td>'+
+            '<td class="mi">'+ _chr[c] +'</td>'+
+            '<td class="native">'+ _chr[c] +'</td>'+
             '<td><speaker onclick="spk(\''+ _chr[c] + (is_con ? 'a' : '') +'\', 10)"></speaker>'+
             ' /'+ _ipa[c] +'/'+
             '</td>'+
@@ -119,7 +120,7 @@ function spk (text, speed = 100) //Speaks faux-tonal Latin-script mi
 
 var HEAD = "MIHEAD", NOUN = "NOUN", ONOUN = "ONOUN", ADJ = "ADJ", VERB = "VERB", NUMBER = "NUMBER";
 var _evi = { d: "direct knowledge", s: "non-visual sensory", r: "inferential", h: "hearsay" };
-var _tense = { n: "none", p: "past", i: "now", f:"future" }
+var _tense = { n: "no", p: "past", i: "now", f:"future" }
 function updateSentence ()
 {
     var preview = [];
@@ -131,11 +132,11 @@ function updateSentence ()
     var question = gE("tool#sentence-maker #question").value;
 
     function tf (bool) { return (bool ? "true" : "false"); }
-    gE("tool#sentence-maker #headerout").innerHTML = "tense: "+ _tense[tense] +", evident: "+ _evi[evidentiality] +", order: "+ tf(imperative) +", ask: "+ tf(question);
+    gE("tool#sentence-maker #headerout").innerHTML = "<b>"+ _tense[tense] +" tense</b>, <b>"+ _evi[evidentiality] +"</b>, <b>"+ (tf(imperative) ? "is order" : "not order") +"</b>, <b>"+ (tf(question) ? "is ask" : "not ask") +"</b>";
   //Generate gloss
     if (gE("tool#sentence-maker #preglossed").checked) {
         gE("tool#sentence-maker preview").innerHTML = "";
-        gE("tool#sentence-maker #glossout").innerHTML = gloss;
+        gE("tool#sentence-maker #glossout").innerHTML = gloss2html(gloss);
     } else {
         gloss = tense + evidentiality + imperative + question +" "+ gloss; //Head
         var input = gloss.split(" ");
@@ -169,16 +170,16 @@ function updateSentence ()
 
         gloss = gloss.join(" ");
         gE("tool#sentence-maker preview").innerHTML = preview.join("");
-        gE("tool#sentence-maker #glossout").innerHTML = gloss;
+        gE("tool#sentence-maker #glossout").innerHTML = gloss2html(gloss);
     }
 
     var multiout = gloss2multi(gloss);
-    gE("tool#sentence-maker #englishout").innerHTML = "<span class='focus'>"+ gE("tool#sentence-maker #englishin").value +"</span>";
-    gE("tool#sentence-maker #binout").innerHTML = multiout.bin_html +"<br>"+ multiout.bin;
-    gE("tool#sentence-maker #hexout").innerHTML = multiout.hex_html +"<br>"+ multiout.hex;
+    gE("tool#sentence-maker #englishout").innerHTML = "<p class='english focus'>"+ gE("tool#sentence-maker #englishin").value +"</p>";
+    gE("tool#sentence-maker #binout").innerHTML = multiout.bin_html;// +"<br>"+ multiout.bin;
+    gE("tool#sentence-maker #hexout").innerHTML = multiout.hex_html +" "+ multiout.bytes +"B";// +"<br>"+ multiout.hex;
     gE("tool#sentence-maker #asciiout").innerHTML = "<input value='"+ multiout.ascii +"' readonly>";
-    gE("tool#sentence-maker #latinout").innerHTML = multiout.latin_html +"<br>"+
-        "<span class='focus'>"+ multiout.latin_styled +"</span><br>"+
+    gE("tool#sentence-maker #latinout").innerHTML = multiout.latin_html +" "+ multiout.chars +" chars"+
+        "<span class='focus'>"+ multiout.latin_styled +"</span>"+
         "/"+ multiout.ipa +'/ <speaker onclick="spk(\''+ multiout.latin_styled.split("?").join("") +'\')"></speaker><br>';
     gE("tool#sentence-maker #scriptout").innerHTML = multiout.latin_styled;
 }

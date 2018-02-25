@@ -20,7 +20,7 @@
             <h3>1. Phonology & Orthography</h3>
             <table class="datatable">
                 <tbody id="t1">
-                    <tr><th>Mode</th><th>Binary</th><th>Hex</th><th>Latin</th><th style="min-width: 4rem">IPA</th></tr>
+                    <tr><th>Mode</th><th>Binary</th><th>Hex</th><th>Latin</th><th>Native</th><th style="min-width: 4rem">IPA</th></tr>
                 </tbody>
             </table>
             <!--<h3>Styled Latin</h3>-->
@@ -139,18 +139,18 @@
                 <h5>Gloss</h5>
                 <p><input id="preglossed" onchange="setTimeout(updateSentence, 1)" type="checkbox"> Pre-processed gloss</p>
                 <textarea id="input" onkeydown="setTimeout(updateSentence, 1)">I meet village girl !little they_are number 8 say !by she</textarea>
-                <h5>Output</h5>
                 <preview></preview>
+                <h5>Output</h5>
                 <table>
                     <tr><th>Key</th><td><mihead>Head</mihead> <onoun>Optional noun</onoun> <noun>Noun</noun> <adj>Adj</adj> <verb>Verb</verb> <number>Number</number></td></tr>
-                    <tr><th>English</th><td class="english" id="englishout"></td></tr>
+                    <tr><th>English</th><td id="englishout"></td></tr>
                     <tr><th>Header</th><td id="headerout"></td></tr>
                     <tr><th>Gloss</th><td class="gloss" id="glossout"></td></tr>
-                    <tr class="hr"><th>Binary</th><td><pre id="binout"></pre></td></tr>
+                    <tr class="hr"><th>Binary</th><td><p id="binout"></p></td></tr>
                     <tr><th>Hex</th><td><pre id="hexout"></pre></td></tr>
                     <tr><th>ASCII</th><td><pre id="asciiout"></pre></td></tr>
                     <tr><th>Latin & IPA</th><td><pre id="latinout"></pre></td></tr>
-                    <tr><th>Script</th><td><canvas id="scriptout"></canvas></td></tr>
+                    <tr><th>Native Script</th><td><native id="scriptout" class="focus"></native></td></tr>
                 </table>
             </tool>
             <tool>

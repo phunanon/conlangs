@@ -28,7 +28,8 @@ table {
     display: inline-block;
 }
 
-tr:nth-child(odd) { background-color: #dedede; }
+tr:nth-child(odd) { background-color: #eee; }
+tr:nth-child(even) { background-color: #fff; }
 tr.hr th, tr.hr td { border-top: .1rem solid #000; }
 th, td { padding: .1rem .5rem; height: 1.25rem; line-height: 1.25rem; }
 th { border-left: .1rem solid #000; font-size: 1rem; padding: .25rem;}
@@ -46,13 +47,12 @@ speaker:after { content: "🔊"; font-weight: normal; font-style: normal; }
 example {
     display: inline-block;
     margin: .5rem;
-    background-color: #dedede;
+    background-color: #ddd;
     padding: .5rem;
     max-width: 30rem;
     vertical-align: top;
 }
 example *:not(speaker) { display: block; }
-example:nth-child(odd) { background-color: #dedede; }
 example gloss { margin-left: .5rem; }
 example mi { margin-left: 1rem; }
 
@@ -81,7 +81,9 @@ tool {
 
 tool#sentence-maker textarea { font-size: 1.1rem; width: 24rem; height: 4rem; }
 tool#sentence-maker p { padding: 0; }
-tool#sentence-maker .focus { font-size: 1.2rem; display: inline-block; padding: .5rem; }
+tool#sentence-maker th { max-width: 4rem; }
+tool#sentence-maker td { padding: .5rem; max-width: 32rem; overflow-wrap: break-word; }
+tool#sentence-maker .focus { font-size: 1.5rem; line-height: 1.5rem; display: block; padding: .5rem; }
 tool#sentence-maker options p { display: inline-block; border: .1rem solid #000; padding: .5rem; }
 tool#sentence-maker preview { display: block; padding: .5rem; }
 tool#sentence-maker mihead { background-color: #dd0; }
@@ -96,8 +98,20 @@ tool#sentence-maker onoun,
 tool#sentence-maker noun,
 tool#sentence-maker adj,
 tool#sentence-maker verb,
-tool#sentence-maker number { padding: .2rem; line-height: 2rem;}
+tool#sentence-maker number {
+    padding: .1rem .2rem;
+    display: inline-block;
+}
 
+tool#sentence-maker #englishout {
+    max-width: 32rem;
+}
+tool#sentence-maker #glossout .feature {
+    font-size: .75rem;
+}
+tool#sentence-maker #binout {
+    font-family: monospace;
+}
 tool#sentence-maker #asciiout input {
     border: none;
     background: transparent;
