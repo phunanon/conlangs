@@ -53,6 +53,7 @@ function loadPage ()
   //6. Examples
     var examples_html = "";
     for (e in _examples) {
+        if (_examples[e][1] == "") { continue; }
         var multiout = gloss2multi(_examples[e][1]);
         examples_html += "<example><english>"+ _examples[e][0] +"</english>"+
             "<gloss>"+ _examples[e][1] +"</gloss>"+
