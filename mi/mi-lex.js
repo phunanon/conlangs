@@ -1,6 +1,6 @@
 var _lex = [
 
-//Language features: pronouns, clause dividers, conditionals
+//Language features: pronouns, clause dividers, conditionals, etc
     { noun: "me/I/my", type: "pronoun", verb: "I_am", adj: "", comment: "" },
     { noun: "you/your", type: "pronoun", verb: "you_are", adj: "", comment: "" },
     { noun: "actor", type: "pronoun", verb: "has", adj: "by", comment: "Refers to the actor of actions taken in the sentence" },
@@ -22,8 +22,10 @@ var _lex = [
     { noun: "if_then", type: "conjunction", verb: "", adj: "should", comment: "Used to denote an if-then relationship between the leading and following clauses" },
     { noun: "compare_to", type: "", verb: "", adj: "must", comment: "Used to denote a comparison between the leading and following clause" },
     { noun: "soft_also", type: "", verb: "", adj: "for", comment: "Used to start a new clause, retaining the subject" },
-    { noun: "however", type: "", verb: "", adj: "would", comment: "" },
+    { noun: "however", type: "", verb: "than", adj: "would", comment: "" },
     { noun: "question/?", type: "question", verb: "question", adj: "", comment: "" },
+    { noun: "within/in", type: "spacial, preposition", verb: "within", adj: "within", comment: "" },
+    { noun: "with", type: "", verb: "", adj: "", comment: "" },
 
 //Communication, mathematics, direction
     { noun: "number", type: "", verb: "quantify", adj: "how_much", comment: "Used to indicate a number follows" },
@@ -45,8 +47,6 @@ var _lex = [
     { noun: "end/stop/speed", type: "", verb: "end/stop", adj: "fast", comment: "" },
     { noun: "positive", type: "", verb: "", adj: "possible/happy/can", comment: "" },
     { noun: "negative/not", type: "", verb: "", adj: "impossible/unable/cannot/sad", comment: "Used to negate a situation" },
-    { noun: "within/in", type: "spacial, preposition", verb: "within", adj: "within", comment: "" },
-    { noun: "with", type: "", verb: "", adj: "", comment: "" },
 
 //Life, nature, time
     { noun: "normality/calm/peace", type: "", verb: "rest", adj: "normal/quiet", comment: "" },
@@ -58,7 +58,7 @@ var _lex = [
     { noun: "person", type: "", verb: "say/talk", adj: "who", comment: "" },
     { noun: "animal", type: "", verb: "hunt", adj: "", comment: "" },
     { noun: "plant", type: "", verb: "grow", adj: "what", comment: "" },
-    { noun: "food", type: "", verb: "eat/drink/consume", adj: "eaten/drank/consumed", comment: "" },
+    { noun: "food/possession", type: "", verb: "eat/drink/consume", adj: "eaten/drank/consumed", comment: "" },
     { noun: "earth/mountain", type: "", verb: "", adj: "large/big/much", comment: "" },
     { noun: "water/rain/river/Spring", type: "", verb: "wet/pour", adj: "", comment: "" },
     { noun: "fire/light/Summer ", type: "", verb: "burn", adj: "bright", comment: "" },
@@ -73,7 +73,7 @@ var _lex = [
     { noun: "yesterday", type: "", verb: "", adj: "most", comment: "" },
     { noun: "today", type: "", verb: "", adj: "", comment: "" },
     { noun: "tomorrow", type: "", verb: "", adj: "least", comment: "" },
-    { noun: "age", type: "", verb: "", adj: "when", comment: "" },
+    { noun: "age/idea", type: "", verb: "", adj: "when", comment: "" },
     { noun: "old", type: "", verb: "", adj: "old", comment: "" },
     { noun: "new", type: "", verb: "", adj: "new", comment: "" },
 //Humanity and its stuff
