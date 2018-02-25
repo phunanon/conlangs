@@ -27,7 +27,9 @@ table {
     overflow-x: hidden;
     display: inline-block;
 }
-
+table.centered {
+    text-align: center;
+}
 tr:nth-child(odd) { background-color: #eee; }
 tr:nth-child(even) { background-color: #fff; }
 tr.hr th, tr.hr td { border-top: .1rem solid #000; }

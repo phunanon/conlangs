@@ -2,20 +2,26 @@
 function loadPage ()
 {
   //1. Phonology & Orthography
-    for (var c = 0, clen = _chr.length - 1; c < clen; ++c) {
-        var is_vow = (c > _con.length);
-        var is_con = !is_vow;
-        var num = (c << is_con*4 & (is_vow ? 0x0F : 0xF0));
-        gE("#s1 #t1").innerHTML += '<tr><td>'+ (is_con ? 'C' : 'V') +'</td>'+
-            '<td>'+ pad(num.toString(2), '00000000') +'</td>'+
+    //Vowels
+    var vow_html = "";
+    for (var c = 0, clen = _con.length; c < clen; ++c) {
+        var num = c;
+        vow_html += '<tr><td>xxxx'+ pad(num.toString(2), '0000') +'</td>'+
             '<td>0x'+ pad(num.toString(16).toUpperCase(), '00') +'</td>'+
-            '<td class="mi">'+ _chr[c] +'</td>'+
-            '<td class="native">'+ _chr[c] +'</td>'+
-            '<td><speaker onclick="spk(\''+ _chr[c] + (is_con ? 'a' : '') +'\', 10)"></speaker>'+
-            ' /'+ _ipa[c] +'/'+
-            '</td>'+
-            '</tr>';
+            '<td><span class="mi">'+ _chr[c] +'</span> <span class="native">'+ _chr[c] +'</span></td>'+
+            '<td><speaker onclick="spk(\''+ _chr[c] +'a\')"></speaker> /'+ _ipa[c] +'/</td></tr>';
     }
+    gE("#s1 #t1").innerHTML += vow_html;
+    //Consonants
+    var con_html = "";
+    for (var c = _vow.length, clen = _chr.length - 1; c < clen; ++c) {
+        var num = c;
+        con_html += '<tr><td>'+ pad(num.toString(2), '0000') +'xxxx</td>'+
+            '<td>0x'+ pad(num.toString(16).toUpperCase(), '00') +'</td>'+
+            '<td><span class="mi">'+ _chr[c] +'</span> <span class="native">'+ _chr[c] +'</span></td>'+
+            '<td><speaker onclick="spk(\''+ _chr[c] +'a\')"></speaker> /'+ _ipa[c] +'/</td></tr>';
+    }
+    gE("#s1 #t2").innerHTML += con_html;
   //4. Lexicon
     var mi_index = 0;
     for (var lex in _lex) {
@@ -58,7 +64,7 @@ function loadPage ()
     meSpeak.loadConfig("mespeak/mespeak_config.json");
     meSpeak.loadVoice("mespeak/en-rp.json");
   //Tools
-    setTimeout(updateSentence, 1)
+    setTimeout(updateSentence, 100);
 }
 
 
