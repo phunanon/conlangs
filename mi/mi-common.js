@@ -41,7 +41,7 @@ function gloss2html (gloss)
     for (g in gloss) {
         var feature = determineGlossFeatures(gloss[g]).feature;
         gloss_html += "<"+ feature +">"+
-            "<span class='feature'>"+ gloss[g].substr(0, 2) +"</span>"+
+            " <span class='feature'>"+ gloss[g].substr(0, 2) +"</span>"+
             gloss[g].substr(2, gloss[g].length-2) +
             "</"+ feature +">";
     }
