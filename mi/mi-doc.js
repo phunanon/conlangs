@@ -118,8 +118,8 @@ function spk (text, speed = 100) //Speaks faux-tonal Latin-script mi
 
 
 var HEAD = "MIHEAD", NOUN = "NOUN", ONOUN = "ONOUN", ADJ = "ADJ", VERB = "VERB", NUMBER = "NUMBER";
-var _evi = { d: "direct knowledge", s: "non-visual sensory", r: "inferential", h: "hearsay" };
-var _tense = { n: "no", p: "past", i: "now", f:"future" }
+var _evi = { d: "direct knowledge", s: "non-visual sense", r: "inferential", h: "hearsay" };
+var _tense = { n: "no", p: "past", i: "present", f:"future" }
 function updateSentence ()
 {
     var preview = [];
