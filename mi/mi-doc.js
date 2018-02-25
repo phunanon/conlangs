@@ -62,56 +62,6 @@ function loadPage ()
 }
 
 
-function isSpace (chr) { return chr == 32; }
-function drawScript (text)
-{
-
-    var SCRIPT_LEN = 16;
-    var RES_W = 16;
-    var RES_H = 24;
-    var CHR_W = 32;
-    var CHR_H = 48;
-    var CHR_PAD = 8;
-    var MAX_W = 320;
-    var MAX_CHR = MAX_W / CHR_W;
-    var KERN = CHR_W*.4;
-    var PAIRKERN = CHR_W*.8;
-    var SPACE = CHR_W*.4;
-
-    var can = gE("canvas#scriptout");
-    var ctx = can.getContext('2d');
-    var script = gE('#script_image');
-    can.width = MAX_W;
-
-    var x = CHR_PAD, y = CHR_PAD;
-    var chr = 0;
-    for (c in text) {
-        c = parseInt(c);
-        var index = chrFind(text[c], _chr);
-        if (isSpace(index)) { x += SPACE; continue; }
-        if (index > 15) { index -= 16; }
-        ++chr;
-        if (x + (chr % 2 ? CHR_W+PAIRKERN : CHR_W) >= MAX_W) {
-            y += CHR_H;
-            x = CHR_PAD;
-        }
-
-        ctx.drawImage(script, index*RES_W, 0, RES_W, RES_H, x, y, CHR_W, CHR_H);
-        x += (chr % 2 ? KERN : PAIRKERN);
-    }
-    var data = can.toDataURL();
-    can.width = MAX_W;
-    can.height = y + CHR_H;
-    var img=new Image();
-        img.onload=function(){
-            ctx.drawImage(img,0,0,img.width,img.height,0,0,img.width,img.height);
-        }
-    img.src=data;
-    ctx.drawImage(script, 15*RES_W, 0, RES_W, RES_H, x+SPACE, y, CHR_W, CHR_H);       //
-    ctx.drawImage(script, 15*RES_W, 0, RES_W, RES_H, x+SPACE+KERN, y, CHR_W, CHR_H); //Ending lines
-}
-
-
 
 //http://www.masswerk.at/mespeak/
 var spk_words = [];
@@ -230,8 +180,7 @@ function updateSentence ()
     gE("tool#sentence-maker #latinout").innerHTML = multiout.latin_html +"<br>"+
         "<span class='focus'>"+ multiout.latin_styled +"</span><br>"+
         "/"+ multiout.ipa +'/ <speaker onclick="spk(\''+ multiout.latin_styled.split("?").join("") +'\')"></speaker><br>';
-console.log(multiout.latin_styled)
-    drawScript(multiout.latin_styled);
+    gE("tool#sentence-maker #scriptout").innerHTML = multiout.latin_styled;
 }
 
 

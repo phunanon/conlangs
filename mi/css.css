@@ -1,3 +1,9 @@
+@font-face {
+   font-family: mi-native;
+   src: url("font/mi-native.woff2") format("woff2");
+}
+
+
 *:not(ul) {
     margin: 0;
     padding: 0;
@@ -52,6 +58,7 @@ example mi { margin-left: 1rem; }
 
 english, .english { font-style: italic; }
 mi, .mi { font-weight: bold; font-style: italic; }
+native, .native { font-weight: bold; font-family: mi-native !important; }
 
 char {
     position: relative;
@@ -94,6 +101,11 @@ tool#sentence-maker number { padding: .2rem; line-height: 2rem;}
 tool#sentence-maker #asciiout input {
     border: none;
     background: transparent;
+}
+tool#sentence-maker #scriptout {
+    font-size: 2.5rem;
+    line-height: 2.5rem;
+    max-width: 32rem;
 }
 
 
