@@ -149,10 +149,10 @@
                 </options>
                 <h5>Gloss</h5>
                 <p><input id="preglossed" onchange="setTimeout(updateSentence, 1)" type="checkbox"> Pre-processed gloss</p>
-                <textarea id="input" onkeydown="setTimeout(updateSentence, 1)">I meet village girl !little they_are number 8 say !by she</textarea>
+                <textarea id="glossin" onkeydown="setTimeout(updateSentence, 1)">I meet village girl !little they_are number 8 say !by she</textarea>
                 <preview></preview>
                 <h5>Output</h5>
-                <table>
+                <table id="output">
                     <tr><th>Key</th><td><mihead>Head</mihead> <onoun>Optional noun</onoun> <noun>Noun</noun> <adj>Adj</adj> <verb>Verb</verb> <number>Number</number></td></tr>
                     <tr><th>English</th><td id="englishout"></td></tr>
                     <tr><th>Header</th><td id="headerout"></td></tr>

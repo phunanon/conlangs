@@ -58,7 +58,8 @@ function loadPage ()
         examples_html += "<example><english>"+ _examples[e][0] +"</english>"+
             "<gloss>"+ _examples[e][1] +"</gloss>"+
             "<mi class='native'>"+ multiout.latin_styled +"</mi>"+
-            "<ipa><speaker onclick='spk(\""+ multiout.latin_styled +"\")''></speaker> /"+ multiout.ipa +"/</ipa></example>";
+            "<ipa><speaker onclick='spk(\""+ multiout.latin_styled +"\")''></speaker> /"+ multiout.ipa +"/</ipa>"+
+            "<button class='load' onclick='tool_sentence_maker_load("+ e +")'>load</button></example>";
     }
     gE("#s6 examples").innerHTML = examples_html;
   //Speakers
@@ -130,7 +131,7 @@ var _tense = { n: "no", p: "past", i: "present", f:"future" }
 function updateSentence ()
 {
     var preview = [];
-    var gloss = gE("tool#sentence-maker #input").value.trim();
+    var gloss = gE("tool#sentence-maker #glossin").value.trim();
   //Generate head
     var tense = gE("tool#sentence-maker #tense").value;
     var evidentiality = gE("tool#sentence-maker #evidentiality").value;
@@ -188,6 +189,18 @@ function updateSentence ()
         "<span class='focus'>"+ multiout.latin_styled +"</span>"+
         "/"+ multiout.ipa +'/ <speaker onclick="spk(\''+ multiout.latin_styled.split("?").join("") +'\')"></speaker><br>';
     gE("tool#sentence-maker #scriptout").innerHTML = multiout.latin_styled;
+}
+
+
+function tool_sentence_maker_load (e)
+{
+    var example = _examples[e];
+    gE("tool#sentence-maker #preglossed").checked = true;
+    gE("tool#sentence-maker #englishin").value = example[0];
+    gE("tool#sentence-maker #glossin").value = example[1];
+    updateSentence();
+    gE("tool#sentence-maker #output").scrollIntoView();
+    return false;
 }
 
 

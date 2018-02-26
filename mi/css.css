@@ -70,11 +70,17 @@ example {
     padding: .5rem;
     max-width: 30rem;
     vertical-align: top;
+    position: relative;
 }
 example *:not(speaker) { display: block; }
 example gloss { margin-left: .75rem; }
 example mi { margin-left: 1.5rem; }
 example .native:hover { font-family: sans !important; letter-spacing: 0; }
+example .load {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
 
 english, .english { font-style: italic; }
 mi, .mi { font-weight: bold; font-style: italic; }
