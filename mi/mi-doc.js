@@ -1,4 +1,55 @@
 
+function loadLexicon ()
+{
+    gE("button#loadLexicon").style.display = "none";
+    var lex_html = "";
+    var mi_index = 0;
+    for (var lex in _lex) {
+        var mi      = index2latin(mi_index) +"/"+ index2latin(mi_index+128);
+        var noun    = _lex[lex].noun;
+        var type    = _lex[lex].type;
+        var verb    = _lex[lex].verb;
+        var adj     = _lex[lex].adj;
+        var comment = _lex[lex].comment;
+
+        var r = (mi_index >> 5) * 36,  g = ((mi_index >> 2) & 0x07) * 36,  b = (mi_index & 0x03) * 85;
+        var bg_colour = "#"+ Math.floor(r/16).toString(16) + Math.floor(g/16).toString(16) + Math.floor(b/16).toString(16);
+        var fg_colour = (determineLumApprox(r/255, g/255, b/255) < .4 ? "#fff" : "#000");
+
+        lex_html += '<tr>'+
+            '<td class="hex">0x'+ pad(parseInt(mi_index).toString(16), "00") +'</td>'+
+            '<td class="mi"><speaker onclick="spk(\''+ mi +'\')"></speaker> '+ mi +'</td>'+
+            '<td class="english cutoff" title="'+ noun +'">'+ noun +'</td>'+
+            '<td class="type cutoff" title="'+ type +'">'+ type +'</td>'+
+            '<td class="english verb cutoff" title="'+ verb +'">'+ verb +'</td>'+
+            '<td class="english adj cutoff" title="'+ adj +'">'+ adj +'</td>'+
+            '<td class="comment cutoff" title="'+ comment +'">'+ comment +'</td>'+
+            '<td class="mono" style="color: '+ fg_colour +'; background-color: '+ bg_colour +'">'+ bg_colour +'</td>'+
+            '</tr>';
+        ++mi_index;
+    }
+    gE("#s4 #t1").innerHTML += lex_html;
+    var lex_count = Object.keys(_lex).length;
+    gE("#s4 #lex-total").innerHTML = lex_count;
+}
+
+function loadExamples ()
+{
+    gE("button#loadExamples").style.display = "none";
+    var examples_html = "";
+    for (e in _examples) {
+        if (_examples[e][1] == "") { continue; }
+        var multi_out = gloss2multi(_examples[e][1]);
+        examples_html += "<example><english>"+ _examples[e][0] +"</english>"+
+            "<gloss>"+ _examples[e][1] +"</gloss>"+
+            "<mi class='native'>"+ multi_out.latin_styled +"</mi>"+
+            "<ipa><speaker onclick='spk(\""+ multi_out.latin_styled +"\")''></speaker> /"+ multi_out.ipa +"/</ipa>"+
+            "<button class='load' onclick='tool_sentence_maker_load("+ e +")'>load</button></example>";
+    }
+    gE("#s6 examples").innerHTML = examples_html;
+}
+
+
 function loadPage ()
 {
   //1. Phonology & Orthography
@@ -22,46 +73,6 @@ function loadPage ()
             '<td><speaker onclick="spk(\''+ _chr[c] +'a\')"></speaker> /'+ _ipa[c] +'/</td></tr>';
     }
     gE("#s1 #t2").innerHTML += con_html;
-  //4. Lexicon
-    var mi_index = 0;
-    for (var lex in _lex) {
-        var mi      = index2latin(mi_index) +"/"+ index2latin(mi_index+128);
-        var noun    = _lex[lex].noun;
-        var type    = _lex[lex].type;
-        var verb    = _lex[lex].verb;
-        var adj     = _lex[lex].adj;
-        var comment = _lex[lex].comment;
-
-        var r = (mi_index >> 5) * 36,  g = ((mi_index >> 2) & 0x07) * 36,  b = (mi_index & 0x03) * 85;
-        var bg_colour = "#"+ Math.floor(r/16).toString(16) + Math.floor(g/16).toString(16) + Math.floor(b/16).toString(16);
-        var fg_colour = (determineLumApprox(r/255, g/255, b/255) < .4 ? "#fff" : "#000");
-
-        gE("#s4 #t1").innerHTML += '<tr>'+
-            '<td class="hex">0x'+ pad(parseInt(mi_index).toString(16), "00") +'</td>'+
-            '<td class="mi"><speaker onclick="spk(\''+ mi +'\')"></speaker> '+ mi +'</td>'+
-            '<td class="english cutoff" title="'+ noun +'">'+ noun +'</td>'+
-            '<td class="type cutoff" title="'+ type +'">'+ type +'</td>'+
-            '<td class="english verb cutoff" title="'+ verb +'">'+ verb +'</td>'+
-            '<td class="english adj cutoff" title="'+ adj +'">'+ adj +'</td>'+
-            '<td class="comment cutoff" title="'+ comment +'">'+ comment +'</td>'+
-            '<td class="mono" style="color: '+ fg_colour +'; background-color: '+ bg_colour +'">'+ bg_colour +'</td>'+
-            '</tr>';
-        ++mi_index;
-    }
-    var lex_count = Object.keys(_lex).length;
-    gE("#s4 #lex-total").innerHTML = lex_count;
-  //6. Examples
-    var examples_html = "";
-    for (e in _examples) {
-        if (_examples[e][1] == "") { continue; }
-        var multi_out = gloss2multi(_examples[e][1]);
-        examples_html += "<example><english>"+ _examples[e][0] +"</english>"+
-            "<gloss>"+ _examples[e][1] +"</gloss>"+
-            "<mi class='native'>"+ multi_out.latin_styled +"</mi>"+
-            "<ipa><speaker onclick='spk(\""+ multi_out.latin_styled +"\")''></speaker> /"+ multi_out.ipa +"/</ipa>"+
-            "<button class='load' onclick='tool_sentence_maker_load("+ e +")'>load</button></example>";
-    }
-    gE("#s6 examples").innerHTML = examples_html;
   //Speakers
     meSpeak.loadConfig("mespeak/mespeak_config.json");
     meSpeak.loadVoice("mespeak/en-rp.json");
