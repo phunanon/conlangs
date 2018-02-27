@@ -13,7 +13,7 @@ var _lex = [
     { noun: "partial/sometimes", type: "quantity, time", verb: "", adj: "some", comment: "" },
     { noun: "only/just", type: "quantity, time", verb: "", adj: "only", comment: "" },
     { noun: "any", type: "quantity", verb: "", adj: "", comment: "" },
-    { noun: "every", type: "quantity", verb: "", adj: "", comment: "" },
+    { noun: "every", type: "quantity", verb: "", adj: "all", comment: "" },
     { noun: "here", type: "spatial", verb: "move_close/go_to", adj: "close/near", comment: "" },
     { noun: "there", type: "spatial", verb: "move_away/go_from", adj: "far_away/distant", comment: "" },
     { noun: "also", type: "conjunction", verb: "", adj: "opposite", comment: "Used to seperate clauses" },
@@ -27,6 +27,8 @@ var _lex = [
     { noun: "question/?", type: "question", verb: "question", adj: "why", comment: "" },
     { noun: "within/in", type: "spacial, preposition", verb: "within", adj: "within", comment: "" },
     { noun: "with", type: "", verb: "", adj: "", comment: "" },
+    { noun: "from", type: "", verb: "come_from/go_away", adj: "from", comment: "" },
+    { noun: "to", type: "", verb: "come_to/come", adj: "to", comment: "" },
 
 //Communication, mathematics, direction
     { noun: "number", type: "", verb: "quantify", adj: "how_much", comment: "Used to indicate a number follows" },
@@ -96,7 +98,8 @@ var _lex = [
     { noun: "table/platform", type: "", verb: "", adj: "", comment: "" },
     { noun: "instrument/toy", type: "", verb: "play", adj: "", comment: "" },
     { noun: "meeting/visit", type: "", verb: "meet", adj: "good", comment: "" },
-    { noun: "collection", type: "", verb: "", adj: "", comment: "" },
+    { noun: "item", type: "", verb: "", adj: "", comment: "" },
+    { noun: "collection", type: "", verb: "collect", adj: "", comment: "" },
     { noun: "glass/cup/bottle/bowl/container", type: "", verb: "", adj: "", comment: "" },
     { noun: "square", type: "", verb: "", adj: "", comment: "" },
     { noun: "circle", type: "", verb: "", adj: "", comment: "" },
