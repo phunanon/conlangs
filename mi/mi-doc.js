@@ -99,13 +99,13 @@ function speakPart (part)
 {
   //Handle tone, by converting to pitch
     var pitch = 50;
-        pitch = 90;
     if (part.slice(-1) == "\u030B") {
         word = part.substr(0, part.length - 1);
+        pitch = 90;
     }
-        pitch = 10;
     if (part.slice(-1) == "\u030F") {
         word = part.substr(0, part.length - 1);
+        pitch = 10;
     }
   //Actually speak, with callback for next syllable
     meSpeak.speak("[["+ part +"]]", {speed: spk_speed, pitch: pitch, wordgap: 0, nostop: true});
