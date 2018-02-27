@@ -247,6 +247,68 @@ function tool_sentence_maker_load (e)
 }
 
 
+function tool_translate ()
+{
+    var mi_in = gE("tool#translate #input").value;
+    mi_in = mi_in.replace(/ /g, "").split("");
+
+    var english_out = "";
+    var is_con = true;
+    var part = 0;
+    var high, low;
+    for (c in mi_in) {
+        var ch = mi_in[c];
+        var index = -1;
+        if (is_con) {
+            index = chrFind(ch, _con);
+        } else {
+            index = chrFind(ch, _vow);
+        }
+        if (index != -1) {
+            if (is_con) {
+                high = index;
+            } else {
+                low = index;
+              //Find word based off index supplied, and current word order
+                index = ((high & 0x7) << 4) | low;
+                //Determine word order
+                var optional = high & 0x8;
+                var feature;
+                switch (part) {
+                    case 0: feature = HEAD; break;
+                    case 1: feature = (optional ? ONOUN : NOUN); break;
+                    case 2: feature = (optional ? ADJ : VERB); break;
+                    case 3: feature = (optional ? ADJ : NOUN); break;
+                }
+                if (!optional) {
+                    ++part;
+                    if (part > 3) { part = 1; }
+                }
+
+                if (feature == HEAD) { //Extract head data
+                    var tense = (index & 0xC0) >> 6;
+                    var evidentiality = (index & 0xC) >> 2;
+                    var imperative = (index & 0x2) >> 1;
+                    var question = index & 0x1;
+                    tense = Object.keys(_tense)[tense];
+                    evidentiality = Object.keys(_evi)[evidentiality];
+                    var head = _tense[tense] +" tense, "+ _evi[evidentiality] +", "+ (imperative ? "is order" : "not order") +", "+ (question ? "is ask" : "not ask");
+                    english_out = "<mihead>("+ head +")</mihead>";
+                } else {
+                    var words = _lex[index][ { NOUN: "noun", ONOUN: "noun", VERB: "verb", ADJ: "adj" }[feature] ];
+                    english_out += " <"+ feature +">"+ words +"</"+ feature +">";
+                }
+            }
+        } else {
+            english_out += " "+ ch +"?";
+        }
+        is_con = !is_con;
+    }
+
+    gE("tool#translate #output").innerHTML = english_out;
+}
+
+
 function tool_speaker_speak ()
 {
     spk(gE("#tool-speaker-input").value);
