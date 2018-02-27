@@ -54,11 +54,11 @@ function loadPage ()
     var examples_html = "";
     for (e in _examples) {
         if (_examples[e][1] == "") { continue; }
-        var multiout = gloss2multi(_examples[e][1]);
+        var multi_out = gloss2multi(_examples[e][1]);
         examples_html += "<example><english>"+ _examples[e][0] +"</english>"+
             "<gloss>"+ _examples[e][1] +"</gloss>"+
-            "<mi class='native'>"+ multiout.latin_styled +"</mi>"+
-            "<ipa><speaker onclick='spk(\""+ multiout.latin_styled +"\")''></speaker> /"+ multiout.ipa +"/</ipa>"+
+            "<mi class='native'>"+ multi_out.latin_styled +"</mi>"+
+            "<ipa><speaker onclick='spk(\""+ multi_out.latin_styled +"\")''></speaker> /"+ multi_out.ipa +"/</ipa>"+
             "<button class='load' onclick='tool_sentence_maker_load("+ e +")'>load</button></example>";
     }
     gE("#s6 examples").innerHTML = examples_html;
@@ -67,6 +67,13 @@ function loadPage ()
     meSpeak.loadVoice("mespeak/en-rp.json");
   //Tools
     setTimeout(updateSentence, 100);
+  //GET param
+    var GET = window.location.search.substr(1);
+    if (GET != "") {
+        gE("tool#sentence-maker #englishin").value = "";
+        gE("tool#sentence-maker #glossin").value = GET.replace(/\+/g, " ");
+        gE("tool#sentence-maker #output").scrollIntoView();
+    }
 }
 
 
@@ -180,15 +187,24 @@ function updateSentence ()
         gE("tool#sentence-maker #glossout").innerHTML = gloss2html(gloss);
     }
 
-    var multiout = gloss2multi(gloss);
-    gE("tool#sentence-maker #englishout").innerHTML = "<p class='english focus'>"+ gE("tool#sentence-maker #englishin").value +"</p>";
-    gE("tool#sentence-maker #binout").innerHTML = multiout.bin_html;// +"<br>"+ multiout.bin;
-    gE("tool#sentence-maker #hexout").innerHTML = multiout.hex_html +" "+ multiout.bytes +"B";// +"<br>"+ multiout.hex;
-    gE("tool#sentence-maker #asciiout").innerHTML = "<input value='"+ multiout.ascii +"' readonly>";
-    gE("tool#sentence-maker #latinout").innerHTML = multiout.latin_html +" "+ multiout.chars +" chars"+
-        "<span class='focus'>"+ multiout.latin_styled +"</span>"+
-        "/"+ multiout.ipa +'/ <speaker onclick="spk(\''+ multiout.latin_styled.split("?").join("") +'\')"></speaker><br>';
-    gE("tool#sentence-maker #scriptout").innerHTML = multiout.latin_styled;
+  //Generate output
+    //English
+    var english_in = gE("tool#sentence-maker #englishin").value;
+    if (english_in != "") {
+        gE("tool#sentence-maker #englishout_tr").style.display = "table-row";
+        gE("tool#sentence-maker #englishout").innerHTML = "<p class='english focus'>"+ english_in +"</p>";
+    } else {
+        gE("tool#sentence-maker #englishout_tr").style.display = "none";
+    }
+    //Other
+    var multi_out = gloss2multi(gloss);
+    gE("tool#sentence-maker #binout").innerHTML = multi_out.bin_html;// +"<br>"+ multi_out.bin;
+    gE("tool#sentence-maker #hexout").innerHTML = multi_out.hex_html +" "+ multi_out.bytes +"B";// +"<br>"+ multi_out.hex;
+    gE("tool#sentence-maker #asciiout").innerHTML = "<input value='"+ multi_out.ascii +"' readonly>";
+    gE("tool#sentence-maker #latinout").innerHTML = multi_out.latin_html +" "+ multi_out.chars +" chars"+
+        "<span class='focus'>"+ multi_out.latin_styled +"</span>"+
+        "/"+ multi_out.ipa +'/ <speaker onclick="spk(\''+ multi_out.latin_styled.split("?").join("") +'\')"></speaker><br>';
+    gE("tool#sentence-maker #scriptout").innerHTML = multi_out.latin_styled;
 }
 
 
