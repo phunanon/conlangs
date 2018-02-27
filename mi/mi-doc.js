@@ -295,7 +295,7 @@ function tool_translate ()
                     var question = index & 0x1;
                     tense = Object.keys(_tense)[tense];
                     evidentiality = Object.keys(_evi)[evidentiality];
-                    var head = _tense[tense] +" tense, "+ _evi[evidentiality] +", "+ (imperative ? "is order" : "not order") +", "+ (question ? "is ask" : "not ask");
+                    var head = _tense[tense] +" tense, "+ _evi[evidentiality] + (imperative ? ", imperative" : "") + (question ? ", question" : "");
                     english_out = "<mihead>("+ head +")</mihead>";
                 } else {
                     var words = _lex[index][ { NOUN: "noun", ONOUN: "noun", VERB: "verb", ADJ: "adj" }[feature] ];
