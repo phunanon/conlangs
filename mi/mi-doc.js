@@ -233,6 +233,8 @@ function updateSentence ()
   //Popup & permalink
     gE("tool#sentence-maker #popup_link").href = "sentence-maker-output.html?"+ btoa(encodeURIComponent(gE("tool#sentence-maker #output").outerHTML));
     gE("tool#sentence-maker #perma_link").href = "?"+ gloss.replace(/ /g, "+");
+  //tool-translate
+    gE("tool#translate #input").value = multi_out.latin_styled;
 }
 
 
