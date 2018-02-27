@@ -255,9 +255,9 @@ function tool_translate ()
     var mi_in = gE("tool#translate #input").value;
     mi_in = mi_in.replace(/ /g, "").split("");
 
-    var english_out = "";
+  //Convert the mi into an array of bytes
+    var bytes = [];
     var is_con = true;
-    var part = 0;
     var high, low;
     for (c in mi_in) {
         var ch = mi_in[c];
@@ -272,40 +272,65 @@ function tool_translate ()
                 high = index;
             } else {
                 low = index;
-              //Find word based off index supplied, and current word order
-                index = ((high & 0x7) << 4) | low;
-                //Determine word order
-                var optional = high & 0x8;
-                var feature;
-                switch (part) {
-                    case 0: feature = HEAD; break;
-                    case 1: feature = (optional ? ONOUN : NOUN); break;
-                    case 2: feature = (optional ? ADJ : VERB); break;
-                    case 3: feature = (optional ? ADJ : NOUN); break;
-                }
-                if (!optional) {
-                    ++part;
-                    if (part > 3) { part = 1; }
-                }
-
-                if (feature == HEAD) { //Extract head data
-                    var tense = (index & 0xC0) >> 6;
-                    var evidentiality = (index & 0xC) >> 2;
-                    var imperative = (index & 0x2) >> 1;
-                    var question = index & 0x1;
-                    tense = Object.keys(_tense)[tense];
-                    evidentiality = Object.keys(_evi)[evidentiality];
-                    var head = _tense[tense] +" tense, "+ _evi[evidentiality] + (imperative ? ", imperative" : "") + (question ? ", question" : "");
-                    english_out = "<mihead>("+ head +")</mihead>";
-                } else {
-                    var words = _lex[index][ { NOUN: "noun", ONOUN: "noun", VERB: "verb", ADJ: "adj" }[feature] ];
-                    english_out += " <"+ feature +">"+ words +"</"+ feature +">";
-                }
+                bytes.push( (high << 4) | low );
             }
         } else {
-            english_out += " "+ ch +"?";
+            //Not found
         }
         is_con = !is_con;
+    }
+
+  //Loop through the bytes and find word based off index supplied, and current word order
+    var english_out = "";
+    var part = 0;
+    for (let b = 0, b_max = bytes.length; b < b_max; ++b) {
+        var byte = bytes[b];
+        //Determine word order
+        var optional = byte & 0x80;
+        var index = byte & 0x7F;
+        var feature;
+        switch (part) {
+            case 0: feature = HEAD; break;
+            case 1: feature = (optional ? ONOUN : NOUN); break;
+            case 2: feature = (optional ? ADJ : VERB); break;
+            case 3: feature = (optional ? ADJ : NOUN); break;
+        }
+        if (!optional) {
+            ++part;
+            if (part > 3) { part = 1; }
+        }
+
+        if (feature == HEAD) { //Extract head data
+            var tense = (index & 0xC0) >> 6;
+            var evidentiality = (index & 0xC) >> 2;
+            var imperative = (index & 0x2) >> 1;
+            var question = index & 0x1;
+            tense = Object.keys(_tense)[tense];
+            evidentiality = Object.keys(_evi)[evidentiality];
+            var head = _tense[tense] +" tense, "+ _evi[evidentiality] + (imperative ? ", imperative" : "") + (question ? ", question" : "");
+            english_out = "<mihead>("+ head +")</mihead>";
+        } else {
+            var words = _lex[index][ { NOUN: "noun", ONOUN: "noun", VERB: "verb", ADJ: "adj" }[feature] ];
+            if (words == "number") {
+                var nums = []; //Array of 7-bits, to be shifted by 7 onwards
+              //Scan the sentence and build the number
+                while (++b < bytes.length) {
+                    var to_continue = bytes[b] & 0x80;
+                    nums.unshift(bytes[b] & 0x7F);
+                    if (!to_continue) { break; }
+                }
+              //Build the number from the 7-bit nums
+                var num = 0;
+                for (let n = 0, n_max = nums.length; n < n_max; ++n) {
+                    num += nums[n] << n*7;
+                }
+                english_out += " <number>"+ num +"</number>";
+              //Continue the sentence
+                part = 2;
+                continue;
+            }
+            english_out += " <"+ feature +">"+ words +"</"+ feature +">";
+        }
     }
 
     gE("tool#translate #output").innerHTML = english_out;
