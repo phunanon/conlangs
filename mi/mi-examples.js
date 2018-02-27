@@ -7,6 +7,7 @@ var _examples = [
     ["He has far more money than brains.", "h:h n:he v:has n:possession n:possession a!more v:than n:idea"],
     ["I smell, I should wash.", "h:is n:body a!bad a!therefore v:wash a!should"],
     ["I met a little cottage girl; she was eight years old, she said.", "h:pd n:I v:meet n:village n:girl a!little v:they_are n:number n:8 v:say a!by n:she"],
+    ["It is a simple language.", "h:pd n!it n:language v:it_is a!simple"],
     ["The sun shines.", "h:id n:sun v:shine"],
     ["The sun is shining.", ""],
     ["The sun shone.", ""],

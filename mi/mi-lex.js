@@ -48,15 +48,16 @@ var _lex = [
     { noun: "end/stop/speed", type: "", verb: "end/stop", adj: "fast", comment: "" },
     { noun: "positive", type: "", verb: "", adj: "possible/happy/can", comment: "" },
     { noun: "negative/not", type: "", verb: "", adj: "impossible/unable/cannot/sad", comment: "Used to negate a situation" },
+    { noun: "language/talk/speech", type: "", verb: "say/talk", adj: "", comment: "" },
 
 //Life, nature, time
     { noun: "normality/calm/peace", type: "", verb: "rest", adj: "normal/quiet", comment: "" },
-    { noun: "change/chaos", type: "", verb: "", adj: "", comment: "" },
+    { noun: "change/chaos", type: "", verb: "", adj: "abnormal", comment: "" },
     { noun: "nest/bed", type: "", verb: "", adj: "low", comment: "" },
     { noun: "sky", type: "", verb: "", adj: "high", comment: "" },
     { noun: "machine/process", type: "", verb: "", adj: "", comment: "" },
-    { noun: "life/nature", type: "", verb: "live", adj: "natural/wild", comment: "" },
-    { noun: "person/body", type: "", verb: "say/talk", adj: "who", comment: "" },
+    { noun: "life/nature", type: "", verb: "live", adj: "natural/wild/simple", comment: "" },
+    { noun: "person/body", type: "", verb: "", adj: "who/complex", comment: "" },
     { noun: "animal", type: "", verb: "hunt", adj: "", comment: "" },
     { noun: "plant", type: "", verb: "grow", adj: "what", comment: "" },
     { noun: "food/possession", type: "", verb: "eat/drink/consume", adj: "eaten/drank/consumed", comment: "" },
@@ -105,7 +106,6 @@ var _lex = [
     { noun: "house/home", type: "", verb: "", adj: "", comment: "" },
     { noun: "village", type: "", verb: "", adj: "", comment: "" },
     { noun: "town", type: "", verb: "", adj: "", comment: "" },
-    { noun: "city", type: "", verb: "", adj: "", comment: "" },
     { noun: "country", type: "", verb: "", adj: "", comment: "" },
     { noun: "wall/fence", type: "", verb: "", adj: "bad", comment: "" },
     { noun: "null", type: "null", verb:"ignore", adj: "ignored", comment: "Used in place of a noun upon repeating grammar pattern" }
