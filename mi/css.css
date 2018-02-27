@@ -11,6 +11,7 @@
 body {
     padding: 1vw;
     font-family: sans-serif;
+    padding-bottom: 8rem;
 }
 
 h1, h2, h3, h4, h5 { margin: 1rem 1rem .5rem 1rem; }
@@ -100,6 +101,11 @@ noun { background-color: #bbf; }
 adj { background-color: #afa; border: .1rem dashed #000; }
 verb { background-color: #faa; }
 number { background-color: #000; color: #fff; }
+
+button.loader {
+    font-size: 1.5rem;
+    padding: .25rem;
+}
 
 tool {
     display: inline-block;
