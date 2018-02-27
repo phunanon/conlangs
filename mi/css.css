@@ -91,12 +91,13 @@ native, .native {
 }
 
 tool {
-    display: block;
+    display: inline-block;
     border: .1rem solid #000;
     background-color: rgba(220, 220, 220, .5);
     padding: .5rem;
     margin: .5rem;
 }
+tool h4 { text-align: center; }
 
 tool#sentence-maker textarea { font-size: 1.1rem; width: 24rem; height: 4rem; }
 tool#sentence-maker p { padding: 0; }

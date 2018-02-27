@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>mi - sentence maker output</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=0.5">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="css.css">
+        <script>
+function onload ()
+{
+    var GET = window.location.search.substr(1);
+    document.querySelector("tool#sentence-maker").innerHTML = decodeURIComponent(atob(GET));
+    screenshotPage(); //https://stackoverflow.com/a/44495166/7000138
+    setTimeout("window.close();", 100);
+}
+
+
+(function(exports) {
+    function urlsToAbsolute(nodeList) {
+        if (!nodeList.length) {
+            return [];
+        }
+        var attrName = 'href';
+        if (nodeList[0].__proto__ === HTMLImageElement.prototype || nodeList[0].__proto__ === HTMLScriptElement.prototype) {
+            attrName = 'src';
+        }
+        nodeList = [].map.call(nodeList, function(el, i) {
+            var attr = el.getAttribute(attrName);
+            if (!attr) {
+                return;
+            }
+            var absURL = /^(https?|data):/i.test(attr);
+            if (absURL) {
+                return el;
+            } else {
+                return el;
+            }
+        });
+        return nodeList;
+    }
+
+    function screenshotPage() {
+        var wrapper = document.querySelector("tool#sentence-maker");
+        html2canvas(wrapper, {
+            onrendered: function(canvas) {
+                canvas.toBlob(function(blob) {
+                    saveAs(blob, 'myScreenshot.png');
+                });
+            }
+        });
+    }
+
+    function addOnPageLoad_() {
+        window.addEventListener('DOMContentLoaded', function(e) {
+            var scrollX = document.documentElement.dataset.scrollX || 0;
+            var scrollY = document.documentElement.dataset.scrollY || 0;
+            window.scrollTo(scrollX, scrollY);
+        });
+    }
+    exports.screenshotPage = screenshotPage;
+    exports.generate = generate;
+})(window);
+        </script>
+    </head>
+    <body onload="onload()">
+        <tool id="sentence-maker">
+        </tool>
+    </body>
+</html>

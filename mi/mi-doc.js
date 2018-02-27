@@ -216,6 +216,8 @@ function updateSentence ()
         "<span class='focus'>"+ multi_out.latin_styled +"</span>"+
         "/"+ multi_out.ipa +'/ <speaker onclick="spk(\''+ multi_out.latin_styled.split("?").join("") +'\')"></speaker><br>';
     gE("tool#sentence-maker #scriptout").innerHTML = multi_out.latin_styled;
+  //Popup
+    gE("tool#sentence-maker #popup_link").href = "sentence-maker-output.html?"+ btoa(encodeURIComponent(gE("tool#sentence-maker #output").outerHTML));
 }
 
 
