@@ -151,6 +151,9 @@ function updateSentence ()
     if (gE("tool#sentence-maker #preglossed").checked) {
         gE("tool#sentence-maker preview").innerHTML = "";
         gE("tool#sentence-maker #glossout").innerHTML = gloss2html(gloss);
+
+        tense = "n";
+        evidentiality = "d";
         question = imperative = false;
         var head = gloss.split(" ")[0].split(":")[1];
         for (h in head) {
