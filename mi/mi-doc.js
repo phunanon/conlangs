@@ -11,10 +11,13 @@ function loadLexicon ()
         let verb    = _lex[lex].verb;
         let adj     = _lex[lex].adj;
         let comment = _lex[lex].comment;
-
-        let r = (mi_index >> 5) * 36,  g = ((mi_index >> 2) & 0x07) * 36,  b = (mi_index & 0x03) * 85;
-        let bg_colour = "#"+ Math.floor(r/16).toString(16) + Math.floor(g/16).toString(16) + Math.floor(b/16).toString(16);
-        let fg_colour = (determineLumApprox(r/255, g/255, b/255) < .4 ? "#fff" : "#000");
+      //Prepare colours
+        function rgb2hex (r, g, b) { return "#"+ Math.floor(r/16).toString(16) + Math.floor(g/16).toString(16) + Math.floor(b/16).toString(16); }
+        function w_or_b (r, g, b) { return (determineLumApprox(r/255, g/255, b/255) < .4 ? "#fff" : "#000"); }
+        let r1 = (mi_index >> 5) * 36,  g1 = ((mi_index >> 2) & 0x07) * 36,  b1 = (mi_index & 0x03) * 85,
+            r2 = ((0x80 | mi_index) >> 5) * 36,  g2 = (((0x80 | mi_index) >> 2) & 0x07) * 36,  b2 = ((0x80 | mi_index) & 0x03) * 85;
+        let bg_colour1 = rgb2hex(r1, g1, b1), bg_colour2 = rgb2hex(r2, g2, b2);
+        let fg_colour1 = w_or_b(r1, g1, b1), fg_colour2 = w_or_b(r2, g2, b2);
 
         lex_html += '<tr>'+
             '<td class="hex">0x'+ pad(parseInt(mi_index).toString(16), "00") +'</td>'+
@@ -24,13 +27,12 @@ function loadLexicon ()
             '<td class="english verb cutoff" title="'+ verb +'">'+ verb +'</td>'+
             '<td class="english adj cutoff" title="'+ adj +'">'+ adj +'</td>'+
             '<td class="comment cutoff" title="'+ comment +'">'+ comment +'</td>'+
-            '<td class="mono" style="color: '+ fg_colour +'; background-color: '+ bg_colour +'">'+ bg_colour +'</td>'+
+            '<td class="mono" style="color: '+ fg_colour1 +'; background-color: '+ bg_colour1 +'">'+ bg_colour1 +'</td>'+
+            '<td class="mono" style="color: '+ fg_colour2 +'; background-color: '+ bg_colour2 +'">'+ bg_colour2 +'</td>'+
             '</tr>';
         ++mi_index;
     }
     gE("#s4 #t1").innerHTML += lex_html;
-    let lex_count = Object.keys(_lex).length;
-    gE("#s4 #lex-total").innerHTML = lex_count;
 }
 
 function loadExamples ()
