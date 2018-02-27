@@ -71,6 +71,7 @@ function loadPage ()
     var GET = window.location.search.substr(1);
     if (GET != "") {
         gE("tool#sentence-maker #englishin").value = "";
+        gE("tool#sentence-maker #preglossed").checked = true;
         gE("tool#sentence-maker #glossin").value = GET.replace(/\+/g, " ");
         gE("tool#sentence-maker #output").scrollIntoView();
     }
@@ -146,11 +147,20 @@ function updateSentence ()
     var question = gE("tool#sentence-maker #question").value;
 
     function tf (bool) { return (bool ? "true" : "false"); }
-    gE("tool#sentence-maker #headerout").innerHTML = _tense[tense] +" tense, "+ _evi[evidentiality] +", "+ (imperative ? "is order" : "not order") +", "+ (question ? "is ask" : "not ask");
   //Generate gloss
     if (gE("tool#sentence-maker #preglossed").checked) {
         gE("tool#sentence-maker preview").innerHTML = "";
         gE("tool#sentence-maker #glossout").innerHTML = gloss2html(gloss);
+        question = imperative = false;
+        var head = gloss.split(" ")[0].split(":")[1];
+        for (h in head) {
+            switch (head[h]) {
+                case "n": case "p": case "i": case "f": tense = head[h]; break;
+                case "d": case "s": case "r": case "h": evidentiality = head[h]; break;
+                case "m": imperative = true; break;
+                case "q": question = true;   break;
+            }
+        }
     } else {
         gloss = tense + evidentiality + imperative + question +" "+ gloss; //Head
         var input = gloss.split(" ");
@@ -186,6 +196,7 @@ function updateSentence ()
         gE("tool#sentence-maker preview").innerHTML = preview.join("");
         gE("tool#sentence-maker #glossout").innerHTML = gloss2html(gloss);
     }
+    gE("tool#sentence-maker #headerout").innerHTML = _tense[tense] +" tense, "+ _evi[evidentiality] +", "+ (imperative ? "is order" : "not order") +", "+ (question ? "is ask" : "not ask");
 
   //Generate output
     //English
