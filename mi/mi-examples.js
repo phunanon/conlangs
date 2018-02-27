@@ -1,5 +1,5 @@
 
-var _examples = [
+let _examples = [
     ["I ate the same food he ate.", "h:pd n:me v:eat n:he n:food a!same"],
     ["How did you get here?", "h:pdq n:you v:travel a!how n:here"],
     ["He poured coffee into his mug.", "h:pdq n:he v:pour n:water n:plant v:within n:cup"],

@@ -10,7 +10,7 @@
         <script>
 function onload ()
 {
-    var GET = window.location.search.substr(1);
+    let GET = window.location.search.substr(1);
     document.querySelector("tool#sentence-maker").innerHTML = decodeURIComponent(atob(GET));
     screenshotPage(); //https://stackoverflow.com/a/44495166/7000138
     setTimeout("window.close();", 500);
@@ -22,16 +22,16 @@ function onload ()
         if (!nodeList.length) {
             return [];
         }
-        var attrName = 'href';
+        let attrName = 'href';
         if (nodeList[0].__proto__ === HTMLImageElement.prototype || nodeList[0].__proto__ === HTMLScriptElement.prototype) {
             attrName = 'src';
         }
         nodeList = [].map.call(nodeList, function(el, i) {
-            var attr = el.getAttribute(attrName);
+            let attr = el.getAttribute(attrName);
             if (!attr) {
                 return;
             }
-            var absURL = /^(https?|data):/i.test(attr);
+            let absURL = /^(https?|data):/i.test(attr);
             if (absURL) {
                 return el;
             } else {
@@ -42,7 +42,7 @@ function onload ()
     }
 
     function screenshotPage() {
-        var wrapper = document.querySelector("tool#sentence-maker");
+        let wrapper = document.querySelector("tool#sentence-maker");
         html2canvas(wrapper, {
             onrendered: function(canvas) {
                 canvas.toBlob(function(blob) {
@@ -54,8 +54,8 @@ function onload ()
 
     function addOnPageLoad_() {
         window.addEventListener('DOMContentLoaded', function(e) {
-            var scrollX = document.documentElement.dataset.scrollX || 0;
-            var scrollY = document.documentElement.dataset.scrollY || 0;
+            let scrollX = document.documentElement.dataset.scrollX || 0;
+            let scrollY = document.documentElement.dataset.scrollY || 0;
             window.scrollTo(scrollX, scrollY);
         });
     }

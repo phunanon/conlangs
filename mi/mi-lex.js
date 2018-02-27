@@ -1,4 +1,4 @@
-var _lex = [
+let _lex = [
 
 //Language features: pronouns, clause dividers, conditionals, etc
     { noun: "me/I/my", type: "pronoun", verb: "I_am", adj: "", comment: "" },
@@ -115,7 +115,7 @@ var _lex = [
 ];
 
 /*
-var _lex_multi = [
+let _lex_multi = [
     { noun: "coffee", nouns: "water plant"},
     { noun: "drum", nouns: "instrument noise"}
 ];

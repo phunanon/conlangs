@@ -2,19 +2,19 @@
 function loadLexicon ()
 {
     gE("button#loadLexicon").style.display = "none";
-    var lex_html = "";
-    var mi_index = 0;
-    for (var lex in _lex) {
-        var mi      = index2latin(mi_index) +"/"+ index2latin(mi_index+128);
-        var noun    = _lex[lex].noun;
-        var type    = _lex[lex].type;
-        var verb    = _lex[lex].verb;
-        var adj     = _lex[lex].adj;
-        var comment = _lex[lex].comment;
+    let lex_html = "";
+    let mi_index = 0;
+    for (let lex in _lex) {
+        let mi      = index2latin(mi_index) +"/"+ index2latin(mi_index+128);
+        let noun    = _lex[lex].noun;
+        let type    = _lex[lex].type;
+        let verb    = _lex[lex].verb;
+        let adj     = _lex[lex].adj;
+        let comment = _lex[lex].comment;
 
-        var r = (mi_index >> 5) * 36,  g = ((mi_index >> 2) & 0x07) * 36,  b = (mi_index & 0x03) * 85;
-        var bg_colour = "#"+ Math.floor(r/16).toString(16) + Math.floor(g/16).toString(16) + Math.floor(b/16).toString(16);
-        var fg_colour = (determineLumApprox(r/255, g/255, b/255) < .4 ? "#fff" : "#000");
+        let r = (mi_index >> 5) * 36,  g = ((mi_index >> 2) & 0x07) * 36,  b = (mi_index & 0x03) * 85;
+        let bg_colour = "#"+ Math.floor(r/16).toString(16) + Math.floor(g/16).toString(16) + Math.floor(b/16).toString(16);
+        let fg_colour = (determineLumApprox(r/255, g/255, b/255) < .4 ? "#fff" : "#000");
 
         lex_html += '<tr>'+
             '<td class="hex">0x'+ pad(parseInt(mi_index).toString(16), "00") +'</td>'+
@@ -29,17 +29,17 @@ function loadLexicon ()
         ++mi_index;
     }
     gE("#s4 #t1").innerHTML += lex_html;
-    var lex_count = Object.keys(_lex).length;
+    let lex_count = Object.keys(_lex).length;
     gE("#s4 #lex-total").innerHTML = lex_count;
 }
 
 function loadExamples ()
 {
     gE("button#loadExamples").style.display = "none";
-    var examples_html = "";
+    let examples_html = "";
     for (e in _examples) {
         if (_examples[e][1] == "") { continue; }
-        var multi_out = gloss2multi(_examples[e][1]);
+        let multi_out = gloss2multi(_examples[e][1]);
         examples_html += "<example><english>"+ _examples[e][0] +"</english>"+
             "<gloss>"+ _examples[e][1] +"</gloss>"+
             "<mi class='native'>"+ multi_out.latin_styled +"</mi>"+
@@ -54,9 +54,9 @@ function loadPage ()
 {
   //1. Phonology & Orthography
     //Vowels
-    var vow_html = "";
-    for (var c = 0, clen = _con.length; c < clen; ++c) {
-        var num = c;
+    let vow_html = "";
+    for (let c = 0, clen = _con.length; c < clen; ++c) {
+        let num = c;
         vow_html += '<tr><td>xxxx'+ pad(num.toString(2), '0000') +'</td>'+
             '<td>0x'+ pad(num.toString(16).toUpperCase(), '00') +'</td>'+
             '<td><span class="mi">'+ _chr[c] +'</span> <span class="native">'+ _chr[c] +'</span></td>'+
@@ -64,9 +64,9 @@ function loadPage ()
     }
     gE("#s1 #t1").innerHTML += vow_html;
     //Consonants
-    var con_html = "";
-    for (var c = _vow.length, clen = _chr.length - 1; c < clen; ++c) {
-        var num = c;
+    let con_html = "";
+    for (let c = _vow.length, clen = _chr.length - 1; c < clen; ++c) {
+        let num = c;
         con_html += '<tr><td>'+ pad(num.toString(2), '0000') +'xxxx</td>'+
             '<td>0x'+ pad(num.toString(16).toUpperCase(), '00') +'</td>'+
             '<td><span class="mi">'+ _chr[c] +'</span> <span class="native">'+ _chr[c] +'</span></td>'+
@@ -79,7 +79,7 @@ function loadPage ()
   //Tools
     setTimeout(updateSentence, 100);
   //GET param
-    var GET = window.location.search.substr(1);
+    let GET = window.location.search.substr(1);
     if (GET != "") {
         gE("tool#sentence-maker #englishin").value = "";
         gE("tool#sentence-maker #preglossed").checked = true;
@@ -91,12 +91,12 @@ function loadPage ()
 
 
 //http://www.masswerk.at/mespeak/
-var spk_words = [];
-var spk_syllables = [];
-var spk_w = 0, spk_s = 0;
-var spk_speed = 150;
-var WORD_GAP = 200;
-var SYLL_WAIT = 200;
+let spk_words = [];
+let spk_syllables = [];
+let spk_w = 0, spk_s = 0;
+let spk_speed = 150;
+let WORD_GAP = 200;
+let SYLL_WAIT = 200;
 function speakNext ()
 {
     if (spk_w < spk_words.length) {
@@ -117,7 +117,7 @@ function speakNext ()
 function speakPart (part)
 {
   //Handle tone, by converting to pitch
-    var pitch = 50;
+    let pitch = 50;
     if (part.slice(-1) == "\u030B") {
         word = part.substr(0, part.length - 1);
         pitch = 90;
@@ -144,18 +144,17 @@ function spk (text, speed = 100) //Speaks faux-tonal Latin-script mi
 
 
 
-var HEAD = "MIHEAD", NOUN = "NOUN", ONOUN = "ONOUN", ADJ = "ADJ", VERB = "VERB", NUMBER = "NUMBER";
-var _evi = { d: "direct knowledge", s: "non-visual sense", r: "inferential", h: "hearsay" };
-var _tense = { n: "no", p: "past", i: "present", f:"future" }
+let _evi = { d: "direct knowledge", s: "non-visual sense", r: "inferential", h: "hearsay" };
+let _tense = { n: "no", p: "past", i: "present", f:"future" }
 function updateSentence ()
 {
-    var preview = [];
-    var gloss = gE("tool#sentence-maker #glossin").value.trim();
+    let preview = [];
+    let gloss = gE("tool#sentence-maker #glossin").value.trim();
   //Generate head
-    var tense = gE("tool#sentence-maker #tense").value;
-    var evidentiality = gE("tool#sentence-maker #evidentiality").value;
-    var imperative = gE("tool#sentence-maker #imperative").value;
-    var question = gE("tool#sentence-maker #question").value;
+    let tense = gE("tool#sentence-maker #tense").value;
+    let evidentiality = gE("tool#sentence-maker #evidentiality").value;
+    let imperative = gE("tool#sentence-maker #imperative").value;
+    let question = gE("tool#sentence-maker #question").value;
 
     function tf (bool) { return (bool ? "true" : "false"); }
   //Generate gloss
@@ -166,7 +165,7 @@ function updateSentence ()
         tense = "n";
         evidentiality = "d";
         question = imperative = false;
-        var head = gloss.split(" ")[0].split(":")[1];
+        let head = gloss.split(" ")[0].split(":")[1];
         for (h in head) {
             switch (head[h]) {
                 case "n": case "p": case "i": case "f": tense = head[h]; break;
@@ -177,14 +176,14 @@ function updateSentence ()
         }
     } else {
         gloss = tense + evidentiality + imperative + question +" "+ gloss; //Head
-        var input = gloss.split(" ");
+        let input = gloss.split(" ");
         gloss = input;
-        var part = 0; //0 head, 1 (noun) noun, 2 (adj) verb, 3 (adj) noun/null ...
-        var was_number = false;
+        let part = 0; //0 head, 1 (noun) noun, 2 (adj) verb, 3 (adj) noun/null ...
+        let was_number = false;
         for (w in input) {
-            var word = input[w];
-            var optional = (word[0] == "!");
-            var feature; //either HEAD, NOUN, ONOUN, ADJ, or VERB
+            let word = input[w];
+            let optional = (word[0] == "!");
+            let feature; //either HEAD, NOUN, ONOUN, ADJ, or VERB
             switch (part) {
                 case 0: feature = HEAD; break;
                 case 1: feature = (optional ? ONOUN : NOUN); break;
@@ -214,7 +213,7 @@ function updateSentence ()
 
   //Generate output
     //English
-    var english_in = gE("tool#sentence-maker #englishin").value;
+    let english_in = gE("tool#sentence-maker #englishin").value;
     if (english_in != "") {
         gE("tool#sentence-maker #englishout_tr").style.display = "table-row";
         gE("tool#sentence-maker #englishout").innerHTML = "<p class='english focus'>"+ english_in +"</p>";
@@ -222,7 +221,7 @@ function updateSentence ()
         gE("tool#sentence-maker #englishout_tr").style.display = "none";
     }
     //Other
-    var multi_out = gloss2multi(gloss);
+    let multi_out = gloss2multi(gloss);
     gE("tool#sentence-maker #binout").innerHTML = multi_out.bin_html;// +"<br>"+ multi_out.bin;
     gE("tool#sentence-maker #hexout").innerHTML = multi_out.hex_html +" "+ multi_out.bytes +"B";// +"<br>"+ multi_out.hex;
     gE("tool#sentence-maker #asciiout").innerHTML = "<input value='"+ multi_out.ascii +"' readonly>";
@@ -240,7 +239,7 @@ function updateSentence ()
 
 function tool_sentence_maker_load (e)
 {
-    var example = _examples[e];
+    let example = _examples[e];
     gE("tool#sentence-maker #preglossed").checked = true;
     gE("tool#sentence-maker #englishin").value = example[0];
     gE("tool#sentence-maker #glossin").value = example[1];
@@ -252,16 +251,16 @@ function tool_sentence_maker_load (e)
 
 function tool_translate ()
 {
-    var mi_in = gE("tool#translate #input").value;
+    let mi_in = gE("tool#translate #input").value;
     mi_in = mi_in.replace(/ /g, "").split("");
 
   //Convert the mi into an array of bytes
-    var bytes = [];
-    var is_con = true;
-    var high, low;
+    let bytes = [];
+    let is_con = true;
+    let high, low;
     for (c in mi_in) {
-        var ch = mi_in[c];
-        var index = -1;
+        let ch = mi_in[c];
+        let index = -1;
         if (is_con) {
             index = chrFind(ch, _con);
         } else {
@@ -281,14 +280,14 @@ function tool_translate ()
     }
 
   //Loop through the bytes and find word based off index supplied, and current word order
-    var english_out = "";
-    var part = 0;
+    let english_out = "";
+    let part = 0;
     for (let b = 0, b_max = bytes.length; b < b_max; ++b) {
-        var byte = bytes[b];
+        let byte = bytes[b];
         //Determine word order
-        var optional = byte & 0x80;
-        var index = byte & 0x7F;
-        var feature;
+        let optional = byte & 0x80;
+        let index = byte & 0x7F;
+        let feature;
         switch (part) {
             case 0: feature = HEAD; break;
             case 1: feature = (optional ? ONOUN : NOUN); break;
@@ -301,26 +300,26 @@ function tool_translate ()
         }
 
         if (feature == HEAD) { //Extract head data
-            var tense = (index & 0xC0) >> 6;
-            var evidentiality = (index & 0xC) >> 2;
-            var imperative = (index & 0x2) >> 1;
-            var question = index & 0x1;
+            let tense = (index & 0xC0) >> 6;
+            let evidentiality = (index & 0xC) >> 2;
+            let imperative = (index & 0x2) >> 1;
+            let question = index & 0x1;
             tense = Object.keys(_tense)[tense];
             evidentiality = Object.keys(_evi)[evidentiality];
-            var head = _tense[tense] +" tense, "+ _evi[evidentiality] + (imperative ? ", imperative" : "") + (question ? ", question" : "");
+            let head = _tense[tense] +" tense, "+ _evi[evidentiality] + (imperative ? ", imperative" : "") + (question ? ", question" : "");
             english_out = "<mihead>("+ head +")</mihead>";
         } else {
-            var words = _lex[index][ { NOUN: "noun", ONOUN: "noun", VERB: "verb", ADJ: "adj" }[feature] ];
+            let words = _lex[index][ { NOUN: "noun", ONOUN: "noun", VERB: "verb", ADJ: "adj" }[feature] ];
             if (words == "number") {
-                var nums = []; //Array of 7-bits, to be shifted by 7 onwards
+                let nums = []; //Array of 7-bits, to be shifted by 7 onwards
               //Scan the sentence and build the number
                 while (++b < bytes.length) {
-                    var to_continue = bytes[b] & 0x80;
+                    let to_continue = bytes[b] & 0x80;
                     nums.unshift(bytes[b] & 0x7F);
                     if (!to_continue) { break; }
                 }
               //Build the number from the 7-bit nums
-                var num = 0;
+                let num = 0;
                 for (let n = 0, n_max = nums.length; n < n_max; ++n) {
                     num += nums[n] << n*7;
                 }

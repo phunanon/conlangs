@@ -1,11 +1,11 @@
 
 
-var _vow = ["i", "e", "a", "o", "u", "í", "é", "á", "ó", "ú", "ì", "è", "à", "ò", "ù", "h"];
-var _con = ["m", "n", "p", "b", "t", "d", "k", "g", "w", "s", "z", "c", "j", "f", "v", "y"];
-var _chr = _vow.concat(_con).concat(" ");
-var _ipa = ["i", "ɛ", "a", "ɒ", "u", "i\u030B", "ɛ\u030B", "a\u030B", "ɒ\u030B", "u\u030B", "i\u030F", "ɛ\u030F", "a\u030F", "ɒ\u030F", "u\u030F", "ə", "m", "n", "p", "b", "t", "d", "k", "g", "w", "s", "z", "ʃ", "ʒ", "f", "v", "ð", " "];
-var _spk = ["i", "E", "a", "0", "u", "i\u030B", "E\u030B", "a\u030B", "0\u030B", "u\u030B", "i\u030F", "E\u030F", "a\u030F", "0\u030F", "u\u030F", "@", "m", "n", "p", "b", "t", "d", "k", "g", "w", "s", "z", "S", "Z", "f", "v", "D", " "];
-var HEAD = "MIHEAD", NOUN = "NOUN", ONOUN = "ONOUN", ADJ = "ADJ", VERB = "VERB", NUMBER = "NUMBER";
+let _vow = ["i", "e", "a", "o", "u", "í", "é", "á", "ó", "ú", "ì", "è", "à", "ò", "ù", "h"];
+let _con = ["m", "n", "p", "b", "t", "d", "k", "g", "w", "s", "z", "c", "j", "f", "v", "y"];
+let _chr = _vow.concat(_con).concat(" ");
+let _ipa = ["i", "ɛ", "a", "ɒ", "u", "i\u030B", "ɛ\u030B", "a\u030B", "ɒ\u030B", "u\u030B", "i\u030F", "ɛ\u030F", "a\u030F", "ɒ\u030F", "u\u030F", "ə", "m", "n", "p", "b", "t", "d", "k", "g", "w", "s", "z", "ʃ", "ʒ", "f", "v", "ð", " "];
+let _spk = ["i", "E", "a", "0", "u", "i\u030B", "E\u030B", "a\u030B", "0\u030B", "u\u030B", "i\u030F", "E\u030F", "a\u030F", "0\u030F", "u\u030F", "@", "m", "n", "p", "b", "t", "d", "k", "g", "w", "s", "z", "S", "Z", "f", "v", "D", " "];
+let HEAD = "MIHEAD", NOUN = "NOUN", ONOUN = "ONOUN", ADJ = "ADJ", VERB = "VERB", NUMBER = "NUMBER";
 
 
 
@@ -20,7 +20,7 @@ function chrFind (chr, set)
 
 function latin2IPA (latin)
 {
-    var IPA = latin.trim().split("?").join(" ");
+    let IPA = latin.trim().split("?").join(" ");
     for (c in _chr) {
         IPA = IPA.split(_chr[c]).join(_ipa[c]);
     }
@@ -37,9 +37,9 @@ function determineGlossFeatures (gloss)
 function gloss2html (gloss)
 {
     gloss = gloss.split(" ");
-    var gloss_html = ""
+    let gloss_html = ""
     for (g in gloss) {
-        var feature = determineGlossFeatures(gloss[g]).feature;
+        let feature = determineGlossFeatures(gloss[g]).feature;
         gloss_html += "<"+ feature +">"+
             " <span class='feature'>"+ gloss[g].substr(0, 2) +"</span>"+
             gloss[g].substr(2, gloss[g].length-2) +
@@ -55,11 +55,11 @@ function gloss2rootIndex (gloss, feature)
     if (feature == "onoun") { feature = "noun"; }
 
     for (l in _lex) {
-        var lex = _lex[l];
-        var roots = lex[feature].split("/");
+        let lex = _lex[l];
+        let roots = lex[feature].split("/");
         for (r in roots) {
             if (roots[r].toLowerCase() == gloss.toLowerCase()) {
-                var index = parseInt(l);
+                let index = parseInt(l);
                 return index;
             }
         }
@@ -67,7 +67,7 @@ function gloss2rootIndex (gloss, feature)
     return "?";
 }
 
-var latin_space_rules = {
+let latin_space_rules = {
     NUMBER_NUMBER: false, NUMBER_NOUN: false, NUMBER_ONOUN: false, NUMBER_VERB: true, NUMBER_ADJ: true,
     NOUN_NUMBER: true, NOUN_NOUN: false, NOUN_ONOUN: false, NOUN_VERB: true, NOUN_ADJ: false,
     ONOUN_NUMBER: true, ONOUN_NOUN: false, ONOUN_ONOUN: false, ONOUN_VERB: true, ONOUN_ADJ: false,
@@ -76,12 +76,12 @@ var latin_space_rules = {
 };
 function gloss2multi (gloss)
 {
-    var bin_html = [], bin = [], hex_html = [], hex = [], latin_html = [], latin_styled = "", latin = [], ascii = [];
+    let bin_html = [], bin = [], hex_html = [], hex = [], latin_html = [], latin_styled = "", latin = [], ascii = [];
     gloss = gloss.split(" ");
-    var head = gloss.splice(0, 1)[0];
+    let head = gloss.splice(0, 1)[0];
     head = head.substr(2, head.length - 2).split("");
   //Process head byte
-    var bin_head = 0;
+    let bin_head = 0;
     for (h in head) {
         switch (head[h]) {
             case "p": bin_head |= 64;  break;
@@ -95,32 +95,32 @@ function gloss2multi (gloss)
         }
     }
 
-    var root_bin = bin_head.toString(2);
+    let root_bin = bin_head.toString(2);
     bin_html.push("<mihead>"+ pad(root_bin, "00000000") +"</mihead>");
     bin.push(pad(root_bin, "00000000"));
 
-    var root_hex = pad(bin_head.toString(16), "00");
+    let root_hex = pad(bin_head.toString(16), "00");
     hex.push(root_hex);
     hex_html.push('<mihead>'+ root_hex +'</mihead>');
 
-    var root_latin = index2latin(bin_head);
+    let root_latin = index2latin(bin_head);
     latin.push(root_latin);
     latin_html.push('<mihead>'+ root_latin +'</mihead>');
     latin_styled += root_latin +" ";
   //Process words
-    var regular = NOUN;
-    var prev_feature = HEAD;
-    var is_numbering = false, number = [], n = 0;
+    let regular = NOUN;
+    let prev_feature = HEAD;
+    let is_numbering = false, number = [], n = 0;
 
     function getGlossRoot (w) { return gloss[w].substr(2, gloss[w].length - 2); }
 
-    var gloss_len = gloss.length;
-    for (var w = 0; w < gloss_len; ++w) {
-        var features = determineGlossFeatures(gloss[w]);
-        var feature = features.feature;
-        var optional = features.optional;
-        var root = "?";
-        var gloss_root = "";
+    let gloss_len = gloss.length;
+    for (let w = 0; w < gloss_len; ++w) {
+        let features = determineGlossFeatures(gloss[w]);
+        let feature = features.feature;
+        let optional = features.optional;
+        let root = "?";
+        let gloss_root = "";
 
         if (!is_numbering) {
           //Find root index
@@ -151,11 +151,11 @@ function gloss2multi (gloss)
                     feature = NUMBER;
                 }
             }
-            var full_root = (optional ? 128 : 0) + root;
-            var root_bin = pad(full_root.toString(2), "00000000");
-            var root_hex = pad(full_root.toString(16), "00");
-            var root_ascii = "&#"+ full_root +";";
-            var root_latin = index2latin(full_root);
+            let full_root = (optional ? 128 : 0) + root;
+            let root_bin = pad(full_root.toString(2), "00000000");
+            let root_hex = pad(full_root.toString(16), "00");
+            let root_ascii = "&#"+ full_root +";";
+            let root_latin = index2latin(full_root);
 
             bin.push(root_bin);
             hex.push(root_hex);
@@ -189,8 +189,8 @@ function index2latin (index)
 {
     index = parseInt(index);
   //Split and select
-    var high = (index & 0xF0) >> 4;
-    var low = index & 0x0F;
+    let high = (index & 0xF0) >> 4;
+    let low = index & 0x0F;
     high = _con[high];
     low = _vow[low];
 
@@ -201,7 +201,7 @@ function index2latin (index)
 //https://itinerarium.github.io/phoneme-synthesis/
 function latin2spk (latin)
 {
-    var spk = "";
+    let spk = "";
     for (c in latin) {
         spk += _spk[chrFind(latin[c], _chr)];
     }
@@ -212,12 +212,12 @@ function latin2spk (latin)
 function num2mi_bin (num)
 {
     num = parseInt(num);
-    var overflows = Math.floor(Math.floor(Math.log2(num)) / 7);
-    var bin = num.toString(2);
+    let overflows = Math.floor(Math.floor(Math.log2(num)) / 7);
+    let bin = num.toString(2);
     bin = pad(bin, new Array( (Math.ceil(bin.length / 7) * 7) + 1 ).join("0"));
-    var num_out = [];
-    for (var o = 0; o <= overflows; ++o) {
-        var this_bin = bin.substr(o * 7, 7);
+    let num_out = [];
+    for (let o = 0; o <= overflows; ++o) {
+        let this_bin = bin.substr(o * 7, 7);
         num_out.push((o < overflows ? "1" : "0") + pad(this_bin, "0000000"));
     }
     return num_out
