@@ -9,7 +9,7 @@ let _lex = [
     { noun: "us_inclusive/we_inclusive/our_inclusive", type: "pronoun", verb: "in_are", adj: "", comment: "" },
     { noun: "us_exclusive/we_exclusive/our_exclusive", type: "pronoun", verb: "ex_are", adj: "", comment: "" },
     { noun: "all/always", type: "quantity, time", verb: "", adj: "many", comment: "" },
-    { noun: "nothing/never", type: "quantity, time", verb: "", adj: "few", comment: "" },
+    { noun: "nothing/never", type: "quantity, time", verb: "", adj: "none", comment: "" },
     { noun: "partial/sometimes", type: "quantity, time", verb: "", adj: "some", comment: "" },
     { noun: "only/just", type: "quantity, time", verb: "", adj: "only", comment: "" },
     { noun: "any", type: "quantity", verb: "", adj: "", comment: "" },
@@ -42,14 +42,14 @@ let _lex = [
     { noun: "west", type: "", verb: "", adj: "left", comment: "" },
     { noun: "ease/ability", type: "", verb: "", adj: "easy/probable", comment: "" },
     { noun: "difficulty/inability", type: "", verb: "", adj: "difficult", comment: "" },
-    { noun: "method/work/use", type: "", verb: "work/use", adj: "how", comment: "" },
-    { noun: "conflict/fight", type: "", verb: "", adj: "", comment: "" },
+    { noun: "method/work/use", type: "", verb: "work/use", adj: "how/can", comment: "" },
+    { noun: "conflict/fight", type: "", verb: "", adj: "cannot/unable", comment: "" },
     { noun: "time", type: "", verb: "", adj: "soon", comment: "" },
     { noun: "travel", type: "", verb: "travel", adj: "", comment: "" },
     { noun: "begin/start", type: "", verb: "begin/start", adj: "slow", comment: "" },
     { noun: "end/stop/speed", type: "", verb: "end/stop", adj: "fast", comment: "" },
-    { noun: "positive", type: "", verb: "", adj: "possible/happy/can", comment: "" },
-    { noun: "negative/not", type: "", verb: "", adj: "impossible/unable/cannot/sad", comment: "Used to negate a situation" },
+    { noun: "positive", type: "", verb: "", adj: "possible/happy", comment: "" },
+    { noun: "negative/not", type: "", verb: "", adj: "impossible/sad/not", comment: "Used to negate a situation" },
     { noun: "language/talk/speech", type: "", verb: "say/talk", adj: "", comment: "" },
 
 //Life, nature, time
@@ -64,7 +64,7 @@ let _lex = [
     { noun: "plant", type: "", verb: "grow", adj: "what", comment: "" },
     { noun: "food/possession", type: "", verb: "eat/drink/consume", adj: "eaten/drank/consumed", comment: "" },
     { noun: "earth/mountain", type: "", verb: "", adj: "large/big/much", comment: "" },
-    { noun: "water/rain/river/Spring", type: "", verb: "wet/pour/wash", adj: "", comment: "" },
+    { noun: "water/rain/river/Spring", type: "", verb: "wet/pour/wash/rain", adj: "", comment: "" },
     { noun: "fire/light/Summer ", type: "", verb: "burn", adj: "bright", comment: "" },
     { noun: "air/wind/Autumn", type: "", verb: "blow", adj: "windy", comment: "" },
     { noun: "snow/Winter", type: "", verb: "snow", adj: "", comment: "" },
@@ -104,19 +104,46 @@ let _lex = [
     { noun: "square", type: "", verb: "", adj: "", comment: "" },
     { noun: "circle", type: "", verb: "", adj: "", comment: "" },
     { noun: "place", type: "", verb: "", adj: "where", comment: "" },
-    { noun: "opposite/other_side", type: "location", verb: "", adj: "beside", comment: "" },
-    { noun: "unknown_location", type: "", verb: "lose", adj: "lost", comment: "" },
+    { noun: "opposite/other_side", type: "spacial", verb: "", adj: "beside", comment: "" },
+    { noun: "unknown_location", type: "spacial", verb: "lose", adj: "lost", comment: "" },
     { noun: "house/home", type: "", verb: "", adj: "", comment: "" },
     { noun: "village", type: "", verb: "", adj: "", comment: "" },
     { noun: "town", type: "", verb: "", adj: "", comment: "" },
     { noun: "country", type: "", verb: "", adj: "", comment: "" },
     { noun: "wall/fence", type: "", verb: "", adj: "bad", comment: "" },
-    { noun: "null", type: "null", verb:"ignore", adj: "ignored", comment: "Used in place of a noun upon repeating grammar pattern" }
+    { noun: "", type: "", verb: "", adj: "", comment: "" },
+    { noun: "", type: "", verb: "", adj: "", comment: "" },
+    { noun: "", type: "", verb: "", adj: "", comment: "" },
+    { noun: "", type: "", verb: "", adj: "", comment: "" },
+    { noun: "", type: "", verb: "", adj: "", comment: "" },
+    { noun: "", type: "", verb: "", adj: "", comment: "" },
+    { noun: "", type: "", verb: "", adj: "", comment: "" },
+    { noun: "", type: "", verb: "", adj: "", comment: "" },
+    { noun: "", type: "", verb: "", adj: "", comment: "" },
+    { noun: "", type: "", verb: "", adj: "", comment: "" },
+    { noun: "", type: "", verb: "", adj: "", comment: "" },
+    { noun: "", type: "", verb: "", adj: "", comment: "" },
+    { noun: "", type: "", verb: "", adj: "", comment: "" },
+    { noun: "", type: "", verb: "", adj: "", comment: "" },
+    { noun: "", type: "", verb: "", adj: "", comment: "" },
+    { noun: "", type: "", verb: "", adj: "", comment: "" },
+    { noun: "", type: "", verb: "", adj: "", comment: "" },
+    { noun: "", type: "", verb: "", adj: "", comment: "" },
+    { noun: "", type: "", verb: "", adj: "", comment: "" },
+    { noun: "", type: "", verb: "", adj: "", comment: "" },
+    { noun: "", type: "", verb: "", adj: "", comment: "" },
+    { noun: "", type: "", verb: "", adj: "", comment: "" },
+    { noun: "null", type: "null", verb: "exist", adj: "absent", comment: "Used in place of a noun upon repeating grammar pattern" },
+    { noun: "period", type: "period", verb: "", adj: "", comment: "Used to denote a new sentence, followed by a head", period: "period" }
 ];
 
 /*
-let _lex_multi = [
+let _noun_multi = [
     { noun: "coffee", nouns: "water plant"},
-    { noun: "drum", nouns: "instrument noise"}
+    { noun: "drum", nouns: "instrument noise"},
+    { noun: "socialism", nouns: "collection person"}
+];
+let _adj_multi = [
+    { adj: "absent", adjs: "near none" }
 ];
 */
