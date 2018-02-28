@@ -79,7 +79,7 @@ function loadPage ()
     meSpeak.loadConfig("mespeak/mespeak_config.json");
     meSpeak.loadVoice("mespeak/en-rp.json");
   //Tools
-    setTimeout(updateSentence, 100);
+    setTimeout(toolSentenceMakerUpdate, 100);
   //GET param
     let GET = window.location.search.substr(1);
     if (GET != "") {
@@ -148,7 +148,7 @@ function spk (text, speed = 100) //Speaks faux-tonal Latin-script mi
 
 let _evi = { d: "direct knowledge", s: "non-visual sense", r: "inferential", h: "hearsay" };
 let _tense = { n: "no", p: "past", i: "present", f:"future" }
-function updateSentence ()
+function toolSentenceMakerUpdate ()
 {
     let preview = [];
     let gloss = gE("tool#sentence-maker #glossin").value.trim();
@@ -197,6 +197,7 @@ function updateSentence ()
                 if (part > 3) { part = 1; }
             }
 
+          //Prefix the gloss
             gloss[w] = { "MIHEAD":"h:", "NOUN":"n:", "ONOUN":"n", "ADJ":"a", "VERB":"v:" }[feature] + gloss[w];
 
           //Prepare if was/is number
@@ -239,19 +240,44 @@ function updateSentence ()
 }
 
 
-function tool_sentence_maker_load (e)
+function toolSentenceMakerLoad (e)
 {
     let example = _examples[e];
     gE("tool#sentence-maker #preglossed").checked = true;
     gE("tool#sentence-maker #englishin").value = example[0];
     gE("tool#sentence-maker #glossin").value = example[1];
-    updateSentence();
+    toolSentenceMakerUpdate();
     gE("tool#sentence-maker #output").scrollIntoView();
+    return false;
+}
+function toolParagrapherLoad (e)
+{
+    let example = _examples[e];
+    gE("tool#paragrapher #englishin").value = example[0];
+    gE("tool#paragrapher #glossin").value = example[1];
+    updateSentence();
+    gE("tool#paragrapher #output").scrollIntoView();
     return false;
 }
 
 
-function tool_translate ()
+
+function toolParagrapher ()
+{
+    gE("tool#paragrapher #englishout").innerHTML = "<english>"+ gE("tool#paragrapher #englishin").value +"</english>";
+    let gloss = gE("tool#paragrapher #input").value;
+    gE("tool#paragrapher #glossout").innerHTML = "<gloss>"+ gloss2html(gloss) +"</gloss>";
+    var multi_out = gloss2multi(gloss);
+    gE("tool#paragrapher #asciiout").innerHTML = "<input value='"+ multi_out.ascii +"' readonly>";
+    gE("tool#paragrapher #latinout").innerHTML = multi_out.latin_html +" "+ multi_out.chars +" chars"+
+        "<span class='focus'>"+ multi_out.latin_styled +"</span>"+
+        "/"+ multi_out.ipa +'/ <speaker onclick="spk(\''+ multi_out.latin_styled.split("?").join("") +'\')"></speaker><br>';
+    gE("tool#paragrapher #scriptout").innerHTML = multi_out.latin_styled;
+}
+
+
+
+function toolTranslate ()
 {
     let mi_in = gE("tool#translate #input").value;
     mi_in = mi_in.replace(/ /g, "").split("");
@@ -296,21 +322,26 @@ function tool_translate ()
             case 2: feature = (optional ? ADJ : VERB); break;
             case 3: feature = (optional ? ADJ : NOUN); break;
         }
-        if (!optional) {
+        if (!optional || feature == HEAD) {
             ++part;
             if (part > 3) { part = 1; }
         }
 
         if (feature == HEAD) { //Extract head data
-            let tense = (index & 0xC0) >> 6;
-            let evidentiality = (index & 0xC) >> 2;
-            let imperative = (index & 0x2) >> 1;
-            let question = index & 0x1;
+            let tense = (byte & 0xC0) >> 6;
+            let evidentiality = (byte & 0xC) >> 2;
+            let imperative = (byte & 0x2) >> 1;
+            let question = byte & 0x1;
             tense = Object.keys(_tense)[tense];
             evidentiality = Object.keys(_evi)[evidentiality];
             let head = _tense[tense] +" tense, "+ _evi[evidentiality] + (imperative ? ", imperative" : "") + (question ? ", question" : "");
-            english_out = "<mihead>("+ head +")</mihead>";
+            english_out += " <mihead>("+ head +")</mihead>";
         } else {
+            if (byte == 0x7F || byte == 0xFF) { //It's a p:old/p:new
+                part = 1 - ((byte & 0x80) >> 7);
+                english_out += " <period>"+ (byte == 0xFF ? "new" : "old") +"</period>";
+                continue;
+            }
             let words = _lex[index][ { NOUN: "noun", ONOUN: "noun", VERB: "verb", ADJ: "adj" }[feature] ];
             if (words == "number") {
                 let nums = []; //Array of 7-bits, to be shifted by 7 onwards
@@ -338,7 +369,7 @@ function tool_translate ()
 }
 
 
-function tool_speaker_speak ()
+function toolSpeakerSpeak ()
 {
     spk(gE("#tool-speaker-input").value);
 }

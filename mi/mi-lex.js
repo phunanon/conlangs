@@ -134,7 +134,7 @@ let _lex = [
     { noun: "", type: "", verb: "", adj: "", comment: "" },
     { noun: "", type: "", verb: "", adj: "", comment: "" },
     { noun: "null", type: "null", verb: "exist", adj: "absent", comment: "Used in place of a noun upon repeating grammar pattern" },
-    { noun: "period", type: "period", verb: "", adj: "", comment: "Used to denote a new sentence, followed by a head", period: "period" }
+    { noun: "period", type: "period", verb: "", adj: "", comment: "Used to denote a new sentence, optionally by a head" }
 ];
 
 /*

@@ -91,7 +91,8 @@
                 <p>RRRGGGBB</p>-->
             <!--<h4>Question asking</h4>-->
             <!--<h4>Proper nouns</h4>-->
-            <!--<h4>Multiple sentences</h4>-->
+            <!--<h4>Multiple sentences</h4>
+                0x7F no head  0xFF new head-->
             <!--<h4>Expressing amount</h4>
                 Explicit plural is "much"
                 verb number - verb'd that many times-->
@@ -119,11 +120,11 @@
             <tool id="sentence-maker">
                 <h4>Sentence maker</h4>
                 <h5>English original</h5>
-                <textarea id="englishin" onkeyup="setTimeout(updateSentence, 1)">I met a little cottage girl; she was eight years old, she said.</textarea>
+                <textarea id="englishin" onkeyup="setTimeout(toolSentenceMakerUpdate, 1)">I met a little cottage girl; she was eight years old, she said.</textarea>
                 <h5>Head</h4>
                 <options>
                     <p>Tense:
-                        <select id="tense" onchange="setTimeout(updateSentence, 1)">
+                        <select id="tense" onchange="setTimeout(toolSentenceMakerUpdate, 1)">
                             <option value="n">None</option>
                             <option value="p" selected>Past</option>
                             <option value="i">Present</option>
@@ -131,7 +132,7 @@
                         </select>
                     </p>
                     <p>Evidentiality:
-                        <select id="evidentiality" onchange="setTimeout(updateSentence, 1)">
+                        <select id="evidentiality" onchange="setTimeout(toolSentenceMakerUpdate, 1)">
                             <option value="d">Direct Knowledge</option>
                             <option value="s">Non-visual Sensory</option>
                             <option value="r">Inferential</option>
@@ -139,21 +140,21 @@
                         </select>
                     </p>
                     <p>Is imperative:
-                        <select id="imperative" onchange="setTimeout(updateSentence, 1)">
+                        <select id="imperative" onchange="setTimeout(toolSentenceMakerUpdate, 1)">
                             <option value="">False</option>
                             <option value="m">True</option>
                         </select>
                     </p>
                     <p>Is question:
-                        <select id="question" onchange="setTimeout(updateSentence, 1)">
+                        <select id="question" onchange="setTimeout(toolSentenceMakerUpdate, 1)">
                             <option value="">False</option>
                             <option value="q">True</option>
                         </select>
                     </p>
                 </options>
                 <h5>Gloss</h5>
-                <p><input id="preglossed" onchange="setTimeout(updateSentence, 1)" type="checkbox"> Pre-processed gloss</p>
-                <textarea id="glossin" onkeydown="setTimeout(updateSentence, 1)">I meet village girl !little they_are number 8 say !by she</textarea>
+                <p><input id="preglossed" onchange="setTimeout(toolSentenceMakerUpdate, 1)" type="checkbox"> Pre-processed gloss</p>
+                <textarea id="glossin" onkeydown="setTimeout(toolSentenceMakerUpdate, 1)">I meet village girl !little they_are number 8 say !by she</textarea>
                 <preview></preview>
                 <h5>Output</h5>
                 <p><a id="popup_link" target="_blank">Open in popup</a>; <a id="perma_link">Perma-link</a></p>
@@ -170,25 +171,38 @@
                 </table>
             </tool>
             <br>
+            <tool id="paragrapher">
+                <h4>mi Paragrapher</h4>
+                <input id="englishin" placeholder="English original" value="The sun shines. The sun is shining."><br>
+                <input id="input" placeholder="preglossed input" value="h:nh n:sun v:shine p:new h:id n:sun v:shine"><br>
+                <button onclick="toolParagrapher()">Generate mi</button>
+                <p><b>Key:</b> <mihead>Head</mihead> <onoun>Optional noun</onoun> <noun>Noun</noun> <adj>Adj</adj> <verb>Verb</verb> <number>Number</number> <period>Period</period></p>
+                <h5>Output</h5>
+                <table id="output">
+                    <tr><th>Key</th><td><mihead>Head</mihead> <onoun>Optional noun</onoun> <noun>Noun</noun> <adj>Adj</adj> <verb>Verb</verb> <number>Number</number></td></tr>
+                    <tr id="englishout_tr"><th>English</th><td id="englishout"></td></tr>
+                    <tr><th>Gloss</th><td class="gloss" id="glossout"></td></tr>
+                    <tr class="hr"><th>ASCII</th><td><pre id="asciiout"></pre></td></tr>
+                    <tr><th>Latin & IPA</th><td><pre id="latinout"></pre></td></tr>
+                    <tr><th>Native Script</th><td><native id="scriptout" class="focus"></native></td></tr>
+                </table>
+            </tool>
+            <br>
             <tool id="translate">
                 <h4>mi to English</h4>
-                <input id="input" placeholder="mi to translate"><button onclick="tool_translate()">Translate</button>
-                <p><b>Key:</b> <mihead>Head</mihead> <onoun>Optional noun</onoun> <noun>Noun</noun> <adj>Adj</adj> <verb>Verb</verb> <number>Number</number></p>
+                <input id="input" placeholder="mi to translate"><button onclick="toolTranslate()">Translate</button>
+                <p><b>Key:</b> <mihead>Head</mihead> <onoun>Optional noun</onoun> <noun>Noun</noun> <adj>Adj</adj> <verb>Verb</verb> <number>Number</number> <period>Period</period></p>
                 <h5>English</h5>
                 <p id="output"></p>
             </tool>
             <br>
             <tool>
                 <h4>Speaker</h4>
-                <input id="tool-speaker-input" placeholder="mi to speak"><button onclick="tool_speaker_speak()">Speak</button>
+                <input id="tool-speaker-input" placeholder="mi to speak"><button onclick="toolSpeakerSpeak()">Speak</button>
             </tool>
             <!--<tool>
                 <h4>Number maker</h4>
-                <input id="tool-number-input" placeholder="number"><button onclick="tool_number()">Speak</button>
-            </tool>
-            <tool>
-                <h4>Translate mi to Gloss</h4>
-                <input id="tool-translater-input" placeholder="mi"><button onclick="tool_translate()">Translate</button>
+                <input id="tool-number-input" placeholder="number"><button onclick="toolNumber()">Speak</button>
             </tool>-->
         </section>
         <section id="s6">

@@ -91,7 +91,7 @@ native, .native {
     letter-spacing: -.1em;
 }
 
-mihead, onoun, noun, adj, verb, number {
+mihead, onoun, noun, adj, verb, number, period {
     padding: .1rem .2rem;
     display: inline-block;
 }
@@ -101,6 +101,7 @@ noun { background-color: #bbf; }
 adj { background-color: #afa; border: .1rem dashed #000; }
 verb { background-color: #faa; }
 number { background-color: #000; color: #fff; }
+period { background-color: #aaa; border: .15rem solid #000; }
 
 button.loader {
     font-size: 1.5rem;
@@ -121,10 +122,8 @@ tool#sentence-maker textarea { font-size: 1.1rem; width: 24rem; height: 4rem; }
 tool#sentence-maker p { padding: 0; }
 tool#sentence-maker th { max-width: 4rem; }
 tool#sentence-maker td { padding: .5rem; max-width: 32rem; overflow-wrap: break-word; }
-tool#sentence-maker .focus { font-size: 1.5rem; line-height: 1.5rem; display: block; padding: .5rem; }
 tool#sentence-maker options p { display: inline-block; border: .1rem solid #000; padding: .5rem; }
 tool#sentence-maker preview { display: block; padding: .5rem; }
-
 tool#sentence-maker #englishout {
     max-width: 32rem;
 }
@@ -134,11 +133,14 @@ tool#sentence-maker #glossout .feature {
 tool#sentence-maker #binout {
     font-family: monospace;
 }
-tool#sentence-maker #asciiout input {
+
+.focus { font-size: 1.5rem; line-height: 1.5rem; display: block; padding: .5rem; }
+#asciiout input {
     border: none;
     background: transparent;
+    margin: .25rem;
 }
-tool#sentence-maker #scriptout {
+#scriptout {
     font-size: 2.5rem;
     line-height: 2.5rem;
     max-width: 32rem;
