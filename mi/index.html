@@ -120,11 +120,11 @@
             <tool id="sentence-maker">
                 <h4>Sentence maker</h4>
                 <h5>English original</h5>
-                <textarea id="englishin" onkeyup="setTimeout(toolSentenceMakerUpdate, 1)">I met a little cottage girl; she was eight years old, she said.</textarea>
+                <textarea id="englishin" onkeyup="setTimeout(toolSentenceMaker, 1)">I met a little cottage girl; she was eight years old, she said.</textarea>
                 <h5>Head</h4>
                 <options>
                     <p>Tense:
-                        <select id="tense" onchange="setTimeout(toolSentenceMakerUpdate, 1)">
+                        <select id="tense" onchange="setTimeout(toolSentenceMaker, 1)">
                             <option value="n">None</option>
                             <option value="p" selected>Past</option>
                             <option value="i">Present</option>
@@ -132,7 +132,7 @@
                         </select>
                     </p>
                     <p>Evidentiality:
-                        <select id="evidentiality" onchange="setTimeout(toolSentenceMakerUpdate, 1)">
+                        <select id="evidentiality" onchange="setTimeout(toolSentenceMaker, 1)">
                             <option value="d">Direct Knowledge</option>
                             <option value="s">Non-visual Sensory</option>
                             <option value="r">Inferential</option>
@@ -140,21 +140,21 @@
                         </select>
                     </p>
                     <p>Is imperative:
-                        <select id="imperative" onchange="setTimeout(toolSentenceMakerUpdate, 1)">
+                        <select id="imperative" onchange="setTimeout(toolSentenceMaker, 1)">
                             <option value="">False</option>
                             <option value="m">True</option>
                         </select>
                     </p>
                     <p>Is question:
-                        <select id="question" onchange="setTimeout(toolSentenceMakerUpdate, 1)">
+                        <select id="question" onchange="setTimeout(toolSentenceMaker, 1)">
                             <option value="">False</option>
                             <option value="q">True</option>
                         </select>
                     </p>
                 </options>
                 <h5>Gloss</h5>
-                <p><input id="preglossed" onchange="setTimeout(toolSentenceMakerUpdate, 1)" type="checkbox"> Pre-processed gloss</p>
-                <textarea id="glossin" onkeydown="setTimeout(toolSentenceMakerUpdate, 1)">I meet village girl !little they_are number 8 say !by she</textarea>
+                <p><input id="preglossed" onchange="setTimeout(toolSentenceMaker, 1)" type="checkbox"> Pre-processed gloss</p>
+                <textarea id="glossin" onkeydown="setTimeout(toolSentenceMaker, 1)">I meet village girl !little they_are number 8 say !by she</textarea>
                 <preview></preview>
                 <h5>Output</h5>
                 <p><a id="popup_link" target="_blank">Open in popup</a>; <a id="perma_link">Perma-link</a></p>

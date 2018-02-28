@@ -46,7 +46,8 @@ function loadExamples ()
             "<gloss>"+ _examples[e][1] +"</gloss>"+
             "<mi class='native'>"+ multi_out.latin_styled +"</mi>"+
             "<ipa><speaker onclick='spk(\""+ multi_out.latin_styled +"\")''></speaker> /"+ multi_out.ipa +"/</ipa>"+
-            "<button class='load' onclick='tool_sentence_maker_load("+ e +")'>load</button></example>";
+            (_examples[e][1].indexOf("p:") == -1 ? "<button class='load' onclick='toolSentenceMakerLoad("+ e +")'>load</button>" : "<button class='load' onclick='toolParagrapherLoad("+ e +")'>load</button>")+
+            "</example>";
     }
     gE("#s6 examples").innerHTML = examples_html;
 }
@@ -79,7 +80,7 @@ function loadPage ()
     meSpeak.loadConfig("mespeak/mespeak_config.json");
     meSpeak.loadVoice("mespeak/en-rp.json");
   //Tools
-    setTimeout(toolSentenceMakerUpdate, 100);
+    setTimeout(toolSentenceMaker, 100);
   //GET param
     let GET = window.location.search.substr(1);
     if (GET != "") {
@@ -148,7 +149,7 @@ function spk (text, speed = 100) //Speaks faux-tonal Latin-script mi
 
 let _evi = { d: "direct knowledge", s: "non-visual sense", r: "inferential", h: "hearsay" };
 let _tense = { n: "no", p: "past", i: "present", f:"future" }
-function toolSentenceMakerUpdate ()
+function toolSentenceMaker ()
 {
     let preview = [];
     let gloss = gE("tool#sentence-maker #glossin").value.trim();
@@ -246,7 +247,7 @@ function toolSentenceMakerLoad (e)
     gE("tool#sentence-maker #preglossed").checked = true;
     gE("tool#sentence-maker #englishin").value = example[0];
     gE("tool#sentence-maker #glossin").value = example[1];
-    toolSentenceMakerUpdate();
+    toolSentenceMaker();
     gE("tool#sentence-maker #output").scrollIntoView();
     return false;
 }
@@ -254,8 +255,8 @@ function toolParagrapherLoad (e)
 {
     let example = _examples[e];
     gE("tool#paragrapher #englishin").value = example[0];
-    gE("tool#paragrapher #glossin").value = example[1];
-    updateSentence();
+    gE("tool#paragrapher #input").value = example[1];
+    toolParagrapher();
     gE("tool#paragrapher #output").scrollIntoView();
     return false;
 }
