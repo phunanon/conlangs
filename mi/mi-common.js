@@ -49,10 +49,30 @@ function gloss2html (gloss)
 }
 
 
+function head2binhead (head)
+{
+    let bin_head = 0;
+    for (h in head) {
+        switch (head[h]) {
+            case "p": bin_head |= 64;  break;
+            case "i": bin_head |= 128; break;
+            case "f": bin_head |= 192; break;
+            case "s": bin_head |= 4;   break;
+            case "r": bin_head |= 8;   break;
+            case "h": bin_head |= 12;  break;
+            case "m": bin_head |= 2;   break;
+            case "q": bin_head |= 1;   break;
+        }
+    }
+    return bin_head;
+}
+
+
 function gloss2rootIndex (gloss, feature)
 {
     feature = feature.toLowerCase();
     if (feature == "onoun") { feature = "noun"; }
+    if (feature == "mihead") { return head2binhead(gloss); }
 
     for (l in _lex) {
         let lex = _lex[l];
@@ -78,35 +98,6 @@ function gloss2multi (gloss)
 {
     let bin_html = [], bin = [], hex_html = [], hex = [], latin_html = [], latin_styled = "", latin = [], ascii = [];
     gloss = gloss.split(" ");
-    let head = gloss.splice(0, 1)[0];
-    head = head.substr(2, head.length - 2).split("");
-  //Process head byte
-    let bin_head = 0;
-    for (h in head) {
-        switch (head[h]) {
-            case "p": bin_head |= 64;  break;
-            case "i": bin_head |= 128; break;
-            case "f": bin_head |= 192; break;
-            case "s": bin_head |= 4;   break;
-            case "r": bin_head |= 8;   break;
-            case "h": bin_head |= 12;  break;
-            case "m": bin_head |= 2;   break;
-            case "q": bin_head |= 1;   break;
-        }
-    }
-
-    let root_bin = bin_head.toString(2);
-    bin_html.push("<mihead>"+ pad(root_bin, "00000000") +"</mihead>");
-    bin.push(pad(root_bin, "00000000"));
-
-    let root_hex = pad(bin_head.toString(16), "00");
-    hex.push(root_hex);
-    hex_html.push('<mihead>'+ root_hex +'</mihead>');
-
-    let root_latin = index2latin(bin_head);
-    latin.push(root_latin);
-    latin_html.push('<mihead>'+ root_latin +'</mihead>');
-    latin_styled += root_latin +" ";
   //Process words
     let regular = NOUN;
     let prev_feature = HEAD;
