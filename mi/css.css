@@ -120,7 +120,6 @@ tool h4 { text-align: center; }
 
 tool#sentence-maker textarea { font-size: 1.1rem; width: 24rem; height: 4rem; }
 tool#sentence-maker p { padding: 0; }
-tool#sentence-maker th { max-width: 4rem; }
 tool#sentence-maker td { padding: .5rem; max-width: 32rem; overflow-wrap: break-word; }
 tool#sentence-maker options p { display: inline-block; border: .1rem solid #000; padding: .5rem; }
 tool#sentence-maker preview { display: block; padding: .5rem; }
@@ -134,6 +133,7 @@ tool#sentence-maker #binout {
     font-family: monospace;
 }
 
+tool#sentence-maker th, tool#paragrapher th { max-width: 4rem; }
 .focus { font-size: 1.5rem; line-height: 1.5rem; display: block; padding: .5rem; }
 #asciiout input {
     border: none;
