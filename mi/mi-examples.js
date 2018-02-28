@@ -9,6 +9,7 @@ let _examples = [
     ["I met a little cottage girl; she was eight years old, she said.", "h:pd n:I v:meet n:village n:girl a!little v:they_are n:number n:8 v:say a!by n:she"],
     ["It is a simple language.", "h:pd n!it n:language v:it_is a!simple"],
     ["Have all the leaves fallen from the tree?", "h:pdq n:item a!all v:fall a!from n:tree"],
+    ["But tell me now, and make this clear to me: what gathering, what feast is this? Why here?", "h:im n!however n:you v:tell n:me n:soft_and v:create n:my n:ease p:new h:q n:this v:it_is n:meeting n!and n!food n!and n:here a!why"],
     ["The sun shines. The sun is shining.", "h:nh n:sun v:shine p:new h:id n:sun v:shine"],
     ["The sun shone.", "h:pd n:sun v:shine"],
     ["The sun will shine.", "h:fd n:sun v:shine"],

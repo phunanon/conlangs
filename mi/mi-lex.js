@@ -50,14 +50,14 @@ let _lex = [
     { noun: "end/stop/speed", type: "", verb: "end/stop", adj: "fast", comment: "" },
     { noun: "positive", type: "", verb: "", adj: "possible/happy", comment: "" },
     { noun: "negative/not", type: "", verb: "", adj: "impossible/sad/not", comment: "Used to negate a situation" },
-    { noun: "language/talk/speech", type: "", verb: "say/talk", adj: "", comment: "" },
+    { noun: "language/talk/speech", type: "", verb: "say/talk/tell", adj: "", comment: "" },
 
 //Life, nature, time
     { noun: "normality/calm/peace", type: "", verb: "rest", adj: "normal/quiet", comment: "" },
-    { noun: "change/chaos", type: "", verb: "", adj: "abnormal", comment: "" },
+    { noun: "change/chaos", type: "", verb: "change", adj: "abnormal", comment: "" },
     { noun: "nest/bed", type: "", verb: "", adj: "low", comment: "" },
     { noun: "sky", type: "", verb: "", adj: "high", comment: "" },
-    { noun: "machine/process", type: "", verb: "", adj: "often", comment: "" },
+    { noun: "machine/process", type: "", verb: "create", adj: "often", comment: "" },
     { noun: "life/nature", type: "", verb: "live", adj: "natural/wild/simple", comment: "" },
     { noun: "person/body", type: "", verb: "", adj: "who/complex", comment: "" },
     { noun: "animal", type: "", verb: "hunt", adj: "", comment: "" },
@@ -82,6 +82,7 @@ let _lex = [
     { noun: "new", type: "", verb: "", adj: "new/again", comment: "" },
 //Humanity and its stuff
     { noun: "desire/want/pleasure", type: "", verb: "desire/want/like", adj: "", comment: "" },
+    { noun: "need/requirement", type: "", verb: "need/require", adj: "", comment: "" },
     { noun: "friend/unison", type: "", verb: "", adj: "friendly/in unison", comment: "" },
     { noun: "music", type: "", verb: "play", adj: "musical", comment: "" },
     { noun: "family", type: "", verb: "know_person", adj: "familiar", comment: "" },
