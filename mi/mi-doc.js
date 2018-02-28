@@ -63,7 +63,7 @@ function loadPage ()
         vow_html += '<tr><td>xxxx'+ pad(num.toString(2), '0000') +'</td>'+
             '<td>0x'+ pad(num.toString(16).toUpperCase(), '00') +'</td>'+
             '<td><span class="mi">'+ _chr[c] +'</span> <span class="native">'+ _chr[c] +'</span></td>'+
-            '<td><speaker onclick="spk(\''+ _chr[c] +'a\')"></speaker> /'+ _ipa[c] +'/</td></tr>';
+            '<td><speaker onclick="spk(\''+ _chr[c] +'a\', 100)"></speaker> /'+ _ipa[c] +'/</td></tr>';
     }
     gE("#s1 #t1").innerHTML += vow_html;
     //Consonants
@@ -73,7 +73,7 @@ function loadPage ()
         con_html += '<tr><td>'+ pad(num.toString(2), '0000') +'xxxx</td>'+
             '<td>0x'+ pad(num.toString(16).toUpperCase(), '00') +'</td>'+
             '<td><span class="mi">'+ _chr[c] +'</span> <span class="native">'+ _chr[c] +'</span></td>'+
-            '<td><speaker onclick="spk(\''+ _chr[c] +'a\')"></speaker> /'+ _ipa[c] +'/</td></tr>';
+            '<td><speaker onclick="spk(\''+ _chr[c] +'a\', 100)"></speaker> /'+ _ipa[c] +'/</td></tr>';
     }
     gE("#s1 #t2").innerHTML += con_html;
   //Speakers
@@ -81,6 +81,7 @@ function loadPage ()
     meSpeak.loadVoice("mespeak/en-rp.json");
   //Tools
     setTimeout(toolSentenceMaker, 100);
+    setTimeout(toolParagrapher, 200);
   //GET param
     let GET = window.location.search.substr(1);
     if (GET != "") {
@@ -97,9 +98,9 @@ function loadPage ()
 let spk_words = [];
 let spk_syllables = [];
 let spk_w = 0, spk_s = 0;
-let spk_speed = 150;
-let WORD_GAP = 200;
-let SYLL_WAIT = 200;
+let SPK_SPEED;
+let WORD_GAP = 140;
+let SYLL_WAIT = 110;
 function speakNext ()
 {
     if (spk_w < spk_words.length) {
@@ -120,21 +121,21 @@ function speakNext ()
 function speakPart (part)
 {
   //Handle tone, by converting to pitch
-    let pitch = 50;
+    let pitch = 45;
     if (part.slice(-1) == "\u030B") {
         word = part.substr(0, part.length - 1);
-        pitch = 90;
+        pitch = 70;
     }
     if (part.slice(-1) == "\u030F") {
         word = part.substr(0, part.length - 1);
         pitch = 10;
     }
   //Actually speak, with callback for next syllable
-    meSpeak.speak("[["+ part +"]]", {speed: spk_speed, pitch: pitch, wordgap: 0, nostop: true});
+    meSpeak.speak("[["+ part +"]]", {speed: SPK_SPEED, pitch: pitch, wordgap: 0, nostop: true});
 }
-function spk (text, speed = 100) //Speaks faux-tonal Latin-script mi
+function spk (text, speed = 220) //Speaks faux-tonal Latin-script mi
 {
-    spk_speed = speed;
+    SPK_SPEED = speed;
   //Convert to espeak format
     text = latin2spk(text);
   //Split into words
