@@ -3,7 +3,7 @@
     <head>
         <title>mi</title>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=0.5">
+        <meta name="viewport" content="width=device-width, initial-scale=0.6">
         <script type="text/javascript" src="mi-doc.js"></script>
         <script type="text/javascript" src="mi-common.js"></script>
         <script type="text/javascript" src="mi-lex.js"></script>
@@ -154,7 +154,7 @@
                 </options>
                 <h5>Gloss</h5>
                 <p><input id="preglossed" onchange="setTimeout(toolSentenceMaker, 1)" type="checkbox"> Pre-processed gloss</p>
-                <textarea id="glossin" onkeydown="setTimeout(toolSentenceMaker, 1)">I meet village girl !little they_are number 8 say !by she</textarea>
+                <textarea id="glossin" onkeydown="setTimeout(toolSentenceMaker, 1)">I meet village girl !little they_are number 8 say !by actor</textarea>
                 <preview></preview>
                 <h5>Output</h5>
                 <p><a id="popup_link" target="_blank">Open in popup</a>; <a id="perma_link">Perma-link</a></p>
@@ -166,7 +166,7 @@
                     <tr class="hr"><th>Binary</th><td><p id="binout"></p></td></tr>
                     <tr><th>Hex</th><td><pre id="hexout"></pre></td></tr>
                     <tr><th>ASCII</th><td><pre id="asciiout"></pre></td></tr>
-                    <tr><th>Latin & IPA</th><td><pre id="latinout"></pre></td></tr>
+                    <tr><th>Latin & IPA</th><td><div id="latinout"></div></td></tr>
                     <tr><th>Native Script</th><td><native id="scriptout" class="focus"></native></td></tr>
                 </table>
             </tool>
@@ -182,7 +182,7 @@
                     <tr id="englishout_tr"><th>English</th><td id="englishout"></td></tr>
                     <tr><th>Gloss</th><td class="gloss" id="glossout"></td></tr>
                     <tr class="hr"><th>ASCII</th><td><pre id="asciiout"></pre></td></tr>
-                    <tr><th>Latin & IPA</th><td><pre id="latinout"></pre></td></tr>
+                    <tr><th>Latin & IPA</th><td><div id="latinout"></div></td></tr>
                     <tr><th>Native Script</th><td><native id="scriptout" class="focus"></native></td></tr>
                 </table>
             </tool>

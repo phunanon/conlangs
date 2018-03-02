@@ -230,8 +230,8 @@ function toolSentenceMaker ()
     gE("tool#sentence-maker #binout").innerHTML = multi_out.bin_html;// +"<br>"+ multi_out.bin;
     gE("tool#sentence-maker #hexout").innerHTML = multi_out.hex_html +" "+ multi_out.bytes +"B";// +"<br>"+ multi_out.hex;
     gE("tool#sentence-maker #asciiout").innerHTML = "<input value='"+ multi_out.ascii +"' readonly>";
-    gE("tool#sentence-maker #latinout").innerHTML = multi_out.latin_html +" "+ multi_out.chars +" chars"+
-        "<span class='focus'>"+ multi_out.latin_styled +"</span>"+
+    gE("tool#sentence-maker #latinout").innerHTML = multi_out.latin_html +" <span>"+ multi_out.chars +" chars</span>"+
+        "<p class='focus'>"+ multi_out.latin_styled +"</p>"+
         "/"+ multi_out.ipa +'/ <speaker onclick="spk(\''+ multi_out.latin_styled.split("?").join("") +'\')"></speaker><br>';
     gE("tool#sentence-maker #scriptout").innerHTML = multi_out.latin_styled;
   //Popup & permalink
@@ -271,8 +271,8 @@ function toolParagrapher ()
     gE("tool#paragrapher #glossout").innerHTML = "<gloss>"+ gloss2html(gloss) +"</gloss>";
     var multi_out = gloss2multi(gloss);
     gE("tool#paragrapher #asciiout").innerHTML = "<input value='"+ multi_out.ascii +"' readonly>";
-    gE("tool#paragrapher #latinout").innerHTML = multi_out.latin_html +" "+ multi_out.chars +" chars"+
-        "<span class='focus'>"+ multi_out.latin_styled +"</span>"+
+    gE("tool#paragrapher #latinout").innerHTML = multi_out.latin_html +" <span>"+ multi_out.chars +" chars</span>"+
+        "<p class='focus'>"+ multi_out.latin_styled +"</p>"+
         "/"+ multi_out.ipa +'/ <speaker onclick="spk(\''+ multi_out.latin_styled.split("?").join("") +'\')"></speaker><br>';
     gE("tool#paragrapher #scriptout").innerHTML = multi_out.latin_styled;
 }
