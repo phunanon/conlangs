@@ -99,7 +99,7 @@ let latin_space_rules = {
 };
 function gloss2multi (gloss)
 {
-    let bin_html = [], bin = [], hex_html = [], hex = [], latin_html = [], latin_styled = "", latin = [], ascii = [];
+    let bin_html = [], bin = [], hex_html = [], hex = [], latin_html = "", latin_styled = "", latin = [], ascii = [];
     gloss = gloss.split(" ");
   //Process words
     let regular = NOUN;
@@ -125,6 +125,7 @@ function gloss2multi (gloss)
             optional = parseInt(number[n][0]);
         }
 
+        let space = (latin_space_rules[prev_feature+"_"+feature] ? " " : "");
         if (root != "?" || is_numbering) {
           //Prepare if number
             if (is_numbering || gloss_root == "number") {
@@ -157,15 +158,16 @@ function gloss2multi (gloss)
             ascii.push(root_ascii);
             bin_html.push('<'+ feature +'>'+ root_bin +'</'+ feature +'>');
             hex_html.push('<'+ feature +'>'+ root_hex +'</'+ feature +'>');
-            latin_html.push('<'+ feature +'>'+ root_latin +'</'+ feature +'>');
-            latin_styled += (latin_space_rules[prev_feature+"_"+feature] ? " " : "") + root_latin;
+            latin_html += space + '<'+ feature +'_glow>'+ root_latin +'</'+ feature +'_glow>';
+            latin_styled += space + root_latin;
         } else {
             bin.push(pad((optional ? '1' : '0') + "???????", "00000000"));
             hex.push("??");
             latin.push("?");
             bin_html.push('<'+ feature +'>'+ (optional ? '1' : '0') +'?</'+ feature +'>');
             hex_html.push('<'+ feature +'>??</'+ feature +'>');
-            latin_html.push('<'+ feature +'>?</'+ feature +'>');
+            latin_html += '<'+ feature +'_glow>??</'+ feature +'_glow>';
+            latin_styled += space + "??";
         }
         prev_feature = feature;
     }
@@ -173,7 +175,7 @@ function gloss2multi (gloss)
     return { bin_html: bin_html.join(""), bin: bin.join(""),
             hex_html: "0x"+ hex_html.join(""), hex: "0x"+ hex.join(""),
             ascii: ascii.join(""),
-            latin_html: latin_html.join(""), latin_styled: latin_styled.trim(), latin: latin.join(" "),
+            latin_html: latin_html, latin_styled: latin_styled.trim(), latin: latin.join(" "),
             ipa: latin2IPA(latin_styled),
             bytes: hex.length, chars: hex.length*2
         };
