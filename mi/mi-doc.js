@@ -71,7 +71,7 @@ function loadPage ()
     for (let c = _vow.length, clen = _chr.length - 1; c < clen; ++c) {
         let num = c;
         con_html += '<tr><td>'+ pad(num.toString(2), '0000') +'xxxx</td>'+
-            '<td>0x'+ pad(num.toString(16).toUpperCase(), '00') +'</td>'+
+            '<td>0x'+ pad((num<<4).toString(16).toUpperCase(), '00') +'</td>'+
             '<td><span class="mi">'+ _chr[c] +'</span> <span class="native">'+ _chr[c] +'</span></td>'+
             '<td><speaker onclick="spk(\''+ _chr[c] +'a\', 100)"></speaker> /'+ _ipa[c] +'/</td></tr>';
     }
