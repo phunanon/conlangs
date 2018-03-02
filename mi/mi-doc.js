@@ -47,7 +47,7 @@ function loadExamples ()
             "<td><english>"+ _examples[e][0] +"</english>"+
             "<gloss>"+ _examples[e][1] +"</gloss>"+
             "<ipa><speaker onclick='spk(\""+ multi_out.latin_styled +"\")''></speaker> /"+ multi_out.ipa +"/</ipa>"+
-            (_examples[e][1].indexOf("p:") == -1 ? "<button class='load' onclick='toolSentenceMakerLoad("+ e +")'>load</button>" : "<button class='load' onclick='toolParagrapherLoad("+ e +")'>load</button>")+
+            (_examples[e][1].indexOf("p:") == -1 ? "<button class='load' onclick='toolSentencerLoad("+ e +")'>load</button>" : "<button class='load' onclick='toolParagrapherLoad("+ e +")'>load</button>")+
             "</td></tr></tbody></table></example>";
     }
     gE("#s6 examples").innerHTML = examples_html;
@@ -81,15 +81,15 @@ function loadPage ()
     meSpeak.loadConfig("mespeak/mespeak_config.json");
     meSpeak.loadVoice("mespeak/en-rp.json");
   //Tools
-    setTimeout(toolSentenceMaker, 100);
+    setTimeout(toolSentencer, 100);
     setTimeout(toolParagrapher, 200);
   //GET param
     let GET = window.location.search.substr(1);
     if (GET != "") {
-        gE("tool#sentence-maker #englishin").value = "";
-        gE("tool#sentence-maker #preglossed").checked = true;
-        gE("tool#sentence-maker #glossin").value = GET.replace(/\+/g, " ");
-        gE("tool#sentence-maker #output").scrollIntoView();
+        gE("tool#sentencer #englishin").value = "";
+        gE("tool#sentencer #preglossed").checked = true;
+        gE("tool#sentencer #glossin").value = GET.replace(/\+/g, " ");
+        gE("tool#sentencer #output").scrollIntoView();
     }
 }
 
@@ -179,21 +179,21 @@ function latin2restHTML (latin_styled, MAX_LINE)
 
 let _evi = { d: "direct knowledge", s: "non-visual sense", r: "inferential", h: "hearsay" };
 let _tense = { n: "no", p: "past", i: "present", f:"future" }
-function toolSentenceMaker ()
+function toolSentencer ()
 {
     let preview = [];
-    let gloss = gE("tool#sentence-maker #glossin").value.trim();
+    let gloss = gE("tool#sentencer #glossin").value.trim();
   //Generate head
-    let tense = gE("tool#sentence-maker #tense").value;
-    let evidentiality = gE("tool#sentence-maker #evidentiality").value;
-    let imperative = gE("tool#sentence-maker #imperative").value;
-    let question = gE("tool#sentence-maker #question").value;
+    let tense = gE("tool#sentencer #tense").value;
+    let evidentiality = gE("tool#sentencer #evidentiality").value;
+    let imperative = gE("tool#sentencer #imperative").value;
+    let question = gE("tool#sentencer #question").value;
 
     function tf (bool) { return (bool ? "true" : "false"); }
   //Generate gloss
-    if (gE("tool#sentence-maker #preglossed").checked) {
-        gE("tool#sentence-maker preview").innerHTML = "";
-        gE("tool#sentence-maker #glossout").innerHTML = gloss2html(gloss);
+    if (gE("tool#sentencer #preglossed").checked) {
+        gE("tool#sentencer preview").innerHTML = "";
+        gE("tool#sentencer #glossout").innerHTML = gloss2html(gloss);
 
         tense = "n";
         evidentiality = "d";
@@ -240,45 +240,45 @@ function toolSentenceMaker ()
         }
 
         gloss = gloss.join(" ");
-        gE("tool#sentence-maker preview").innerHTML = preview.join("");
-        gE("tool#sentence-maker #glossout").innerHTML = gloss2html(gloss);
+        gE("tool#sentencer preview").innerHTML = preview.join("");
+        gE("tool#sentencer #glossout").innerHTML = gloss2html(gloss);
     }
-    gE("tool#sentence-maker #headerout").innerHTML = _tense[tense] +" tense, "+ _evi[evidentiality] +", "+ (imperative ? "is order" : "not order") +", "+ (question ? "is ask" : "not ask");
+    gE("tool#sentencer #headerout").innerHTML = _tense[tense] +" tense, "+ _evi[evidentiality] +", "+ (imperative ? "is order" : "not order") +", "+ (question ? "is ask" : "not ask");
 
   //Generate output
     //English
-    let english_in = gE("tool#sentence-maker #englishin").value;
+    let english_in = gE("tool#sentencer #englishin").value;
     if (english_in != "") {
-        gE("tool#sentence-maker #englishout_tr").style.display = "table-row";
-        gE("tool#sentence-maker #englishout").innerHTML = "<p class='english focus'>"+ english_in +"</p>";
+        gE("tool#sentencer #englishout_tr").style.display = "table-row";
+        gE("tool#sentencer #englishout").innerHTML = "<p class='english focus'>"+ english_in +"</p>";
     } else {
-        gE("tool#sentence-maker #englishout_tr").style.display = "none";
+        gE("tool#sentencer #englishout_tr").style.display = "none";
     }
     //Other
     let multi_out = gloss2multi(gloss);
-    gE("tool#sentence-maker #binout").innerHTML = multi_out.bin_html;// +"<br>"+ multi_out.bin;
-    gE("tool#sentence-maker #hexout").innerHTML = multi_out.hex_html +" "+ multi_out.bytes +"B";// +"<br>"+ multi_out.hex;
-    gE("tool#sentence-maker #asciiout").innerHTML = "<input value='"+ multi_out.ascii +"' readonly>";
-    gE("tool#sentence-maker #latinout").innerHTML = '<p class="focus">'+ multi_out.latin_html +'</p>'+
+    gE("tool#sentencer #binout").innerHTML = multi_out.bin_html;// +"<br>"+ multi_out.bin;
+    gE("tool#sentencer #hexout").innerHTML = multi_out.hex_html +" "+ multi_out.bytes +"B";// +"<br>"+ multi_out.hex;
+    gE("tool#sentencer #asciiout").innerHTML = "<input value='"+ multi_out.ascii +"' readonly>";
+    gE("tool#sentencer #latinout").innerHTML = '<p class="focus">'+ multi_out.latin_html +'</p>'+
         '<p>/'+ multi_out.ipa +'/ <speaker onclick="spk(\''+ multi_out.latin_styled.split("?").join("") +'\')"></speaker> <span>'+ multi_out.chars +' chars</span></p>';
-    gE("tool#sentence-maker #script1out").innerHTML = multi_out.latin_styled;
-    gE("tool#sentence-maker #script2out").innerHTML = latin2restHTML(multi_out.latin_styled, 16);
+    gE("tool#sentencer #script1out").innerHTML = multi_out.latin_styled;
+    gE("tool#sentencer #script2out").innerHTML = latin2restHTML(multi_out.latin_styled, 16);
   //Popup & permalink
-    gE("tool#sentence-maker #popup_link").href = "sentence-maker-output.html?"+ btoa(encodeURIComponent(gE("tool#sentence-maker #output").outerHTML));
-    gE("tool#sentence-maker #perma_link").href = "?"+ gloss.replace(/ /g, "+");
+    gE("tool#sentencer #popup_link").href = "sentencer-output.html?"+ btoa(encodeURIComponent(gE("tool#sentencer #output").outerHTML));
+    gE("tool#sentencer #perma_link").href = "?"+ gloss.replace(/ /g, "+");
   //tool-translate
     gE("tool#translate #input").value = multi_out.latin_styled;
 }
 
 
-function toolSentenceMakerLoad (e)
+function toolSentencerLoad (e)
 {
     let example = _examples[e];
-    gE("tool#sentence-maker #preglossed").checked = true;
-    gE("tool#sentence-maker #englishin").value = example[0];
-    gE("tool#sentence-maker #glossin").value = example[1];
-    toolSentenceMaker();
-    gE("tool#sentence-maker #output").scrollIntoView();
+    gE("tool#sentencer #preglossed").checked = true;
+    gE("tool#sentencer #englishin").value = example[0];
+    gE("tool#sentencer #glossin").value = example[1];
+    toolSentencer();
+    gE("tool#sentencer #output").scrollIntoView();
     return false;
 }
 function toolParagrapherLoad (e)
