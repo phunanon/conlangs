@@ -158,7 +158,7 @@ function gloss2multi (gloss)
             ascii.push(root_ascii);
             bin_html.push('<'+ feature +'>'+ root_bin +'</'+ feature +'>');
             hex_html.push('<'+ feature +'>'+ root_hex +'</'+ feature +'>');
-            latin_html += space + '<'+ feature +'_glow>'+ root_latin +'</'+ feature +'_glow>';
+            latin_html += space + '<'+ feature +'_subtle>'+ root_latin +'</'+ feature +'_subtle>';
             latin_styled += space + root_latin;
         } else {
             bin.push(pad((optional ? '1' : '0') + "???????", "00000000"));
@@ -166,7 +166,7 @@ function gloss2multi (gloss)
             latin.push("?");
             bin_html.push('<'+ feature +'>'+ (optional ? '1' : '0') +'?</'+ feature +'>');
             hex_html.push('<'+ feature +'>??</'+ feature +'>');
-            latin_html += '<'+ feature +'_glow>??</'+ feature +'_glow>';
+            latin_html += '<'+ feature +'_subtle>??</'+ feature +'_subtle>';
             latin_styled += space + "??";
         }
         prev_feature = feature;

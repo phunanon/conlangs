@@ -22,7 +22,7 @@ h1, h2, h3, h4, h5 { margin: 1rem 1rem .5rem 1rem; }
 p { padding: .25rem; }
 mono, .mono { font-family: monospace; }
 .regular { font-family: sans-serif; }
-input { font-size: 1.32rem; }
+input, textarea { font-size: 1.32rem; }
 
 /*Tables*/
 table {
@@ -111,6 +111,9 @@ native2 tr:nth-child(odd) td, .native2 tr:nth-child(odd) td {
 native2 tr:nth-child(even) td, .native2 tr:nth-child(even) td {
     padding: .2rem 0 .6rem 0;
 }
+native2 tr:last-child td, .native2 tr:last-child td {
+    padding-bottom: .1rem;
+}
 
 mihead, onoun, noun, adj, verb, number, period {
     padding: .1rem .2rem;
@@ -124,13 +127,13 @@ verb { background-color: #faa; }
 number { background-color: #000; color: #fff; }
 period { background-color: #aaa; border: .15rem solid #000; }
 
-mihead_glow { border-bottom: .2rem solid #dd0; }
-onoun_glow { border-bottom: .2rem solid #aff; }
-noun_glow { border-bottom: .2rem solid #bbf; }
-adj_glow { border-bottom: .2rem solid #afa;}
-verb_glow { border-bottom: .2rem solid #faa; }
-number_glow { border-bottom: .2rem solid #000; }
-period_glow { border-bottom: .2rem solid #aaa;}
+mihead_subtle { border-bottom: .2rem solid #dd0; }
+onoun_subtle { border-bottom: .2rem solid #aff; }
+noun_subtle { border-bottom: .2rem solid #bbf; }
+adj_subtle { border-bottom: .2rem solid #afa;}
+verb_subtle { border-bottom: .2rem solid #faa; }
+number_subtle { border-bottom: .2rem solid #000; }
+period_subtle { border-bottom: .2rem solid #aaa;}
 
 button.loader {
     font-size: 1.5rem;
@@ -155,9 +158,6 @@ tool#sentence-maker preview { display: block; padding: .5rem; }
 tool#sentence-maker #englishout {
     max-width: 32rem;
 }
-tool#sentence-maker #glossout .feature {
-    font-size: .75rem;
-}
 tool#sentence-maker #binout {
     font-family: monospace;
 }
@@ -166,14 +166,17 @@ tool#sentence-maker th, tool#paragrapher th { max-width: 4rem; }
 
 .focus {
     font-size: 1.5rem;
-    line-height: 1.5rem;
+    line-height: 2rem;
     display: block;
     margin: .5rem 0;
 }
-#asciiout input {
+tool #asciiout input {
     border: none;
     background: transparent;
     margin: .25rem;
+}
+tool #glossout .feature {
+    font-size: .75rem;
 }
 
 #script1out, #script2out {

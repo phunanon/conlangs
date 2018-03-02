@@ -300,7 +300,6 @@ function toolParagrapher ()
     let gloss = gE("tool#paragrapher #input").value;
     gE("tool#paragrapher #glossout").innerHTML = "<gloss>"+ gloss2html(gloss) +"</gloss>";
     var multi_out = gloss2multi(gloss);
-    gE("tool#paragrapher #asciiout").innerHTML = "<input value='"+ multi_out.ascii +"' readonly>";
     gE("tool#paragrapher #latinout").innerHTML = '<p class="focus">'+ multi_out.latin_html +'</p>'+
         '<p>/'+ multi_out.ipa +'/ <speaker onclick="spk(\''+ multi_out.latin_styled.split("?").join("") +'\')"></speaker> <span>'+ multi_out.chars +' chars</span></p>';
     gE("tool#paragrapher #script1out").innerHTML = multi_out.latin_styled;
