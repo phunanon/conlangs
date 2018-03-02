@@ -42,12 +42,13 @@ function loadExamples ()
     for (e in _examples) {
         if (_examples[e][1] == "") { continue; }
         let multi_out = gloss2multi(_examples[e][1]);
-        examples_html += "<example><english>"+ _examples[e][0] +"</english>"+
+        examples_html += "<example><table><tbody><tr>"+
+            "<td><native2>"+ latin2restHTML(multi_out.latin_styled, 8) +"</native2></td>"+
+            "<td><english>"+ _examples[e][0] +"</english>"+
             "<gloss>"+ _examples[e][1] +"</gloss>"+
-            "<mi class='native1'>"+ multi_out.latin_styled +"</mi>"+
             "<ipa><speaker onclick='spk(\""+ multi_out.latin_styled +"\")''></speaker> /"+ multi_out.ipa +"/</ipa>"+
             (_examples[e][1].indexOf("p:") == -1 ? "<button class='load' onclick='toolSentenceMakerLoad("+ e +")'>load</button>" : "<button class='load' onclick='toolParagrapherLoad("+ e +")'>load</button>")+
-            "</example>";
+            "</td></tr></tbody></table></example>";
     }
     gE("#s6 examples").innerHTML = examples_html;
 }
@@ -148,10 +149,8 @@ function spk (text, speed = 220) //Speaks faux-tonal Latin-script mi
 
 
 
-function latin2restHTML (latin_styled)
+function latin2restHTML (latin_styled, MAX_LINE)
 {
-    let MAX_LINE = 16;
-
     latin_styled = latin_styled.replace(/ /g, "");
     let cons = [], vows = [];
     for (let c = 0, c_max = latin_styled.length; c < c_max; ++c) {
@@ -174,7 +173,7 @@ function latin2restHTML (latin_styled)
         }
     }
     ret_html += cons_html + vows_html;
-    return "<table>"+ ret_html +"</table>";
+    return "<table><tbody>"+ ret_html +"</tbody></table>";
 }
 
 
@@ -263,7 +262,7 @@ function toolSentenceMaker ()
     gE("tool#sentence-maker #latinout").innerHTML = '<p class="focus">'+ multi_out.latin_html +'</p>'+
         '<p>/'+ multi_out.ipa +'/ <speaker onclick="spk(\''+ multi_out.latin_styled.split("?").join("") +'\')"></speaker> <span>'+ multi_out.chars +' chars</span></p>';
     gE("tool#sentence-maker #script1out").innerHTML = multi_out.latin_styled;
-    gE("tool#sentence-maker #script2out").innerHTML = latin2restHTML(multi_out.latin_styled);
+    gE("tool#sentence-maker #script2out").innerHTML = latin2restHTML(multi_out.latin_styled, 16);
   //Popup & permalink
     gE("tool#sentence-maker #popup_link").href = "sentence-maker-output.html?"+ btoa(encodeURIComponent(gE("tool#sentence-maker #output").outerHTML));
     gE("tool#sentence-maker #perma_link").href = "?"+ gloss.replace(/ /g, "+");
@@ -303,7 +302,7 @@ function toolParagrapher ()
     gE("tool#paragrapher #latinout").innerHTML = '<p class="focus">'+ multi_out.latin_html +'</p>'+
         '<p>/'+ multi_out.ipa +'/ <speaker onclick="spk(\''+ multi_out.latin_styled.split("?").join("") +'\')"></speaker> <span>'+ multi_out.chars +' chars</span></p>';
     gE("tool#paragrapher #script1out").innerHTML = multi_out.latin_styled;
-    gE("tool#paragrapher #script2out").innerHTML = latin2restHTML(multi_out.latin_styled);
+    gE("tool#paragrapher #script2out").innerHTML = latin2restHTML(multi_out.latin_styled, 16);
 }
 
 

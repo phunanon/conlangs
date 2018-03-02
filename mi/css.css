@@ -39,7 +39,7 @@ table.centered {
 tr:nth-child(odd) { background-color: #eee; }
 tr:nth-child(even) { background-color: #fff; }
 tr.hr th, tr.hr td { border-top: .1rem solid #000; }
-th, td { padding: .1rem .5rem; height: 1.25rem; line-height: 1.25rem; }
+th, td { padding: .1rem .5rem; }
 th { border-left: .1rem solid #000; font-size: 1rem; padding: .25rem;}
 th:first-child { border-left: none; }
 .datatable td { font-family: monospace; }
@@ -70,18 +70,17 @@ speaker {
 speaker:after { content: "🔊"; font-weight: normal; font-style: normal; }
 
 example {
-    display: inline-block;
-    margin: .5rem;
+    display: block;
+    margin: .5rem auto;
     background-color: #ddd;
     padding: .5rem;
-    max-width: 30rem;
     vertical-align: top;
     position: relative;
+    max-width: 40rem;
 }
-example *:not(speaker) { display: block; }
-example gloss { margin-left: .75rem; }
-example mi { margin-left: 1.5rem; }
-example .native1:hover { font-family: sans !important; letter-spacing: 0; }
+example *:not(speaker):not(td) { display: block; }
+example english { font-size: 1.1rem; padding: .25rem; }
+example gloss { padding-left: .75rem; }
 example .load {
     position: absolute;
     right: 0;
@@ -109,7 +108,7 @@ native2 tr:nth-child(odd) td, .native2 tr:nth-child(odd) td {
     padding: .1rem 0 0 0;
 }
 native2 tr:nth-child(even) td, .native2 tr:nth-child(even) td {
-    padding: .2rem 0 .6rem 0;
+    padding: 0 0 .6rem 0;
 }
 native2 tr:last-child td, .native2 tr:last-child td {
     padding-bottom: .1rem;
