@@ -4,7 +4,7 @@
 }
 @font-face {
    font-family: mi-native-rest;
-   src: url("font/rest/curve/mi-native-rest-curve.woff2") format("woff2");
+   src: url("font/rest/round/mi-native-rest-round.woff2") format("woff2");
 }
 
 
@@ -106,10 +106,10 @@ native2 tr, .native2 tr {
     background-color: transparent !important;
 }
 native2 tr:nth-child(odd) td, .native2 tr:nth-child(odd) td {
-    padding-bottom: .2em;
+    padding: .1rem 0 0 0;
 }
 native2 tr:nth-child(even) td, .native2 tr:nth-child(even) td {
-    padding-top: 0;
+    padding: .2rem 0 .6rem 0;
 }
 
 mihead, onoun, noun, adj, verb, number, period {
