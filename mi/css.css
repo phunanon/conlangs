@@ -125,7 +125,7 @@ noun { background: linear-gradient(transparent, #bbf); }
 adj { background: linear-gradient(transparent, #afa); border-bottom: .1rem solid #000; }
 verb { background: linear-gradient(transparent, #faa); }
 number { background: linear-gradient(#aaa, #000); color: #fff; }
-period { background: linear-gradient(transparent, #aaa); border-bottom: .15rem solid #000; }
+period { background: linear-gradient(transparent, #aaa); border-left: .15rem solid #000; margin-left: .5rem; }
 
 mihead_subtle { border-bottom: .2rem solid #dd0; }
 onoun_subtle { border-bottom: .2rem solid #aff; }
