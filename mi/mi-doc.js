@@ -63,7 +63,7 @@ function loadPage ()
         let num = c;
         vow_html += '<tr><td>xxxx'+ pad(num.toString(2), '0000') +'</td>'+
             '<td>0x'+ pad(num.toString(16).toUpperCase(), '00') +'</td>'+
-            '<td><span class="mi">'+ _chr[c] +'</span> <span class="native">'+ _chr[c] +'</span></td>'+
+            '<td><span class="mi">'+ _chr[c] +'</span> <span class="native1">'+ _chr[c] +'</span> <span class="native2">'+ _chr[c] +'</span></td>'+
             '<td><speaker onclick="spk(\''+ _chr[c] +'a\', 100)"></speaker> /'+ _ipa[c] +'/</td></tr>';
     }
     gE("#s1 #t1").innerHTML += vow_html;
@@ -73,7 +73,7 @@ function loadPage ()
         let num = c;
         con_html += '<tr><td>'+ pad(num.toString(2), '0000') +'xxxx</td>'+
             '<td>0x'+ pad((num<<4).toString(16).toUpperCase(), '00') +'</td>'+
-            '<td><span class="mi">'+ _chr[c] +'</span> <span class="native">'+ _chr[c] +'</span></td>'+
+            '<td><span class="mi">'+ _chr[c] +'</span> <span class="native1">'+ _chr[c] +'</span> <span class="native2">'+ _chr[c] +'</span></td>'+
             '<td><speaker onclick="spk(\''+ _chr[c] +'a\', 100)"></speaker> /'+ _ipa[c] +'/</td></tr>';
     }
     gE("#s1 #t2").innerHTML += con_html;
