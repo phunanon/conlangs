@@ -77,7 +77,7 @@ let _lex = [
     { noun: "yesterday", type: "", verb: "", adj: "most", comment: "" },
     { noun: "today", type: "", verb: "", adj: "", comment: "" },
     { noun: "tomorrow", type: "", verb: "", adj: "least", comment: "" },
-    { noun: "age", type: "", verb: "", adj: "when", comment: "" },
+    { noun: "age", type: "", verb: "tax/age", adj: "when", comment: "" },
     { noun: "old", type: "", verb: "", adj: "old", comment: "" },
     { noun: "new", type: "", verb: "", adj: "new/again", comment: "" },
     { noun: "bad", type: "", verb: "", adj: "bad", comment: "" },
@@ -133,9 +133,6 @@ let _lex = [
     { noun: "", type: "", verb: "", adj: "", comment: "" },
     { noun: "", type: "", verb: "", adj: "", comment: "" },
     { noun: "", type: "", verb: "", adj: "", comment: "" },
-    { noun: "", type: "", verb: "", adj: "", comment: "" },
-    { noun: "", type: "", verb: "", adj: "", comment: "" },
-    { noun: "", type: "", verb: "", adj: "", comment: "" },
     { noun: "null", type: "null", verb: "exist", adj: "absent", comment: "Used in place of a noun upon repeating grammar pattern" },
     { noun: "period", type: "period", verb: "", adj: "", comment: "Used to denote a new sentence, optionally by a head" }
 ];
@@ -144,7 +141,8 @@ let _lex = [
 let _noun_multi = [
     { noun: "coffee", nouns: "water plant"},
     { noun: "drum", nouns: "instrument noise"},
-    { noun: "socialism", nouns: "collection person"}
+    { noun: "socialism", nouns: "collection person"},
+    { noun: "wedding", nouns: "meeting desire" }
 ];
 let _adj_multi = [
     { adj: "absent", adjs: "near none" }

@@ -11,6 +11,7 @@ let _examples = [
     ["Have all the leaves fallen from the tree?", "h:pdq n:item a!all v:fall a!from n:tree"],
     ["But tell me now, and make this clear to me: what gathering, what feast is this? Why here?", "h:im n!however n:you v:tell n:me n:soft_and v:create n:my n:ease p:new h:q n:this v:it_is n:meeting n!and n!food n!and n:here a!why"],
     ["Memory is a strange thing. It doesn't work like I thought it did. There are days that define your story beyond your life. Like the day they arrived.", "h:h n!idea n:time a!strange p:old n:it v:work a!similar a!not a!for n:my n:thought p:old n:day a!exist v:create a!more n:history n:life p:new h:p n:they v:come a!similar"],
+    ["A wedding? Revel? At the expense of all? Not that, I think.", "h:q n!meeting n!desire n!and n:music v:age n:person a!all p:new h:r n:negative"]
     ["The sun shines. The sun is shining.", "h:nh n:sun v:shine p:new h:id n:sun v:shine"],
     ["The sun shone.", "h:pd n:sun v:shine"],
     ["The sun will shine.", "h:fd n:sun v:shine"],
