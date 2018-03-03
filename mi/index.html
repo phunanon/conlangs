@@ -61,6 +61,7 @@
             <h2>3. Grammar</h2>
             <h4>Word order</h4>
             <p>Word order is SVOVO.., or SVOV[by]SVOVO...</p>
+            <p>Nouns are ordered as "main selector," such as "meeting desire" for "wedding."</p>
             <h4>Possession</h4>
             <table>
                 <tbody>
@@ -87,12 +88,13 @@
                 <tr class="mono"><td class="regular">Overflow?</td><td>2^(6+x)</td><td>2^(5+x)</td><td>2^(4+x)</td><td>2^(3+x)</td><td>2^(2+x)</td><td>2^(1+x)</td><td>2^(0+x)</td></tr>
             </table>
             <p>Numbers are treated as independent strings of bytes, where the first bits states whether another number byte is to follow. Bytes 'overflow' after 01111111b, becoming 10000000 00000000b, treated as a 14-bit number with the first bit again stating whether there is another byte to follow.</p>
-            <!--<h4>Colours</h4>
-                <p>RRRGGGBB</p>-->
-            <!--<h4>Question asking</h4>-->
+            <h4>Colours</h4>
+            <p>Colours are formed in their binary form as RRRGGGBB. To express a colour, state the noun "colour," followed by the binary number.</p>
+            <h4>Question asking</h4>
+            <p>To ask a question, use h:q, and state the fact you want verified.</p>
             <!--<h4>Proper nouns</h4>-->
-            <!--<h4>Multiple sentences</h4>
-                0x7F no head  0xFF new head-->
+            <h4>Multiple sentences</h4>
+            <p>In order to express multiple sentences, use one of the 'period' words: 0x7F to state the previous head will be used; 0xFF to state a new head will be declared.</p>
             <!--<h4>Expressing amount</h4>
                 Explicit plural is "much"
                 verb number - verb'd that many times-->
