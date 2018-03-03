@@ -94,7 +94,7 @@ let _lex = [
     { noun: "female/girl/wife/she", type: "", verb: "", adj: "", comment: "" },
     { noun: "male/boy/husband/he", type: "", verb: "", adj: "", comment: "" },
 //Buildings, furniture, structures, protocols, objects, locations
-    { noun: "rock/stone", type: "", verb: "", adj: "", comment: "" },
+    { noun: "rock/stone/table", type: "", verb: "", adj: "", comment: "" },
     { noun: "tree/wood", type: "", verb: "", adj: "", comment: "" },
     { noun: "building/room", type: "", verb: "", adj: "", comment: "" },
     { noun: "door/entry", type: "", verb: "enter", adj: "", comment: "" },
