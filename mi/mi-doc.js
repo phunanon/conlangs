@@ -152,6 +152,11 @@ function spk (text, speed = 220) //Speaks faux-tonal Latin-script mi
 function latin2restHTML (latin_styled, MAX_LINE)
 {
     latin_styled = latin_styled.replace(/ /g, "");
+  //Attempt to make squared
+    if (latin_styled.length < MAX_LINE * 4) {
+        MAX_LINE = Math.ceil(latin_styled.length / 4);
+    }
+  //Sort consonants and vowels
     let cons = [], vows = [];
     for (let c = 0, c_max = latin_styled.length; c < c_max; ++c) {
         if (c % 2) {
@@ -160,7 +165,7 @@ function latin2restHTML (latin_styled, MAX_LINE)
             cons.push(latin_styled[c]);
         }
     }
-
+  //Output rows
     let ret_html = "", cons_html = vows_html = "<tr>";
     for (let i = 0, i_max = cons.length; i < i_max; ++i) {
         cons_html += "<td>"+ cons[i] +"</td>";

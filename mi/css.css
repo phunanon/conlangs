@@ -81,6 +81,7 @@ example {
 example *:not(speaker):not(td) { display: block; }
 example english { font-size: 1.1rem; padding: .25rem; }
 example gloss { padding-left: .75rem; }
+example td { padding: .5rem; }
 example .load {
     position: absolute;
     right: 0;
