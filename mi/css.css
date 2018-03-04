@@ -36,6 +36,7 @@ table {
 }
 table.centered { text-align: center; }
 table.inline { display: inline-block; }
+table.constrained td { max-width: 7rem; }
 tr:nth-child(odd) { background-color: #eee; }
 tr:nth-child(even) { background-color: #fff; }
 tr.hr th, tr.hr td { border-top: .1rem solid #000; }
