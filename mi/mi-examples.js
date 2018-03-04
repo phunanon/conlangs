@@ -1,6 +1,6 @@
 
 let _examples = [
-    ["I ate the same food he ate.", "h:pd n:me v:eat n:he n:food a!same"],
+    ["I ate the same food he ate.", "h:pd n:me v:eat n:food n:he a!same"],
     ["How did you get here?", "h:pdq n:you v:travel a!how n:here"],
     ["He poured coffee into his mug.", "h:pdq n:he v:pour n:water n:plant v:within n:cup"],
     ["I hear the drums echoing tonight.", "h:is n!instrument n:noise v:echo n:night"],
@@ -9,10 +9,11 @@ let _examples = [
     ["I met a little cottage girl; she was eight years old, she said.", "h:pd n:I v:meet n:village n:girl a!little v:they_are n:number n:8 v:say a!by n:actor"],
     ["It is a simple language.", "h:d n!it n:language v:it_is a!simple"],
     ["Have all the leaves fallen from the tree?", "h:pdq n:item a!all v:fall a!from n:tree"],
-    ["But tell me now, and make this clear to me: what gathering, what feast is this? Why here?", "h:im n!however n:you v:tell n:me n:soft_and v:create n:my n:ease p:new h:q n:this v:it_is n:meeting n!and n!food n!and n:here a!why"],
+    ["But tell me now, and make this clear to me: what gathering, what feast is this? Why here?", "h:im n!however n:you v:tell n:me n:soft_and v:create n:ease n:my p:new h:q n:this v:it_is n:meeting n!and n!food n!and n:here a!why"],
     ["Memory is a strange thing. It doesn't work like I thought it did. There are days that define your story beyond your life. Like the day they arrived.", "h:h n!idea n:time a!strange p:old n:it v:work a!similar a!not n:my n:thought a!for p:old n:day a!exist v:create a!more n:history n:life p:new h:p n:they v:come a!similar"],
     ["A wedding? Revel? At the expense of all? Not that, I think.", "h:q n!meeting n!desire n!and n:music v:age n:person a!all p:new h:r n:negative"],
     ["From each according to their ability, to each according to their need.", "h:nh n:person v:work a!how_much n:actor n!ability n:soft_and v:eat a!how_much n:actor n:need"],
+    ["Cowards die many times before their death.", "h:h n:person a!abnormal v:die a!many n:death n:before"],
     ["The sun shines. The sun is shining.", "h:nh n:sun v:shine p:new h:id n:sun v:shine"],
     ["The sun shone.", "h:pd n:sun v:shine"],
     ["The sun will shine.", "h:fd n:sun v:shine"],

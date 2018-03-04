@@ -27,8 +27,8 @@ let _lex = [
     { noun: "question/?", type: "question", verb: "question", adj: "why", comment: "" },
     { noun: "within/in", type: "spacial, preposition", verb: "within", adj: "within", comment: "" },
     { noun: "with", type: "", verb: "", adj: "", comment: "" },
-    { noun: "from", type: "", verb: "come_from/go_away", adj: "from", comment: "" },
-    { noun: "to", type: "", verb: "come_to/come", adj: "to", comment: "" },
+    { noun: "from", type: "", verb: "come_from/go_away", adj: "from/outwards", comment: "" },
+    { noun: "to", type: "", verb: "come_to/come", adj: "to/inwards", comment: "" },
 
 //Communication, mathematics, direction
     { noun: "number", type: "", verb: "quantify", adj: "how_much", comment: "Used to indicate a number follows" },
@@ -45,7 +45,7 @@ let _lex = [
     { noun: "method/work/use", type: "", verb: "work/use", adj: "how/can", comment: "" },
     { noun: "conflict/fight", type: "", verb: "", adj: "cannot/unable", comment: "" },
     { noun: "time/idea/thought", type: "", verb: "think", adj: "soon", comment: "" },
-    { noun: "travel", type: "", verb: "travel", adj: "", comment: "" },
+    { noun: "travel", type: "", verb: "travel/insert", adj: "", comment: "" },
     { noun: "begin/start", type: "", verb: "begin/start", adj: "slow", comment: "" },
     { noun: "end/stop/speed", type: "", verb: "end/stop", adj: "fast", comment: "" },
     { noun: "positive", type: "", verb: "", adj: "possible/happy", comment: "" },
@@ -53,15 +53,15 @@ let _lex = [
     { noun: "language/talk/speech", type: "", verb: "say/talk/tell", adj: "", comment: "" },
 
 //Life, nature, time
-    { noun: "normality/calm/peace", type: "", verb: "rest", adj: "normal/quiet", comment: "" },
+    { noun: "normality/calm/peace", type: "", verb: "die", adj: "normal/quiet", comment: "" },
     { noun: "change/chaos", type: "", verb: "change", adj: "abnormal/strange/odd", comment: "" },
-    { noun: "nest/bed", type: "", verb: "", adj: "low", comment: "" },
+    { noun: "nest/bed", type: "", verb: "rest/relax", adj: "low", comment: "" },
     { noun: "sky/history", type: "", verb: "remember", adj: "high", comment: "" },
     { noun: "machine/process", type: "", verb: "create/make", adj: "often", comment: "" },
     { noun: "life/nature", type: "", verb: "live", adj: "natural/wild/simple", comment: "" },
     { noun: "person/body", type: "", verb: "", adj: "who/complex", comment: "" },
-    { noun: "animal", type: "", verb: "hunt", adj: "", comment: "" },
-    { noun: "plant", type: "", verb: "grow", adj: "what", comment: "" },
+    { noun: "animal", type: "", verb: "hunt", adj: "exist", comment: "" },
+    { noun: "plant/death", type: "", verb: "grow/raise", adj: "what", comment: "" },
     { noun: "food/possession", type: "", verb: "eat/drink/consume", adj: "eaten/drank/consumed", comment: "" },
     { noun: "earth/mountain", type: "", verb: "", adj: "large/big/much", comment: "" },
     { noun: "water/rain/river/Spring", type: "", verb: "wet/pour/wash/rain", adj: "", comment: "" },
@@ -72,7 +72,7 @@ let _lex = [
     { noun: "sun/day", type: "", verb: "shine", adj: "hot", comment: "" },
     { noun: "earlier/before", type: "", verb: "", adj: "early", comment: "" },
     { noun: "now", type: "", verb: "", adj: "little/small", comment: "" },
-    { noun: "later/afterwards", type: "", verb: "wait/postpone", adj: "exist", comment: "" },
+    { noun: "later/after", type: "", verb: "wait/postpone", adj: "late", comment: "" },
     { noun: "moon/night", type: "", verb: "obscure/cover/sleep", adj: "cold", comment: "" },
     { noun: "yesterday", type: "", verb: "", adj: "most", comment: "" },
     { noun: "today", type: "", verb: "", adj: "", comment: "" },
@@ -101,8 +101,8 @@ let _lex = [
     { noun: "table/platform", type: "", verb: "", adj: "", comment: "" },
     { noun: "instrument/toy", type: "", verb: "play", adj: "", comment: "" },
     { noun: "meeting/visit", type: "", verb: "meet", adj: "", comment: "" },
-    { noun: "item", type: "", verb: "", adj: "", comment: "" },
-    { noun: "collection", type: "", verb: "collect", adj: "", comment: "" },
+    { noun: "item", type: "", verb: "", adj: "few", comment: "" },
+    { noun: "collection", type: "", verb: "collect", adj: "many", comment: "" },
     { noun: "glass/cup/bottle/bowl/container", type: "", verb: "", adj: "", comment: "" },
     { noun: "square", type: "", verb: "", adj: "", comment: "" },
     { noun: "circle", type: "", verb: "", adj: "", comment: "" },
@@ -139,10 +139,11 @@ let _lex = [
 
 /*
 let _noun_multi = [
-    { noun: "coffee", nouns: "water plant"},
-    { noun: "drum", nouns: "instrument noise"},
-    { noun: "socialism", nouns: "collection person"},
-    { noun: "wedding", nouns: "meeting desire" }
+    { noun: "coffee", nouns: "water plant" },
+    { noun: "drum", nouns: "instrument noise" },
+    { noun: "socialism", nouns: "collection person" },
+    { noun: "wedding", nouns: "meeting desire" },
+    { noun: "science", nouns: "collection idea"}
 ];
 let _adj_multi = [
     { adj: "absent", adjs: "near none" }
