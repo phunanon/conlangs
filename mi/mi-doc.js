@@ -182,6 +182,55 @@ function latin2restHTML (latin_styled, MAX_LINE)
 }
 
 
+function latin2cursiveSVG (latin, MAX_LINE)
+{
+    latin = latin.replace(/ /g, "");
+    let WRD_W = 64, WRD_H = 128, PART_W = 23.192;
+
+    let S_START = '<path d="M ';
+    let X_START = '<path d="m ';
+    let C_STYLE = '" style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;transform:translate(';
+    let LFT_WING = X_START +'16,58 -15,24'+ C_STYLE;
+    let RGT_WING = X_START +'64,34 -16,24'+ C_STYLE;
+    let TOP_STRK = S_START +'16,26 H 56'+ C_STYLE;
+    let BOT_STRK = S_START +'8,90 H 48'+ C_STYLE;
+    let TOP_LOOP = ',58 v -46 c 1,-18 34,-17 -8,46'+ C_STYLE;
+    let TOP_LINE = ',58 v -56 c -3,31 -0,44 -8,56'+ C_STYLE;
+    let BOT_LOOP = ',58 v 46 c -1,17 -33,16 8,-46'+ C_STYLE;
+    let BOT_LINE = ',58 v 56 c 3,-31 0,-44 8,-56'+ C_STYLE;
+    let C_ENDING = ')" />';
+
+    let x = 0, y = 0, l = 0;
+    let SVG_out = '<svg id="cursiveSVGout" version="1.1" style="width: 30rem;" viewBox="0 0 1024 128">';
+    let is_con = true;
+    function appendSVG (svg) { SVG_out += svg + x + 'px,'+ y +'px' + C_ENDING; }
+    for (const c of latin) {
+        if (is_con) {
+            let c_bin = chrFind(c, _con);
+            if (c_bin & 0x8) { appendSVG(TOP_STRK); }
+            if (c_bin & 0x4) { appendSVG(BOT_STRK); }
+            if (c_bin & 0x2) { appendSVG(LFT_WING); }
+            if (c_bin & 0x1) { appendSVG(RGT_WING); }
+        } else {
+            let c_bin = chrFind(c, _vow);
+            if (c_bin & 0x8) { appendSVG(X_START+24+TOP_LOOP); } else { appendSVG(X_START+24+TOP_LINE); }
+            if (c_bin & 0x4) { appendSVG(X_START+40+TOP_LOOP); } else { appendSVG(X_START+40+TOP_LINE); }
+            if (c_bin & 0x2) { appendSVG(X_START+24+BOT_LOOP); } else { appendSVG(X_START+24+BOT_LINE); }
+            if (c_bin & 0x1) { appendSVG(X_START+40+BOT_LOOP); } else { appendSVG(X_START+40+BOT_LINE); }
+            x += WRD_W*0.90;
+        }
+        is_con = !is_con;
+        if (++l / 2 >= MAX_LINE) {
+            x = l = 0;
+            y += WRD_H;
+            setTimeout('gE("#cursiveSVGout").style.height = "'+ y +'px"; gE("#cursiveSVGout").setAttribute("viewBox", "0 0 1024 '+(y+WRD_H)+'");', 100);
+        }
+    }
+    SVG_out += '</svg>';
+    return SVG_out;
+}
+
+
 let _evi = { d: "direct knowledge", s: "non-visual sense", r: "inferential", h: "hearsay" };
 let _tense = { n: "no", p: "past", i: "present", f:"future" }
 function toolSentencer ()
@@ -268,6 +317,7 @@ function toolSentencer ()
         '<p>/'+ multi_out.ipa +'/ <speaker onclick="spk(\''+ multi_out.latin_styled.split("?").join("") +'\')"></speaker> <span>'+ multi_out.chars +' chars</span></p>';
     gE("tool#sentencer #script1out").innerHTML = multi_out.latin_styled;
     gE("tool#sentencer #script2out").innerHTML = latin2restHTML(multi_out.latin_styled, 16);
+    gE("tool#sentencer #script3out").innerHTML = latin2cursiveSVG(multi_out.latin, 16);
   //Popup & permalink
     gE("tool#sentencer #popup_link").href = "sentencer-output.html?"+ btoa(encodeURIComponent(gE("tool#sentencer #output").outerHTML));
     gE("tool#sentencer #perma_link").href = "?"+ gloss.replace(/ /g, "+");
@@ -308,6 +358,7 @@ function toolParagrapher ()
         '<p>/'+ multi_out.ipa +'/ <speaker onclick="spk(\''+ multi_out.latin_styled.split("?").join("") +'\')"></speaker> <span>'+ multi_out.chars +' chars</span></p>';
     gE("tool#paragrapher #script1out").innerHTML = multi_out.latin_styled;
     gE("tool#paragrapher #script2out").innerHTML = latin2restHTML(multi_out.latin_styled, 16);
+    gE("tool#paragrapher #script3out").innerHTML = latin2cursiveSVG(multi_out.latin, 16);
 }
 
 
