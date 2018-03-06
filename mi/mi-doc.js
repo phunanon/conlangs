@@ -188,17 +188,22 @@ function latin2cursiveSVG (latin, MAX_LINE)
     latin = latin.replace(/ /g, "");
     let WRD_W = 64, WRD_H = 128, PART_W = 23.192;
 
-    let S_START = '<path d="M ';
     let X_START = '<path d="m ';
-    let C_STYLE = '" style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;transform:translate(';
-    let LFT_WING = X_START +'16,58 -15,24'+ C_STYLE;
-    let RGT_WING = X_START +'64,34 -16,24'+ C_STYLE;
-    let TOP_STRK = S_START +'16,26 H 56'+ C_STYLE;
-    let BOT_STRK = S_START +'8,90 H 48'+ C_STYLE;
-    let TOP_LOOP = ',58 v -46 c 1,-18 34,-17 -8,46'+ C_STYLE;
-    let TOP_LINE = ',58 v -56 c -3,31 -0,44 -8,56'+ C_STYLE;
-    let BOT_LOOP = ',58 v 46 c -1,17 -33,16 8,-46'+ C_STYLE;
-    let BOT_LINE = ',58 v 56 c 3,-31 0,-44 8,-56'+ C_STYLE;
+    let X_STYLE = '" style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;transform:translate(';
+    let LFT_WING = X_START +'16,58 -15,24'+ X_STYLE;
+    let RGT_WING = X_START +'64,34 -16,24'+ X_STYLE;
+    let TOP_STRK = X_START +'16,26 H 56'+ X_STYLE;
+    let BOT_STRK = X_START +'8,90 H 48'+ X_STYLE;
+    let LFT_01   = X_START +'12,47 C 0,70 10,70 16,58'+ X_STYLE;
+    let LFT_10   = X_START +'4,94 c 4,-12 3,-19 12,-36'+ X_STYLE;
+    let LFT_11   = X_START +'20,62 c -2,28 -31,35 -4,-4'+ X_STYLE;
+    let RGT_01   = X_START +'52,70 c 10,-26 2,-23 -4,-12'+ X_STYLE;
+    let RGT_10   = X_START +'60,22 c -4,12 -3,19 -12,36'+ X_STYLE;
+    let RGT_11   = X_START +'44,54 c 2,-28 31,-35 4,4'+ X_STYLE;
+    let TOP_LOOP = ',58 v -46 c 1,-18 34,-17 -8,46'+ X_STYLE;
+    let TOP_LINE = ',58 v -56 c -3,31 -0,44 -8,56'+ X_STYLE;
+    let BOT_LOOP = ',58 v 46 c -1,17 -33,16 8,-46'+ X_STYLE;
+    let BOT_LINE = ',58 v 56 c 3,-31 0,-44 8,-56'+ X_STYLE;
     let C_ENDING = ')" />';
 
     let x = 0, y = 0, l = 0;
@@ -208,15 +213,17 @@ function latin2cursiveSVG (latin, MAX_LINE)
     for (const c of latin) {
         if (is_con) {
             let c_bin = chrFind(c, _con);
-            if (c_bin & 0x8) { appendSVG(TOP_STRK); }
-            if (c_bin & 0x4) { appendSVG(BOT_STRK); }
-            if (c_bin & 0x2) { appendSVG(LFT_WING); }
-            if (c_bin & 0x1) { appendSVG(RGT_WING); }
+            if ((c_bin & 0xC) == 0xC) { appendSVG(LFT_11); }
+            else if (c_bin & 0x8) { appendSVG(LFT_10); }
+            else if (c_bin & 0x4) { appendSVG(LFT_01); }
+            if (((c_bin & 0x3) == 0x3)) { appendSVG(RGT_11); }
+            else if (c_bin & 0x2) { appendSVG(RGT_10); do_right = false; }
+            else if (c_bin & 0x1) { appendSVG(RGT_01); do_right = false; }
         } else {
             let c_bin = chrFind(c, _vow);
             if (c_bin & 0x8) { appendSVG(X_START+24+TOP_LOOP); } else { appendSVG(X_START+24+TOP_LINE); }
-            if (c_bin & 0x4) { appendSVG(X_START+40+TOP_LOOP); } else { appendSVG(X_START+40+TOP_LINE); }
-            if (c_bin & 0x2) { appendSVG(X_START+24+BOT_LOOP); } else { appendSVG(X_START+24+BOT_LINE); }
+            if (c_bin & 0x2) { appendSVG(X_START+40+TOP_LOOP); } else { appendSVG(X_START+40+TOP_LINE); }
+            if (c_bin & 0x4) { appendSVG(X_START+24+BOT_LOOP); } else { appendSVG(X_START+24+BOT_LINE); }
             if (c_bin & 0x1) { appendSVG(X_START+40+BOT_LOOP); } else { appendSVG(X_START+40+BOT_LINE); }
             x += WRD_W*0.90;
         }

@@ -5,18 +5,29 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   version="1.1"
-   viewBox="0 0 64 128"
+   width="64"
    height="128"
-   width="64">
-  <g>
-    <path d="m 40,58 v -46 c 1,-17 33,-16 -8,46" style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4" /> <!-- top loop -->
-    <path d="m 24,58 v -56 c -3,31 -0,43 -8,56" style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4" /> <!-- top line -->
-    <path d="m 16,58 -15,24" style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4" /> <!--left wing-->
-    <path d="m 64,34 -16,24" style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4" /> <!--right wing-->
-    <path d="M 16,26 H 56" style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4" />
-    <path d="M 8,90 H 48" style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4" />
-    <path d="m 40,58 v 46 c -1,17 -33,16 8,-46" style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4" /> <!-- bottom loop -->
-    <path d="m 24,58 v 56 c 3,-31 0,-43 8,-56" style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4" /> <!-- bottom line -->
-  </g>
+   viewBox="0 0 64 128"
+   version="1.1">
+
+    <path d="m 40,58 v -46 c 1,-17 33,-16 -8,46" style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4" /> <!-- top loop -->
+
+    <path d="m 24,58 v -56 c -3,31 -0,43 -8,56" style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4" /> <!-- top line -->
+
+    <path d="m 40,58 v 46 c -1,17 -33,16 8,-46" style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4" /> <!-- bottom loop -->
+
+    <path d="m 24,58 v 56 c 3,-31 0,-43 8,-56" style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4" /> <!-- bottom line -->
+
+    <path d="M 52,70 c 10,-26 2,-23 -4,-12" style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <!-- 0001 -->
+
+    <path d="m 60,22 c -4,12 -3,19 -12,36" style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <!-- 0010 -->
+
+    <path d="m 44,54 c 2,-28 31,-35 4,4" style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <!-- 0011 -->
+
+    <path d="m 12,47 C 0,70 10,70 16,58" style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <!-- 0100 -->
+
+    <path d="m 4,94 c 4,-12 3,-19 12,-36" style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <!-- 1000 -->
+
+    <path d="m 20,62 c -2,28 -31,35 -4,-4" style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <!-- 1100 -->
+
 </svg>
