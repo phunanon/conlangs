@@ -206,7 +206,7 @@ function latin2cursiveSVG (latin, MAX_LINE)
     let BOT_LINE = ',58 v 56 c 3,-31 0,-44 8,-56'+ X_STYLE;
     let C_ENDING = ')" />';
 
-    let x = 0, y = 0, l = 0;
+    let x = 0, y = 0, l = 1;
     let SVG_out = '<svg id="cursiveSVGout'+latin2cursiveSVG_count+'" version="1.1" style="width: 30rem;/*transform:scale(4)*/" viewBox="0 0 1024 128">';
     let is_con = true;
     function appendSVG (svg) { SVG_out += svg + x + 'px,'+ y +'px' + C_ENDING; }
@@ -226,14 +226,15 @@ function latin2cursiveSVG (latin, MAX_LINE)
             if (c_bin & 0x4) { appendSVG(X_START+24+BOT_LOOP); } else { appendSVG(X_START+24+BOT_LINE); }
             if (c_bin & 0x1) { appendSVG(X_START+40+BOT_LOOP); } else { appendSVG(X_START+40+BOT_LINE); }
             x += WRD_W*0.90;
+            if (x+WRD_W >= MAX_LINE*WRD_W) {
+                x = 0;
+                y += WRD_H;
+                ++l;
+            }
         }
         is_con = !is_con;
-        if (++l / 2 >= MAX_LINE) {
-            x = l = 0;
-            y += WRD_H;
-            setTimeout('gE("#cursiveSVGout'+latin2cursiveSVG_count+'").style.height = "'+ y +'px"; gE("#cursiveSVGout").setAttribute("viewBox", "0 0 1024 '+(y+WRD_H)+'");', 100);
-        }
     }
+    setTimeout('gE("#cursiveSVGout'+latin2cursiveSVG_count+'").style.height = "'+ (l*WRD_H/2) +'px"; gE("#cursiveSVGout'+latin2cursiveSVG_count+'").setAttribute("viewBox", "0 0 1024 '+(l*WRD_H)+'");', 100);
     SVG_out += '</svg>';
     ++latin2cursiveSVG_count;
     return SVG_out;
