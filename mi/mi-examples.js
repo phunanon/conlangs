@@ -29,7 +29,7 @@ let _examples = [
     ["Happy people often shout.", "h:nh n:person v:shout a!often"],
     ["The kitten jumped up.", "h:pd n:life: c:cat v:jump"],
     ["The kitten jumped onto the table.", "h:pd n:animal v:jump n:table a!to"],
-    ["My little kitten walked away.", "h:pd n!my n:life: c:cat a!little v:go_away"],
+    ["My little kitten walked away.", "h:pd n!life: c:cat n:my a!little v:go_away"],
     ["It's raining.", "h:id n:sky v:rain"],
     ["The rain came down.", "h:pd n:rain v:fall"],
     ["The kitten is playing in the rain.", ""],
