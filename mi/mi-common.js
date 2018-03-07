@@ -5,7 +5,7 @@ let _con = ["m", "n", "p", "b", "t", "d", "k", "g", "w", "s", "z", "c", "j", "f"
 let _chr = _vow.concat(_con).concat(" ");
 let _ipa = ["i", "ɛ", "a", "ɒ", "u", "i\u030B", "ɛ\u030B", "a\u030B", "ɒ\u030B", "u\u030B", "i\u030F", "ɛ\u030F", "a\u030F", "ɒ\u030F", "u\u030F", "ə", "m", "n", "p", "b", "t", "d", "k", "g", "w", "s", "z", "ʃ", "ʒ", "f", "v", "θ", " "];
 let _spk = ["i", "E", "a", "0", "u", "i\u030B", "E\u030B", "a\u030B", "0\u030B", "u\u030B", "i\u030F", "E\u030F", "a\u030F", "0\u030F", "u\u030F", "@", "m", "n", "p", "b", "t", "d", "k", "g", "w", "s", "z", "S", "Z", "f", "v", "T", " "];
-let HEAD = "MIHEAD", NOUN = "NOUN", ONOUN = "ONOUN", ADJ = "ADJ", VERB = "VERB", NUMBER = "NUMBER", PERIOD = "PERIOD";
+let HEAD = "MIHEAD", NOUN = "NOUN", ONOUN = "ONOUN", CNOUN = "CNOUN", ADJ = "ADJ", VERB = "VERB", NUMBER = "NUMBER", PERIOD = "PERIOD";
 
 
 
@@ -30,7 +30,9 @@ function latin2IPA (latin)
 
 function determineGlossFeatures (gloss)
 {
-    return { optional: (gloss[1] == "!"), feature: {"h:":HEAD, "n:":NOUN, "n!":ONOUN, "a!":ADJ, "v:":VERB, "p:":PERIOD}[gloss.substr(0, 2)] }
+    if (gloss.slice(-1) == ":") { return { optional: false, feature: CNOUN }; }
+    if (gloss == "n:number" || !isNaN(gloss.slice(-1))) { return { optional: false, feature: NUMBER }; }
+    return { optional: (gloss[1] == "!"), feature: {"h:":HEAD, "n:":NOUN, "n!":ONOUN, "c:":CNOUN, "a!":ADJ, "v:":VERB, "p:":PERIOD}[gloss.substr(0, 2)] }
 }
 
 
@@ -71,7 +73,7 @@ function head2binhead (head)
 function gloss2rootIndex (gloss, feature)
 {
     feature = feature.toLowerCase();
-    if (feature == "onoun") { feature = "noun"; }
+    if (feature == "onoun" || feature == "cnoun" || feature == "number") { feature = "noun"; }
     if (feature == "period") { return (gloss == "new" ? 0xFF : 0x7F); }
     if (feature == "mihead") { return head2binhead(gloss); }
 
@@ -89,13 +91,14 @@ function gloss2rootIndex (gloss, feature)
 }
 
 let latin_space_rules = {
-    NUMBER_NUMBER: false, NUMBER_NOUN: false, NUMBER_ONOUN: false, NUMBER_VERB: true, NUMBER_ADJ: true, NUMBER_MIHEAD: true, NUMBER_PERIOD: true,
-    NOUN_NUMBER: true, NOUN_NOUN: false, NOUN_ONOUN: false, NOUN_VERB: true, NOUN_ADJ: false, NOUN_MIHEAD: true, NOUN_PERIOD: true,
-    ONOUN_NUMBER: true, ONOUN_NOUN: false, ONOUN_ONOUN: false, ONOUN_VERB: true, ONOUN_ADJ: false, ONOUN_MIHEAD: true, ONOUN_PERIOD: true,
-    VERB_NUMBER: true, VERB_NOUN: true, VERB_ONOUN: true, VERB_ADJ: false, VERB_MIHEAD: true, VERB_PERIOD: true,
-    ADJ_NUMBER: true, ADJ_NOUN: true, ADJ_ONOUN: false, ADJ_VERB: true, ADJ_ADJ: false, ADJ_MIHEAD: true, ADJ_PERIOD: true,
-    MIHEAD_NUMBER: true, MIHEAD_NOUN: true, MIHEAD_ONOUN: true, MIHEAD_VERB: true, MIHEAD_ADJ: true, MIHEAD_MIHEAD: true, MIHEAD_PERIOD: true,
-    PERIOD_NUMBER: true, PERIOD_NOUN: true, PERIOD_ONOUN: true, PERIOD_VERB: true, PERIOD_ADJ: true, PERIOD_MIHEAD: true, PERIOD_PERIOD: true
+    NUMBER_NUMBER: false, NUMBER_NOUN: false, NUMBER_ONOUN: false, NUMBER_CNOUN: false, NUMBER_VERB: true, NUMBER_ADJ: true, NUMBER_MIHEAD: true, NUMBER_PERIOD: true,
+    NOUN_NUMBER: true, NOUN_NOUN: false, NOUN_ONOUN: false, NOUN_CNOUN: false, NOUN_VERB: true, NOUN_ADJ: false, NOUN_MIHEAD: true, NOUN_PERIOD: true,
+    ONOUN_NUMBER: true, ONOUN_NOUN: false, ONOUN_ONOUN: false, ONOUN_CNOUN: false, ONOUN_VERB: true, ONOUN_ADJ: false, ONOUN_MIHEAD: true, ONOUN_PERIOD: true,
+    CNOUN_NUMBER: true, CNOUN_NOUN: false, CNOUN_ONOUN: false, CNOUN_CNOUN: false, CNOUN_VERB: true, CNOUN_ADJ: false, CNOUN_MIHEAD: true, CNOUN_PERIOD: true,
+    VERB_NUMBER: true, VERB_NOUN: true, VERB_ONOUN: true, VERB_CNOUN: true, VERB_ADJ: false, VERB_MIHEAD: true, VERB_PERIOD: true,
+    ADJ_NUMBER: true, ADJ_NOUN: true, ADJ_ONOUN: false, ADJ_CNOUN: false, ADJ_VERB: true, ADJ_ADJ: false, ADJ_MIHEAD: true, ADJ_PERIOD: true,
+    MIHEAD_NUMBER: true, MIHEAD_NOUN: true, MIHEAD_ONOUN: true, MIHEAD_CNOUN: true, MIHEAD_VERB: true, MIHEAD_ADJ: true, MIHEAD_MIHEAD: true, MIHEAD_PERIOD: true,
+    PERIOD_NUMBER: true, PERIOD_NOUN: true, PERIOD_ONOUN: true, PERIOD_CNOUN: true, PERIOD_VERB: true, PERIOD_ADJ: true, PERIOD_MIHEAD: true, PERIOD_PERIOD: true
 };
 function gloss2multi (gloss)
 {
@@ -105,6 +108,7 @@ function gloss2multi (gloss)
     let regular = NOUN;
     let prev_feature = HEAD;
     let is_numbering = false, number = [], n = 0;
+    let will_compound = false, compound = "";
 
     function getGlossRoot (w) { return gloss[w].substr(2, gloss[w].length - 2); }
 
@@ -116,13 +120,27 @@ function gloss2multi (gloss)
         let root = "?";
         let gloss_root = "";
 
-        if (!is_numbering) {
-          //Find root index
-            gloss_root = getGlossRoot(w);
-            root = gloss2rootIndex(gloss_root, feature);
-        } else {
-            root = parseInt(number[n].substr(1, 7), 2);
-            optional = parseInt(number[n][0]);
+        switch (true) {
+            case is_numbering:
+              //Prepare root for number conversion
+                root = parseInt(number[n].substr(1, 7), 2);
+                optional = parseInt(number[n][0]);
+                break;
+            case will_compound:
+              //Select the compound noun
+                if (_noun_multi.hasOwnProperty(compound)) {
+                    root = getGlossRoot(w);
+                    root = _noun_multi[compound].indexOf(root);
+                    if (root == -1) { root = "?"; }
+                } else {
+                    //Root was not found. Root will still be "?"
+                }
+                break;
+            default:
+              //Find root index
+                gloss_root = getGlossRoot(w);
+                root = gloss2rootIndex(gloss_root, feature);
+                break;
         }
 
         let space = (latin_space_rules[prev_feature+"_"+feature] ? " " : "");
@@ -146,6 +164,12 @@ function gloss2multi (gloss)
                     feature = NUMBER;
                 }
             }
+          //Prepare if compounding
+            if (feature == "CNOUN") {
+                compound = gloss_root.slice(0, -1);
+                will_compound = !will_compound;
+            }
+          //Output data
             let full_root = (optional ? 128 : 0) + root;
             let root_bin = pad(full_root.toString(2), "00000000");
             let root_hex = pad(full_root.toString(16), "00");

@@ -79,7 +79,7 @@ let _lex = [
     { noun: "tomorrow", type: "", verb: "", adj: "least", comment: "" },
     { noun: "age", type: "", verb: "tax/age", adj: "when", comment: "" },
     { noun: "old", type: "", verb: "", adj: "old", comment: "" },
-    { noun: "new", type: "", verb: "", adj: "new/again", comment: "" },
+    { noun: "new/youngling", type: "", verb: "", adj: "new/again/young", comment: "" },
     { noun: "bad", type: "", verb: "", adj: "bad", comment: "" },
     { noun: "good", type: "", verb: "", adj: "good", comment: "" },
 //Humanity and its stuff
@@ -132,10 +132,16 @@ let _lex = [
     { noun: "", type: "", verb: "", adj: "", comment: "" },
     { noun: "", type: "", verb: "", adj: "", comment: "" },
     { noun: "", type: "", verb: "", adj: "", comment: "" },
-    { noun: "", type: "", verb: "", adj: "", comment: "" },
+//Compound nouns
+    { noun: "life:", type: "", verb: "", adj: "", comment: "" },
+//More meta
     { noun: "null", type: "null", verb: "exist", adj: "absent", comment: "Used in place of a noun upon repeating grammar pattern" },
     { noun: "period", type: "period", verb: "", adj: "", comment: "Used to denote a new sentence, optionally by a head" }
 ];
+
+let _noun_multi = {
+    life: ["dog", "cat"]
+};
 
 /*
 let _noun_multi = [
@@ -143,7 +149,8 @@ let _noun_multi = [
     { noun: "drum", nouns: "instrument noise" },
     { noun: "socialism", nouns: "collection person" },
     { noun: "wedding", nouns: "meeting desire" },
-    { noun: "science", nouns: "collection idea"}
+    { noun: "science", nouns: "collection idea"},
+    { noun: "ship", nouns: "house water" }
 ];
 let _adj_multi = [
     { adj: "absent", adjs: "near none" }

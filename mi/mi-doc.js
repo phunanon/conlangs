@@ -211,6 +211,7 @@ function latin2cursiveSVG (latin, MAX_LINE)
     let is_con = true;
     function appendSVG (svg) { SVG_out += svg + x + 'px,'+ y +'px' + C_ENDING; }
     for (const c of latin) {
+        if (c == "?") { continue; }
         if (is_con) {
             let c_bin = chrFind(c, _con);
             if ((c_bin & 0xC) == 0xC) { appendSVG(LFT_11); }
@@ -247,6 +248,7 @@ function toolSentencer ()
 {
     let preview = [];
     let gloss = gE("tool#sentencer #glossin").value.trim();
+    if (gloss == "") { return; }
   //Generate head
     let tense = gE("tool#sentencer #tense").value;
     let evidentiality = gE("tool#sentencer #evidentiality").value;
@@ -254,11 +256,11 @@ function toolSentencer ()
     let question = gE("tool#sentencer #question").value;
 
     function tf (bool) { return (bool ? "true" : "false"); }
-  //Generate gloss
+  //Generate processed gloss
     if (gE("tool#sentencer #preglossed").checked) {
         gE("tool#sentencer preview").innerHTML = "";
         gE("tool#sentencer #glossout").innerHTML = gloss2html(gloss);
-
+      //Extract head data
         tense = "n";
         evidentiality = "d";
         question = imperative = false;
@@ -276,7 +278,7 @@ function toolSentencer ()
         let input = gloss.split(" ");
         gloss = input;
         let part = 0; //0 head, 1 (noun) noun, 2 (adj) verb, 3 (adj) noun/null ...
-        let was_number = false;
+        let was_number = false, was_compound = false;
         for (w in input) {
             let word = input[w];
             let optional = (word[0] == "!");
@@ -292,14 +294,18 @@ function toolSentencer ()
                 if (part > 3) { part = 1; }
             }
 
-          //Prefix the gloss
-            gloss[w] = { "MIHEAD":"h:", "NOUN":"n:", "ONOUN":"n", "ADJ":"a", "VERB":"v:" }[feature] + gloss[w];
-
           //Prepare if was/is number
             if (was_number) { feature = NUMBER; }
-            was_number = (gloss[w] == "n:number");
+            was_number = (gloss[w] == "number");
             if (was_number) { feature = NUMBER; }
+          //Prepare if was/is compound
+            if (was_compound) { feature = CNOUN; }
+            was_compound = (gloss[w].slice(-1) == ":");
 
+          //Prefix the gloss
+            gloss[w] = { "MIHEAD":"h:", "NOUN":"n:", "ONOUN":"n", "CNOUN":"c:", "ADJ":"a", "VERB":"v:", "NUMBER":"n:" }[feature] + gloss[w];
+
+            if (was_compound) { feature = CNOUN; }
             preview.push('<'+ feature +'>'+ word +'</'+ feature +'>');
         }
 
@@ -361,7 +367,8 @@ function toolParagrapherLoad (e)
 function toolParagrapher ()
 {
     gE("tool#paragrapher #englishout").innerHTML = "<english>"+ gE("tool#paragrapher #englishin").value +"</english>";
-    let gloss = gE("tool#paragrapher #input").value;
+    let gloss = gE("tool#paragrapher #input").value.trim();
+    if (gloss == "") { return; }
     gE("tool#paragrapher #glossout").innerHTML = "<gloss>"+ gloss2html(gloss) +"</gloss>";
     var multi_out = gloss2multi(gloss);
     gE("tool#paragrapher #latinout").innerHTML = '<p class="focus">'+ multi_out.latin_html +'</p>'+
@@ -408,7 +415,7 @@ function toolTranslate ()
     let part = 0;
     for (let b = 0, b_max = bytes.length; b < b_max; ++b) {
         let byte = bytes[b];
-        //Determine word order
+        //Determine word order position
         let optional = byte & 0x80;
         let index = byte & 0x7F;
         let feature;

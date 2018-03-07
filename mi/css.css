@@ -116,13 +116,14 @@ native2 tr:last-child td, .native2 tr:last-child td {
     padding-bottom: .1rem;
 }
 
-mihead, onoun, noun, adj, verb, number, period {
+mihead, onoun, noun, cnoun, adj, verb, number, period {
     padding: .1rem .2rem;
     display: inline-block;
 }
 mihead { background: linear-gradient(transparent, #dd0); }
 onoun { background: linear-gradient(transparent, #aff); border-bottom: .1rem solid #000; }
 noun { background: linear-gradient(transparent, #bbf); }
+cnoun { background: linear-gradient(transparent, #a4f); }
 adj { background: linear-gradient(transparent, #afa); border-bottom: .1rem solid #000; }
 verb { background: linear-gradient(transparent, #faa); }
 number { background: linear-gradient(#aaa, #000); color: #fff; }
@@ -131,6 +132,7 @@ period { background: linear-gradient(transparent, #aaa); border-left: .15rem sol
 mihead_subtle { border-bottom: .2rem solid #dd0; }
 onoun_subtle { border-bottom: .2rem solid #aff; }
 noun_subtle { border-bottom: .2rem solid #bbf; }
+cnoun_subtle { border-bottom: .2rem solid #a4f; }
 adj_subtle { border-bottom: .2rem solid #afa;}
 verb_subtle { border-bottom: .2rem solid #faa; }
 number_subtle { border-bottom: .2rem solid #000; }
