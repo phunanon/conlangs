@@ -22,6 +22,7 @@ h1, h2, h3, h4, h5 { margin: 1rem 1rem .5rem 1rem; }
 p { padding: .25rem; }
 mono, .mono { font-family: monospace; }
 .regular { font-family: sans-serif; }
+.small { font-size: .75rem; }
 input, textarea { font-size: 1.32rem; }
 
 h2 { border-left: .5rem solid #000; padding-left: 1rem; }

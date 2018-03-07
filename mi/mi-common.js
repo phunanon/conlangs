@@ -30,9 +30,10 @@ function latin2IPA (latin)
 
 function determineGlossFeatures (gloss)
 {
-    if (gloss.slice(-1) == ":") { return { optional: false, feature: CNOUN }; }
     if (gloss == "n:number" || !isNaN(gloss.slice(-1))) { return { optional: false, feature: NUMBER }; }
-    return { optional: (gloss[1] == "!"), feature: {"h:":HEAD, "n:":NOUN, "n!":ONOUN, "c:":CNOUN, "a!":ADJ, "v:":VERB, "p:":PERIOD}[gloss.substr(0, 2)] }
+    let is_optional = (gloss[1] == "!");
+    if (gloss.indexOf("-") != -1) { return { optional: is_optional, feature: CNOUN }; }
+    return { optional: is_optional, feature: {"h:":HEAD, "n:":NOUN, "n!":ONOUN, "a!":ADJ, "v:":VERB, "p:":PERIOD}[gloss.substr(0, 2)] }
 }
 
 
@@ -73,7 +74,7 @@ function head2binhead (head)
 function gloss2rootIndex (gloss, feature)
 {
     feature = feature.toLowerCase();
-    if (feature == "onoun" || feature == "cnoun" || feature == "number") { feature = "noun"; }
+    if (feature == "onoun" || feature == "number") { feature = "noun"; }
     if (feature == "period") { return (gloss == "new" ? 0xFF : 0x7F); }
     if (feature == "mihead") { return head2binhead(gloss); }
 
@@ -108,68 +109,13 @@ function gloss2multi (gloss)
     let regular = NOUN;
     let prev_feature = HEAD;
     let is_numbering = false, number = [], n = 0;
-    let will_compound = false, compound = "";
 
-    function getGlossRoot (w) { return gloss[w].substr(2, gloss[w].length - 2); }
 
-    let gloss_len = gloss.length;
-    for (let w = 0; w < gloss_len; ++w) {
-        let features = determineGlossFeatures(gloss[w]);
-        let feature = features.feature;
-        let optional = features.optional;
-        let root = "?";
-        let gloss_root = "";
+    function getGlossRoot (g) { return g.substr(2, g.length - 2); }
 
-        switch (true) {
-            case is_numbering:
-              //Prepare root for number conversion
-                root = parseInt(number[n].substr(1, 7), 2);
-                optional = parseInt(number[n][0]);
-                break;
-            case will_compound:
-              //Select the compound noun
-                if (_noun_multi.hasOwnProperty(compound)) {
-                    root = getGlossRoot(w);
-                    root = _noun_multi[compound].indexOf(root);
-                    if (root == -1) { root = "?"; }
-                } else {
-                    //Root was not found. Root will still be "?"
-                }
-                break;
-            default:
-              //Find root index
-                gloss_root = getGlossRoot(w);
-                root = gloss2rootIndex(gloss_root, feature);
-                break;
-        }
-
+    function outputData (root, optional, prev_feature, feature) {
         let space = (latin_space_rules[prev_feature+"_"+feature] ? " " : "");
-        if (root != "?" || is_numbering) {
-          //Prepare if number
-            if (is_numbering || gloss_root == "number") {
-                if (gloss_root == "number") { //Begin numbering?
-                    is_numbering = true;
-                    feature = NUMBER;
-                    number = num2mi_bin(getGlossRoot(w + 1));
-                    gloss.splice(w + 1, 1);
-                    insertArrayAt(gloss, w + 1, number);
-                    gloss_len += number.length - 1;
-                } else if (optional) { //Continue numbering?
-                    ++n;
-                    is_numbering = true;
-                    feature = NUMBER;
-                } else { //Reset for next number
-                    n = 0;
-                    is_numbering = false;
-                    feature = NUMBER;
-                }
-            }
-          //Prepare if compounding
-            if (feature == "CNOUN") {
-                compound = gloss_root.slice(0, -1);
-                will_compound = !will_compound;
-            }
-          //Output data
+        if (root != "?") {
             let full_root = (optional ? 128 : 0) + root;
             let root_bin = pad(full_root.toString(2), "00000000");
             let root_hex = pad(full_root.toString(16), "00");
@@ -192,6 +138,72 @@ function gloss2multi (gloss)
             hex_html.push('<'+ feature +'>??</'+ feature +'>');
             latin_html += '<'+ feature +'_subtle>??</'+ feature +'_subtle>';
             latin_styled += space + "??";
+        }
+    }
+
+
+    let gloss_len = gloss.length;
+    for (let w = 0; w < gloss_len; ++w) {
+        let features = determineGlossFeatures(gloss[w]);
+        let feature = features.feature;
+        let optional = features.optional;
+        let root = "?";
+        let gloss_root = "";
+        let is_compound = (feature == "CNOUN");
+
+        switch (true) {
+            case is_numbering:
+              //Prepare root for number conversion
+                root = parseInt(number[n].substr(1, 7), 2);
+                optional = parseInt(number[n][0]);
+                break;
+            case is_compound:
+                let notation = gloss[w].split("-");
+                let compound_domain = getGlossRoot(notation[0]);
+                let compound = notation[1];
+              //Select the compound noun
+                if (_noun_multi.hasOwnProperty(compound_domain)) {
+                    root = _noun_multi[compound_domain].indexOf(compound);
+                    if (root == -1) { root = "?"; }
+                } else {
+                    //Root was not found. Root will still be "?"
+                }
+              //Output the domain
+                let domain_root = gloss2rootIndex(compound_domain +"-", "noun");
+                outputData(domain_root, optional, prev_feature, feature);
+                prev_feature = "CNOUN";
+                break;
+            default:
+              //Find root index
+                gloss_root = getGlossRoot(gloss[w]);
+                root = gloss2rootIndex(gloss_root, feature);
+                break;
+        }
+
+        if (root != "?" || is_numbering) {
+          //Prepare if number
+            if (is_numbering || gloss_root == "number") {
+                if (gloss_root == "number") { //Begin numbering?
+                    is_numbering = true;
+                    feature = NUMBER;
+                    number = num2mi_bin(getGlossRoot(gloss[w + 1]));
+                    gloss.splice(w + 1, 1);
+                    insertArrayAt(gloss, w + 1, number);
+                    gloss_len += number.length - 1;
+                } else if (optional) { //Continue numbering?
+                    ++n;
+                    is_numbering = true;
+                    feature = NUMBER;
+                } else { //Reset for next number
+                    n = 0;
+                    is_numbering = false;
+                    feature = NUMBER;
+                }
+            }
+          //Output data
+            outputData(root, optional, prev_feature, feature);
+        } else {
+            outputData("?", optional, prev_feature, feature);
         }
         prev_feature = feature;
     }

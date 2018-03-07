@@ -278,7 +278,7 @@ function toolSentencer ()
         let input = gloss.split(" ");
         gloss = input;
         let part = 0; //0 head, 1 (noun) noun, 2 (adj) verb, 3 (adj) noun/null ...
-        let was_number = false, was_compound = false;
+        let was_number = false;
         for (w in input) {
             let word = input[w];
             let optional = (word[0] == "!");
@@ -298,14 +298,10 @@ function toolSentencer ()
             if (was_number) { feature = NUMBER; }
             was_number = (gloss[w] == "number");
             if (was_number) { feature = NUMBER; }
-          //Prepare if was/is compound
-            if (was_compound) { feature = CNOUN; }
-            was_compound = (gloss[w].slice(-1) == ":");
 
           //Prefix the gloss
-            gloss[w] = { "MIHEAD":"h:", "NOUN":"n:", "ONOUN":"n", "CNOUN":"c:", "ADJ":"a", "VERB":"v:", "NUMBER":"n:" }[feature] + gloss[w];
+            gloss[w] = { "MIHEAD":"h:", "NOUN":"n:", "ONOUN":"n", "ADJ":"a", "VERB":"v:", "NUMBER":"n:" }[feature] + gloss[w];
 
-            if (was_compound) { feature = CNOUN; }
             preview.push('<'+ feature +'>'+ word +'</'+ feature +'>');
         }
 

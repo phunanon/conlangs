@@ -35,15 +35,16 @@
             <h2>2. Sentence Structure & Morphology</h2>
             <p>mi is broken down into bits, bytes, and sentences.</p>
             <h4>Sentence structure</h4>
-            <p><b>[head] (noun) noun (adj) verb (adj) noun/null ...</b></p>
+            <p><b>[head] (noun/noun-noun) noun/noun-noun (adj) verb (adj) noun/noun-noun/null ...</b></p>
             <p>There are 4 features of a sentence: head, noun, adjective, and verb. Features in parenthesis are optional, as opposed to regular. Adjectives affect their preceding feature, excluding "*_is/are/am, has" verbs. Once this pattern has reached its end, it repeats beyond the head. Each feature is represented in mi as a byte.</p>
+            <p>noun-noun indicates a compound noun.</p>
             <h4>Head</h4>
             <p>The head of a sentence is an 8-bit byte encoding sentence-wide information.</p>
             <table id="t1">
                 <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-                <tr><td colspan="2">Tense</td><td></td><td></td><td colspan="2">Evidentiality</td><td>Imperative?</td><td>Question?</td></tr>
-                <!--<tr><td colspan="6"></td><td>1</td><td>1</td></tr>
-                <tr><td colspan="6"></td><td colspan="2">Something else</td></tr>-->
+                <tr><td colspan="2">Tense</td><td></td><td></td><td colspan="2">Evidentiality</td><td>Imperative</td><td>Question</td></tr>
+                <tr><td colspan="6"></td><td>1</td><td>1</td></tr>
+                <tr><td colspan="6"></td><td colspan="2">Favour ask</td></tr>
             </table>
             <br>
             <table class="constrained">
@@ -54,8 +55,10 @@
             <p>Evidentiality becomes second-person when the sentence is a question.</p>
             <h4>Byte structure</h4>
             <p>Bytes are 8-bits in length. The first bit is set to 0 to indicate a regular feature, or 1 to indicate an optional feature. The remaining 7 bits are used to indicate a root.</p>
+            <p>The first bit is set to 1 on both nouns of a compound noun, if optional is desired.</p>
             <h4>Orthograhy</h4>
             <p>Each 4 bits corresponds to a spoken character.</p>
+            <h4>Glossing</h4>
         </section>
         <section id="s3">
             <h2>3. Grammar</h2>
@@ -161,9 +164,9 @@
                 <h5>Output</h5>
                 <p><a id="popup_link" target="_blank">Open in popup</a>; <a id="perma_link">Perma-link</a></p>
                 <table id="output">
-                    <tr><th>Key</th><td><mihead>Head</mihead> <onoun>Optional noun</onoun> <noun>Noun</noun> <adj>Adj</adj> <verb>Verb</verb> <number>Number</number></td></tr>
                     <tr id="englishout_tr"><th>English</th><td id="englishout"></td></tr>
                     <tr><th>Header</th><td id="headerout"></td></tr>
+                    <tr class="small"><th>Key</th><td><mihead>Head</mihead> <onoun>Optional Noun</onoun> <noun>Noun</noun> <cnoun>Compound Noun</cnoun> <adj>Adj</adj> <verb>Verb</verb> <number>Number</number></td></tr>
                     <tr><th>Gloss</th><td class="gloss" id="glossout"></td></tr>
                     <tr class="hr"><th>Binary</th><td><p id="binout"></p></td></tr>
                     <tr><th>Hex</th><td><p id="hexout"></p></td></tr>
@@ -182,8 +185,8 @@
                 <button onclick="toolParagrapher()">Generate mi</button>
                 <h5>Output</h5>
                 <table id="output">
-                    <tr><th>Key</th><td><mihead>Head</mihead> <onoun>Optional noun</onoun> <noun>Noun</noun> <adj>Adj</adj> <verb>Verb</verb> <number>Number</number> <period>Period</period></td></tr>
                     <tr id="englishout_tr"><th>English</th><td id="englishout"></td></tr>
+                    <tr class="small"><th>Key</th><td><mihead>Head</mihead> <onoun>Optional noun</onoun> <noun>Noun</noun> <cnoun>Compound Noun</cnoun> <adj>Adj</adj> <verb>Verb</verb> <number>Number</number> <period>Period</period></td></tr>
                     <tr><th>Gloss</th><td class="gloss" id="glossout"></td></tr>
                     <tr class="hr"><th>Latin & IPA</th><td><p id="latinout"></p></td></tr>
                     <tr><th>Script 1</th><td><native1 id="script1out"></native1></td></tr>

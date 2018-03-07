@@ -133,7 +133,7 @@ let _lex = [
     { noun: "", type: "", verb: "", adj: "", comment: "" },
     { noun: "", type: "", verb: "", adj: "", comment: "" },
 //Compound nouns
-    { noun: "life:", type: "", verb: "", adj: "", comment: "" },
+    { noun: "life-", type: "", verb: "", adj: "", comment: "" },
 //More meta
     { noun: "null", type: "null", verb: "exist", adj: "absent", comment: "Used in place of a noun upon repeating grammar pattern" },
     { noun: "period", type: "period", verb: "", adj: "", comment: "Used to denote a new sentence, optionally by a head" }
