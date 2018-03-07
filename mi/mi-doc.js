@@ -302,6 +302,7 @@ function toolSentencer ()
           //Prefix the gloss
             gloss[w] = { "MIHEAD":"h:", "NOUN":"n:", "ONOUN":"n", "ADJ":"a", "VERB":"v:", "NUMBER":"n:" }[feature] + gloss[w];
 
+            if (gloss[w].indexOf("-") != -1) { feature = "CNOUN"; }
             preview.push('<'+ feature +'>'+ word +'</'+ feature +'>');
         }
 
