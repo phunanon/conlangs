@@ -6,6 +6,10 @@
    font-family: mi-native-rest;
    src: url("font/rest/round/mi-native-rest-round.woff2") format("woff2");
 }
+@font-face {
+   font-family: mi-native-loop;
+   src: url("font/loop/mi-native-loop.woff2") format("woff2");
+}
 
 
 *:not(ul) {
@@ -97,7 +101,6 @@ native1, .native1 {
     font-style: unset;
     letter-spacing: -.1em;
 }
-
 native2, .native2 {
     font-family: mi-native-rest !important;
 }
@@ -115,6 +118,9 @@ native2 tr:nth-child(even) td, .native2 tr:nth-child(even) td {
 }
 native2 tr:last-child td, .native2 tr:last-child td {
     padding-bottom: .1rem;
+}
+native4, .native4 {
+    font-family: mi-native-loop !important;
 }
 
 mihead, onoun, noun, cnoun, adj, verb, number, period {
@@ -185,7 +191,7 @@ tool #glossout .feature {
 #script1out, #script2out {
     max-width: 32rem;
 }
-#script1out {
+#script1out, #script4out {
     font-size: 2.5rem;
     line-height: 2.25rem;
 }

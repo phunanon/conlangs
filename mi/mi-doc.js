@@ -63,7 +63,7 @@ function loadPage ()
         let num = c;
         vow_html += '<tr><td>xxxx'+ pad(num.toString(2), '0000') +'</td>'+
             '<td>0x'+ pad(num.toString(16).toUpperCase(), '00') +'</td>'+
-            '<td><span class="mi">'+ _chr[c] +'</span> <span class="native1">'+ _chr[c] +'</span> <span class="native2">'+ _chr[c] +'</span></td>'+
+            '<td><span class="mi">'+ _chr[c] +'</span> <span class="native1">'+ _chr[c] +'</span> <span class="native2">'+ _chr[c] +'</span> <span class="native4">'+ _chr[c] +'</span></td>'+
             '<td><speaker onclick="spk(\''+ _chr[c] +'a\', 100)"></speaker> /'+ _ipa[c] +'/</td></tr>';
     }
     gE("#s1 #t1").innerHTML += vow_html;
@@ -73,7 +73,7 @@ function loadPage ()
         let num = c;
         con_html += '<tr><td>'+ pad(num.toString(2), '0000') +'xxxx</td>'+
             '<td>0x'+ pad((num<<4).toString(16).toUpperCase(), '00') +'</td>'+
-            '<td><span class="mi">'+ _chr[c] +'</span> <span class="native1">'+ _chr[c] +'</span> <span class="native2">'+ _chr[c] +'</span></td>'+
+            '<td><span class="mi">'+ _chr[c] +'</span> <span class="native1">'+ _chr[c] +'</span> <span class="native2">'+ _chr[c] +'</span> <span class="native4">'+ _chr[c] +'</span></td>'+
             '<td><speaker onclick="spk(\''+ _chr[c] +'a\', 100)"></speaker> /'+ _ipa[c] +'/</td></tr>';
     }
     gE("#s1 #t2").innerHTML += con_html;
@@ -331,6 +331,7 @@ function toolSentencer ()
     gE("tool#sentencer #script1out").innerHTML = multi_out.latin_styled;
     gE("tool#sentencer #script2out").innerHTML = latin2restHTML(multi_out.latin_styled, 16);
     gE("tool#sentencer #script3out").innerHTML = latin2cursiveSVG(multi_out.latin, 16);
+    gE("tool#sentencer #script4out").innerHTML = multi_out.latin_styled;
   //Popup & permalink
     gE("tool#sentencer #popup_link").href = "sentencer-output.html?"+ btoa(encodeURIComponent(gE("tool#sentencer #output").outerHTML));
     gE("tool#sentencer #perma_link").href = "?"+ gloss.replace(/ /g, "+");
@@ -373,6 +374,7 @@ function toolParagrapher ()
     gE("tool#paragrapher #script1out").innerHTML = multi_out.latin_styled;
     gE("tool#paragrapher #script2out").innerHTML = latin2restHTML(multi_out.latin_styled, 16);
     gE("tool#paragrapher #script3out").innerHTML = latin2cursiveSVG(multi_out.latin, 16);
+    gE("tool#paragrapher #script4out").innerHTML = multi_out.latin_styled;
 }
 
 
