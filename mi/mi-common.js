@@ -92,7 +92,7 @@ function gloss2rootIndex (gloss, feature)
 }
 
 let latin_space_rules = {
-    NUMBER_NUMBER: false, NUMBER_NOUN: false, NUMBER_ONOUN: false, NUMBER_CNOUN: false, NUMBER_VERB: true, NUMBER_ADJ: true, NUMBER_MIHEAD: true, NUMBER_PERIOD: true,
+    NUMBER_NUMBER: false, NUMBER_NOUN: false, NUMBER_ONOUN: false, NUMBER_CNOUN: false, NUMBER_VERB: true, NUMBER_ADJ: false, NUMBER_MIHEAD: true, NUMBER_PERIOD: true,
     NOUN_NUMBER: true, NOUN_NOUN: false, NOUN_ONOUN: false, NOUN_CNOUN: false, NOUN_VERB: true, NOUN_ADJ: false, NOUN_MIHEAD: true, NOUN_PERIOD: true,
     ONOUN_NUMBER: true, ONOUN_NOUN: false, ONOUN_ONOUN: false, ONOUN_CNOUN: false, ONOUN_VERB: true, ONOUN_ADJ: false, ONOUN_MIHEAD: true, ONOUN_PERIOD: true,
     CNOUN_NUMBER: true, CNOUN_NOUN: false, CNOUN_ONOUN: false, CNOUN_CNOUN: false, CNOUN_VERB: true, CNOUN_ADJ: false, CNOUN_MIHEAD: true, CNOUN_PERIOD: true,
