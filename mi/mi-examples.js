@@ -4,7 +4,6 @@ let _examples = [
     ["How did you get here?", "h:pdq n:you v:travel a!how n:here"],
     ["He poured coffee into his mug.", "h:pdq n:he v:pour n:water n:plant v:within n:cup"],
     ["I hear the drums echoing tonight.", "h:is n!instrument n:noise v:echo n:night"],
-    ["He has far more money than brains.", "h:h n:he v:has n:possession n:possession a!more v:than n:idea"],
     ["I smell, I should wash.", "h:is n:body a!bad a!therefore v:wash a!should"],
     ["I met a little cottage girl; she was eight years old, she said.", "h:pd n:I v:meet n:village n:girl a!little v:they_are n:number n:8 v:say a!by n:actor"],
     ["It is a simple language.", "h:d n!it n:language v:it_is a!simple"],
@@ -232,7 +231,7 @@ let _examples = [
     ["My opinion is that the governor will grant him a pardon.", ""],
     ["Why he has left the city is a mystery.", ""],
     ["The house stands where three roads meet.", ""],
-    ["He has far more money than brains.", ""],
+    ["He has far more money than brains.", "h:h n:he v:has n:possession n:possession a!more v:than n:brain"],
     ["Evidently that gate is never opened, for the long grass and the great hemlocks grow close against it.", ""],
     ["I met a little cottage girl; she was eight years old, she said.", ""]
 ];

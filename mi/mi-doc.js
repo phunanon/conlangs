@@ -470,6 +470,21 @@ function toolTranslate ()
     gE("tool#translate #output").innerHTML = english_out;
 }
 
+function toolTranslateTranscode () {
+    var bin = gE("tool#translate #transcode_input").value.replace(/ /g, "").match(/.{4}/g);
+    var mi = "";
+    let c = true;
+    for (let b of bin) {
+        if (c) {
+            mi += _con[parseInt(b, 2)];
+        } else {
+            mi += _vow[parseInt(b, 2)];
+        }    
+        c = !c;
+    }
+    gE("tool#translate #input").value = mi;
+}
+
 
 function toolSpeakerSpeak ()
 {
