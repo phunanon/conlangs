@@ -27,8 +27,8 @@ let _lex = [
     { noun: "question/?", type: "question", verb: "ask/question", adj: "why", comment: "" },
     { noun: "within/in", type: "spacial, preposition", verb: "within", adj: "within", comment: "" },
     { noun: "with", type: "", verb: "", adj: "", comment: "" },
-    { noun: "from", type: "", verb: "come/come_from/go_away", adj: "from/outward/outwards", comment: "" },
-    { noun: "to", type: "", verb: "go_toward", adj: "to/toward/towards/inwards", comment: "" },
+    { noun: "from", type: "", verb: "come/come_from/go_away/leave", adj: "from/outward/outwards", comment: "" },
+    { noun: "to", type: "", verb: "go_toward/arrive", adj: "to/toward/towards/inwards", comment: "" },
 
 //Communication, mathematics, direction
     { noun: "number", type: "", verb: "quantify", adj: "how_much", comment: "Used to indicate a number follows" },

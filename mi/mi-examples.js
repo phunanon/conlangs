@@ -15,7 +15,8 @@ let _examples = [
     ["From each according to their ability, to each according to their need.", "h:h n!ability n:person v:work p:old n!need n:person v:eat"],
     ["Cowards die many times before their death.", "h:h n:person a!abnormal v:die a!many n:death n:before"],
     ["We will meet in only 70 days.", "h:fd n:us_exclusive v:meet n:day n:number n:70 a!to a!only"],
-    ["I hope to meet with the prime minister next year after he retires from office", "h:id n:I v:want n:meeting n:person a!high v:within n:measure-year n!next n:position a!absent"],
+    ["I hope to meet with the prime minister next year after he retires from office.", "h:id n:I v:want n:meeting n:person a!high v:within n:measure-year n!next n:position a!absent"],
+    ["Three professors might be laid off this year.", "h:fh n!person n!school n:number n:3 v:leave a!by n:school n:measure-year"],
 
     ["The sun shines. The sun is shining.", "h:nh n:sun v:shine p:new h:id n:sun v:shine"],
     ["The sun shone.", "h:pd n:sun v:shine"],
