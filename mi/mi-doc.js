@@ -153,7 +153,7 @@ function latin2restHTML (latin_styled, MAX_LINE)
 {
     latin_styled = latin_styled.replace(/ /g, "");
   //Attempt to make squared
-    if (latin_styled.length < MAX_LINE * 4) {
+    if (latin_styled.length < MAX_LINE * 4 && latin_styled.length > 6) {
         MAX_LINE = Math.ceil(latin_styled.length / 4);
     }
   //Sort consonants and vowels
