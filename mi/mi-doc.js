@@ -106,11 +106,11 @@ function speakNext ()
 {
     if (spk_w < spk_words.length) {
         if (spk_s == 0) { //Prepare syllables
-            spk_syllables = spk_words[spk_w].replace(/(.{2})(\u030B|\u030F)/g, " $1$2 ").replace(/\s+/g, " ").split(" "); // "dɛ̏kudȁʒɛ"  -> ["dɛ̏", "kudȁ", "ʒɛ"]
+            spk_syllables = spk_words[spk_w].replace(/(.{2})(\u0301|\u0300)/g, " $1$2 ").replace(/\s+/g, " ").split(" "); // "dɛ̏kudȁʒɛ"  -> ["dɛ̏", "kudȁ", "ʒɛ"]
         }
         if (spk_s < spk_syllables.length) { //Continue speaking syllables
             speakPart(spk_syllables[spk_s]);
-            setTimeout(speakNext, SYLL_WAIT*(spk_syllables[spk_s].replace(/˥|˩/g, "").length/2));
+            setTimeout(speakNext, SYLL_WAIT*(spk_syllables[spk_s].length/2));
             ++spk_s;
         } else { //Finish speaking syllables
             spk_s = 0;
@@ -123,11 +123,11 @@ function speakPart (part)
 {
   //Handle tone, by converting to pitch
     let pitch = 45;
-    if (part.slice(-1) == "\u030B") {
+    if (part.slice(-1) == "\u0301") {
         word = part.substr(0, part.length - 1);
         pitch = 70;
     }
-    if (part.slice(-1) == "\u030F") {
+    if (part.slice(-1) == "\u0300") {
         word = part.substr(0, part.length - 1);
         pitch = 10;
     }
