@@ -75,14 +75,19 @@ speaker {
 }
 speaker:after { content: "🔊"; font-weight: normal; font-style: normal; }
 
-example {
+examples {
     display: block;
-    margin: .5rem auto;
+    text-align: center;
+}
+example {
+    display: inline-block;
+    margin: .5rem;
     background-color: #ddd;
     padding: .5rem;
     vertical-align: top;
     position: relative;
-    max-width: 40rem;
+    width: 30rem;
+    text-align: left;
 }
 example *:not(speaker):not(td) { display: block; }
 example english { font-size: 1.1rem; padding: .25rem; }
