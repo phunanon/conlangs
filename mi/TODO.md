@@ -3,6 +3,7 @@
 ## Must do
 - Switch to `for const .. of ..` from `for .. in ...`
 - state colour
+- Implement compound nouns in mi to English
 
 ## Should do
 - Make lexicon searchable
