@@ -2,7 +2,8 @@
 
 ## Must do
 - Switch to `for const .. of ..` from `for .. in ...`
-- Implement colour in sentencer/pragrapher/translator
+- state colour
+- Implement compound nouns in mi to English
 - Implement compound noun lexicon load
 
 ## Should do

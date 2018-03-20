@@ -25,7 +25,7 @@ let _lex = [
     { noun: "soft_also", type: "", verb: "", adj: "for", comment: "Used to start a new clause, retaining the subject" },
     { noun: "however", type: "", verb: "than", adj: "would", comment: "" },
     { noun: "question/?", type: "question", verb: "ask/question", adj: "why", comment: "" },
-    { noun: "within/in", type: "spacial, preposition", verb: "within", adj: "within", comment: "" },
+    { noun: "within/in/at", type: "spacial, preposition", verb: "within/at/occupy", adj: "within", comment: "" },
     { noun: "with", type: "", verb: "", adj: "", comment: "" },
     { noun: "from", type: "", verb: "come/come_from/go_away/leave", adj: "from/outward/outwards", comment: "" },
     { noun: "to", type: "", verb: "go_toward/arrive", adj: "to/toward/towards/inwards", comment: "" },
@@ -140,7 +140,7 @@ let _lex = [
 ];
 
 let _noun_multi = {
-    life: ["dog", "cat"],
+    life: ["canine", "feline"],
     protocol: ["socialism"],
     measure: ["year"]
 };
