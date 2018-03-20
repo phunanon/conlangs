@@ -42,7 +42,7 @@
             <p>The head of a sentence is an 8-bit byte encoding sentence-wide information.</p>
             <table id="t1">
                 <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-                <tr><td colspan="2">Tense</td><td></td><td></td><td colspan="2">Evidentiality</td><td>Imperative</td><td>Question</td></tr>
+                <tr><td colspan="2">Tense</td><td colspan="2">Frequency</td><td colspan="2">Evidentiality</td><td>Imperative</td><td>Question</td></tr>
                 <tr><td colspan="6"></td><td>1</td><td>1</td></tr>
                 <tr><td colspan="6"></td><td colspan="2">Favour ask</td></tr>
             </table>
@@ -50,6 +50,7 @@
             <table class="constrained">
                 <tr><th>Bits</th><td>00</td><td>01</td><td>10</td><td>11</td></tr>
                 <tr><th>Tense</th><td>(n)one</td><td>(p)ast</td><td>(i)mmediate</td><td>(f)uture</td></tr>
+                <tr><th>Frequency</th><td>(o)nce</td><td>(c)ontinuous</td><td>fr(e)quent</td><td>do & (u)ndo</td></tr>
                 <tr><th>Evidentiality</th><td>(d)irect knowledge</td><td>non-visual (s)ensory</td><td>infe(r)ential</td><td>(h)earsay</td></tr>
             </table>
             <p>Evidentiality becomes second-person when the sentence is a question.</p>
@@ -136,6 +137,14 @@
                             <option value="f">Future</option>
                         </select>
                     </p>
+                    <p>Frequency:
+                        <select id="frequency" onchange="setTimeout(toolSentencer, 1)">
+                            <option value="o" selected>Once</option>
+                            <option value="c">Continuous</option>
+                            <option value="e">Frequent</option>
+                            <option value="u">Do & undo</option>
+                        </select>
+                    </p>
                     <p>Evidentiality:
                         <select id="evidentiality" onchange="setTimeout(toolSentencer, 1)">
                             <option value="d">Direct Knowledge</option>
@@ -159,7 +168,7 @@
                 </options>
                 <h5>Gloss</h5>
                 <p><input id="preglossed" onchange="setTimeout(toolSentencer, 1)" type="checkbox"> Pre-processed gloss</p>
-                <textarea id="glossin" onkeydown="setTimeout(toolSentencer, 1)">I meet life-cat village !little it_is number 8 say !by family my</textarea>
+                <textarea id="glossin" onkeydown="setTimeout(toolSentencer, 1)">I meet life-feline village !little it_is number 8 say !by family my</textarea>
                 <preview></preview>
                 <h5>Output</h5>
                 <p><a id="popup_link" target="_blank">Open in popup</a>; <a id="perma_link">Perma-link</a></p>

@@ -57,14 +57,17 @@ function head2binhead (head)
     let bin_head = 0;
     for (h in head) {
         switch (head[h]) {
-            case "p": bin_head |= 64;  break;
-            case "i": bin_head |= 128; break;
-            case "f": bin_head |= 192; break;
-            case "s": bin_head |= 4;   break;
-            case "r": bin_head |= 8;   break;
-            case "h": bin_head |= 12;  break;
-            case "m": bin_head |= 2;   break;
-            case "q": bin_head |= 1;   break;
+            case "f": bin_head |= 0xC0; break;
+            case "i": bin_head |= 0x80; break;
+            case "p": bin_head |= 0x40; break;
+            case "u": bin_head |= 0x30; break;
+            case "e": bin_head |= 0x20; break;
+            case "c": bin_head |= 0x10; break;
+            case "s": bin_head |= 0x04; break;
+            case "r": bin_head |= 0x08; break;
+            case "h": bin_head |= 0x0C; break;
+            case "m": bin_head |= 0x02; break;
+            case "q": bin_head |= 0x01; break;
         }
     }
     return bin_head;

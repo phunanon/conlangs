@@ -243,7 +243,8 @@ function latin2cursiveSVG (latin, MAX_LINE)
 
 
 let _evi = { d: "direct knowledge", s: "non-visual sense", r: "inferential", h: "hearsay" };
-let _tense = { n: "no", p: "past", i: "present", f:"future" }
+let _tense = { n: "no", p: "past", i: "present", f:"future" };
+let _freq = { o: "once", c: "continuous", e: "frequent", u: "do & undo" };
 function toolSentencer ()
 {
     let preview = [];
@@ -251,6 +252,7 @@ function toolSentencer ()
     if (gloss == "") { return; }
   //Generate head
     let tense = gE("tool#sentencer #tense").value;
+    let frequency = gE("tool#sentencer #frequency").value;
     let evidentiality = gE("tool#sentencer #evidentiality").value;
     let imperative = gE("tool#sentencer #imperative").value;
     let question = gE("tool#sentencer #question").value;
@@ -262,19 +264,21 @@ function toolSentencer ()
         gE("tool#sentencer #glossout").innerHTML = gloss2html(gloss);
       //Extract head data
         tense = "n";
+        frequency = "o";
         evidentiality = "d";
         question = imperative = false;
         let head = gloss.split(" ")[0].split(":")[1];
         for (h in head) {
             switch (head[h]) {
                 case "n": case "p": case "i": case "f": tense = head[h]; break;
+                case "o": case "c": case "e": case "u": frequency = head[h]; break;
                 case "d": case "s": case "r": case "h": evidentiality = head[h]; break;
                 case "m": imperative = true; break;
                 case "q": question = true;   break;
             }
         }
     } else {
-        gloss = tense + evidentiality + imperative + question +" "+ gloss; //Head
+        gloss = tense + frequency + evidentiality + imperative + question +" "+ gloss; //Head
         let input = gloss.split(" ");
         gloss = input;
         let part = 0; //0 head, 1 (noun) noun, 2 (adj) verb, 3 (adj) noun/null ...
@@ -310,7 +314,7 @@ function toolSentencer ()
         gE("tool#sentencer preview").innerHTML = preview.join("");
         gE("tool#sentencer #glossout").innerHTML = gloss2html(gloss);
     }
-    gE("tool#sentencer #headerout").innerHTML = _tense[tense] +" tense, "+ _evi[evidentiality] +", "+ (imperative ? "is order" : "not order") +", "+ (question ? "is ask" : "not ask");
+    gE("tool#sentencer #headerout").innerHTML = _tense[tense] +" tense, "+ _freq[frequency] +", "+ _evi[evidentiality] +", "+ (imperative ? "is order" : "not order") +", "+ (question ? "is ask" : "not ask");
 
   //Generate output
     //English
@@ -431,12 +435,14 @@ function toolTranslate ()
 
         if (feature == HEAD) { //Extract head data
             let tense = (byte & 0xC0) >> 6;
+            let frequency = (byte & 0x30) >> 4;
             let evidentiality = (byte & 0xC) >> 2;
             let imperative = (byte & 0x2) >> 1;
             let question = byte & 0x1;
             tense = Object.keys(_tense)[tense];
+            frequency = Object.keys(_freq)[frequency];
             evidentiality = Object.keys(_evi)[evidentiality];
-            let head = _tense[tense] +" tense, "+ _evi[evidentiality] + (imperative ? ", imperative" : "") + (question ? ", question" : "");
+            let head = _tense[tense] +" tense, "+ _freq[frequency] +", "+ _evi[evidentiality] + (imperative ? ", imperative" : "") + (question ? ", question" : "");
             english_out += " <mihead>("+ head +")</mihead>";
         } else {
             if (byte == 0x7F || byte == 0xFF) { //It's a p:old/p:new
@@ -479,7 +485,7 @@ function toolTranslateTranscode () {
             mi += _con[parseInt(b, 2)];
         } else {
             mi += _vow[parseInt(b, 2)];
-        }    
+        }
         c = !c;
     }
     gE("tool#translate #input").value = mi;

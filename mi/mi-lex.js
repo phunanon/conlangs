@@ -40,7 +40,7 @@ let _lex = [
     { noun: "east", type: "", verb: "", adj: "rich/right", comment: "" },
     { noun: "south", type: "", verb: "", adj: "", comment: "" },
     { noun: "west", type: "", verb: "", adj: "left", comment: "" },
-    { noun: "ease/ability", type: "", verb: "", adj: "easy/probable", comment: "" },
+    { noun: "ease/ability", type: "", verb: "happen", adj: "easy/probable", comment: "" },
     { noun: "difficulty/inability", type: "", verb: "", adj: "difficult", comment: "" },
     { noun: "method/work/use", type: "", verb: "work/use", adj: "how/can", comment: "" },
     { noun: "conflict/fight", type: "", verb: "fight", adj: "cannot/unable", comment: "" },
@@ -80,7 +80,7 @@ let _lex = [
     { noun: "age", type: "", verb: "tax/age", adj: "when", comment: "" },
     { noun: "old/previous", type: "", verb: "", adj: "old", comment: "" },
     { noun: "new/youngling/next", type: "", verb: "", adj: "new/again/young", comment: "" },
-    { noun: "bad", type: "", verb: "", adj: "bad", comment: "" },
+    { noun: "bad", type: "", verb: "kill", adj: "bad", comment: "" },
     { noun: "good", type: "", verb: "", adj: "good", comment: "" },
 //Humanity and its stuff
     { noun: "desire/want/pleasure", type: "", verb: "desire/want/like", adj: "", comment: "" },
