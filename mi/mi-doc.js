@@ -416,6 +416,8 @@ function toolTranslate ()
   //Loop through the bytes and find word based off index supplied, and current word order
     let english_out = "";
     let part = 0;
+    let is_compounding = false;
+    let compound_domain = "";
     for (let b = 0, b_max = bytes.length; b < b_max; ++b) {
         let byte = bytes[b];
         //Determine word order position
@@ -450,7 +452,15 @@ function toolTranslate ()
                 english_out += " <period>"+ (byte == 0xFF ? "new" : "old") +"</period>";
                 continue;
             }
-            let words = _lex[index][ { NOUN: "noun", ONOUN: "noun", VERB: "verb", ADJ: "adj" }[feature] ];
+            let words = "";
+            if (!is_compounding) {
+                words = _lex[index][ { NOUN: "noun", ONOUN: "noun", VERB: "verb", ADJ: "adj" }[feature] ];
+            } else {
+                words = compound_domain +"-"+ _noun_multi[compound_domain][index];
+                feature = "cnoun";
+                is_compounding = false;
+                --part;
+            }
             if (words == "number") {
                 let nums = []; //Array of 7-bits, to be shifted by 7 onwards
               //Scan the sentence and build the number
@@ -469,7 +479,12 @@ function toolTranslate ()
                 part = 2;
                 continue;
             }
-            english_out += " <"+ feature +">"+ words +"</"+ feature +">";
+            if (words.slice(-1) == "-") { //Is a compound-noun?
+                is_compounding = true;
+                compound_domain = words.substr(0, words.length - 1);
+            } else {
+                english_out += " <"+ feature +">"+ words +"</"+ feature +">";
+            }
         }
     }
 
