@@ -14,6 +14,11 @@
 - Index
 - Paragrapher URL param
 - Sentencer favour ask option
+- Floating point numbers
+- Syth pause after period
 
 ## Could do
 - Implement compound verbs/adjectives
+- Change number notation to n:number-x
+- Make sentencer & paragrapher outputs optional
+  - Merge sentencer & paragrapher into one tool
