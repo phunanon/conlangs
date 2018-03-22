@@ -107,7 +107,7 @@ let latin_space_rules = {
 function gloss2multi (gloss)
 {
     let bin_html = [], bin = [], hex_html = [], hex = [], latin_html = "", latin_styled = "", latin = [], ascii = [];
-    gloss = gloss.split(" ");
+    gloss = gloss.replace(/\n|\s{2,}/g, " ").split(" ");
   //Process words
     let regular = NOUN;
     let prev_feature = HEAD;

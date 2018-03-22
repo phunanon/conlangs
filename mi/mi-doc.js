@@ -248,7 +248,7 @@ let _freq = { o: "once", c: "continuous", e: "frequent", u: "do & undo" };
 function toolSentencer ()
 {
     let preview = [];
-    let gloss = gE("tool#sentencer #glossin").value.trim();
+    let gloss = gE("tool#sentencer #glossin").value.replace(/\n|\s{2,}/g, " ").trim();
     if (gloss == "") { return; }
   //Generate head
     let tense = gE("tool#sentencer #tense").value;
@@ -369,7 +369,7 @@ function toolParagrapherLoad (e)
 function toolParagrapher ()
 {
     gE("tool#paragrapher #englishout").innerHTML = "<english>"+ gE("tool#paragrapher #englishin").value +"</english>";
-    let gloss = gE("tool#paragrapher #input").value.trim();
+    let gloss = gE("tool#paragrapher #input").value.replace(/\n|\s{2,}/g, " ").trim();
     if (gloss == "") { return; }
     gE("tool#paragrapher #glossout").innerHTML = "<gloss>"+ gloss2html(gloss) +"</gloss>";
     var multi_out = gloss2multi(gloss);
