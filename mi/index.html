@@ -35,7 +35,8 @@
             <h2>2. Sentence Structure & Morphology</h2>
             <p>mi is broken down into bits, bytes, and sentences.</p>
             <h4>Sentence structure</h4>
-            <p><b>[head] (noun/noun-noun) noun/noun-noun (adj) verb (adj) noun/noun-noun/null ...</b></p>
+            <p><b>[head] (noun) noun (adj) verb (adj) noun/null ...</b></p>
+            <p>'noun' could also be a compound noun (noun-noun) or number/colour. 'adj' could also be a colour.</p>
             <p>There are 4 features of a sentence: head, noun, adjective, and verb. Features in parenthesis are optional, as opposed to regular. Adjectives affect their preceding feature, excluding "*_is/are/am, has" verbs. Once this pattern has reached its end, it repeats beyond the head. Each feature is represented in mi as a byte.</p>
             <p>noun-noun indicates a compound noun.</p>
             <h4>Head</h4>
@@ -92,6 +93,7 @@
                 <tr class="mono"><td class="regular">Overflow?</td><td>2^(6+x)</td><td>2^(5+x)</td><td>2^(4+x)</td><td>2^(3+x)</td><td>2^(2+x)</td><td>2^(1+x)</td><td>2^(0+x)</td></tr>
             </table>
             <p>Numbers are treated as independent strings of bytes, where the first bits states whether another number byte is to follow. Bytes 'overflow' after 01111111b, becoming 10000000 00000000b, treated as a 14-bit number with the first bit again stating whether there is another byte to follow.</p>
+            <p>Adjacent numbers are treated as a list, by default as a set of separate options.</p>
             <h4>Colours</h4>
             <p>Colours are formed in their binary form as RRRGGGBB. To express a colour, state the noun "colour," followed by the binary number.</p>
             <h4>Question asking</h4>
