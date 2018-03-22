@@ -138,8 +138,8 @@ noun { background: linear-gradient(transparent, #bbf); }
 cnoun { background: linear-gradient(transparent, #a4f); }
 adj { background: linear-gradient(transparent, #afa); border-bottom: .1rem solid #000; }
 verb { background: linear-gradient(transparent, #faa); }
-number { background: linear-gradient(#aaa, #000); color: #fff; }
-period { background: linear-gradient(transparent, #aaa); border-left: .15rem solid #000; margin-left: .5rem; }
+number { background: linear-gradient(transparent, #aaa); }
+period { background: linear-gradient(#aaa, #000); color: #fff; }
 
 mihead_subtle { border-bottom: .2rem solid #dd0; }
 onoun_subtle { border-bottom: .2rem solid #aff; }
@@ -147,8 +147,8 @@ noun_subtle { border-bottom: .2rem solid #bbf; }
 cnoun_subtle { border-bottom: .2rem solid #a4f; }
 adj_subtle { border-bottom: .2rem solid #afa;}
 verb_subtle { border-bottom: .2rem solid #faa; }
-number_subtle { border-bottom: .2rem solid #000; }
-period_subtle { border-bottom: .2rem solid #aaa;}
+number_subtle { border-bottom: .2rem solid #aaa; }
+period_subtle { border-bottom: .2rem solid #000;}
 
 button.loader {
     font-size: 1.5rem;
