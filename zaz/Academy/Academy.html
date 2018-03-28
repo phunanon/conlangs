@@ -1,0 +1,1103 @@
+<head>
+    <meta charset="UTF-8"/>
+    <title>zaz Academy | uyuj zaz</title>
+    <link rel="icon" href="AcademyFiles/small-z.png">
+    <base target="_blank"/></base>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script type="text/javascript" src="../common.js"></script>
+    <script type="text/javascript" src="AcademyFiles/levels.js"></script>
+    <script type="text/javascript" >
+var academyTotalLevels = 0;
+var u_score = 0;
+var u_rank = 0;
+var u_level = 0;
+var u_levels = 0;
+var lB = '';
+var wipeP = false;
+var PPOpen = false;
+var ZKBOpen = false;
+var SBOpen = false;
+var quizmode = false;
+
+
+function nextLevel()
+{
+    u_level++;
+    //Calculate total levels in the programme
+    academyTotalLevels = 0;
+    for (var r = 0, len = ranks.length; r < len; r++)
+    {
+       academyTotalLevels += ranks[r][2] + 1; //+1 for the rank earning "level"
+    }
+    //Now, we must calculate how many levels all-together this is
+    u_levels = 0;
+    for (var r = 0, len = ranks.length; r < len; r++)
+    {
+        if (r > u_rank) { break; }
+        if (u_rank !== r) //Have we completed this rank before?
+        {
+            u_levels += ranks[r][2] + 1; //+1 for the rank earning "level"
+        } else { //No?
+            u_levels += u_level;
+        }
+    }
+    quizmode = false;
+//Have we finished the programme?
+    if (u_levels < academyTotalLevels) //No?
+    {
+//Is the rank earned?
+        if (u_level > ranks[u_rank][2])
+        {
+            u_level = 0;
+            u_rank++;
+            u_score += 50;
+            gE("workarea").innerHTML = "<h2>Rank earned!</h2><h3>&star; <i>" + ranks[u_rank][0] + "</i></h3><p>" + ranks[u_rank][1] + "</p><p>50 points awarded</p>" + pContinue;
+            blueFlash(true);
+        } else {
+//Have we come back when we earned a rank before?
+            if (u_level == 0) { u_level++; }
+            loadLevel(false);
+        }
+        loadInfobar();
+    } else {
+//We've finished the programme! Hide the infobar, and show the endLevel() level
+        gE("infobar").style.top = "-100px";
+        loadLevel(true);
+        blueFlash(false);
+    }
+}
+
+function blueFlash(recover)
+{
+	document.body.style.transition = "background-color 0.1s ease-out";
+    document.body.style.backgroundColor = "blue";
+    if (recover) { setTimeout('document.body.style.transition = "background-color 10s ease-in-out"; document.body.style.backgroundColor = "#808";', 1000); }
+}
+
+
+function previousLevel()
+{
+    u_level--;
+    u_levels--;
+    if (u_level === 0) { u_rank--; }
+    loadLevel(false);
+    loadInfobar();
+}
+
+
+function loadLevel(end)
+{
+    document.body.style.transition = "background-color 10s ease-in-out";
+    document.body.style.backgroundColor = "#808";
+    if (!end) { gE("infobar").style.top = (gE("infobar").offsetWidth > document.body.offsetWidth - 100 ? "0px": gE("workarea").offsetTop) + "px"; }
+    lB = '';
+    if (u_level > 1) { lB += pPrevious; }
+    lB += (!end ? pSkip: "");
+    gE("workarea").innerHTML = pIndex + (end ? endLevel() : eval('r' + u_rank + 'l' + u_level + '(false)') + '<br>' + (quizmode ? '' : pContinue));
+    //Reset the scroll
+    gE("workarea").scrollTop = 0;
+    //Add IPAs, Glosses, and hover thingies
+    addMetas();
+    //Save progress as a cookie
+    document.cookie = "data=" + u_score + ":" + u_rank + ":" + u_level;
+}
+
+var previousL = 0;
+var previousLs = 0;
+function loadInfobar()
+{
+    var prog = (u_level / (ranks[u_rank][2] + 1)) * 100;
+    var aProg = (u_levels / academyTotalLevels) * 100;
+    var iB = '';
+    iB += '<i title="' + ranks[u_rank][1] + '">' + ranks[u_rank][0] + '</i> (' + u_score + ') ';
+    var bLs = "#808";
+    if (previousL < prog) //Do blue blinks
+    {
+        bLs = "blue";
+        setTimeout('gE("levelP").style.backgroundColor = "#808";', 500);
+    }
+    if (previousL > prog)
+    {
+        bLs = "pink";
+        setTimeout('gE("levelP").style.backgroundColor = "#808";', 500);
+    }
+    iB += '<div class="progbar" id="rankprogress"><div class="progbarcontainer"><div class="progbarbar" id="levelP" style="background-color: ' + bLs + '; width: ' + previousL + '%;">' + u_level + '/' + (ranks[u_rank][2] + 1) + '</div></div></div>';
+    iB += '<div><a onclick="openPP();">Progress Panel</a>|<a id="openSB" onclick="openSB();">Sound Board</a></div>';
+    var bbLs = "#808";
+    if (previousLs != aProg) //Do blue blinks
+    {
+        bbLs = "blue";
+        setTimeout('gE("levelsP").style.backgroundColor = "#808";', 500);
+    }
+    iB += '<br><div class="progbar" style="width: 99.5%;"><div class="progbarcontainer"><div class="progbarbar" id="levelsP" style="background-color: ' + bLs + ';width: ' + previousLs + '%;">' + u_levels + '/' + academyTotalLevels + '</div></div></div>';
+    previousL = prog;
+    previousLs = aProg  ;
+    setTimeout('gE("levelP").style.width="' + prog + '%"', 200);
+    setTimeout('gE("levelsP").style.width="' + aProg + '%"',500);
+    gE("infobar").innerHTML = iB;
+}
+
+
+function loadPage()
+{
+    //Init the soundboard
+    loadSoundBoard();
+    //Check if a cookie was saved
+    if (document.cookie != "")
+    {
+        //Check if the data is valid using crude heuristic
+        if (document.cookie.split(":").length - 1 == 2 && !wipeP)
+        {
+            var crumbs = document.cookie.split('data=')[1].split(";")[0].split(":");
+            u_score = pI(crumbs[0]);
+            u_rank = pI(crumbs[1]);
+            u_level = pI(crumbs[2]);
+            u_level--;
+       } else {
+              document.cookie = "data=" + u_score + ":" + u_rank + ":" + u_level;
+       }
+    }
+    nextLevel();
+    //Add the hovertext click handling
+    document.body.addEventListener("click",documentClick);
+    //Show/hide HTML5 badge
+    gE("html5badge").style.opacity = 1;
+    gE("html5badge").style.transition = "opacity 5s ease-in";
+    setTimeout('gE("html5badge").style.opacity = 0;', 5000);
+}
+
+
+
+
+function openPP() //Open the "Progress Panel"
+{
+    if (PPOpen) { closePP(); return false; }
+    PPOpen = true;
+    var PP = '';
+    PP += '<div id="progresspanel"><h3>Progress panel</h3>';
+    PP += '<a onclick="closePP();">Close the progress panel</a><br>';
+    PP += '<button onclick="presentProgress();">Save progress externally</button>';
+    PP += '<button onclick="takeProgress();">Load progress</button>';
+    PP += '<button onclick="wipeProgress();">Wipe progress</button>';
+    PP += "</div>";
+    setTimeout('gE("progresspanel").style.opacity = "1";', 100);
+    document.body.innerHTML += PP;
+}
+
+function presentProgress()
+{
+    prompt("Copy the text below", "data=" + u_score + ":" + u_rank + ":" + u_level);
+    closePP();
+}
+
+function takeProgress()
+{
+    document.cookie = prompt("Paste the text below", "data=0:0:0");
+    loadPage();
+    closePP();
+}
+
+function wipeProgress()
+{
+    if (confirm("Are you sure you want to wipe your progress?"))
+    {
+       wipeP = true;
+       u_level = 0;
+       u_levels = 0;
+       u_rank = 0;
+       u_score = 0;
+       loadPage();
+    }
+    closePP();
+}
+
+function closePP()
+{
+    if (PPOpen) { gE("progresspanel").style.opacity = "0"; setTimeout('gE("progresspanel").parentElement.removeChild(gE("progresspanel"));', 400); }
+    PPOpen = false;
+}
+
+
+var indexOpen = false;
+function openIndex()
+{
+    if (indexOpen) { closeIndex(); return false; }
+    indexOpen = true;
+    var inx = '';
+    inx += '<div id="indexpanel"><h3>Index panel</h3>';
+    inx += '<a onclick="closeIndex();">Close the index panel</a><br><br>';
+    for (var r = 0, len = ranks.length; r < len; r++)
+    {
+        inx += '<a class="rankindex' + (r === u_rank && u_levels < academyTotalLevels ? ' currentindex' : '') + '" onclick="u_rank = ' + r + '; u_level = 0; nextLevel(); closeIndex();"><div class="index">' + ranks[r][0] + '</div></a>';
+        for (var l = 1, len2 = ranks[r][2] + 1; l < len2; l++)
+        {
+            inx += '<a class="levelindex' + (r === u_rank && l === u_level ? ' currentindex' : '') + '" onclick="u_rank = ' + r + '; u_level = ' + l + ' - 1; nextLevel(); closeIndex();"><div class="index">' + eval('r' + r + 'l' + l + '(true)').split("quiz").join('<b>quiz</b>').split("conversation").join('<b>conversation</b>') + '</div></a>';
+        }
+    }
+    inx += "</div>";
+    setTimeout('gE("indexpanel").style.opacity = "1";', 100);
+    document.body.innerHTML += inx;
+}
+
+function closeIndex()
+{
+	if (indexOpen) { gE("indexpanel").style.opacity = "0"; setTimeout('gE("indexpanel").parentElement.removeChild(gE("indexpanel"));', 400); }
+    indexOpen = false;
+}
+
+
+var hti = 0;
+function addMetas()
+{
+//Add the IPA of .z elements into their title
+    var zs = document.getElementsByClassName("z");
+    for (var z = 0, len = zs.length; z < len; z++)
+    {
+        var theIPA = toIPA(zs[z].innerHTML);
+        zs[z].title = theIPA;
+        if (zs[z].parentElement.tagName.toUpperCase() == "BUTTON") { zs[z].parentElement.title = theIPA; }
+    }
+//Add the full name and use of the parts of gloss into the title of all .g
+    var gs = document.getElementsByClassName("g");
+    var glen = zazGlosses.length;
+    for (var g = 0, len = gs.length; g < len; g++)
+    {
+        for (var i = 0; i < glen; i++)
+        {
+            if (gs[g].innerHTML.indexOf(zazGlosses[i][1]) > -1)
+            {
+                gs[g].innerHTML = gs[g].innerHTML.split(zazGlosses[i][1]).join('<span class="gp" title="' + zazGlosses[i][0] + '  ' + zazGlosses[i][2] + '">' + zazGlosses[i][1] + '</span>'); //Make them gloss parts, with titles
+            }
+        }
+    }
+}
+
+
+
+
+
+function documentClick(e) //Used to pick-up on clicks on .z, .gp, .examplespan, and .hovertext itself
+{ //The reason for this gross function is due to the fact that opening the progress panel, for example, would remove all events on the hovertext-enabled elements
+    if (e.target.tagName === "BUTTON") { return false; }
+    var eClassName = e.target.className;
+    if (eClassName === "z" || eClassName === "gp" || eClassName === "examplespan" || eClassName === "hovertext" || (e.target.parentElement !== null ? e.target.parentElement.className === "hovertext" : false) || (e.target.parentElement.parentElement !== null ? e.target.parentElement.parentElement.className === "hovertext" : false))
+    {
+        var existing = e.target.getElementsByClassName("hovertext");
+        var isHovertext = (eClassName === "hovertext");
+        var isHovertextChild = (e.target.parentElement !== null ? e.target.parentElement.className === "hovertext" : false);
+        var isHovertextChildChild = (e.target.parentElement.parentElement !== null ? e.target.parentElement.parentElement.className === "hovertext" : false);
+        if (existing.length > 0 || isHovertext || isHovertextChild || isHovertextChildChild) //Remove existing hovertext?
+        {
+            if (isHovertext || isHovertextChild || isHovertextChildChild) //Are we dealing with a parent of hovertext, or hovertext itself (which includes things within the hovertext?
+            {
+                if (isHovertext)
+                {
+                    e.target.style.opacity = "0";
+                    setTimeout('gE("' + e.target.id + '").parentElement.removeChild(gE("' + e.target.id + '"))', 300);
+                } else {
+                    if (isHovertextChild)
+                    {
+                        e.target.parentElement.style.opacity = "0";
+                       setTimeout('gE("' + e.target.parentElement.id + '").parentElement.removeChild(gE("' + e.target.parentElement.id + '"))', 300);
+                    } else { //isHovertextChildChild
+                        e.target.parentElement.parentElement.style.opacity = "0";
+                       setTimeout('gE("' + e.target.parentElement.parentElement.id + '").parentElement.removeChild(gE("' + e.target.parentElement.parentElement.id + '"))', 300);
+                    }
+                }
+            } else { //Parent
+                gE(existing[0].id).style.opacity = "0";
+                setTimeout('gE("' + existing[0].id + '").parentElement.removeChild(gE("' + existing[0].id + '"))', 300);
+            }
+        } else { //Add new hovertext
+            hti++;
+            var theTitle;
+            if (e.target.title.split("\n").length < 2) //Are we working with a gloss, or a normal title (inc. IPA)?
+            {
+                theTitle = e.target.title;
+                if (theTitle[0] === "/")
+                {
+                    //theTitle += '<span class="zahz">' + forZahz(e.target.innerHTML) + '</span>';
+                    theTitle += "<br/>" + toHTMLZahzan(e.target.innerHTML);
+                }
+            } else {
+                var theTTitle;
+                theTitle = e.target.title.split("\n");
+                theTTitle = theTitle[0].split("  ");
+                theTitle = '<b><i>' + theTTitle[0] + '</b></i> ' + theTTitle[1] + '<br><i>' + theTitle[1] + '</i>';   
+            }
+            var hovertext = '<div class="hovertext" id="ht' + hti + '" style="z-index: ' + hti + ';opacity: 0; left: 0px; top: -' + (e.target.offsetHeight) + 'px;">' + theTitle + '</div>';
+            e.target.innerHTML += hovertext;
+            setTimeout('gE("ht' + hti + '").style.opacity = "1"', 10);
+            setTimeout('gE("ht' + hti + '").style.top = (gE("ht' + hti + '").parentElement.offsetHeight + 2 ) + "px";', 10);
+         }
+    }
+}
+
+
+
+
+
+
+function openSB() //Open the "Sound Board"
+{
+    if (!allowSB) { alert("Should have revised! ;)"); return false; }
+    //Init the soundboard, for size purposes
+    loadSoundBoard();
+    if (SBOpen) { closeSB(); return false; }
+    SBOpen = true;
+    var SB = '';
+    SB += '<div id="soundboard"><h3>Sound board</h3>';
+    SB += '<a onclick="closeSB();">Close the sound board</a><br>';
+    SB += pSoundBoard + '<br>' + pBriefPause;
+    SB += "</div>";
+    setTimeout('gE("soundboard").style.opacity = "1";', 100);
+    document.body.innerHTML += SB;
+}
+
+function closeSB()
+{
+    if (SBOpen) { gE("soundboard").style.opacity = "0"; setTimeout('gE("soundboard").parentElement.removeChild(gE("soundboard"));', 400); }
+    SBOpen = false;
+}
+
+
+
+//QUIZZES
+var Q; //The array of questions for the quiz
+var qi = 0; //Quiz question index
+var qs = 0; //Score for this quiz
+var doneQs = 0; //The amount of questions answered correctly
+var acceptingAnswer = false; //For if the user presses a key for multiselection
+var acceptingAdvance = false; //For if the user presses Enter to say "yay!" or "bugger."
+var acceptingEnter = false; //For pressing enter while the cursor is not actually in the answer text box
+var allowSB = true;
+var _praises = ["Well done!","Huzzah!","Excellent!","Brilliant!","Yay!","Good work!","Bravo!"];
+var _tryAgains = ['Nope! It\'s "<b>%</b>". You\'ll get it, don\'t worry.','Ooo, sorry, twas actually <b>%</b>, we\'ll try that one again, later...','Ahck, damn, sorry, twas <b>%</b>, but, you\'ll have another shot','Sorry! It was <b>%</b>! Did you feel close? You\'ll get another go.', 'Nuh-uh, sorry; <b>%</b> was the correct answer. Another go for you!'];
+function loadQuiz(Quiz)
+{
+    quizmode = true;
+    Q = Quiz;
+    qi = 0;
+    qs = 0;
+    doneQs = 0;
+    previousD = 0;
+    acceptingAnswer = false;
+    acceptingAdvance = false;
+    acceptingEnter = false;
+    //Go through the questions, and add their static number and the boolean for whether they've been answered or not
+    for (var q = 0, len = Q.length; q < len; q++)
+    {
+        Q[q][2] = false; //No, this question has not been answered correctly yet
+        Q[q][3] = q + 1; //Question number
+        Q[q][4] = 0; //How many times the question has already been asked (to give a lower score, or ignore, if so)
+    }
+    setTimeout("nextq(false)", 200); //Ask the first question once lB has been processed
+    return '<div class="qB" id="qB"></div>';
+}
+
+var previousDs = 0;
+function nextq(answer) //Start quiz/process answer
+{
+    closeZKB();
+    allowSB = true;
+    var qbody = '';
+    var genTitle = function(qnum) {
+        qbody = '<i>Score earned: <b>' + qs + '</b></i>';
+        var bLs = "#808";
+        if (previousDs >= doneQs) //Do blue blinks
+        {
+            bLs = "blue";
+            if (doneQs !== Q.length) { setTimeout('gE("qP").style.backgroundColor = "#808";', 500); }
+        }
+        var pP = (previousDs / Q.length) * 100
+        var qP = (doneQs / Q.length) * 100;
+        previousDs = doneQs;
+        qbody += '<br><div class="progbar" style="width: 100%; max-width: 470px;"><div class="progbarcontainer"><div class="progbarbar" id="qP" style="background-color: ' + bLs + ';width: ' + pP + '%;">' + doneQs + '/' + Q.length + '</div></div></div>';
+        setTimeout("gE('qP').style.width = " + qP + " + '%';", 200);
+        if (qnum)
+        {
+            qbody += '<h3 class="qt">Question ' + (Q[qi][3]) + ' of ' + Q.length + '</h3> <i>'
+            qbody += (answer === false ? ( (Q[qi][4] < 1) ? 'Not yet attempted' : ('Attempted ' + Q[qi][4] + ' time' + (Q[qi][4] > 1 ? 's' : '')) ) : '') + '</i>';
+        }
+        qbody += '<br>';
+    }
+    if (answer !== false) //Are we taking on an answer, or asking a question?
+    {
+        genTitle(true);
+        acceptingAnswer = false;
+        acceptingEnter = false;
+        setTimeout("acceptingAdvance = true;", 100);
+        answer = answer.toString().toLowerCase().trim();
+//Process result
+        var correctAnswer = Q[qi][1].toString().toLowerCase().trim(); //May be text, may be an index
+        if (correctAnswer.indexOf(":") > -1) //Is this a text Q?
+        {
+            correctAnswer = correctAnswer.split(":")[1]; //Because a text Q is like "e:tree" or "z:lem"
+        }
+        var achieved = false;
+        var correctedAnswer = '';
+        if (answer == correctAnswer) { achieved = true; }
+        //Get the actual answer
+        if (pI(answer) == answer) //Was multiselection? (is a number?)
+        {
+            var qu = Q[qi][0]; //Actual question
+            correctedAnswer = qu.split("?")[1].split(";")[correctAnswer];
+        } else {
+            correctedAnswer = correctAnswer;
+        }
+        if (achieved) //Achieved
+        {
+            genTitle(true);
+            qbody += '<b>' + _praises[Math.floor(rN() * _praises.length)] + '</b> <i>' +  correctedAnswer + '</i> was correct.';
+            doneQs++;
+        } else { //Not achieved
+            genTitle(true);
+            qbody += (pI(answer) != answer ? 'You said: ' + answer + '<br>' : '');
+            qbody += _tryAgains[Math.floor(Math.random() * _tryAgains.length)].split("%").join(correctedAnswer);
+            Q[qi][4]++; //Increment the amount of times this question as already done before
+        }
+        qbody += '<br><button onclick="nextq(false);">Next Question</button><br><i>You can press [Enter] to advance</i>';
+        if (achieved) { Q[qi][2] = true; } //Mark as answered correctly
+        if (achieved) //Award points
+        {
+            qs += (Q[qi][4] > 0 ? 5 : 10);
+        } else {
+            qs += 0;
+        }
+        qi++;
+    } else {
+//Ask the next question not answered in the array
+        var looped = false;
+        var finishedQ = false; //Finished the quiz
+        do //While the question we are on has been done
+        {
+            if (qi >= Q.length - 1) //Reached the end of the array?
+            {
+                if (looped) //Have we already looped?
+                {
+                    finishedQ = true;
+                    break;
+                }
+                qi = 0;
+                looped = true;
+            }
+            if (Q[qi][2] === true && Q.length > 1) { qi++; } //Next question, if this one was completed, and this is not just a 1 question quiz
+        } while (Q[qi][2] === true)
+        if (!finishedQ)
+        {
+            genTitle(true);
+            //Ask the Q
+            var qu = Q[qi][0]; //Actual question
+            if (qu.indexOf('class="a"') > -1) { allowSB = false; }
+            if (qu.indexOf("?") == qu.length - 1) //Is it a text answer or a multiselection?
+            {
+                qbody += '<h4 id="question">' + qu + '</h4>';
+                qbody += '<input id="answer" onkeydown="if(event.keyCode==13) { nextq(this.value.replace(/[0-9]/g, \'\')); }"/>';
+                var isZazQ = (Q[qi][1].indexOf("z:") > -1);
+                qbody += (isZazQ ? '<br><button onclick="openZKB(\'answer\');">Open zaz keyboard</button>' : '');
+                qbody += '<br><i>Press [Enter] to advance</i>';
+                setTimeout('gE("answer").focus();',50);
+                setTimeout("acceptingEnter = true;", 100);
+            } else {
+                var qus = qu.split("?")[1].split(";");
+                qbody += '<h4>' + qu.split("?")[0] + '?</h4>';
+                //Randomise the order of the answer buttons
+                for (var q = 0, len = qus.length; q < len; q++) //Add their actual index, for answering purposes
+                {
+                    qus[q] = [qus[q], q];
+                }
+                qus = sA(qus); //Shake it up
+                for (q = 0, len = qus.length; q < len; q++)
+                {
+                   qbody += '<button onclick="nextq(' + qus[q][1] + ');">' + (q < 8 ? (q + 1) + ': ' : '') + qus[q][0] + '</button>';
+                   if (q != qus.length - 1 && (q + 1) % 3 == 0) { qbody += '<br>'; }
+                }
+                qbody += '<br><i>You can press the number to advance</i>';
+            }
+            setTimeout("acceptingAnswer = true;", 100);
+            acceptingAdvance = false;
+        } else { //Finished the quiz
+            genTitle(false);
+            qbody += '<h3>You finished the quiz!</h3>';
+            qbody += '<p>You\'ve earned ' + qs + ' points, and it has just been added to your score.</p>' + pContinue;
+            quizmode = false;
+            u_score += qs;
+            loadInfobar();
+        }
+    }
+    gE("qB").innerHTML = qbody;
+    addMetas();
+}
+
+function attemptAnswer(e)
+{
+    if (e.keyCode > 48 && e.keyCode < 57 && document.activeElement == document.body && acceptingAnswer) //Press number to select answer
+    {
+       nextq(e.keyCode - 49);
+       return false;
+    }
+    if (e.keyCode == 13 && acceptingAdvance) //Press enter to advance from result
+    {
+        nextq(false);
+        return false;
+    }
+    if (e.keyCode === 13 && acceptingEnter) //Press enter to accept answer text box answer
+    {
+        nextq(gE("answer").value);
+        return false;
+    }
+}
+
+
+
+
+//CONVERSATIONS
+var C;
+var mi = 0;
+var cname = '';
+var lastWildcard = "";
+var expectedReply = "";
+function loadConversation(cn, convo)
+{
+    cname = cn; 
+    var cbody = '<div id="chat"><h2><span class="z">vatqì</span></h2><div id="name"><h3><u>' + cname + '</u></h3><i id="ctyping">vámqq,</i></div><div id="chistory"></div>';
+    cbody += '<textarea onkeydown="if(event.keyCode===13){nextMessage(this.value);this.value=\'\';}" id="chatbox"></textarea>';
+    cbody += '<button id="skipMsg" onclick="nextMessage(expectedReply);">Skip message</button><button id="openZKB" onclick="openZKB(\'chatbox\');">Open zaz keyboard</button><div id="chatboxcover"></div></div>';
+    C = convo;
+    mi = 0;
+    setTimeout('nextMessage(false)', 500);
+    return cbody;
+}
+
+var replySpeed = 40;
+function nextMessage(reply)
+{
+    closeZKB();
+    var repliedCorrectly = true;
+    if (reply !== false) //Are we taking a reply, or just messaging first?
+    {
+        var splitAnswer = C[mi][1].split("*");
+        var wildcardCorrect = false;
+        if (splitAnswer.length > 1) //Are we working with the wildcard?
+        {
+            var wildcards = splitAnswer.length - 1;
+            if (reply.substr(0, splitAnswer[0].length) === splitAnswer[0]) //Is the first part correct?
+            {
+                if (reply.substr(splitAnswer[0].length + wildcards, splitAnswer[splitAnswer.length - 1].length) === splitAnswer[splitAnswer.length - 1]) //Is the final part correct?
+                {
+                    wildcardCorrect = true;
+                    lastWildcard = reply.substr(splitAnswer[0].length, wildcards);
+                }
+            }
+        }
+        if (reply !== C[mi][1] && !wildcardCorrect)
+        {
+            repliedCorrectly = false;
+        } else {
+            mi++;
+            chatMessage(reply, "cstudent", mi);
+        }
+    }
+    if (mi === C.length)
+    {
+        endChat();
+        return false;
+    }
+    var displayChatbox = "block";
+    gE("chatboxcover").innerHTML = (!repliedCorrectly ? '<p class="red">Try again!</p>' : '') + C[mi][2] + '<br><button onclick="gE(\'chatbox\').value = \'\'; gE(\'chatboxcover\').style.display = \'none\';">Okay</button>';
+    gE("chatbox").placeholder = C[mi][1];
+    if ((repliedCorrectly && C[mi][0][0] !== "") || C[mi][1] === "")
+    {
+        setTimeout('gE("ctyping").style.visibility = "visible";', 1000);
+        setTimeout('gE("ctyping").style.visibility = "hidden"; chatMessage(C[' + mi + '][0][0], "czaz", ' + mi + ');', (C[mi][0][0].length * replySpeed) + 1000);
+    }
+    if (C[mi][1] === "")
+    {
+        mi++;
+        displayChatbox = "none";
+        if (mi === C.length) { endChat(); return false; }
+        setTimeout('nextMessage(false);', (C[mi][0][0].length * replySpeed) * 1.5);
+    }
+    expectedReply = C[mi][1];
+    gE("chatboxcover").style.display = displayChatbox;
+    gE("chatboxcover").style.left = gE("chatbox").offsetLeft + "px";
+    gE("chatboxcover").style.top = gE("chatbox").offsetTop + "px";
+    gE("chatboxcover").scrollTop = 0;
+    addMetas();
+}
+
+function endChat()
+{
+	 gE("chatbox").parentElement.removeChild(gE("chatbox"));
+	 gE("chatboxcover").parentElement.removeChild(gE("chatboxcover"));
+    gE("skipMsg").parentElement.removeChild(gE("skipMsg"));
+    gE("openZKB").parentElement.removeChild(gE("openZKB"));
+    setTimeout('rawMessage("cstatus", "Well done for completing your chat with ' + cname + '! You have earned 30 points");', 3000);
+    u_score += 30;
+    loadInfobar();
+}
+
+var msgs = 0;
+function chatMessage(msg, who, mindex)
+{
+    if (who !== "cstudent")
+    {
+        rawMessage(who, '<span class="clickmsg" onclick="openMsg(\'m' + (msgs + 1) + '\',\'' + mindex + '\');">' + msg.split("*").join(lastWildcard) + '</span>');
+    } else {
+        rawMessage(who, msg);
+    }
+}
+
+function rawMessage(who, msg)
+{
+    msgs++;
+    var out = '<div class="cmsgcontainer"><div id="m' + msgs + '" class="cmsg ' + who + '">';
+    out += msg;
+    out += '</div></div>';
+    gE("chistory").innerHTML += out;
+    setTimeout('gE("m' + msgs + '").style.opacity = "1";   ', 100);
+    gE("chistory").scrollTop = gE("chistory").scrollHeight;
+}
+
+function openMsg(msg, mindex)
+{
+    var already = gE(msg).getElementsByClassName("t");
+    if (already.length > 0) //Is the message already open?
+    {
+        var openmsg = gE(msg).getElementsByClassName("openmsg")[0];
+        openmsg.parentElement.removeChild(openmsg);
+    } else {
+        gE(msg).innerHTML += '<div class="openmsg"><span class="IPA">' + toIPA(C[mindex][0][0].split("<")[0]) + '</span><br><span class="g">' + C[mindex][0][1] + '</span><br><span class="t">' + C[mindex][0][2] + '</span></div>';
+        addMetas();
+        if (pI(mindex) === mi) { gE("chistory").scrollTop = gE("chistory").scrollHeight; }
+    }
+}
+
+
+
+var ZKBel;
+function openZKB(el)
+{
+    if (ZKBOpen) { closeZKB(); return false; }
+    ZKBel = el;
+    var currentAnswer = gE(el).value;
+    ZKBOpen = true;
+    var ZKB = '';
+    ZKB += '<div id="zkb" style="left: ' + (!is640Mobile() ? gP(gE(el)).x + gE(el).offsetWidth + 8 : 0) + 'px;">';
+    var toTranslate = (el === "chatbox" ? 'a' : gE("question").innerHTML.split('"')[1]);
+    ZKB += '<h3>zaz keyboard</h3><a onclick="closeZKB();">Close the keyboard</a>' + (toTranslate !== "a" ? '<br><i>"' + toTranslate + '"</i>' : '');
+    ZKB += '<br><input id="ZKBtyped" value="' + currentAnswer + '" readonly/>';
+    ZKB += '<button class="zkey" onclick="presszKey(\' \');">_</button>';
+    ZKB += '<button class="zkey" onclick="presszKey(false);">⌫</button><br>';
+    for (var z = 0, len = zazAlphabet.length; z < len; z++)
+    {
+        ZKB += '<button class="zkey" onclick="presszKey(\'' + zazAlphabet[z] + '\');" style="background-color: ' + ((z + 1) % 2 == 0 ? "#ccc" : "#ddd" ) + ';">' + zazAlphabet[z] + '</button>';
+        ZKB += ((z + 1) % 9 == 0 ? '<br>' : '');
+    }
+    ZKB += "</div>";
+    setTimeout('gE("zkb").style.opacity = "1";gE("' + el + '").value = "' + currentAnswer + '";', 100);
+    document.body.innerHTML += ZKB;
+}
+
+function closeZKB()
+{
+    if (ZKBOpen) { gE("zkb").style.opacity = "0"; setTimeout('gE("zkb").parentElement.removeChild(gE("zkb"));', 400); }
+    ZKBOpen = false;
+}
+
+function presszKey(zkey)
+{
+    if (zkey === false)
+    {
+        gE(ZKBel).value = gE(ZKBel).value.substr(0, gE(ZKBel).value.length - 1);
+        gE("ZKBtyped").value = gE("ZKBtyped").value.substr(0, gE("ZKBtyped").value.length - 1);
+        return false;
+    } else {
+        gE(ZKBel).value += zkey;
+        gE("ZKBtyped").value += zkey;
+    }
+}
+
+
+
+/*Get onscreen position*/function gP(e) { var xPosition = 0; var yPosition = 0; while(e) { xPosition += (e.offsetLeft - e.scrollLeft + e.clientLeft); yPosition += (e.offsetTop - e.scrollTop + e.clientTop); e = e.offsetParent; } return { x: xPosition, y: yPosition }; }
+/*Get if mobile*/function is640Mobile() { return gE("mobile640").offsetWidth < 10; }
+    </script>
+    <style type="text/css">
+        @font-face {
+            font-family: "Gentium Plus";
+            src: url("AcademyFiles/gentiumplus-r-webfont.woff2") format("woff2");
+        }
+        @import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed);
+        @font-face {
+            font-family: "zahz";
+            src: url("AcademyFiles/uzahz.ttf") format("truetype");
+        }
+        * {
+            font-family: "Gentium Plus", serif;
+            line-height: 1.4em;
+            padding: 0;
+            margin: 0;
+        }
+        a { color: blue; cursor: pointer; }
+        a:visited { color: blue; }
+        hr { width: 200px; }
+        .examplespan { text-decoration: underline; text-decoration-color: gray; text-decoration-style: dotted; }
+        body {
+            background-color: #808;
+            color: white;
+            font-size: 1em;
+            position: relative;
+            overflow-y: hidden;
+            text-shadow: -3px 3px 3px rgba(0,0,0,0.1);
+            height: 100%;
+        }
+        input { font-size: 1em; padding: 4px; }
+        .s { font-size: 80%; }
+        .red { color: red; }
+        h1 {
+            width: 50%;
+            margin: auto;
+            text-align: center;
+            font-size: 1.8em;
+            margin-bottom: 2px;
+        }
+        #workarea {
+            border: 3px solid black;
+            border-left: none;
+            border-right: none;
+            background-image: url("AcademyFiles/seamlesspaper.jpg");
+            background-attachment: local;
+            background-color: white;
+            color: black;
+            height: 85%;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            padding: 8px;
+            margin: 0;
+        }
+        #workarea *:not(i):not(b):not(a):not(.z):not(.g):not(.gp):not(.t):not(.hovertext):not(.progbarbar):not(.progbarcontainer) {
+            margin: 4px;
+        }
+        span { display: inline-block; }
+        p, span:not(.progbar), .hovertext, h4 {
+            max-width: 470px;
+            text-align: justify;
+        }
+        #infobar {
+            max-width: 45%;
+            position: absolute;
+            right: 16px;
+            min-height: 1.6em;
+            background-color: white;
+            color: black;
+            border: 3px solid black;
+            padding: 1px;
+        }
+        #infobar * {
+            display: inline-block;
+        }
+        #infobar a { margin-left: 2px !important; margin-right: 2px !important; }
+        .progbar {
+            height: 1.1em;
+            border: 1px solid black;
+            min-width: 200px;
+            background-color: #eee;
+            margin-top: 2px;
+            padding: 0;
+        }
+        .progbar * { font-size: 0.9em; }
+        .progbarcontainer {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .progbarbar {
+            display: inline-block;
+            position: absolute;
+            min-width: 40px;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            border-right: 1px solid black;
+            background-color: #808;
+            color: white;
+            padding-left: 4px;
+            font-weight: bold;
+        }
+        .title {
+            text-align: right;
+            margin-right: 120px !important;
+            color: #909;
+        }
+        .zB {
+            border-left: 4px solid #808;
+        }
+        .z, .examplespan, .gp { position: relative; }
+        .zB:hover {
+            border-left: 4px solid blue;
+        }        
+        .z {
+            text-decoration: underline;
+            text-decoration-color: gray;
+            text-decoration-style: dotted;
+            font-weight: bold;
+            font-style: italic;
+        }
+        .zB .z {
+            margin-left: 10px !important; 
+        }
+        .zB .g {
+            margin-left: 20px !important;
+        }
+        .z, .gp, .examplespan, .clickmsg {
+            text-decoration: underline;
+            text-decoration-color: gray;
+            text-decoration-style: dotted;
+            cursor: pointer;
+        }
+        .t {
+            font-style: italic;
+        }
+        .zB .t {
+            margin-left: 30px !important;
+        }
+        button {
+            padding: 4px;
+            font-size: 1.2em;
+        }
+        #progresspanel, #zkb, #soundboard, #indexpanel {
+            border: 3px solid black;
+            background-color: white;
+            color: black;
+            position: absolute;
+            overflow-y: scroll;
+            padding: 8px;
+            opacity: 0;
+        }
+        #progresspanel {
+            top: 150px;
+            height: 180px;
+            max-width: 400px;
+            left: 150px;
+            overflow-y: hidden;
+        }
+        #progresspanel * {
+            display: block;
+        }
+        #zkb {
+            top: 100px;
+            max-width: 400px;
+            left: 200px;
+        }
+        #zkb .zkey {
+            width: 40px;
+            height: 40px;
+        }
+        #soundboard {
+            top: 100px;
+            width: 630px;
+            height: 300px;
+            left: 200px;
+        }
+        #indexpanel {
+            top: 100px;
+            left: 0px;
+            height: 300px;
+            width: 300px;
+        }
+        .rankindex { font-weight: bold; font-variant: small-caps; }
+        .levelindex { padding-left: 8px; }
+        .levelindex, .rankindex { display: block; }
+        .currentindex { background-color: lightblue; }
+        #indexpanel a div { display: inline-block; width: 100%; }
+        #indexpanel a div:hover { background-color: pink; }
+        .i {
+            border: 1px solid black;
+            display: inline-block;
+            background-color: white;
+        }
+        .i p {
+            font-variant: small-caps;
+            font-style: italic;
+        }
+        .a {
+            border: 1px dotted black;
+            font-size: 1em;
+            padding: 4px;
+            min-width: 90px;
+            min-height: 50px;
+            display: inline-block;
+            background-color: white;
+            background-image: url("AcademyFiles/speaker.png");
+            background-repeat: no-repeat;
+            background-position: top right;
+        }
+        .a audio {
+            width: 200px;
+        }
+        .qt {
+            display: inline-block;
+        }
+        .hovertext {
+            position: absolute;
+            border-top: 1px dotted black;
+            border-left: 1px dotted black;
+            border-bottom: 1px solid black;
+            border-right: 1px solid black;
+            background-color: white;
+            color: black;
+            padding: 2px;
+            min-width: 150px;
+            text-align: center;
+        }
+        .zahz, .ahan, .ahanC {
+            font-family: "zahz";
+            font-weight: bold;
+            font-style: normal;
+            font-size: 120%;
+        }
+        .ahan, .ahanC {
+            min-width: 0.2em;
+            position: relative;
+            margin: 0 !important;
+        }
+        .ahanC {
+            font-size: 60%;
+            position: absolute;
+            top: 0.6em;
+            left: 0.15em;
+        }
+        #chat {
+            border: 2px solid #808;
+            width: 470px;
+            padding: 0;
+            position: relative;
+        }
+        #chat *:not(.cmsgcontainer):not(h2):not(h3) {
+            margin: 0 !important;
+        }
+        #chat h2 { float: right; display: inline-block; margin: 4px !important; }
+        #chat #name { display: inline-block; margin: 4px !important; }
+        #chistory {
+            border-top: 1px solid #808;
+            background-color: #fafafa;
+            width: 100%;
+            position: relative;
+            overflow-y: scroll;
+            height: 270px;
+        }
+        #chatbox {
+            width: 100%;
+            resize: none;
+            overflow-y: scroll;
+            text-align: left;
+            height: 100px;
+        }
+        #chatboxcover {
+            position: absolute;
+            width: 100%;
+            height: 100px;
+            background-color: lightgreen;
+            overflow-y: scroll;
+            display: none;
+        }
+        .cmsgcontainer {
+            display: block;
+            width: 98%;
+            min-height: 2em;
+            margin: 4px !important;
+        }
+        .cmsg {
+            display: inline-block;
+            border-radius: 4px;
+            border: 1px solid #808;
+            max-width: 75%;
+            padding: 4px;
+            opacity: 0;
+            font-family: "Open Sans",sans-serif !important;
+        }
+        .clickmsg, .cemoti, #chatbox { font-family: "Open Sans Condensed", sans-serif !important; }
+        .czaz {
+            background-color: pink;
+        }
+        .cstudent {
+            float: right;
+            background-color: lightblue;
+        }
+        .cstatus {
+            margin: auto;
+            background-color: #808;
+            color: white;
+        }
+        .cemoti {
+            padding-left: 4px;
+        }
+        
+        .zB, .zB *, .hovertext, .progbarbar, #progresspanel, #soundboard, #zkb, #indexpanel, .progbar, .cmsg {
+            transition: all 0.3s ease-in-out;
+            -webkit-transition: all 0.3s ease-in-out;
+            -o-transition: all 0.3s ease-in-out;
+        }
+        
+        #workarea, .hovertext, #progresspanel, #soundboard, #zkb, #infobar {
+            box-shadow: -3px 3px 3px rgba(0,0,0,0.5);
+        }
+        .title, h1, #shameless {
+            text-shadow: -3px 3px 3px rgba(0,0,0,0.3);
+        }
+        
+        #mobile640 { width: 100px; }
+        @media screen and (max-width: 840px) {
+            #soundboard { left: 0px; }
+        }
+        @media screen and (max-width: 640px) {
+            #mobile640 { width: 1px; }
+            .title {
+                width: 100%;
+                text-align: center;
+            }
+            body {
+                overflow: hidden;
+            }
+            #infobar {
+                right: inherit;
+                margin: auto;
+                max-width: 100%;
+                width: 100%;
+                border-left: none;
+                border-right: none;
+            }
+            #infobarspace {
+                height: 10%;
+            }
+            #workarea {
+                height: 75%;
+                padding-top: 30px;
+            }
+            #progresspanel { left: 0; }
+            #soundboard { width: 300px; }
+        }
+        @media screen and (max-height: 500px) { #workarea { height: 70%; } }
+        @media screen and (max-width: 300px) { #rankprogress { min-width: 100px; max-width: 100px; } }
+        #html5badge { position: absolute; right: 0; bottom: 16px; }
+        .lowerleft  { position: absolute; bottom: 0px; display: inline-block; }
+        #shameless { color: #88d !important; }
+    </style>
+</head>
+<body onload="loadPage()" onkeydown="attemptAnswer(event);/*for multiselection quizzes*/">
+    <h1><span class="z">uyuj zaz</span></h1>
+    <div id="infobar"></div>
+    <div id="infobarspace"></div>
+    <div id="workarea">Loading sounds and fonts and stuff...</div>
+    <div style="visibility: hidden;">
+        <div id="mobile640"></div>
+        <span class="zahz">This is just to load the font before proper use</span>
+    </div>
+    <div id="html5badge"><a href="https://www.w3.org/html/logo/"><img src="AcademyFiles/html5-badge-h-css3-multimedia.png" width="83" height="32" alt="HTML5 Powered with CSS3 / Styling, and Multimedia" title="HTML5 Powered with CSS3 / Styling, and Multimedia"></a></div>
+    <span class="lowerleft">
+        <a id="shameless" href="https://reddit.com/r/zazzy">/r/zazzy</a>
+        <span id="lastmod">Programme last updated @ 20th of March '16</span>
+    </span>
+</body>
