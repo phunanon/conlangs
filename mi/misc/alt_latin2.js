@@ -1,7 +1,18 @@
+/*
+Unvoiced:
 var _1 = ["p", "t", "k", "ʃ"];
 var _2 = ["", "ʼ"];
 var _3 = ["ə", "ɛ", "a", "ɒ"];
-var _4 = ["ʔ", "m", "n", "θ", "f", "l", "s", "ɾ"];
+var _4 = ["ʔ", "m", "n", "θ", "f", "l", "s", "i"];
+*/
+
+var _1 = ["p", "t", "k", "ʃ"];
+var _2 = ["", "ʼ"];
+var _3 = ["ə", "ɛ", "a", "ɒ"];
+var _4 = ["f", "v", "θ", "ð", "s", "z", "ʒ", "l"];
+
+//00000000
+//21133444
 
 function index2altLatin (index)
 {
@@ -15,7 +26,7 @@ function index2altLatin (index)
     return _1[_1_] + _2[_2_] + _3[_3_] + _4[_4_];
 }
 
-var mi_hex = "40001ea745".match(/.{2}/g);
+var mi_hex = "4837ba2a0d".match(/.{2}/g);
 var mi_latin = "";
 for (let m of mi_hex) {
     m = parseInt(m, 16);
