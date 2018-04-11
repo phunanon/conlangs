@@ -1,0 +1,40 @@
+https://storyplanets.com/the-wise-farmer/
+
+The Wise Farmer
+
+Farmer Peter won the gold medal for growing the best corn in the village. He became famous when the newspapers wrote about him.
+One day, a reporter was amazed to find Peter distributing his seeds to other farmers in the village. “If you distribute your seeds, how will you win the competition for growing the best corn next year?” the reporter asked.
+“Sir,” replied Peter, “the wind picks up pollen from crops and flowers and spreads it everywhere. So if my neighbours do not grow good corps, my field will suffer too. If i need to grow good corn, i must help my neighbours too.”
+The reporter realized how wise the farmer was.
+
+पीटर नाम के एक किसान को अपने गाँव में सबसे बेहतरीन मक्के की फसल की खेती करने के लिए एक स्वर्ण पुरस्कार मिला।
+
+एक दिन एक रिपोर्टर यह देखकर चौंक गया की वही किसान पीटर गाँव के बाकी किसानों को बीज प्रदान कर रहा था। रिपोर्टर ने उससे पूछा, "अगर तुम अपने बीज एसे बाँट दोगे तो अगले साल तुम  सबसे अच्छी मक्के की फसल उगाने की प्रतियोगिता में कैसे जीतो गे?" 
+वह बोला, "साहब, हवा खुद ही अपने बहाव से फसल के फूलों से पराग पूरे वातावरण में फैला देती हैं। तो अगर मेरे पड़ोसी किसान अच्छी फसल नहीं उगाते , उससे आखिर में मेरी फसल को ही नुकसान होगा। अगर मैं अच्छी फसल उगाना चाहता हूँ तो मुझे अपने पड़ोसी किसानों की मदद करनी ही पड़ेगी।"
+
+तब जाकर उस रिपोर्टर को  उस किसान की चतुराई का अंदाज़ा हुआ
+
+h:pch n!person n:plant a!wise v:receive n:gift n:good v:because n:plant n:his v:grow a!most
+p:old n:he a!famous v:because n:book n:village v:write n:history n:him
+p:new h:poh n!person n:book v:see a!surprised n:person n:plant v:give n:seed n:him v:towards n:person n!plant n:village a!other
+p:old n!person n:book v:ask n:person n:plant v:receive a!how n:gift n:good v:despite n:this
+p:old n!person n:plant v:say n:life-bee v:take n:seed n:air v:around n:village a!all
+p:old n:village v:grow a!well a!not n:if_then n!plant n:my v:grow a!same
+p:old n!person n:book v:know_fact n:person n:plant a!wise a!true
+
+A wise farmer received prizes because his plants grew the most.
+He was famous because the village newspaper wrote about him.
+Once, a writer saw in surprise the farmer giving his seeds to other farmers of the village.
+The writer asked the the farmer how he will receive the prizes despite this.
+The farmer said "the bees take the pollen around all the village.
+If the village's plants grow badly then my plants grow badly."
+The writer knew the farmer was indeed wise.
+
+
+   dà cébózú dh dàtà nu bódé bójí
+gh défa nu kaká ka bodé
+yh tà céka kèfi bébó dù dudé nè bécókávu
+gh céka ná bébó dhzá dàtà no mo
+gh cébó ph gìmi ke dubò kí káwà
+gh ká bójàzù nacómi bósi
+gh céka ka bébózúwí

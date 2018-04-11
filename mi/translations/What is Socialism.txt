@@ -1,0 +1,17 @@
+Socialism is disapproval of absentee property. Capitalists rent out property, controlling the workmen/tools relationship, owning in absence—unable to personally use multiple machines, contributing nothing.
+Eight people have half the world’s wealth. Not through sweat but exploit and underpayment. We then statistically cannot buy all produced, and must borrow our stolen labour as credit (with interest) to live.
+All absentee property in common!
+Ensure people their homes, workers their tools, farmers their land. Who needs these than us? Not lazy capitalists; rent/wage is illegitimate!
+Not unjust cock-fight markets, we need rational competition and collaboration. Not corrupt politics, we need real democracy.
+
+
+h:h n:protocol-socialism v:like a!not n:ownership n:possession a!absent
+p:old n:person v:give a!temporary n:possession n:soft_and v:control a!absent n:relationship n!tool n:person
+p:old n:ownership a!absent v:give n:nothing
+p:old n:person n:number n:8 v:have n:possession n:world a!half
+p:old n:effort n:they a!false v:take a!forcible n:possession n:other
+p:old n!and_so 
+We then statistically cannot buy all produced, and must borrow our stolen labour as credit (with interest) to live.
+All absentee property in common!
+Ensure people their homes, workers their tools, farmers their land. Who needs these than us? Not lazy capitalists; rent/wage is illegitimate!
+Not unjust cock-fight markets, we need rational competition and collaboration. Not corrupt politics, we need real democracy.
