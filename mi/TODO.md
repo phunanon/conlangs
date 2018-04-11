@@ -16,6 +16,7 @@
 - Sentencer favour ask option
 - Floating point numbers
 - Syth pause after period
+- Lone-head sentences
 
 ## Could do
 - Implement compound verbs/adjectives
