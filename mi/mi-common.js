@@ -116,7 +116,7 @@ function gloss2multi (gloss)
 
     function getGlossRoot (g) { return g.substr(2, g.length - 2); }
 
-    function outputData (root, optional, prev_feature, feature) {
+    function outputData (gloss, root, optional, prev_feature, feature) {
         let space = (latin_space_rules[prev_feature+"_"+feature] ? " " : "");
         if (root != "?") {
             let full_root = (optional ? 128 : 0) + root;
@@ -131,7 +131,7 @@ function gloss2multi (gloss)
             ascii.push(root_ascii);
             bin_html.push('<'+ feature +'>'+ root_bin +'</'+ feature +'>');
             hex_html.push('<'+ feature +'>'+ root_hex +'</'+ feature +'>');
-            latin_html += space + '<'+ feature +'_subtle>'+ root_latin +'</'+ feature +'_subtle>';
+            latin_html += space + '<'+ feature +'_subtle title="'+ gloss +'">'+ root_latin +'</'+ feature +'_subtle>';
             latin_styled += space + root_latin;
         } else {
             bin.push(pad((optional ? '1' : '0') + "???????", "00000000"));
@@ -173,7 +173,7 @@ function gloss2multi (gloss)
                 }
               //Output the domain
                 let domain_root = gloss2rootIndex(compound_domain +"-", "noun");
-                outputData(domain_root, optional, prev_feature, feature);
+                outputData(gloss[w], domain_root, optional, prev_feature, feature);
                 prev_feature = "CNOUN";
                 break;
             default:
@@ -204,9 +204,9 @@ function gloss2multi (gloss)
                 }
             }
           //Output data
-            outputData(root, optional, prev_feature, feature);
+            outputData(gloss[w], root, optional, prev_feature, feature);
         } else {
-            outputData("?", optional, prev_feature, feature);
+            outputData(gloss[w], "?", optional, prev_feature, feature);
         }
         prev_feature = feature;
     }
