@@ -128,7 +128,7 @@
             <h2>5. Tools</h2>
             <tool id="sentencer">
                 <h4>Sentencer</h4>
-                <h5>English original</h5>
+                <h5>Original text</h5>
                 <textarea id="englishin" onkeyup="setTimeout(toolSentencer, 1)">I met a little village cat; it was eight years old, my family said.</textarea>
                 <h5>Head</h4>
                 <options>
@@ -176,7 +176,7 @@
                 <h5>Output</h5>
                 <p><a id="popup_link" target="_blank">Open in popup</a>; <a id="perma_link">Perma-link</a></p>
                 <table id="output">
-                    <tr id="englishout_tr"><th>English</th><td id="englishout"></td></tr>
+                    <tr id="englishout_tr"><th>Original</th><td id="englishout"></td></tr>
                     <tr><th>Header</th><td id="headerout"></td></tr>
                     <tr class="small"><th>Key</th><td><mihead>Head</mihead> <onoun>Optional Noun</onoun> <noun>Noun</noun> <cnoun>Compound Noun</cnoun> <adj>Adj</adj> <verb>Verb</verb> <number>Number</number></td></tr>
                     <tr><th>Gloss</th><td class="gloss" id="glossout"></td></tr>
@@ -193,12 +193,12 @@
             <br>
             <tool id="paragrapher">
                 <h4>Paragrapher</h4>
-                <textarea id="englishin" placeholder="English original">Memory is a strange thing. It doesn't work like I thought it did. There are days that define your story beyond your life. Like the day they arrived.</textarea><br>
+                <textarea id="englishin" placeholder="Original text">Memory is a strange thing. It doesn't work like I thought it did. There are days that define your story beyond your life. Like the day they arrived.</textarea><br>
                 <textarea id="input" placeholder="preglossed input">h:h n!idea n:time a!strange p:old n:it v:work a!similar a!not n:my n:thought a!for p:old n:day a!exist v:create a!more n:history n:life p:new h:p n:they v:come a!similar</textarea><br>
                 <button onclick="toolParagrapher()">Generate mi</button>
                 <h5>Output</h5>
                 <table id="output">
-                    <tr id="englishout_tr"><th>English</th><td id="englishout"></td></tr>
+                    <tr id="englishout_tr"><th>Original</th><td id="englishout"></td></tr>
                     <tr class="small"><th>Key</th><td><mihead>Head</mihead> <onoun>Optional noun</onoun> <noun>Noun</noun> <cnoun>Compound Noun</cnoun> <adj>Adj</adj> <verb>Verb</verb> <number>Number</number> <period>Period</period></td></tr>
                     <tr><th>Gloss</th><td class="gloss" id="glossout"></td></tr>
                     <tr class="hr"><th>Latin & IPA</th><td><p id="latinout"></p></td></tr>
