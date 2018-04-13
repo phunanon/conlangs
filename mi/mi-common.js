@@ -236,6 +236,7 @@ function index2latin (index)
 //https://itinerarium.github.io/phoneme-synthesis/
 function latin2spk (latin)
 {
+    latin = latin.replace(/\//g, " ");
     let spk = "";
     for (c in latin) {
         spk += _spk[chrFind(latin[c], _chr)];

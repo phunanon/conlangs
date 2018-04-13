@@ -4,6 +4,7 @@ function loadLexicon ()
     gE("button#loadLexicon").style.display = "none";
     let lex_html = "";
     let mi_index = 0;
+  //Load roots
     for (let lex in _lex) {
         let mi      = index2latin(mi_index) +"/"+ index2latin(mi_index+128);
         let noun    = _lex[lex].noun;
@@ -32,6 +33,19 @@ function loadLexicon ()
             '</tr>';
         ++mi_index;
     }
+  //Load compound nouns
+    for (let lex in _noun_multi) {
+        let i = gloss2rootIndex(lex +"-", "noun");
+        for (let compound in _noun_multi[lex]) {
+            let mi = index2latin(i) +"/"+ index2latin(i+128) +' '+index2latin(compound);
+            lex_html += '<tr>'+
+                '<td class="hex">0x'+ pad(parseInt(i).toString(16), "00") + pad(parseInt(compound).toString(16), "00") +'</td>'+
+                '<td class="mi"><speaker onclick="spk(\''+ mi +'\')"></speaker> '+ mi +'</td>'+
+                '<td class="english cutoff" title="'+ _noun_multi[lex][compound] +'">'+ _noun_multi[lex][compound] +'</td>'+
+                '</tr>';
+        }
+    }
+  //Dump to DOM
     gE("#s4 #t1").innerHTML += lex_html;
 }
 
