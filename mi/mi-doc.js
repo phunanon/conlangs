@@ -387,6 +387,7 @@ function toolParagrapher ()
     if (gloss == "") { return; }
     gE("tool#paragrapher #glossout").innerHTML = "<gloss>"+ gloss2html(gloss) +"</gloss>";
     var multi_out = gloss2multi(gloss);
+    multi_out.latin_html = multi_out.latin_html.replace(/(<PERIOD.+?>)/g, "<br>$1");
     gE("tool#paragrapher #latinout").innerHTML = '<p class="focus">'+ multi_out.latin_html +'</p>'+
         '<p>/'+ multi_out.ipa +'/ <speaker onclick="spk(\''+ multi_out.latin_styled.split("?").join("") +'\')"></speaker> <span>'+ multi_out.chars +' chars</span></p>';
     gE("tool#paragrapher #script1out").innerHTML = multi_out.latin_styled;
