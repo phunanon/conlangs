@@ -22,19 +22,23 @@ p:old n!person n:plant v:say n:life-bee v:take n:seed n:air v:around n:village a
 p:old n:village v:grow a!well a!not n:if_then n!plant n:my v:grow a!same
 p:old n!person n:book v:know_fact n:person n:plant a!wise a!true
 
-A wise farmer received prizes because his plants grew the most.
-He was famous because the village newspaper wrote about him.
-Once, a writer saw in surprise the farmer giving his seeds to other farmers of the village.
-The writer asked the the farmer how he will receive the prizes despite this.
-The farmer said "the bees take the pollen around all the village.
-If the village's plants grow badly then my plants grow badly."
-The writer knew the farmer was indeed wise.
+1 A wise farmer received prizes because his plants grew the most.
+2 He was famous because the village newspaper wrote about him.
+3 Once, a writer saw in surprise the farmer giving his seeds to other farmers of the village.
+4 The writer asked the the farmer how he will receive the prizes despite this.
+5 The farmer said "the bees take the pollen around all the village.
+6 If the village's plants grow badly then my plants grow badly."
+7 The writer knew the farmer was indeed wise.
 
 
-   dà cébózú dh dàtà nu bódé bójí
-gh défa nu kaká ka bodé
-yh tà céka kèfi bébó dù dudé nè bécókávu
-gh céka ná bébó dhzá dàtà no mo
-gh cébó ph gìmi ke dubò kí káwà
-gh ká bójàzù nacómi bósi
-gh céka ka bébózúwí
+1 dà cébózú dh dàtà nu bódé bójí
+2 gh défa nu kaká ka bodé
+3 yh tà céka kèfi bébó dù dudé nè bécókávu
+4 gh céka ná bébó dhzá dàtà no mo
+5 gh cébó ph gìmi ke dubò kí káwà
+6 gh ká bójàzù nacómi bósi
+7 gh céka ka bébózúwí
+
+
+
+
