@@ -28,7 +28,7 @@ let _lex = [
     { noun: "within/in/at", type: "spacial, preposition", verb: "within/at/occupy", adj: "within", comment: "" },
     { noun: "with", type: "", verb: "", adj: "", comment: "" },
     { noun: "from", type: "", verb: "come/come_from/go_away/leave", adj: "from/outward/outwards", comment: "" },
-    { noun: "to", type: "", verb: "go_toward/arrive/toward/towards", adj: "to/toward/towards/inwards", comment: "" },
+    { noun: "to/towards/toward", type: "", verb: "go_toward/arrive/toward/towards", adj: "to/toward/towards/inwards", comment: "" },
 
 //Communication, mathematics, direction
     { noun: "number", type: "", verb: "quantify", adj: "how_much", comment: "Used to indicate an integer follows" },
@@ -76,14 +76,14 @@ let _lex = [
     { noun: "moon/night", type: "", verb: "obscure/cover/sleep", adj: "cold", comment: "" },
     { noun: "yesterday", type: "", verb: "", adj: "most/best", comment: "" },
     { noun: "today", type: "", verb: "", adj: "never/impossible", comment: "" },
-    { noun: "tomorrow", type: "", verb: "", adj: "least", comment: "" },
+    { noun: "tomorrow", type: "", verb: "", adj: "least/worst", comment: "" },
     { noun: "age", type: "", verb: "tax/age", adj: "when/dead", comment: "" },
-    { noun: "old/previous", type: "", verb: "", adj: "old", comment: "" },
-    { noun: "new/youngling/next", type: "", verb: "", adj: "new/again/young", comment: "" },
+    { noun: "old/previous", type: "", verb: "lose", adj: "old", comment: "" },
+    { noun: "new/youngling/next", type: "", verb: "win/beat", adj: "new/again/young", comment: "" },
     { noun: "bad", type: "", verb: "kill/break", adj: "bad", comment: "" },
     { noun: "good", type: "", verb: "", adj: "good/well", comment: "" },
 //Humanity and its stuff
-    { noun: "desire/want/pleasure/love", type: "", verb: "desire/want/like/love", adj: "wanted/desired", comment: "" },
+    { noun: "desire/want/pleasure/love", type: "", verb: "desire/want/like/love/enjoy", adj: "wanted/desired", comment: "" },
     { noun: "need/requirement", type: "", verb: "need/require", adj: "forcible", comment: "" },
     { noun: "unison/relationship", type: "", verb: "care", adj: "in_unison", comment: "" },
     { noun: "music", type: "", verb: "play", adj: "musical/surprised", comment: "" },
@@ -96,14 +96,14 @@ let _lex = [
 //Buildings, furniture, structures, protocols, objects, locations
     { noun: "rock/stone/table", type: "", verb: "", adj: "", comment: "" },
     { noun: "tree/wood", type: "", verb: "", adj: "tasty", comment: "" },
-    { noun: "building/room", type: "", verb: "", adj: "", comment: "" },
-    { noun: "door/entry", type: "", verb: "enter", adj: "possible", comment: "" },
+    { noun: "building/room", type: "", verb: "enter", adj: "", comment: "" },
+    { noun: "door/entry", type: "", verb: "open", adj: "possible/opened", comment: "" },
     { noun: "table/platform", type: "", verb: "", adj: "", comment: "" },
     { noun: "instrument/toy/gift", type: "", verb: "play", adj: "", comment: "" },
     { noun: "meeting/visit", type: "", verb: "meet", adj: "included", comment: "" },
     { noun: "item/tool", type: "", verb: "give", adj: "few", comment: "" },
     { noun: "collection", type: "", verb: "collect/receive", adj: "many", comment: "" },
-    { noun: "glass/cup/bottle/bowl/container", type: "", verb: "", adj: "", comment: "" },
+    { noun: "glass/cup/bottle/bowl/container", type: "", verb: "close", adj: "closed", comment: "" },
     { noun: "area/ownership", type: "", verb: "own/have/take", adj: "excluded", comment: "" },
     { noun: "book", type: "", verb: "write/know_fact", adj: "written", comment: "" },
     { noun: "place/location/position", type: "", verb: "place", adj: "where", comment: "" },
@@ -160,7 +160,8 @@ let _noun_multi = [
     { noun: "prize", nouns: "gift good" },
     { noun: "newspaper", nouns: "book village" },
     { noun: "writer", nouns: "person book" },
-    { noun: "pollen", nouns: "seed air" }
+    { noun: "pollen", nouns: "seed air" },
+    { noun: "key", nouns: "door instrument" }
 ];
 let _adj_multi = [
     { adj: "absent", adjs: "near none" }
