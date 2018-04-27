@@ -200,6 +200,7 @@ let latin2cursiveSVG_count = 0;
 function latin2cursiveSVG (latin, MAX_LINE)
 {
     latin = latin.replace(/ /g, "");
+    latin = latin.replace(/gh/g, "xgh").replace(/yh/g, "xyh");
     let WRD_W = 64, WRD_H = 128, PART_W = 23.192;
 
     let X_START = '<path d="m ';
@@ -225,6 +226,7 @@ function latin2cursiveSVG (latin, MAX_LINE)
     let is_con = true;
     function appendSVG (svg) { SVG_out += svg + x + 'px,'+ y +'px' + C_ENDING; }
     for (const c of latin) {
+        if (c == "x") { ++l; x = 0; y += WRD_H; continue; }
         if (c == "?") { continue; }
         if (is_con) {
             let c_bin = chrFind(c, _con);
@@ -393,7 +395,7 @@ function toolParagrapher ()
     gE("tool#paragrapher #script1out").innerHTML = multi_out.latin_styled;
     gE("tool#paragrapher #script2out").innerHTML = latin2restHTML(multi_out.latin_styled, 16);
     gE("tool#paragrapher #script3out").innerHTML = latin2cursiveSVG(multi_out.latin, 16);
-    gE("tool#paragrapher #script4out").innerHTML = multi_out.latin_styled;
+    gE("tool#paragrapher #script4out").innerHTML = multi_out.latin_styled.replace(/gh/g, "<br>gh").replace(/yh/g, "<br>yh");
 }
 
 
