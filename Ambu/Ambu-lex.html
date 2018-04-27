@@ -1,0 +1,57 @@
+<head>
+    <script>
+let Ambu_lex = `
+n	amba	walk, journey
+v	ambi	walk
+v	amna	meal
+v	amni	eat
+a	anto	tall
+n	baku	sentence
+a	bibo	all
+n	dewa	home
+n	kaka	madness
+v	kaki	angry, mad
+a	kako	mad
+n	kuna	dog
+v	kuni	bark
+a	memo	less
+a	momo	more
+n	nama	name
+v	nami	name
+a	namo	named
+n	paka	work
+v	paki	work
+n	pepa	gift
+v	pepi	give
+n	saba	hello
+n	tebu	tree
+n	teda	interest
+a	tedo	interesting
+n	tepa	leaf
+n	tika	desire, want
+v	tiki	want
+n	unta	vista, view
+v	unti	see
+v	wine	fall
+a	wino	fallen
+n	winu	fall
+v	work	paki
+`;
+
+function pageLoad ()
+{
+    let html = "<table><tr><th>Genre</th><th>Ambu</th><th>English</th></tr>";
+    let _lex = Ambu_lex.split("\n");
+    for (l of _lex) {
+        if (l == "") { continue; }
+        l = l.split("\t");
+        html += "<tr><td>"+ l[0] +"</td><td>"+ l[1] +"</td><td>"+ l[2] +"</td></tr>";
+    }
+    html += "</table>";
+    document.body.innerHTML = html;
+}
+    </script>
+</head>
+<body onload="pageLoad()">
+
+</body>
