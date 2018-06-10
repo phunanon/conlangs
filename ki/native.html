@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>ki native script</title>
+        <style>
+@font-face {
+   font-family: ki-native-loop;
+   src: url("font/ki-native-loop.woff2") format("woff2");
+}
+* {
+    font-size: 1.5rem;
+}
+ki, lat { display: block; }
+ki { font-family: ki-native-loop !important; }
+lat { font-family: mono; font-size: 1.9rem; }
+        </style>
+        <script>
+let chs = [" ", "ii", "jj", "ee", "aa", "qq", "oo", "uu", "hh", "i", "j", "e", "a", "q", "o", "u", "h", "p", "b", "t", "d", "k", "g", "m", "n", "f", "v", "y", "s", "z", "c", "l", "w"];
+let lat = [" ", "í", "ì", "é", "á", "ò", "ó", "ú", "ù", "i", "j", "e", "a", "q", "o", "u", "h", "p", "b", "t", "d", "k", "g", "m", "n", "f", "v", "y", "s", "z", "c", "l", "w"];
+
+function load ()
+{
+    let txt = window.location.toString().split('#')[1].replace(/\+/g, ' ');
+    for (let c in chs) {
+        txt = txt.split(chs[c]).join(lat[c]);
+    }
+    document.body.innerHTML = '<ki>'+ txt +'</ki><lat>'+ txt +'</lat>';
+}
+        </script>
+    </head>
+    <body onload="load()">
+    </body>
+</html>
+
