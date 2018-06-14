@@ -17,6 +17,7 @@
 - Floating point numbers
 - Syth pause after period
 - Lone-head sentences
+- Script 3 introduces gaps upon ??
 
 ## Could do
 - Implement compound verbs/adjectives

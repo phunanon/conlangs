@@ -1,0 +1,12 @@
+(noun) noun (adj) verb (adj) noun/null...
+
+are you sure the white dog is sleeping on the wooden table and not outside?
+n:() n:you a:() v:sure a:() n:null n:() n:animal a:(white) v:sleep a:() n:wood n:() n:table a:() v:not a:() n:outside
+
+When did you eat that cake on Wednesday?
+when being null you eat wednesday cake
+
+Are you updating only one value or have you updated everything in the table?
+you update value one !only compare_to null you update table all
+
+ma ma ma ma ma ma ma ma ma ma ma

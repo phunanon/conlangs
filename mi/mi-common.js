@@ -76,6 +76,7 @@ function head2binhead (head)
 
 function gloss2rootIndex (gloss, feature)
 {
+    if (feature == undefined){ return "??"; }
     feature = feature.toLowerCase();
     if (feature == "onoun" || feature == "number") { feature = "noun"; }
     if (feature == "period") { return (gloss == "new" ? 0xFF : 0x7F); }
