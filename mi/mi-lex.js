@@ -113,7 +113,7 @@ let _lex = [
     { noun: "village", type: "", verb: "", adj: "", comment: "" },
     { noun: "town", type: "", verb: "", adj: "", comment: "" },
     { noun: "country", type: "", verb: "", adj: "", comment: "" },
-    { noun: "wall/fence", type: "", verb: "", adj: "bad", comment: "" },
+    { noun: "wall/fence", type: "", verb: "", adj: "", comment: "" },
     { noun: "face", type: "", verb: "see", adj: "", comment: "" },
     { noun: "", type: "", verb: "", adj: "", comment: "" },
     { noun: "", type: "", verb: "", adj: "", comment: "" },
@@ -127,7 +127,7 @@ let _lex = [
     { noun: "", type: "", verb: "", adj: "", comment: "" },
     { noun: "", type: "", verb: "", adj: "", comment: "" },
     { noun: "", type: "", verb: "", adj: "", comment: "" },
-    { noun: "colour", type: "", verb: "", adj: "", comment: "Used to indicate an colour follows" },
+    { noun: "colour", type: "", verb: "", adj: "colourful", comment: "Used to indicate an colour follows" },
 //Compound nouns
     { noun: "proper-", type: "", verb: "", adj: "", comment: "Expresses proper nouns" },
     { noun: "life-", type: "", verb: "", adj: "", comment: "" },

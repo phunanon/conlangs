@@ -19,6 +19,7 @@ let _examples = [
     ["Three professors might be laid off this year.", "h:fh n!person n!school n:number n:3 v:leave a!by n:school n:measure-year"],
     ["My friend came walking into the classroom toward me.", " h:pod n!friend n:my v:walk_to n:me n!room n:school"],
     ["The wolf that killed the woman who saw the man you love is dead.", "h:pod n:animal a!dead v:kill n:female n:adult v:see n:male n!love n:you"],
+    ["(A panagram) Once, and then back again, I know the happy east was able to sleep well and the colourful home badly remembered the partial collection of female teachers", "h:pud n:east a!happy v:sleep a!well a!able n:soft_and n:house a!colourful v:remember a!bad n:female n!school n!collection n!partial"],
 
     ["The sun shines. The sun is shining.", "h:nh n:sun v:shine p:new h:id n:sun v:shine"],
     ["The sun shone. The sun has been shining.", "h:pd n:sun v:shine"],
