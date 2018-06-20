@@ -1,0 +1,37 @@
+1 A wise farmer received prizes because his plants grew the most.
+2 He was famous because the village newspaper wrote about him.
+3 Once, a writer saw in surprise the farmer giving his seeds to other farmers of the village.
+4 The writer asked the the farmer how he will receive the prizes despite this.
+5 The farmer said "the bees take the pollen around all the village.
+6 If the village's plants grow badly then my plants grow badly."
+7 The writer knew the farmer was indeed wise.
+
+1 farmer" 'past 'hearsay 'wise" grow, 'most plant his receive, 'result prize"
+2 newspaper" write, story his 'famous
+3 'person book see, 'surprised farmer" give, seed" his to", farmer" village 'other
+4 The writer asked the the farmer how he will receive the prizes despite this.
+4 'person book ask, farmer" receive, 'how gift" while", this
+5 farmer" say, bee" carry, pollen" around", village 'all
+6 village grow, 'good 'not 'if_then plant my grow, 'same
+7 'person book know_fact, person plant 'wise" 'true
+
+
+1 'person plant 'past 'mind 'old 'hearsay grow, 'most plant his receive, 'result possession success
+2 'book village write, story his 'mind 'village
+3 'person book see, 'surprised person plant give, child 'plant his toward", person plant 'other
+4 'person book ask, person plant receive, 'how possession success while", this
+5 'person plant say, bee" carry, child air around", village 'all
+6 village grow, 'good 'not 'if_then plant my grow, 'same
+7 'person book know_fact, person plant 'mind 'old 'true
+
+1 risu dó zjré dò su, libò su pe sú, ze cukì (wù)
+2 véyq fì, fò pe zjyq (wù)
+3 rifé sh, ladi yi su sù, yìzu be wecq, yisu zo (wù)
+4 rifé to, yisu sú, dq cugì weti, pé (wù)
+5 risu ki, wóbobi wqpe, yìzé wewe, yq likí (wù)
+6 yq su, zh gq lidi su pi su, zq (wù)
+7 rifé fu, yqsu zjréga (wù)
+(83/90B)
+
+
+
