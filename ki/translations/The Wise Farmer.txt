@@ -6,10 +6,9 @@
 6 If the village's plants grow badly then my plants grow badly."
 7 The writer knew the farmer was indeed wise.
 
-1 farmer" 'past 'hearsay 'wise" grow, 'most plant his receive, 'result prize"
+1 farmer" 'past 'wise" 'hearsay grow, 'most plant his receive, 'result prize"
 2 newspaper" write, story his 'famous
 3 'person book see, 'surprised farmer" give, seed" his to", farmer" village 'other
-4 The writer asked the the farmer how he will receive the prizes despite this.
 4 'person book ask, farmer" receive, 'how gift" while", this
 5 farmer" say, bee" carry, pollen" around", village 'all
 6 village grow, 'good 'not 'if_then plant my grow, 'same
@@ -24,13 +23,13 @@
 6 village grow, 'good 'not 'if_then plant my grow, 'same
 7 'person book know_fact, person plant 'mind 'old 'true
 
-1 risu dó zjré dò su, libò su pe sú, ze cukì (wù)
-2 véyq fì, fò pe zjyq (wù)
-3 rifé sh, ladi yi su sù, yìzu be wecq, yisu zo (wù)
-4 rifé to, yisu sú, dq cugì weti, pé (wù)
-5 risu ki, wóbobi wqpe, yìzé wewe, yq likí (wù)
-6 yq su, zh gq lidi su pi su, zq (wù)
-7 rifé fu, yqsu zjréga (wù)
+1 xisu dó zyxé dò su, libò su pe sú, ze cukì (wù)
+2 vérq fì, fò pe zyrq (wù)
+3 xifé sh, ladi ri su sù, rìzu be wecq, risu zo (wù)
+4 xifé to, risu sú, dq cugì weti, pé (wù)
+5 xisu ki, wóbobi wqpe, rìzé wewe, rq likí (wù)
+6 rq su, zh gq lidi su pi su, zq (wù)
+7 xifé fu, rqsu zyxé ga (wù)
 (83/90B)
 
 

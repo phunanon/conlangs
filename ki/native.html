@@ -16,8 +16,9 @@ ki { font-size: 1.5rem; font-family: ki-native; }
 lat { font-size: 1.9rem; font-family: 'Roboto Mono'; }
         </style>
         <script>
-let chs = [" ", "ii", "jj", "ee", "aa", "qq", "oo", "uu", "hh", "i", "j", "e", "a", "q", "o", "u", "h", "p", "b", "t", "d", "k", "g", "m", "n", "f", "v", "y", "s", "z", "c", "l", "w"];
-let lat = [" ", "í", "ì", "é", "á", "ò", "ó", "ú", "ù", "i", "j", "e", "a", "q", "o", "u", "h", "p", "b", "t", "d", "k", "g", "m", "n", "f", "v", "y", "s", "z", "c", "l", "w"];
+const Cs  = ["p", "t", "k", "f", "r", "s", "c", "w", "b", "d", "g", "v", "x", "z", "j", "l"];
+let chs = [" ", "ii", "yy", "ee", "aa", "qq", "oo", "uu", "hh", "i", "j", "e", "a", "q", "o", "u", "h"].concat(Cs);
+let lat = [" ", "í", "ì", "é", "á", "ò", "ó", "ú", "ù", "i", "j", "e", "a", "q", "o", "u", "h"].concat(Cs);
 
 function load ()
 {
@@ -25,7 +26,7 @@ function load ()
     for (let c in chs) {
         txt = txt.split(chs[c]).join(lat[c]);
     }
-    document.body.innerHTML = '<ki>'+ txt +'</ki><lat>'+ txt +'</lat>';
+    document.body.innerHTML = '<ki>'+ txt +'</ki><lat>'+ txt +'</lat><br><p>Note: if you clicked on this example from the internet, it\'s likely only newer translations are up-to-date orthographically.</p>';
 }
         </script>
     </head>

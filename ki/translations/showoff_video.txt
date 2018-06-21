@@ -1,0 +1,32 @@
+0 Hello!
+1 I believe I may have created the world's fastest language.
+2 Please challenge me on this!
+3 But I do cheat a little, as I drop a lot of articles.
+4 To show how fast it is, I'm speaking this at a comfortable pace and applying subtitles.
+5 I'm not fluent, but when writing with the documentation it's really quick to form a sentence.
+6 Thanks for watching!
+
+0 you!
+1 I believe, language" world 'fast" 'most" make, 'maybe" I
+2 you challenge, 'please me this 'about
+3 'but cheat" 'little make, I 'because article" 'plural include", 'little I
+4 I show, speed" 'good it 'by speak, I speed" 'comfortable 'and apply", I subtitles"
+5 I 'fluent" 'not but write, with documentation" is, 'fast 'really I sentence" make,
+6 you watch, 'thanks
+
+0 pj!
+1 pi fá, fìci sh cacá libò pé, lidh pi
+2 pj ké, bj pi pí ligj
+3 ligq cekq ca pé, pi ligi refì bò ljfq, ca pi
+4 pi fh, sacá ch pé liga ki, pi sacá vú dí lqpi, pi fìvjyì
+5 pi cavì gq likq fì, wivq lqpj pi, cacá dh pi vìfì pé,
+6 pj fí, bi!
+
+
+0 pj!
+1 pi faa, fjjci sh cacaa libqq pee, lidh pi
+2 pj kee, bj pi pii ligj
+3 ligq cekq ca pee, pi ligi refjj bqq ljfq, ca pi
+4 pi fh, sacaa ch pee liga ki, pi sacaa vuu dii lqpi, pi fjjvjyjj
+5 pi cavjj gq likq fjj, wivq lqpj pi, cacaa dh pi vjjfjj pee,
+6 pj fee, bi!
