@@ -1,0 +1,66 @@
+@font-face {
+    font-family: "DejaVu Sans Extra Light", sans-serif;
+    src: url("https://cdn.web-fonts.ge/fonts/dejavu-sans-extra-light/fonts/dejavu-sans-extra-light-webfont.woff2") format('woff2');
+}
+@font-face {
+   font-family: ki-native;
+   src: url("font/ki-native.woff2") format("woff2");
+}
+
+*:not(ul) {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "DejaVu Sans Extra Light", sans-serif;
+    background-color: #f8f8f8;
+}
+
+.ki { font-family: ki-native; }
+.dist {
+    background-color: #00a65d;
+    color: #fff;
+    display: inline-block;
+    padding: .8rem;
+    min-width: 2.4rem;
+    min-height: 2.4rem;
+    vertical-align: top;
+    text-align: center;
+}
+
+p { padding: .5rem; }
+.big_items * { font-size: 1.5rem; }
+td { padding: .2rem; }
+
+#gloss_stuff {
+    padding: 1rem;
+}
+#gloss_in_con {
+    padding: .5rem;
+    border: .1rem solid #000;
+    background-color: #fff;
+    user-select: none;
+    overflow: hidden;
+    display: block;
+    min-height: 2rem;
+}
+#gloss_in {
+    border: none;
+    display: block;
+    width: 100%;
+}
+
+overlap { position: relative; display: block; }
+overlap > * { position: absolute; }
+overlap > *:last-child { opacity: .5; }
+
+n { background-color: #aaf; }
+v { background-color: #faa; }
+a { background-color: #afa; }
+n_, v_, a_ { padding: 0 .3rem 0 .3rem; }
+n_ { border-bottom: .2rem solid #aaf; }
+v_ { border-bottom: .2rem solid #faa; }
+a_ { border-bottom: .2rem solid #afa; }
+
+

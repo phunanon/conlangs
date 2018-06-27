@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>ki</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="css.css">
+        <script type="text/javascript" src="ki-common.js"></script>
+        <script>
+function onLoad ()
+{
+    create_lex_indexes();
+    create_multi_indexes();
+    DOM_gloss_in(e("#gloss_in"));
+}
+
+function DOM_gloss_in (el)
+{
+    let gloss = el.value.trim().split(" ");
+    if (gloss == "") { e("#gloss_in_mask").innerHTML = e("#gloss2ki_out").innerHTML = e("#ipa_out").innerHTML = ""; return; }
+    let vgloss = "";
+  //Jazz up with a mask, generate vgloss
+    let html = "";
+    let p = 0;
+    const parts = ["N", "A", "V", "A", "N", "N"];
+    let prev_opt = 5;
+    for (let g = 0, g_len = gloss.length; g < g_len; ++g) {
+         let is_opt = (gloss[g][0] == "'");
+         if (is_opt && prev_opt) { p = prev_opt; } else {
+             if (!is_opt && (p % 2)) { ++p; prev_opt = 0; } else { prev_opt = p; }
+         }
+         if (p > 5) { p = 0; }
+         html += "<"+ parts[p] +">"+ gloss[g] +"</"+ parts[p] +"> ";
+         vgloss += parts[p] + gloss[g] +" ";
+         ++p;
+    }
+    e("#gloss_in_mask").innerHTML = html;
+  //Do vgloss2ki
+    let ki_multi = vgloss2ki_multi(vgloss.trim());
+    e("#gloss2ki_out").innerHTML = ki_multi.htm_ki.replace(/ /g, "");
+    e("#ipa_out").innerHTML = "/"+ ki2ipa(ki_multi.lat_ki) +"/";
+}
+
+
+function loadDict ()
+{
+    let html = '<table><tr><th colspan="2">ki</th><th>noun</th><th>verb</th><th>adjective</th></tr>';
+    let count = 0;
+    for (let l of lex) {
+        let k = num2ki(l.k);
+        if (!l.n) { continue; }
+        html += '<tr><td class="ki">'+ k +'</td><td>'+ k +'</td><td>'+ l.n +'</td><td>'+ l.v +'</td><td>'+ l.a +'</td></tr>';
+        ++count;
+    }
+    html += "</table>";
+    e("#dict").innerHTML = count +" roots"+ html;
+}
+
+
+function e (el) { return document.querySelector(el); }
+        </script>
+    </head>
+    <body onload="onLoad()">
+        <h1 class="dist">ki</h1><h1 class="ki dist">ki</h1>
+        <p>An oligosynthetic contructed language with the primary goal of being the fastest-to-speak language in the world.</p>
+        <div class="big_items" id="gloss_stuff">
+            <overlap id="gloss_in_con">
+                <span id="gloss_in_mask"></span>
+                <input id="gloss_in" onkeyup="DOM_gloss_in(this)" value="I determine 'needed I water drink">
+            </overlap>
+            <p id="gloss2ki_out"></p>
+            <p id="ipa_out"></p>
+        </div>
+        <p>Lexicon included:</p>
+        <ul>
+            <li>Mono-Roots</li>
+            <li>Generic Multi-Roots</li>
+            <li>Grammar Multi-Roots</li>
+            <li>Space/Time/Travel Multi-Roots</li>
+        </ul>
+        <div id="dict">
+            <button onclick="loadDict()">Load lexicon</button>
+        </div>
+    </body>
+</html>
