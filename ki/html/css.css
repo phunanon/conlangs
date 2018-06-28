@@ -17,7 +17,7 @@ body {
     background-color: #f8f8f8;
 }
 
-.ki, ki { font-family: ki-native; }
+.ki, ki, ki * { font-family: ki-native; }
 .dist {
     background-color: #00a65d;
     color: #fff;
