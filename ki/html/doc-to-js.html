@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>ki doc-to-js</title>
+        <script>
+let lex = [];
+
+function doc2js (prefix = 0)
+{
+    let txt = e("#lex").value.slice(0, -1).split("\n");
+  //Separate
+    let l = 0;
+    for (let t = 0, t_len = txt.length; t < t_len; t += 3) {
+        if (txt[t] == "") { ++l; continue; }
+        let lx = {};
+        lx.k = "0x"+ (prefix ? hex(prefix) : "") + hex(l);
+        lx.n = txt[t];
+        lx.v = txt[t+1];
+        lx.a = txt[t+2];
+        lex.push(lx);
+        ++l;
+    }
+  //Output
+    let pre_out = "";
+    for (let l of lex) {
+        pre_out += '    { k: '+ l.k +', n: "'+ l.n +'", v: "'+ l.v +'", a: "'+ l.a +'" },\n';
+    }
+    document.body.innerHTML = "<pre>let lex = [\n"+ pre_out.slice(0, -2) +"\n];</pre>";
+}
+
+function triplicate ()
+{
+    let txt = e("#trip").value.trim().split("\n");
+    let htm_out = "";
+    for (let t = 0, t_len = txt.length; t < t_len; ++t) {
+        htm_out += txt[t] +"\n";
+        htm_out += txt[t] +"\n";
+        htm_out += txt[t] +"\n";
+    }
+    e("#trip").value = htm_out;
+}
+
+function multiroots_doc2js ()
+{
+    let txt = e("#multiroots").value.slice(0, -1).split("\n");
+  //Separate
+    let l = 0;
+    for (let t = 0, t_len = txt.length; t < t_len; t += 3) {
+        let lx = {};
+        if (txt[t].match(/ /)) {
+            lx.m = txt[t];
+            lx.n = (txt[t+1].trim().match(/ /) ? txt[t+1] : "");
+            lx.a = (txt[t+2].trim().match(/ /) ? txt[t+2] : "");
+        }
+        lex.push(lx);
+        ++l;
+    }
+  //Output
+    let pre_out = "";
+    for (let l of lex) {
+        pre_out += '    { k: 0x00, m: "'+ l.m +'", n: "'+ l.n +'", a: "'+ l.a +'" },\n';
+    }
+    document.body.innerHTML = "<pre>let multi_lex = [\n"+ pre_out.slice(0, -2) +"\n];</pre>";
+}
+
+
+function e (el) { return document.querySelector(el); }
+function hex (n) { return (n < 16 ? "0" : "") + n.toString(16).toUpperCase(); }
+        </script>
+    </head>
+    <body>
+        <textarea id="lex" cols="64" rows="16"></textarea>
+        <button onclick="doc2js()">doc2js</button>
+        <br>
+        <input id="multiprefix" placeholder="prefix e.g. 72">
+        <button onclick="doc2js(e('#multiprefix').value)">prefix doc2js</button>
+        <br><br><br>
+        <textarea id="trip" cols="64" rows="16"></textarea>
+        <button onclick="triplicate()">triplicate</button>
+        <br><br><br>
+        <textarea id="multiroots" cols="64" rows="16"></textarea>
+        <button onclick="multiroots_doc2js()">multiroots doc2js</button>
+    </body>
+</html>

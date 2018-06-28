@@ -22,7 +22,7 @@ function vgloss2ki_multi (vg)
             ki = "?";
         }
         lat_ki += ki;
-        htm_ki += "<"+ part +"_>"+ ki +"</"+ part +"_> ";
+        htm_ki += "<"+ part +"_>"+ ki + (part == "V" ? "," : "") +"</"+ part +"_> ";
         lat_ki += " ";
         htm_ki += " ";
     }
@@ -68,7 +68,7 @@ function ki2ipa (ki)
 const Cs  = ["p", "t", "k", "f", "r", "s", "c", "w", "b", "d", "g", "v", "x", "z", "j", "l"];
 const Vs  = ["i", "y", "e", "a", "q", "o", "u", "h", "í", "ì", "é", "á", "ò", "ó", "ú", "ù"];
 const lat = Vs.concat(Cs).concat([" ", "?"]);
-const ipa = ["i", "e", "ɛ", "a", "ɒ", "ɔ", "u", "ə", "í", "é", "ɛ́", "á", "ɒ́", "ɔ́", "ú", "ə́",
+const ipa = ["i", "e", "ɛ", "a", "ɒ", "ɔ", "u", "ə", "í", "é", "ɛ́", "á", "ɒ́", "ɔ́", "ú", "ə́",
              "p", "t", "k", "f", "θ", "s", "ʃ", "w", "b", "d", "g", "v", "ð", "z", "ʒ", "l", " ", "?"];
 
 let lex = [

@@ -39,6 +39,7 @@ function DOM_gloss_in (el)
     let ki_multi = vgloss2ki_multi(vgloss.trim());
     e("#gloss2ki_out").innerHTML = ki_multi.htm_ki.replace(/ /g, "");
     e("#ipa_out").innerHTML = "/"+ ki2ipa(ki_multi.lat_ki) +"/";
+    e("#ki_out").innerHTML = "<ki>"+ ki_multi.htm_ki.replace(/ /g, "") +"</ki>";
 }
 
 
@@ -70,6 +71,7 @@ function e (el) { return document.querySelector(el); }
             </overlap>
             <p id="gloss2ki_out"></p>
             <p id="ipa_out"></p>
+            <p id="ki_out"></p>
         </div>
         <p>Lexicon included:</p>
         <ul>
