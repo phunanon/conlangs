@@ -38,7 +38,7 @@ p:old n!person n:book v:know_fact n:person n:plant a!wise a!true
 5 gh cébó ph gìmi ke dubò kí káwà
 6 gh ká bójàzù nacómi bósi
 7 gh céka ka bébózúwí
-
+(79B)
 
 
 
