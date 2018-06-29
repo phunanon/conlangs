@@ -23,16 +23,27 @@ function DOM_gloss_in (el)
     let html = "";
     let p = 0;
     const parts = ["N", "A", "V", "A", "N", "N"];
-    let prev_opt = 5;
+    let prev_part = 5;
+    let was_opt = true;
     for (let g = 0, g_len = gloss.length; g < g_len; ++g) {
-         let is_opt = (gloss[g][0] == "'");
-         if (is_opt && prev_opt) { p = prev_opt; } else {
-             if (!is_opt && (p % 2)) { ++p; prev_opt = 0; } else { prev_opt = p; }
-         }
-         if (p > 5) { p = 0; }
-         html += "<"+ parts[p] +">"+ gloss[g] +"</"+ parts[p] +"> ";
-         vgloss += parts[p] + gloss[g] +" ";
-         ++p;
+
+        let is_opt = (gloss[g][0] == "'");
+        if (is_opt) {
+            if (was_opt) {
+                p = prev_part;
+            }
+        } else {
+            if (p % 2) { ++p; }
+            if (p > 5) { p = 0; }
+        }
+
+        html += "<"+ parts[p] +">"+ gloss[g] +"</"+ parts[p] +"> ";
+        vgloss += parts[p] + gloss[g] +" ";
+
+        was_opt = is_opt;
+        prev_part = p;
+        ++p;
+        if (p > 5) { p = 0; }
     }
     e("#gloss_in_mask").innerHTML = html;
   //Do vgloss2ki
@@ -64,10 +75,11 @@ function e (el) { return document.querySelector(el); }
     <body onload="onLoad()">
         <h1 class="dist">ki</h1><h1 class="ki dist">ki</h1>
         <p>An oligosynthetic contructed language with the primary goal of being the fastest-to-speak language in the world.</p>
+        <p>It uses a strict pattern of <b>... (noun) noun (adj) verb (adj) noun ...</b> which repeats at the ellipsis until a period is reached. The features in parenthesis are accessed with ' in glossary.</p>
         <div class="big_items" id="gloss_stuff">
             <overlap id="gloss_in_con">
                 <span id="gloss_in_mask"></span>
-                <input id="gloss_in" onkeyup="DOM_gloss_in(this)" value="I determine 'needed I water drink">
+                <input id="gloss_in" onkeyup="DOM_gloss_in(this)" value="child 'plu_the say they plant eat 'past">
             </overlap>
             <p id="gloss2ki_out"></p>
             <p id="ipa_out"></p>

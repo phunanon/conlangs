@@ -21,7 +21,7 @@ function vgloss2ki_multi (vg)
         } else {
             ki = "?";
         }
-        lat_ki += ki;
+        lat_ki += ki+ (part == "V" ? "," : "");
         htm_ki += "<"+ part +"_>"+ ki + (part == "V" ? "," : "") +"</"+ part +"_> ";
         lat_ki += " ";
         htm_ki += " ";
@@ -67,9 +67,9 @@ function ki2ipa (ki)
 
 const Cs  = ["p", "t", "k", "f", "r", "s", "c", "w", "b", "d", "g", "v", "x", "z", "j", "l"];
 const Vs  = ["i", "y", "e", "a", "q", "o", "u", "h", "í", "ì", "é", "á", "ò", "ó", "ú", "ù"];
-const lat = Vs.concat(Cs).concat([" ", "?"]);
+const lat = Vs.concat(Cs).concat([" ", "?", ","]);
 const ipa = ["i", "e", "ɛ", "a", "ɒ", "ɔ", "u", "ə", "í", "é", "ɛ́", "á", "ɒ́", "ɔ́", "ú", "ə́",
-             "p", "t", "k", "f", "θ", "s", "ʃ", "w", "b", "d", "g", "v", "ð", "z", "ʒ", "l", " ", "?"];
+             "p", "t", "k", "f", "θ", "s", "ʃ", "w", "b", "d", "g", "v", "ð", "z", "ʒ", "l", " ", "??", "ː"];
 
 let lex = [
     { k: 0x00, n: "me/I/my", v: "am/is", a: "thanks" },
