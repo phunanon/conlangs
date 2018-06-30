@@ -48,9 +48,14 @@ function DOM_gloss_in (el)
     e("#gloss_in_mask").innerHTML = html;
   //Do vgloss2ki
     let ki_multi = vgloss2ki_multi(vgloss.trim());
-    e("#gloss2ki_out").innerHTML = ki_multi.htm_ki.replace(/ /g, "");
+    e("#gloss2ki_out").innerHTML = ki_multi.htm_ki;
     e("#ipa_out").innerHTML = "/"+ ki2ipa(ki_multi.lat_ki) +"/";
-    e("#ki_out").innerHTML = "<ki>"+ ki_multi.htm_ki.replace(/ /g, "") +"</ki>";
+    e("#ki_out").innerHTML = "<ki>"+ ki_multi.htm_ki +"</ki>";
+  //DOM styles
+    e("#gloss_width_tester").innerHTML = el.value;
+    let w = e("#gloss_width_tester").offsetWidth +"px";
+    el.style.width = w;
+    e("#gloss_in_mask").style.width = w;
 }
 
 
@@ -77,10 +82,11 @@ function e (el) { return document.querySelector(el); }
         <p>An oligosynthetic contructed language with the primary goal of being the fastest-to-speak language in the world.</p>
         <p>It uses a strict pattern of <b>... (noun) noun (adj) verb (adj) noun ...</b> which repeats at the ellipsis until a period is reached. The features in parenthesis are accessed with ' in glossary.</p>
         <div class="big_items" id="gloss_stuff">
-            <overlap id="gloss_in_con">
+            <overlap id="gloss_in_con" onclick="el = e('#gloss_in'); el.focus(); el.setSelectionRange(el.value.length, el.value.length);">
                 <span id="gloss_in_mask"></span>
-                <input id="gloss_in" onkeyup="DOM_gloss_in(this)" value="child 'plu_the say they plant eat 'past">
+                <input id="gloss_in" onkeyup="DOM_gloss_in(this);" onclick="event.stopPropagation();" value="child 'plu_the say they plant eat 'past">
             </overlap>
+            <span id="gloss_width_tester"></span>
             <p id="gloss2ki_out"></p>
             <p id="ipa_out"></p>
             <p id="ki_out"></p>

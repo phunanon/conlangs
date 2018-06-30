@@ -37,30 +37,31 @@ td { padding: .2rem; }
     padding: 1rem;
 }
 #gloss_in_con {
-    padding: .5rem;
+    padding-left: .5rem;
     border: .1rem solid #000;
     background-color: #fff;
-    user-select: none;
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
     display: block;
-    min-height: 2rem;
+    cursor: text;
 }
 #gloss_in {
     border: none;
     display: block;
-    width: 100%;
 }
+#gloss_in_mask {
+    position: absolute;
+    pointer-events: none;
+}
+#gloss_width_tester { position: fixed; white-space: nowrap; bottom: -2rem; }
 
 overlap { position: relative; display: block; }
-overlap > * { position: absolute; }
+overlap > * { line-height: 3rem; }
 overlap > *:last-child { opacity: .5; }
 
 n { background-color: #aaf; }
 v { background-color: #faa; }
 a { background-color: #afa; }
-n_, v_, a_ { padding: 0 .3rem 0 .3rem; }
 n_ { border-bottom: .2rem solid #aaf; }
 v_ { border-bottom: .2rem solid #faa; }
 a_ { border-bottom: .2rem solid #afa; }
-
-
