@@ -14,6 +14,10 @@
 ki, lat { display: block; }
 ki { font-size: 3.6rem; font-family: ki-print; }
 lat { font-size: 3rem; font-family: 'Roboto Mono'; }
+
+n { color: #44c; }
+v { color: #c44; }
+a { color: #4c4; }
         </style>
         <script>
 let Vs  = [" ", "ii", "yy", "ee", "aa", "qq", "oo", "uu", "hh", "i", "j", "e", "a", "q", "o", "u", "h"];
@@ -22,10 +26,19 @@ let lat = [" ", "í", "ì", "é", "á", "ò", "ó", "ú", "ù", "i", "j", "e", "
 function load ()
 {
     let txt = window.location.toString().split('#')[1].replace(/\+/g, ' ').replace(/,/g, '');
+    let mask = "";
+    let masked = "";
+    if (txt.indexOf("&")) { txt = txt.split("&"); mask = txt[1]; txt = txt[0]; }
     for (let c in lat) {
         txt = txt.split(Vs[c]).join(lat[c]);
     }
-    document.body.innerHTML = '<ki>'+ txt +'</ki><lat>'+ txt +'</lat>';
+    if (mask) {
+        let words = txt.split(" ");
+        for (let w in words) {
+            masked += "<"+mask[w]+">"+ words[w] +"</"+mask[w]+"> ";
+        }
+    }
+    document.body.innerHTML = '<ki>'+ (masked ? masked : txt) +'</ki><lat>'+ txt +(masked?'</lat><br><n>noun</n>, <v>verb</v>, <a>adjective</a>':'');
 }
         </script>
     </head>
