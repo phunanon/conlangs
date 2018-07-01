@@ -4,7 +4,7 @@
 }
 @font-face {
    font-family: ki-native;
-   src: url("font/ki-native.woff2") format("woff2");
+   src: url("font/print/ki-print.woff2") format("woff2");
 }
 
 *:not(ul) {
@@ -65,3 +65,6 @@ a { background-color: #afa; }
 n_ { border-bottom: .2rem solid #aaf; }
 v_ { border-bottom: .2rem solid #faa; }
 a_ { border-bottom: .2rem solid #afa; }
+n_c { color: #44c; }
+v_c { color: #c44; }
+a_c { color: #4c4; }

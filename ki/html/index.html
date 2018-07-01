@@ -50,7 +50,7 @@ function DOM_gloss_in (el)
     let ki_multi = vgloss2ki_multi(vgloss.trim());
     e("#gloss2ki_out").innerHTML = ki_multi.htm_ki;
     e("#ipa_out").innerHTML = "/"+ ki2ipa(ki_multi.lat_ki) +"/";
-    e("#ki_out").innerHTML = "<ki>"+ ki_multi.htm_ki +"</ki>";
+    e("#ki_out").innerHTML = "<ki>"+ ki_multi.htm_ki.replace(/_>/g, '_c>') +"</ki>";
   //DOM styles
     e("#gloss_width_tester").innerHTML = el.value;
     let w = e("#gloss_width_tester").offsetWidth +"px";
@@ -62,15 +62,17 @@ function DOM_gloss_in (el)
 function loadDict ()
 {
     let html = '<table><tr><th colspan="2">ki</th><th>noun</th><th>verb</th><th>adjective</th></tr>';
-    let count = 0;
+    let count_ki = 0;
+    let count_eng = 0;
     for (let l of lex) {
         let k = num2ki(l.k);
         if (!l.n) { continue; }
         html += '<tr><td class="ki">'+ k +'</td><td>'+ k +'</td><td>'+ l.n +'</td><td>'+ l.v +'</td><td>'+ l.a +'</td></tr>';
-        ++count;
+        count_eng += (!!l.n.length) + (!!l.v.length) + (!!l.a.length);
+        ++count_ki;
     }
     html += "</table>";
-    e("#dict").innerHTML = count +" roots"+ html;
+    e("#dict").innerHTML = count_ki +" ki roots; "+ count_eng +" English roots" + html;
 }
 
 

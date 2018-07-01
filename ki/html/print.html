@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>ki print script</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet"> 
+        <style>
+@font-face {
+   font-family: ki-print;
+   src: url("font/print/ki-print.woff2") format("woff2");
+}
+
+ki, lat { display: block; }
+ki { font-size: 3.6rem; font-family: ki-print; }
+lat { font-size: 3rem; font-family: 'Roboto Mono'; }
+        </style>
+        <script>
+let Vs  = [" ", "ii", "yy", "ee", "aa", "qq", "oo", "uu", "hh", "i", "j", "e", "a", "q", "o", "u", "h"];
+let lat = [" ", "í", "ì", "é", "á", "ò", "ó", "ú", "ù", "i", "j", "e", "a", "q", "o", "u", "h"];
+
+function load ()
+{
+    let txt = window.location.toString().split('#')[1].replace(/\+/g, ' ').replace(/,/g, '');
+    for (let c in lat) {
+        txt = txt.split(Vs[c]).join(lat[c]);
+    }
+    document.body.innerHTML = '<ki>'+ txt +'</ki><lat>'+ txt +'</lat>';
+}
+        </script>
+    </head>
+    <body onload="load()">
+    </body>
+</html>
+
