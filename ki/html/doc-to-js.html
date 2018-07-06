@@ -49,8 +49,8 @@ function multiroots_doc2js ()
         let lx = {};
         if (txt[t].match(/ /)) {
             lx.m = txt[t];
-            lx.n = (txt[t+1].trim().match(/ /) ? txt[t+1] : "");
-            lx.a = (txt[t+2].trim().match(/ /) ? txt[t+2] : "");
+            lx.n = txt[t+1];
+            lx.a = txt[t+2];
         }
         lex.push(lx);
         ++l;
@@ -71,6 +71,9 @@ function hex (n) { return (n < 16 ? "0" : "") + n.toString(16).toUpperCase(); }
     <body>
         <textarea id="lex" cols="64" rows="16"></textarea>
         <button onclick="doc2js()">doc2js</button>
+        <br>
+        <input id="offset" placeholder="offset e.g. 2A">
+        <button onclick="offset_doc2js()">offset doc2js</button>
         <br>
         <input id="multiprefix" placeholder="prefix e.g. 72">
         <button onclick="doc2js(e('#multiprefix').value)">prefix doc2js</button>

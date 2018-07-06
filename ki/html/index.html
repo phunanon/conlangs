@@ -5,6 +5,7 @@
         <title>ki</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="css.css">
+        <script type="text/javascript" src="ki-lex.js"></script>
         <script type="text/javascript" src="ki-common.js"></script>
         <script>
 function onLoad ()
@@ -22,12 +23,12 @@ function DOM_gloss_in (el)
   //Jazz up with a mask, generate vgloss
     let html = "";
     let p = 0;
-    const parts = ["N", "A", "V", "A", "N", "N"];
     let prev_part = 5;
     let was_opt = true;
     for (let g = 0, g_len = gloss.length; g < g_len; ++g) {
 
         let is_opt = (gloss[g][0] == "'");
+        let is_multi = (gloss[g][gloss[g].length-1] == '"');
         if (is_opt) {
             if (was_opt) {
                 p = prev_part;
@@ -36,9 +37,11 @@ function DOM_gloss_in (el)
             if (p % 2) { ++p; }
             if (p > 5) { p = 0; }
         }
+        if (is_multi) { p = 0; }
+        if (is_multi && is_opt) { p = 5; }
 
         html += "<"+ parts[p] +">"+ gloss[g] +"</"+ parts[p] +"> ";
-        vgloss += parts[p] + gloss[g] +" ";
+        vgloss += p + (is_multi ? gloss[g].slice(0,-1) : gloss[g]) +" ";
 
         was_opt = is_opt;
         prev_part = p;
