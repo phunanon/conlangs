@@ -76,35 +76,23 @@ function ki2ipa (ki)
     return ipa_out.trim();
 }
 
-function kiNumberer (num, protocol)
+function kiNumberer (num, base)
 {
     let ki = "";
     
-    switch (protocol) {
-        case "10":
-        case "1": {
-          //To binary!
-            num = num.toString(2);
-            num = a(7 - (num.length % 7), "0") + num;
-          //To 7-bits!
-            let bits = num.match(/.{7}/g);
-          //Add overflows!
-            for (let b = 0, b_len = bits.length - 1; b < b_len; ++b) {
-                bits[b] = "1"+ bits[b];
-            }
-            bits[bits.length-1] = "0"+ bits[bits.length-1];
-          //To bytes!
-            for (let b = 0, b_len = bits.length; b < b_len; ++b) {
-                bits[b] = parseInt(bits[b], 2);
-            }
-            bits.unshift(0x75);
-            ki = nums2ki(bits);
-            break;
-        }
-        case "20": {
+  //Extract pos/neg & int/dec!
+    let is_neg = false;
+    let is_dec = false;
+    if (num < 0) { is_neg = true; num *= -1; }
+    if (f(num) != num) { is_dec = num; num = f(num); }
+
+    switch (base) {
+        case "10": {
           //Calculate log!
             let log = f(l(num));
             if (num == 0) { log = 0; }
+            if (log > 7) { return "Number too big."; }
+            if (is_neg) { log |= 0x8; }
           //Do CV's!
             num = num.toString().split("");
             let C = false;
@@ -112,26 +100,38 @@ function kiNumberer (num, protocol)
                 if (C) { ki += Cs[i(num[n])]; } else { ki += Vs[i(num[n])]; }
                 C = !C;
             }
+          //Finish up!
             if (!(ki.length % 2)) { ki += "i"; }
             ki = "wu"+ Cs[log] + ki;
             break;
         }    
-        case "21": {
+        case "16": {
           //Calculate log!
             let log = f(l(num, 16));
             if (num == 0) { log = 0; }
+            if (log > 7) { return "Number too big."; }
+            if (is_neg) { log |= 0x8; }
           //Do CV's!
-            num = num.toString(16).split("");
+            num = i(num).toString(16).split("");
             let C = false;
             for (let n = 0, n_len = num.length; n < n_len; ++n) {
                 if (C) { ki += Cs[i(num[n], 16)]; } else { ki += Vs[i(num[n], 16)]; }
                 C = !C;
             }
+          //Finish up!
             if (!(ki.length % 2)) { ki += "i"; }
             ki = "wh"+ Cs[log] + ki;
             break;
         }
     }
     
+    if (is_dec) { ki += " "+ kiNumberer((is_dec+"").split(".")[1].substr(0, 7).replace(/0+$/, ""), base); }
+    
     return ki;
+}
+
+
+function ki2Morse (ki)
+{
+    
 }
