@@ -2984,7 +2984,7 @@
 |caza|cuaza|juaza||||||
 |cazx|cuazx|juazx||||||
 |cazq|cuazq|juazq||||||
-|caji|cuaji|juaji|love,affection|loved|love|beinlove||
+|caji|cuaji|juaji|love,affection|loved|love|be in love||
 |caju|cuaju|juaju||||||
 |cajy|cuajy|juajy||||||
 |cajo|cuajo|juajo||||||
