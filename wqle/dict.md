@@ -21,7 +21,7 @@
 |ky|kia|gia||before||||
 |ko|kiq|giq||after||||
 |ke|kau|gau|||have|||
-|ka|kua|gua||within|give,put|||
+|ka|kua|gua|world|within|give,put|||
 |kx|kiq|giq|||take|||
 |kq|kqi|gqi|||receive|||
 |mi|miu|niu|what,who,name|evi_direct||||
@@ -4156,7 +4156,7 @@
 |wqlu|wqilu|lqilu||||||
 |wqly|wqily|lqily||||||
 |wqlo|wqilo|lqilo||||||
-|wqle|wqile|lqile||||||
+|wqle|wqile|lqile|wqle|||||
 |wqla|wqila|lqila||||||
 |wqlx|wqilx|lqilx||||||
 |wqlq|wqilq|lqilq|music|musical|perform|performmusic||

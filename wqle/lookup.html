@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dictionary lookup</title>
+    <script>
+const e  = (el) => document.querySelector(el);
+const es = (el) => document.querySelectorAll(el);
+
+let dict = [];
+let words = [];
+let searchDelay;
+
+function parseDict (md) {
+  dict = md.split("\n").slice(2, -1);
+  dict = dict.map(l => l.split("|").slice(1));
+  
+  const c = x => x !== undefined ? x.split(",") : [];
+  dict = dict.forEach((e, i) => {
+    const [nN, nA, nV, fN, fA, fVt, fVi] = e;
+    if (fN + fA + fVt + fVi == "") return;
+    const pairs = [["noun", nN, ...c(fN)],
+                   ["adjective", nA, ...c(fA)],
+                   ["verb", nV, ...c(fVt), ...c(fVi)]];
+    pairs.filter(p => p[2] != "").forEach(p => words.push(p));
+  });
+}
+
+function downloadDict () {
+  const client = new XMLHttpRequest();
+  client.open('GET', 'https://raw.githubusercontent.com/phunanon/conlangs/master/wqle/dict.md');
+  client.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200)
+      parseDict(client.responseText);
+  }
+  client.send();
+}
+
+function searchFor (query) {
+  const recContains = (words, query) => words.some(w => w.match(query) != null);
+  return words.filter(w => recContains(w.slice(1), query));
+}
+
+
+function makeShorter (word) {
+  const longs = "iu ui ia au ua iq qi".split(" ");
+  const shorts = "ì í à á ù ú ò ó".split(" ");
+  longs.forEach((l, i) => word = word.replace(l, shorts[i]));
+  if (word[0] == "p" && word.length == 2)
+    word = word[1];
+  if (word.length == 4 && word[3] == "i")
+    word = word.slice(0, 3);
+  return word;
+}
+
+
+function DOM_addWord (td) {
+  e("#build").value += " " + td.innerText;
+  e("#query").value = "";
+  e("#query").focus();
+}
+function makeResultRow (e) {
+  let g = `<td>${e[0][0]}</td>`;
+  let n = `<td onclick="DOM_addWord(this)">${makeShorter(e[1])}</td>`;
+  return `<tr>${g + n}<td>${e.slice(2).join(", ")}</td></tr>`;
+}
+function doSearch () {
+  const query = e("#query").value.trim();
+  const results = searchFor(query);
+  const table = results.map(makeResultRow);
+  e("#results").innerHTML = `<tr><th>Genre</th><th>Native</th><th>Foreign</th></tr>${table.join("")}`;
+  e("#info").innerText = `Showing ${table.length} / ${words.length} words.`;
+}
+function DOM_search () {
+  clearTimeout(searchDelay);
+  setTimeout(doSearch, 1000);
+}
+    </script>
+    <style>
+* {
+  font-size: 1.2rem;
+}
+    </style>
+  </head>
+  <body onload="downloadDict()">
+    <input type="text" id="query" placeholder="Dictionary lookup" onkeyup="DOM_search()"/>
+    <p id="info"></p>
+    <input id="build"/>
+    <table>
+      <tbody id="results"></tbody>
+    </table>
+  </body>
+</html>
