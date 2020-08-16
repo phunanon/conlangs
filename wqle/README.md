@@ -1,12 +1,25 @@
-#wqle
+# wqle
 
-The phonology and orthography is:
+[Dictionary document](dict.md), [Interactive dictionary](lookup.html), [Showcaser app](showcaser.html).
+
+
+The Latin orthography is:
 
     ptkmschw
     bdgnzjvl
     iuyoeaxq
     ìíàáùúòó
 
+The native orthography is:
+
+![wqle script](font/curvy-min.png)
+
+Which is
+
+    ptkmschwiuyoeaxq
+    bdgnzjvlìíàáùúòó,.:
+
+The phonology is:
 
 | #   | IPA | char | #   | IPA | char |
 | --- | --- | ---- | --- | --- | ---- |
@@ -83,6 +96,9 @@ Numbers begin with `wi`; `bi, ba, di, da, gi, ga, ni, na, zi, za`, `je, ja, ve, 
 `they "forget mother soft_and child plural` - they forget the mother and the children of said mother
 
 
+The pronoun-verb repeated pattern acts as a chain of effects, for example: `I tell you tell them` - I tell you to tell them.
+
+
 Kin and relationships begin with `cq` then the following morphemes, which can be chained together as nouns:
 
 | wqle | relation  |
@@ -121,7 +137,7 @@ A song can make or ruin a person’s day if they let it get to them.
 person let song affect reflexive if_then make or ruin day 'their
 
 
-##Lexicon
+## Lexicon
 
 `ctx1`, all things are definite/singular; `ctx2` small things are plural, big things are definite/singular; `ctx3`, all things are indefinite; `ctx4` all things are plural.
 

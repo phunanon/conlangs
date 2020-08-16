@@ -1,5 +1,6 @@
 # phunanon/conlangs
 A repertoire of my constructed languages
 
-* [mi - Documentation & Interactive tools](https://phunanon.github.io/conlangs/mi)
-* [~pipu - Documentation & Interactive tools~](https://phunanon.github.io/conlangs/pipu/pipu-doc.html) (Decommissioned)
+* [wqle - Documentation & Interactive tools](wqle/README.md)
+* [~pipu - Documentation & Interactive tools~](pipu/pipu-doc.html) (Decommissioned)
+* [~mi - Documentation & Interactive tools~](mi) (Decommissioned)

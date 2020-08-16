@@ -44,7 +44,7 @@ function searchFor (query) {
 
 
 function makeShorter (word) {
-  const longs = "iu ui ia au ua iq qi".split(" ");
+  const longs = "iu ui ia ai au ua iq qi".split(" ");
   const shorts = "ì í à á ù ú ò ó".split(" ");
   longs.forEach((l, i) => word = word.replace(l, shorts[i]));
   if (word[0] == "p" && word.length == 2)
@@ -53,12 +53,24 @@ function makeShorter (word) {
     word = word.slice(0, 3);
   return word;
 }
+function toIPA (text) {
+  const cha = "ì í à á ù ú ò ó i u y o e a x q p t k m s c h w b d g n z j v l".split(" ");
+  const ipa = "iu ui ia ai au ua iɒ ɒi i u e ɵ ɛ a ɶ ɒ p t k m s ʃ h w b d g n z ʒ v l".split(" ");
+  cha.push(" ");
+  ipa.push(" ");
+  cha.forEach((c, i) => text = text.replace(c, ipa[i]));
+  return text;
+}
 
 
+function DOM_updateIPA () {
+  e("#ipa").innerText = toIPA(e("#build").value);
+}
 function DOM_addWord (td) {
   e("#build").value += " " + td.innerText;
   e("#query").value = "";
   e("#query").focus();
+  DOM_updateIPA();
 }
 function makeResultRow (e) {
   let g = `<td>${e[0][0]}</td>`;
@@ -80,13 +92,15 @@ function DOM_search () {
     <style>
 * {
   font-size: 1.2rem;
+  margin: .2rem;
 }
     </style>
   </head>
   <body onload="downloadDict()">
     <input type="text" id="query" placeholder="Dictionary lookup" onkeyup="DOM_search()"/>
     <p id="info"></p>
-    <input id="build"/>
+    <input id="build" onchange="DOM_updateIPA()"/>
+    <p id="ipa"></p>
     <table>
       <tbody id="results"></tbody>
     </table>

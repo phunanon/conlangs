@@ -18,8 +18,8 @@
 |tq|tqi|dqi|now,present|now,present||||
 |ki|kiu|giu|thought||think|||
 |ku|kui|gui|thing|||||
-|ky|kia|gia||before||||
-|ko|kiq|giq||after||||
+|ky|kia|gia|day|before||||
+|ko|kiq|giq|night|after||||
 |ke|kau|gau|||have|||
 |ka|kua|gua|world|within|give,put|||
 |kx|kiq|giq|||take|||
@@ -30,7 +30,7 @@
 |mo|miq|niq|when|evi_speculated||||
 |me|mau|nau|how|evi_hearsay||||
 |ma|mua|nua|why,question|question,?||||
-|mx|miq|niq||||||
+|mx|miq|niq|for|||||
 |mq|mqi|nqi||||||
 |si|siu|ziu||all||||
 |su|sui|zui||some||||
@@ -63,11 +63,11 @@
 |we|wau|lau||equal,same||||
 |wa|wua|lua||fast||||
 |wx|wiq|liq|because|||||
-|wq|wqi|lqi|speech|spokenabout,mentioned|speakto|speak,say||
+|wq|wqi|lqi|speech|spoken about,mentioned|spoken to|speak,say,tell||
 |pibi|piubi|biubi||||||
 |pibu|piubu|biubu||||||
 |piby|piuby|biuby||||||
-|pibo|piubo|biubo||||||
+|pibo|piubo|biubo|aspect,feature|featured|features|||
 |pibe|piube|biube||||||
 |piba|piuba|biuba||||||
 |pibx|piubx|biubx||||||
@@ -1114,13 +1114,13 @@
 |kigq|kiugq|giugq||||||
 |kini|kiuni|giuni|rememberance|remembered|remember||mind|
 |kinu|kiunu|giunu|future||||time|
-|kiny|kiuny|giuny||||||
+|kiny|kiuny|giuny|consistence|consistent,consistently||||
 |kino|kiuno|giuno||||||
 |kine|kiune|giune||||||
 |kina|kiuna|giuna||||||
 |kinx|kiunx|giunx|forgettance|forgotten|forget||mind|
 |kinq|kiunq|giunq||||||
-|kizi|kiuzi|giuzi||||||
+|kizi|kiuzi|giuzi|time|||||
 |kizu|kiuzu|giuzu||||||
 |kizy|kiuzy|giuzy||||||
 |kizo|kiuzo|giuzo||||||
@@ -1834,7 +1834,7 @@
 |mozq|miqzq|niqzq||||||
 |moji|miqji|niqji||||||
 |moju|miqju|niqju||||||
-|mojy|miqjy|niqjy||||||
+|mojy|miqjy|niqjy|encourage|||||
 |mojo|miqjo|niqjo||||||
 |moje|miqje|niqje||||||
 |moja|miqja|niqja||||||
@@ -3048,7 +3048,7 @@
 |cxza|ciqza|jiqza||||||
 |cxzx|ciqzx|jiqzx||||||
 |cxzq|ciqzq|jiqzq||||||
-|cxji|ciqji|jiqji|child|||||
+|cxji|ciqji|jiqji||||||
 |cxju|ciqju|jiqju||||||
 |cxjy|ciqjy|jiqjy||||||
 |cxjo|ciqjo|jiqjo||||||
@@ -3056,7 +3056,7 @@
 |cxja|ciqja|jiqja|baby|||||
 |cxjx|ciqjx|jiqjx||||||
 |cxjq|ciqjq|jiqjq|adult||accompany a child,childmind|||
-|cxvi|ciqvi|jiqvi|parent|||||
+|cxvi|ciqvi|jiqvi||||||
 |cxvu|ciqvu|jiqvu||||||
 |cxvy|ciqvy|jiqvy||||||
 |cxvo|ciqvo|jiqvo||||||
@@ -3072,7 +3072,7 @@
 |cxla|ciqla|jiqla||||||
 |cxlx|ciqlx|jiqlx||||||
 |cxlq|ciqlq|jiqlq||||||
-|cqbi|cqibi|jqibi|parent|||||
+|cqbi|cqibi|jqibi|parent||||kin|
 |cqbu|cqibu|jqibu||||||
 |cqby|cqiby|jqiby||||||
 |cqbo|cqibo|jqibo||||||
@@ -3080,7 +3080,7 @@
 |cqba|cqiba|jqiba||||||
 |cqbx|cqibx|jqibx||||||
 |cqbq|cqibq|jqibq||||||
-|cqdi|cqidi|jqidi|child|||||
+|cqdi|cqidi|jqidi|child||||kin|
 |cqdu|cqidu|jqidu||||||
 |cqdy|cqidy|jqidy||||||
 |cqdo|cqido|jqido||||||
@@ -3088,7 +3088,7 @@
 |cqda|cqida|jqida||||||
 |cqdx|cqidx|jqidx||||||
 |cqdq|cqidq|jqidq||||||
-|cqgi|cqigi|jqigi|partner|||||
+|cqgi|cqigi|jqigi|partner||||kin|
 |cqgu|cqigu|jqigu||||||
 |cqgy|cqigy|jqigy||||||
 |cqgo|cqigo|jqigo||||||
@@ -3096,7 +3096,7 @@
 |cqga|cqiga|jqiga||||||
 |cqgx|cqigx|jqigx||||||
 |cqgq|cqigq|jqigq||||||
-|cqni|cqini|jqini|neighbour|||||
+|cqni|cqini|jqini|neighbour||||kin|
 |cqnu|cqinu|jqinu||||||
 |cqny|cqiny|jqiny||||||
 |cqno|cqino|jqino||||||
@@ -3104,15 +3104,15 @@
 |cqna|cqina|jqina||||||
 |cqnx|cqinx|jqinx||||||
 |cqnq|cqinq|jqinq||||||
-|cqzi|cqizi|jqizi|sibling|||||
-|cqzu|cqizu|jqizu||||||
+|cqzi|cqizi|jqizi|sibling||||kin|
+|cqzu|cqizu|jqizu|family|||||
 |cqzy|cqizy|jqizy||||||
 |cqzo|cqizo|jqizo||||||
 |cqze|cqize|jqize||||||
 |cqza|cqiza|jqiza||||||
 |cqzx|cqizx|jqizx||||||
 |cqzq|cqizq|jqizq||||||
-|cqji|cqiji|jqiji|friend|||||
+|cqji|cqiji|jqiji|friend||||kin|
 |cqju|cqiju|jqiju||||||
 |cqjy|cqijy|jqijy||||||
 |cqjo|cqijo|jqijo||||||
@@ -3120,7 +3120,7 @@
 |cqja|cqija|jqija||||||
 |cqjx|cqijx|jqijx||||||
 |cqjq|cqijq|jqijq||||||
-|cqvi|cqivi|jqivi|stranger|||||
+|cqvi|cqivi|jqivi|stranger||||kin|
 |cqvu|cqivu|jqivu||||||
 |cqvy|cqivy|jqivy||||||
 |cqvo|cqivo|jqivo||||||
@@ -3512,7 +3512,7 @@
 |hava|huava|vuava||||||
 |havx|huavx|vuavx||||||
 |havq|huavq|vuavq||||||
-|hali|huali|vuali||||||
+|hali|huali|vuali|simplicity|simple,simply|make simple,simplify|||
 |halu|hualu|vualu||||||
 |haly|hualy|vualy||||||
 |halo|hualo|vualo||||||
@@ -4001,7 +4001,7 @@
 |wanx|wuanx|luanx||||||
 |wanq|wuanq|luanq||||||
 |wazi|wuazi|luazi||||||
-|wazu|wuazu|luazu||||||
+|wazu|wuazu|luazu|seriousness|serious|make serious|||
 |wazy|wuazy|luazy||||||
 |wazo|wuazo|luazo||||||
 |waze|wuaze|luaze||||||
@@ -4160,7 +4160,9 @@
 |wqla|wqila|lqila||||||
 |wqlx|wqilx|lqilx||||||
 |wqlq|wqilq|lqilq|music|musical|perform|performmusic||
+|cqdizi|||nephew,niece||||kin|
 |padili|||Patrick||||name|
-|migala|||Mikhailah||||name|
+|migali|||Mikhailah||||name|
+|kaleki|||Alex||||name|
 |citulu|||farmer||||occupation|
 |podyji|||ricebin||||item|

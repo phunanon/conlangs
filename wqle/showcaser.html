@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>wqle showcaser</title>
+    <script>
+const e  = (el) => document.querySelector(el);
+const es = (el) => document.querySelectorAll(el);
+
+//Hex
+const tohex = b => (b < 16 ? '0' : '') + b.toString(16);
+
+const dict = [
+  "iu ui ia ai au ua iq qi",
+  "p t k m s c h w",
+  "b d g n z j v l",
+  "i u y o e a x q"
+].map(s => s.split(" "));
+const add = [8,0,8,0];
+
+//IPA
+const cha = "ì í à á ù ú ò ó i u y o e a x q p t k m s c h w b d g n z j v l".split(" ");
+const ipa = "iu ui ia ai au ua iɒ ɒi i u e ɵ ɛ a ɶ ɒ p t k m s ʃ h w b d g n z ʒ v l".split(" ");
+cha.push(" ");
+ipa.push(" ");
+
+//Short
+const longs  = dict[0];
+const shorts = "ì í à á ù ú ò ó".split(" ");
+
+//Business
+
+function removePorI (word) {
+  if (word.length == 2 && word[0] == "p")
+    return word.substr(1);
+  if (word.length > 2 && word[word.length - 1] == "i")
+    return word.slice(0, -1);
+  return word;
+}
+
+function redo (input) {
+  const txt = input.value;
+
+  //Hex representation
+  let htxt = txt;
+  for (const d in dict)
+    for (let n in dict[d]) {
+      n = parseInt(n);
+      htxt = htxt.replace(new RegExp(dict[d][n], 'g'), (n+add[d])+" ");
+    }
+  htxt = htxt.trim().replace(/  /g, " ").split(" ");
+  const nums = htxt.map(s => parseInt(s));
+  const pairs = nums.flatMap((_, i, a) => i % 2 ? [] : [a.slice(i, i + 2)]);
+  const bytes = pairs.map(p => (p[0] << 4) | p[1]);
+  const hexStr = bytes.map(tohex).join("");
+  e("out").innerHTML = "<br>"+ bytes.length +"B "+ (bytes.length*8) +"b: "+ hexStr;
+
+  //Shorter representation
+  let stxt = txt;
+  for (const l in longs)
+    stxt = stxt.replace(new RegExp(longs[l], 'g'), shorts[l]);
+  stxt = stxt.trim();
+  //Without p- or -i
+  nospaces = stxt.replace(/ /g, "");
+  stxt = stxt.split(" ").map(removePorI).join(" ");
+
+  //IPA representation
+  let itxt = stxt;
+  let ipaTxt = "";
+  while (itxt.length > 0) {
+    let found = false;
+    for (const c in cha)
+      if (itxt.startsWith(cha[c])) {
+        ipaTxt += ipa[c];
+        itxt = itxt.slice(cha[c].length);
+        found = true;
+        break;
+      }
+    if (!found) itxt = itxt.slice(1);
+  }
+  
+  e("out").innerHTML += "<pre>###wqle\n[**"+ stxt +"**]()  \n/"+ ipaTxt +"/  \nOccupies "+ bytes.length +" bytes.</pre>";
+  e("out").innerHTML += "<p>"+ nospaces +"</p>";
+  e("out").innerHTML += "<div>"+ stxt.replace(/,/g, ",<br>") +"</div>";
+}
+    </script>
+    <style>
+@font-face {
+  font-family: wqle;
+  src: url("font/curvy/wqle.woff2");
+}
+div {
+  padding: 2rem;
+  font-family: wqle;
+  font-size: 4rem;
+  letter-spacing: -0.5rem;
+  display: inline-block;
+}
+    </style>
+  </head>
+  <body>
+    <input onkeyup="redo(this)">
+    <out></out>
+  </body>
+</html>
+
