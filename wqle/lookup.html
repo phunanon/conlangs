@@ -46,7 +46,7 @@ function searchFor (query) {
 function makeShorter (word) {
   const longs = "iu ui ia ai au ua iq qi".split(" ");
   const shorts = "ì í à á ù ú ò ó".split(" ");
-  longs.forEach((l, i) => word = word.replace(l, shorts[i]));
+  longs.forEach((l, i) => word = word.replaceAll(l, shorts[i]));
   if (word[0] == "p" && word.length == 2)
     word = word[1];
   if (word.length == 4 && word[3] == "i")
@@ -58,7 +58,7 @@ function toIPA (text) {
   const ipa = "iu ui ia ai au ua iɒ ɒi i u e ɵ ɛ a ɶ ɒ p t k m s ʃ h w b d g n z ʒ v l".split(" ");
   cha.push(" ");
   ipa.push(" ");
-  cha.forEach((c, i) => text = text.replace(c, ipa[i]));
+  cha.forEach((c, i) => text = text.replaceAll(c, ipa[i]));
   return text;
 }
 

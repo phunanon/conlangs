@@ -50,7 +50,7 @@
 |cq|cqi|jqi|(kin_begin)|||||
 |hi|hiu|viu||||||
 |hu|hui|vui|cause|caused|cause|||
-|hy|hia|via||aviqlable||||
+|hy|hia|via|hello|available||||
 |ho|hiq|viq||||||
 |he|hau|vau|then|big,large||||
 |ha|hua|vua|if_then|small,little|is,be,are|||
@@ -1712,8 +1712,8 @@
 |muja|muija|nuija||||||
 |mujx|muijx|nuijx||||||
 |mujq|muijq|nuijq||||||
-|muvi|muivi|nuivi||||||
-|muvu|muivu|nuivu||||||
+|muvi|muivi|nuivi|computer|computed|compute|||
+|muvu|muivu|nuivu|programming|programmed|program|||
 |muvy|muivy|nuivy||||||
 |muvo|muivo|nuivo||||||
 |muve|muive|nuive||||||
