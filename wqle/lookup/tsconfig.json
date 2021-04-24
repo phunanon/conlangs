@@ -1,0 +1,13 @@
+{
+    "include": ["./*"],
+    "exclude": [""],
+    "compilerOptions": {
+      "target": "esNext",
+      "lib": ["ESNext", "dom"],
+      "outFile": "./index.js",
+      "rootDir": "./",
+      "strict": true,
+      "sourceMap": true
+    }
+  }
+  

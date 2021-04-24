@@ -1,6 +1,6 @@
 # wqle
 
-[Dictionary document](dict.md), [Interactive dictionary](lookup.html), [Showcaser app](showcaser.html).
+[Dictionary document](dict.md), [Interactive dictionary](/lookup), [Showcaser app](showcaser.html).
 
 
 The Latin orthography is:

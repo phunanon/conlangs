@@ -373,7 +373,7 @@
 |pevy|pauvy|bauvy||||||
 |pevo|pauvo|bauvo||||||
 |peve|pauve|bauve||||||
-|peva|pauva|bauva|plate||putonaplate|||
+|peva|pauva|bauva|plate||put on a plate|||
 |pevx|pauvx|bauvx|hold|held||||
 |pevq|pauvq|bauvq||||||
 |peli|pauli|bauli||||||
@@ -961,8 +961,8 @@
 |talx|tualx|dualx||||||
 |talq|tualq|dualq||||||
 |txbi|tiqbi|diqbi||||||
-|txbu|tiqbu|diqbu|river|flowing|passover|flow||
-|txby|tiqby|diqby|lake|shallow|floaton|float||
+|txbu|tiqbu|diqbu|river|flowing|pass over|flow||
+|txby|tiqby|diqby|lake|shallow|float on|float||
 |txbo|tiqbo|diqbo|ocean|deep|drifton|drift||
 |txbe|tiqbe|diqbe||||||
 |txba|tiqba|diqba||||||
@@ -1400,7 +1400,7 @@
 |keva|kauva|gauva||||||
 |kevx|kauvx|gauvx||||||
 |kevq|kauvq|gauvq||||||
-|keli|kauli|gauli|enjoyment|enjoyed|enjoy|havefun||
+|keli|kauli|gauli|enjoyment|enjoyed|enjoy|have fun||
 |kelu|kaulu|gaulu||||||
 |kely|kauly|gauly||||||
 |kelo|kaulo|gaulo||||||
@@ -1424,7 +1424,7 @@
 |kada|kuada|guada||||||
 |kadx|kuadx|guadx||||||
 |kadq|kuadq|guadq||||||
-|kagi|kuagi|guagi|note|noted|note|takenote||
+|kagi|kuagi|guagi|note|noted|note|take note||
 |kagu|kuagu|guagu||||||
 |kagy|kuagy|guagy||||||
 |kago|kuago|guago||||||

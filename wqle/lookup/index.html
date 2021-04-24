@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dictionary lookup</title>
+    <script src="index.js"></script>
+    <style>
+* {
+  font-size: 1.2rem;
+  margin: .2rem;
+}
+    </style>
+  </head>
+  <body onload="downloadDict(); DOM_search()">
+    <input type="text" id="query" placeholder="Dictionary lookup" onkeyup="DOM_search()"/>
+    <p id="info"></p>
+    <input id="build" onchange="DOM_updateIPA()"/>
+    <p id="ipa"></p>
+    <table>
+      <tbody id="results"></tbody>
+    </table>
+  </body>
+</html>
