@@ -47,8 +47,7 @@ function toIPA(text) {
     const ipa = "iu ui ia ai au ua iɒ ɒi i u e ɵ ɛ a ɶ ɒ p t k m s ʃ h w b d g n z ʒ v l".split(" ");
     cha.push(" ");
     ipa.push(" ");
-    cha.forEach((c, i) => (text = text.replaceAll(c, ipa[i])));
-    return text;
+    return [...text].map(ch => ipa[cha.indexOf(ch)]).join("");
 }
 function DOM_updateIPA() {
     e("#ipa").innerText = toIPA(e("#build").value);

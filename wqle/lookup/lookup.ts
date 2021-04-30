@@ -57,8 +57,7 @@ function toIPA(text: string) {
     );
     cha.push(" ");
     ipa.push(" ");
-    cha.forEach((c, i) => (text = text.replaceAll(c, ipa[i])));
-    return text;
+    return [...text].map(ch => ipa[cha.indexOf(ch)]).join("");
 }
 
 function DOM_updateIPA() {
