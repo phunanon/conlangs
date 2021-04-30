@@ -1,6 +1,10 @@
 "use strict";
 const e = (el) => document.querySelector(el);
 let words = [];
+function pageLoad() {
+    downloadDict();
+    e("#build").value = "";
+}
 function parseDict(md) {
     let dict = md
         .split("\n")
@@ -23,6 +27,7 @@ function parseDict(md) {
 }
 async function downloadDict() {
     parseDict(await (await fetch("../dict.md")).text());
+    presentTable(words);
 }
 function searchFor(query) {
     return words.filter(w => [w.native, ...w.foreign].some(w => w.match(query)));
@@ -65,16 +70,16 @@ function presentTable(words) {
 let searchDelayTmr;
 function DOM_search(evt) {
     const query = e("#query").value.trim();
+    clearTimeout(searchDelayTmr);
     if (evt.key == "Enter") {
         query.split(" ").forEach(q => {
             const results = searchFor(q);
             if (results.length) {
                 DOM_addWord(results[0].native);
-                return;
             }
         });
+        return;
     }
-    clearTimeout(searchDelayTmr);
     searchDelayTmr = setTimeout(() => presentTable(searchFor(query)), 100);
 }
 //# sourceMappingURL=index.js.map
