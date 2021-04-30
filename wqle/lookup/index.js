@@ -66,13 +66,15 @@ let searchDelayTmr;
 function DOM_search(evt) {
     const query = e("#query").value.trim();
     if (evt.key == "Enter") {
-        const results = searchFor(query);
-        if (results.length) {
-            DOM_addWord(results[0].native);
-            return;
-        }
+        query.split(" ").forEach(q => {
+            const results = searchFor(q);
+            if (results.length) {
+                DOM_addWord(results[0].native);
+                return;
+            }
+        });
     }
     clearTimeout(searchDelayTmr);
-    searchDelayTmr = setTimeout(() => presentTable(searchFor(query)), 500);
+    searchDelayTmr = setTimeout(() => presentTable(searchFor(query)), 100);
 }
 //# sourceMappingURL=index.js.map
