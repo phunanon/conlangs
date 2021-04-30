@@ -25,7 +25,7 @@ async function downloadDict() {
     parseDict(await (await fetch("../dict.md")).text());
 }
 function searchFor(query) {
-    return words.filter(w => w.native.match(query));
+    return words.filter(w => [w.native, ...w.foreign].some(w => w.match(query)));
 }
 function makeShorter(word) {
     const longs = "iu ui ia ai au ua iq qi".split(" ");
@@ -48,27 +48,31 @@ function toIPA(text) {
 function DOM_updateIPA() {
     e("#ipa").innerText = toIPA(e("#build").value);
 }
-function DOM_addWord(td) {
-    e("#build").value += " " + td.innerText;
+function DOM_addWord(word) {
+    e("#build").value = (e("#build").value + " " + makeShorter(word)).trim();
     e("#query").value = "";
     e("#query").focus();
+    presentTable(words);
     DOM_updateIPA();
 }
-function makeResultRow({ native, foreign }) {
-    let g = `<td>${native}</td>`;
-    let n = `<td onclick="DOM_addWord(this)">${makeShorter(native)}</td>`;
-    return `<tr>${g + n}<td>${foreign.join(", ")}</td></tr>`;
-}
-function doSearch() {
-    const query = e("#query").value.trim();
-    const results = searchFor(query);
-    const table = results.map(makeResultRow);
+function presentTable(words) {
+    const table = words.map(({ type, native, foreign }) => {
+        return `<tr onclick="DOM_addWord('${native}')"><td>${type}</td><td>${makeShorter(native)}</td><td>${foreign.join(", ")}</td></tr>`;
+    });
     e("#results").innerHTML = `<tr><th>Genre</th><th>Native</th><th>Foreign</th></tr>${table.join("")}`;
     e("#info").innerText = `Showing ${table.length} / ${words.length} words.`;
 }
 let searchDelayTmr;
-function DOM_search() {
+function DOM_search(evt) {
+    const query = e("#query").value.trim();
+    if (evt.key == "Enter") {
+        const results = searchFor(query);
+        if (results.length) {
+            DOM_addWord(results[0].native);
+            return;
+        }
+    }
     clearTimeout(searchDelayTmr);
-    searchDelayTmr = setTimeout(doSearch, 1000);
+    searchDelayTmr = setTimeout(() => presentTable(searchFor(query)), 500);
 }
 //# sourceMappingURL=index.js.map

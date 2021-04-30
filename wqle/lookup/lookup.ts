@@ -17,9 +17,8 @@ function parseDict(md: string) {
         const [fN, fA, fVt, fVi] = foreigns.map(f);
         if (![...fN, ...fA, ...fVt, ...fVi].length) return;
         const pushIf = (type: Entry["type"], native: string, foreign: string[]) => {
-          if (foreign.length)
-            words.push({ type, native, foreign });
-        }
+            if (foreign.length) words.push({ type, native, foreign });
+        };
         pushIf("noun", nN, fN);
         pushIf("adjective", nA, fA);
         pushIf("verb", nV, [...fVi, ...fVt]);
@@ -31,7 +30,7 @@ async function downloadDict() {
 }
 
 function searchFor(query: string) {
-    return words.filter(w => w.native.match(query));
+    return words.filter(w => [w.native, ...w.foreign].some(w => w.match(query)));
 }
 
 function makeShorter(word: string) {
@@ -58,23 +57,20 @@ function DOM_updateIPA() {
     e("#ipa").innerText = toIPA(e("#build").value);
 }
 
-function DOM_addWord(td) {
-    e("#build").value += " " + td.innerText;
+function DOM_addWord(word: string) {
+    e("#build").value = (e("#build").value + " " + makeShorter(word)).trim();
     e("#query").value = "";
     e("#query").focus();
+    presentTable(words);
     DOM_updateIPA();
 }
 
-function makeResultRow({ native, foreign }: Entry) {
-    let g = `<td>${native}</td>`;
-    let n = `<td onclick="DOM_addWord(this)">${makeShorter(native)}</td>`;
-    return `<tr>${g + n}<td>${foreign.join(", ")}</td></tr>`;
-}
-
-function doSearch() {
-    const query = e("#query").value.trim();
-    const results = searchFor(query);
-    const table = results.map(makeResultRow);
+function presentTable(words: Entry[]) {
+    const table = words.map(({ type, native, foreign }: Entry) => {
+        return `<tr onclick="DOM_addWord('${native}')"><td>${type}</td><td>${makeShorter(
+            native,
+        )}</td><td>${foreign.join(", ")}</td></tr>`;
+    });
     e("#results").innerHTML = `<tr><th>Genre</th><th>Native</th><th>Foreign</th></tr>${table.join(
         "",
     )}`;
@@ -82,7 +78,15 @@ function doSearch() {
 }
 
 let searchDelayTmr: number;
-function DOM_search() {
+function DOM_search(evt: KeyboardEvent) {
+    const query = e("#query").value.trim();
+    if (evt.key == "Enter") {
+        const results = searchFor(query);
+        if (results.length) {
+            DOM_addWord(results[0].native);
+            return;
+        }
+    }
     clearTimeout(searchDelayTmr);
-    searchDelayTmr = setTimeout(doSearch, 1000);
+    searchDelayTmr = setTimeout(() => presentTable(searchFor(query)), 500);
 }

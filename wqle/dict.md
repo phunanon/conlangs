@@ -51,7 +51,7 @@
 |hi|hiu|viu||||||
 |hu|hui|vui|cause|caused|cause|||
 |hy|hia|via|hello|available||||
-|ho|hiq|viq||||||
+|ho|hiq|viq||should,ought,shall||||
 |he|hau|vau|then|big,large||||
 |ha|hua|vua|if_then|small,little|is,be,are|||
 |hx|hiq|viq|(clause_marker)|too||||
@@ -3138,7 +3138,7 @@
 |cqlq|cqilq|jqilq||||||
 |hibi|hiubi|viubi|condition,if,if_then|conditional|invite,offer|||
 |hibu|hiubu|viubu|would|would|request|||
-|hiby|hiuby|viuby|deduction|should,ought|deduce|||
+|hiby|hiuby|viuby|deduction|deduced|deduce|||
 |hibo|hiubo|viubo|ability|can|enable|||
 |hibe|hiube|viube|determination|will,shall|permit,allow,let|||
 |hiba|hiuba|viuba|offer,offering,invite,invitation|can,shall,will,offered,invited|offer,invite|||
@@ -3147,7 +3147,7 @@
 |hidi|hiudi|viudi|permission|can,could,may,allowed||||
 |hidu|hiudu|viudu|prohibition|don't,avoid,prohibited|prohibit|||
 |hidy|hiudy|viudy|obligation|must,obligated||||
-|hido|hiudo|viudo|advice,suggestion|should,ought,shall,suggested||||
+|hido|hiudo|viudo|advice,suggestion|suggested||||
 |hide|hiude|viude|intention|intended|intend|||
 |hida|hiuda|viuda|request|could,requested|obligate|||
 |hidx|hiudx|viudx||||||
@@ -3217,7 +3217,7 @@
 |hudx|huidx|vuidx||||||
 |hudq|huidq|vuidq||||||
 |hugi|huigi|vuigi||||||
-|hugu|huigu|vuigu||||||
+|hugu|huigu|vuigu|alternative|alternatively,instead||||
 |hugy|huigy|vuigy||||||
 |hugo|huigo|vuigo||||||
 |huge|huige|vuige||||||
