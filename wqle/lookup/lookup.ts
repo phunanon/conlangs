@@ -36,7 +36,9 @@ async function downloadDict() {
 }
 
 function searchFor(query: string) {
-    return words.filter(w => [w.native, ...w.foreign].some(w => w.match(query)));
+    return words.filter(w =>
+        [w.native, makeShorter(w.native), ...w.foreign].some(w => w.match(query)),
+    );
 }
 
 function makeShorter(word: string) {

@@ -30,7 +30,7 @@ async function downloadDict() {
     presentTable(words);
 }
 function searchFor(query) {
-    return words.filter(w => [w.native, ...w.foreign].some(w => w.match(query)));
+    return words.filter(w => [w.native, makeShorter(w.native), ...w.foreign].some(w => w.match(query)));
 }
 function makeShorter(word) {
     const longs = "iu ui ia ai au ua iq qi".split(" ");
