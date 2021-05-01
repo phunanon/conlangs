@@ -12,18 +12,18 @@
 |tu|tui|dui|we_exclusive|our_exclusive,ours_exclusive||||
 |ty|tia|dia|this|also||||
 |to|tiq|diq|it,that|its||||
-|te|tau|dau||||||
+|te|tau|dau|world|worldly||||
 |ta|tua|dua||||||
 |tx|tiq|diq||||||
 |tq|tqi|dqi|now,present|now,present||||
-|ki|kiu|giu|thought||think|||
+|ki|kiu|giu|thought|thought about|think about|think||
 |ku|kui|gui|thing|||||
 |ky|kia|gia|day|before||||
 |ko|kiq|giq|night|after||||
-|ke|kau|gau|||have|||
-|ka|kua|gua|world|within|give,put|||
-|kx|kiq|giq|||take|||
-|kq|kqi|gqi|||receive|||
+|ke|kau|gau|||have|have||
+|ka|kua|gua||given,put|give,put|||
+|kx|kiq|giq|||take|take||
+|kq|kqi|gqi|||receive|receive||
 |mi|miu|niu|what,who,name|evi_direct||||
 |mu|mui|nui|which|evi_non_vis||||
 |my|mia|nia|where|evi_inferred||||
@@ -53,7 +53,7 @@
 |hy|hia|via|hello|available||||
 |ho|hiq|viq||should,ought,shall||||
 |he|hau|vau|then|big,large||||
-|ha|hua|vua|if_then|small,little|is,be,are|||
+|ha|hua|vua|if_then|small,little|is,be,are,am|||
 |hx|hiq|viq|(clause_marker)|too||||
 |hq|hqi|vqi||||||
 |wi|wiu|liu|(number_begin)||count|||
@@ -1274,7 +1274,7 @@
 |kyvq|kiavq|giavq||||||
 |kyli|kiali|giali||||||
 |kylu|kialu|gialu||||||
-|kyly|kialy|gialy|delay|delay,held up|delay,hold up||time|
+|kyly|kialy|gialy|delay|delayed,held up|delay,hold up||time|
 |kylo|kialo|gialo|lateness|late|||time|
 |kyle|kiale|giale||||||
 |kyla|kiala|giala||||||
@@ -4159,7 +4159,7 @@
 |wqle|wqile|lqile|wqle|||||
 |wqla|wqila|lqila||||||
 |wqlx|wqilx|lqilx||||||
-|wqlq|wqilq|lqilq|music|musical|perform|performmusic||
+|wqlq|wqilq|lqilq|music|musical|perform|perform music||
 |cqdizi|||nephew,niece||||kin|
 |padili|||Patrick||||name|
 |migali|||Mikhailah||||name|

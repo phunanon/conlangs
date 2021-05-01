@@ -1,6 +1,6 @@
 const e = (el: string) => document.querySelector(el) as HTMLElement;
 
-type Entry = { type: "noun" | "adjective" | "verb"; native: string; foreign: string[] };
+type Entry = { type: "n" | "a" | "tv" | "iv"; native: string; foreign: string[] };
 type Dictionary = Entry[];
 
 let words: Dictionary = [];
@@ -24,9 +24,10 @@ function parseDict(md: string) {
         const pushIf = (type: Entry["type"], native: string, foreign: string[]) => {
             if (foreign.length) words.push({ type, native, foreign });
         };
-        pushIf("noun", nN, fN);
-        pushIf("adjective", nA, fA);
-        pushIf("verb", nV, [...fVi, ...fVt]);
+        pushIf("n", nN, fN);
+        pushIf("a", nA, fA);
+        pushIf("tv", nV, fVt);
+        pushIf("iv", nV, fVi);
     });
 }
 
@@ -36,9 +37,14 @@ async function downloadDict() {
 }
 
 function searchFor(query: string) {
-    return words.filter(w =>
+    const result = words.filter(w =>
         [w.native, makeShorter(w.native), ...w.foreign].some(w => w.match(query)),
     );
+    const bestIdx = result.findIndex(entry => entry.foreign.includes(query));
+    if (bestIdx != -1) {
+        result.unshift(result.splice(bestIdx, 1)[0]);
+    }
+    return result;
 }
 
 function makeShorter(word: string) {
@@ -74,9 +80,11 @@ function DOM_addWord(word: string) {
 
 function presentTable(words: Entry[]) {
     const table = words.map(({ type, native, foreign }: Entry) => {
-        return `<tr onclick="DOM_addWord('${native}')"><td>${type}</td><td>${makeShorter(
-            native,
-        )}</td><td>${foreign.join(", ")}</td></tr>`;
+        return `<tr class="genre-${type}" onclick="DOM_addWord('${native}')">
+                    <td>${type}</td>
+                    <td class="native">${makeShorter(native)}</td>
+                    <td>${foreign.join(", ")}</td>
+                </tr>`;
     });
     e("#results").innerHTML = `<tr><th>Genre</th><th>Native</th><th>Foreign</th></tr>${table.join(
         "",

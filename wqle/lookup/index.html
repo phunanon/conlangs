@@ -10,13 +10,38 @@
   font-size: 1.2rem;
   margin: .2rem;
 }
+.native {
+  font-family: monospace;
+}
+table {
+  border-collapse: collapse;
+}
+td {
+  border-bottom: .1rem solid #aaa;
+  padding: .2rem;
+}
+th {
+  padding-right: .5rem;
+}
+.genre-a {
+  background-color: #cfc;
+}
+.genre-n {
+  background-color: #ccf;
+}
+.genre-tv {
+  background-color: #fcf;
+}
+.genre-iv {
+  background-color: #ffc;
+}
     </style>
   </head>
   <body onload="pageLoad()">
     <input type="text" id="query" placeholder="Dictionary lookup" onkeyup="DOM_search(event)"/>
-    <p id="info"></p>
-    <input id="build" onchange="DOM_updateIPA()"/>
+    <input id="build" placeholder="Sentence builder" onchange="DOM_updateIPA()"/>
     <p id="ipa"></p>
+    <p id="info"></p>
     <table>
       <tbody id="results"></tbody>
     </table>
