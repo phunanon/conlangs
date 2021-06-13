@@ -89,6 +89,12 @@ Personal labels or pronouns at the beginning of a clause are instructional.
 Verbs at the beginning of a clause are first person by default.
 
 
+Consecutive verbs take on the tense of the last verb if present, or their own tenses if present.
+
+
+Tense adjectives at the beginning of a clause describe the whole clause.
+
+
 Numbers begin with `wi`; `bi, ba, di, da, gi, ga, ni, na, zi, za`, `je, ja, ve, va, le, la` constitute 0 to 9, A to F. Append morphemes to compose numbers, such as `wibabi` for 10. `(wi)bu` is used to denote a decimal point.
 
 

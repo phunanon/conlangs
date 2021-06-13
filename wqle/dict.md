@@ -5,8 +5,8 @@
 |py|pia|bia|they,them|their,theirs||||
 |po|piq|biq|yes|||||
 |pe|pau|bau|no|not||||
-|pa|pua|bua||past||||
-|px|piq|biq||future||||
+|pa|pua|bua||past,did||||
+|px|piq|biq||future,will||||
 |pq|pqi|bqi||plural,again||||
 |ti|tiu|diu|we_inclusive|our_inclusive,ours_inclusive||||
 |tu|tui|dui|we_exclusive|our_exclusive,ours_exclusive||||
@@ -30,7 +30,7 @@
 |mo|miq|niq|when|evi_speculated||||
 |me|mau|nau|how|evi_hearsay||||
 |ma|mua|nua|why,question|question,?||||
-|mx|miq|niq|for|||||
+|mx|miq|niq|for|toward||||
 |mq|mqi|nqi||||||
 |si|siu|ziu||all||||
 |su|sui|zui||some||||
@@ -45,8 +45,8 @@
 |cy|cia|jia||||||
 |co|ciq|jiq||old||||
 |ce|cau|jau||new||||
-|ca|cua|jua||||||
-|cx|ciq|jiq||||||
+|ca|cua|jua||inside of||||
+|cx|ciq|jiq||outside of||||
 |cq|cqi|jqi|(kin_begin)|||||
 |hi|hiu|viu||||||
 |hu|hui|vui|cause|caused|cause|||
@@ -654,7 +654,7 @@
 |tudo|tuido|duido||||||
 |tude|tuide|duide||||||
 |tuda|tuida|duida||||||
-|tudx|tuidx|duidx||||||
+|tudx|tuidx|duidx|island|||||
 |tudq|tuidq|duidq||||||
 |tugi|tuigi|duigi||||||
 |tugu|tuigu|duigu||||||
@@ -689,8 +689,8 @@
 |tujx|tuijx|duijx||||||
 |tujq|tuijq|duijq||||||
 |tuvi|tuivi|duivi||||||
-|tuvu|tuivu|duivu||||||
-|tuvy|tuivy|duivy||||||
+|tuvu|tuivu|duivu|mountain|mountainous||||
+|tuvy|tuivy|duivy|hill|hilly|climb hill|||
 |tuvo|tuivo|duivo||||||
 |tuve|tuive|duive||||||
 |tuva|tuiva|duiva||||||
@@ -963,8 +963,8 @@
 |txbi|tiqbi|diqbi||||||
 |txbu|tiqbu|diqbu|river|flowing|pass over|flow||
 |txby|tiqby|diqby|lake|shallow|float on|float||
-|txbo|tiqbo|diqbo|ocean|deep|drifton|drift||
-|txbe|tiqbe|diqbe||||||
+|txbo|tiqbo|diqbo|sea|||||
+|txbe|tiqbe|diqbe|ocean|deep|drift on|drift||
 |txba|tiqba|diqba||||||
 |txbx|tiqbx|diqbx||||||
 |txbq|tiqbq|diqbq||||||
@@ -1169,7 +1169,7 @@
 |kudx|kuidx|guidx||||||
 |kudq|kuidq|guidq||||||
 |kugi|kuigi|guigi||||||
-|kugu|kuigu|guigu||||||
+|kugu|kuigu|guigu|win|won|win|win||
 |kugy|kuigy|guigy||||||
 |kugo|kuigo|guigo||||||
 |kuge|kuige|guige||||||
@@ -1665,7 +1665,7 @@
 |milx|miulx|niulx||||||
 |milq|miulq|niulq||||||
 |mubi|muibi|nuibi||||||
-|mubu|muibu|nuibu|sleep|sleepy|makesleep|sleep||
+|mubu|muibu|nuibu|sleep|sleepy|make sleep|sleep||
 |muby|muiby|nuiby||||||
 |mubo|muibo|nuibo||||||
 |mube|muibe|nuibe||||||
@@ -1786,7 +1786,7 @@
 |myvq|miavq|niavq||||||
 |myli|miali|niali||||||
 |mylu|mialu|nialu||||||
-|myly|mialy|nialy|fit|fit|makefit|fit||
+|myly|mialy|nialy|fit|fit|make fit|fit||
 |mylo|mialo|nialo||||||
 |myle|miale|niale||||||
 |myla|miala|niala||||||
