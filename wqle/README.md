@@ -148,7 +148,7 @@ person let song affect reflexive if_then make or ruin day 'their
 `ctx1`, all things are definite/singular; `ctx2` small things are plural, big things are definite/singular; `ctx3`, all things are indefinite; `ctx4` all things are plural.
 
 
-A guide for word generation:
+A guide for etymology:
 
 | char | essence       | 
 |------|---------------| 
@@ -161,3 +161,21 @@ A guide for word generation:
 | g    | retain        | 
 | p    | items         | 
 | h    | space         | 
+
+## Various examples
+
+https://www.reddit.com/r/conlangs/comments/e1z0kw/1165th_just_used_5_minutes_of_your_day/f8th9cq/  
+https://www.reddit.com/r/conlangs/comments/e107n4/1164th_just_used_5_minutes_of_your_day/f8l571f/  
+https://www.reddit.com/r/conlangs/comments/e0n32q/1163rd_just_used_5_minutes_of_your_day/f8igfz7/  
+https://www.reddit.com/r/conlangs/comments/dylr9e/1161st_just_used_5_minutes_of_your_day/f8eht7d/  
+https://www.reddit.com/r/conlangs/comments/dzsim5/1162nd_just_used_5_minutes_of_your_day/f8a8o99/  
+https://www.reddit.com/r/conlangs/comments/dxgb2z/1159th_just_used_5_minutes_of_your_day/f7qa3wq/  
+https://www.reddit.com/r/conlangs/comments/dwztc6/how_do_you_say_i_love_you/f7mrlof/  
+https://www.reddit.com/r/conlangs/comments/dvcbqc/1157th_just_used_5_minutes_of_your_day/f7cczjp/  
+https://www.reddit.com/r/conlangs/comments/duamsj/1156th_just_used_5_minutes_of_your_day/f76wfjp/  
+https://www.reddit.com/r/conlangs/comments/dtwb8o/1155th_just_used_5_minutes_of_your_day/f6zfhz9/  
+https://www.reddit.com/r/conlangs/comments/dsyr4z/1154th_just_used_5_minutes_of_your_day/f6trx3m/  
+https://www.reddit.com/r/conlangs/comments/f4q4a6/1212th_just_used_5_minutes_of_your_day/fhzbhky/  
+https://www.reddit.com/r/conlangs/comments/e43x9w/1167th_just_used_5_minutes_of_your_day/f96rea6/  
+https://www.reddit.com/r/conlangs/comments/e2ygn7/1166th_just_used_5_minutes_of_your_day/f8zgy1p/  
+https://www.reddit.com/r/conlangs/comments/n2ozme/1459th_just_used_5_minutes_of_your_day/gwnznyf/
