@@ -54,6 +54,9 @@ Lone words beginning with `p` omit the `p` in speech and writing with spaces.
 All words ending in `i` as their V omit the `i` in speech and writing, unless this could cause deletion (pi) or ambiguity (such as without spaces). One may wish to stress between a CVC word and a V word in speech.
 
 
+When vocalised, speakers may omit the final vowel if they double the length of a matching penultimate vowel. E.g. tìbu /tiubu/ could be spoken /tiuːb/.
+
+
 Each word has a *genre* depending on its head consonant and vowel. The genres are:
 
 | Genre      | Byte     | Result                         |
