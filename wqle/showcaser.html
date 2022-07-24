@@ -42,23 +42,20 @@ function redo (input) {
   const txt = input.value;
 
   //Hex representation
-  let htxt = txt;
-  for (const d in dict)
-    for (let n in dict[d]) {
-      n = parseInt(n);
-      htxt = htxt.replace(new RegExp(dict[d][n], 'g'), (n+add[d])+" ");
-    }
-  htxt = htxt.trim().replace(/  /g, " ").split(" ");
-  const nums = htxt.map(s => parseInt(s));
-  const pairs = nums.flatMap((_, i, a) => i % 2 ? [] : [a.slice(i, i + 2)]);
-  const bytes = pairs.map(p => (p[0] << 4) | p[1]);
-  const hexStr = bytes.map(tohex).join("");
-  e("out").innerHTML = "<br>"+ bytes.length +"B "+ (bytes.length*8) +"b: "+ hexStr;
+  let hext = txt;
+  shorts.forEach((short, s) => {
+    hext = hext.replaceAll(short, dict[0][s]);
+  })
+  dict.forEach((quarter, d) => quarter.forEach((letter, n) => {
+    hext = hext.replaceAll(letter, (n + add[d]).toString(16));
+  }));
+  hext = hext.replaceAll(" ", "").split('');
+  e("out").innerHTML = `<br>${hext.join("")}`;
 
   //Shorter representation
   let stxt = txt;
   for (const l in longs)
-    stxt = stxt.replace(new RegExp(longs[l], 'g'), shorts[l]);
+    stxt = stxt.replaceAll(longs[l], shorts[l]);
   stxt = stxt.trim();
   //Without p- or -i
   nospaces = stxt.replace(/ /g, "");
@@ -79,7 +76,7 @@ function redo (input) {
     if (!found) itxt = itxt.slice(1);
   }
   
-  e("out").innerHTML += "<pre>###wqle\n[**"+ stxt +"**]()  \n/"+ ipaTxt +"/  \nOccupies "+ bytes.length +" bytes.</pre>";
+  e("out").innerHTML += "<pre>###wqle\n[**"+ stxt +"**]()  \n/"+ ipaTxt +"/  \nOccupies "+ (hext.length / 2) +" bytes.</pre>";
   e("out").innerHTML += "<p>"+ nospaces +"</p>";
   e("out").innerHTML += "<div>"+ stxt.replace(/,/g, ",<br>") +"</div>";
 }
