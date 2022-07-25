@@ -8,8 +8,8 @@
 |pa|pua|bua||past,did||||
 |px|piq|biq||future,will||||
 |pq|pqi|bqi||plural,again||||
-|ti|tiu|diu|we_inclusive|our_inclusive,ours_inclusive||||
-|tu|tui|dui|we_exclusive|our_exclusive,ours_exclusive||||
+|ti|tiu|diu|we_exclusive|our_exclusive,ours_exclusive||||
+|tu|tui|dui|we_inclusive|our_inclusive,ours_inclusive||||
 |ty|tia|dia|this|also||||
 |to|tai|dai|it,that|its||||
 |te|tau|dau|world|worldly||||
