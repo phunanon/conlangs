@@ -28,12 +28,12 @@ The phonology and Latin orthography is:
 | 1   | u   | **u** |     | 9   | ui  | **ui** / **í** |
 | 2   | e   | **y** |     | A   | ia  | **ia** / **à** |
 | 3   | ɵ   | **o** |     | B   | ai  | **ai** / **á** |
-| 4   | ɛ   | **e** |     | C   | au  | **au** / **ù** |
-| 5   | a   | **a** |     | D   | ua  | **ua** / **ú** |
+| 4   | ɛ   | **e** |     | C   | ua  | **ua** / **ú** |
+| 5   | a   | **a** |     | D   | au  | **au** / **ù** |
 | 6   | ɶ   | **x** |     | E   | iɒ  | **iq** / **ò** |
 | 7   | ɒ   | **q** |     | F   | ɒi  | **qi** / **ó** |
 
-The alphabet is: pitukymo secahxwq bìdígàná zùjúvòló
+The alphabet is: pitukymo secahxwq bìdígàná zújùvòló
 
 A native orthography ("curvy script"):
 
@@ -42,7 +42,7 @@ A native orthography ("curvy script"):
 Which is
 
     ptkmschwiuyoeaxq
-    bdgnzjvlìíàáùúòó,.:
+    bdgnzjvlìíàáúùòó,.:
 
 Words beginning with `p` may omit the `p` in speech and writing with spaces.  
 All words ending in `i` as their V may omit the `i` in speech and writing,

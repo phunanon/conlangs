@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "watch": "nodemon --watch out --delay 1 out/index.js"
+  },
+  "main": "out/index.js",
+  "dependencies": {
+    "discord.js": "^14.0.1"
+  },
+  "devDependencies": {
+    "typescript": "^4.8.0-dev.20220717"
+  }
+}
