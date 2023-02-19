@@ -1,12 +1,13 @@
 # wqle
 
-[Dictionary document](dict.md), [Interactive dictionary](/conlangs/wqle/lookup), [Showcaser app](showcaser.html).
+[Dictionary document](dict.md), [Interactive dictionary](/conlangs/wqle/lookup),
+[Showcaser app](showcaser.html).
 
 ## General
 
-|                                                              |
-| ------------------------------------------------------------ |
 | This section details general information a speaker must know |
+| ------------------------------------------------------------ |
+|                                                              |
 
 The phonology and Latin orthography is:
 
@@ -44,37 +45,52 @@ Which is
     bdgnzjvlìíàáùúòó,.:
 
 Words beginning with `p` may omit the `p` in speech and writing with spaces.  
-All words ending in `i` as their V may omit the `i` in speech and writing, unless this could cause deletion (pi) or ambiguity (such as without spaces). One may wish to stress between a CVC word and a V word in speech.
+All words ending in `i` as their V may omit the `i` in speech and writing,
+unless this could cause deletion (pi) or ambiguity (such as without spaces). One
+may wish to stress between a CVC word and a V word in speech.
 
-When vocalised, speakers may omit the final vowel if they double the length of a matching penultimate vowel. E.g. tìbu /tiubu/ could be spoken /tiuːb/.
+When vocalised, speakers may omit the final vowel if they double the length of a
+matching penultimate vowel. E.g. tìbu /tiubu/ could be spoken /tiuːb/.
 
 Adjectives follow the word they describe.
 
 Contiguous nouns act as `noun [of] noun`. Pronouns are excluded from this.
 
-There can be multiple subjects to a verb, all contributing to the carrying out of that verb. For example: `I brush paint wall` - _I paint wall with brush_.
+There can be multiple subjects to a verb, all contributing to the carrying out
+of that verb. For example: `I brush paint wall` - _I paint wall with brush_.
 
 Addressing a person with their name/label acts as the pronoun.
 
-Personal names/labels or pronouns at the beginning of a clause are instructional.
+Personal names/labels or pronouns at the beginning of a clause are
+instructional.
 
-Verbs at the end of a clause (not including adjectives) are intransitive, whereas verbs with objects after them are transitive.  
-Intransitive verbs can be overloaded with multiple subjects, for example: `I hold table` - _I hold up the table_; `I table hold` - _I hold onto the table._
+Verbs at the end of a clause (not including adjectives) are intransitive,
+whereas verbs with objects after them are transitive.  
+Intransitive verbs can be overloaded with multiple subjects, for example:
+`I hold table` - _I hold up the table_; `I table hold` - _I hold onto the
+table._
 
 A verb at the beginning of a clause makes the clause first-person.
 
-Consecutive verbs take on the tense of the last verb if present, or their own tenses if present.
+Consecutive verbs take on the tense of the last verb if present, or their own
+tenses if present.
 
 Tense adjectives at the beginning of a clause describe the whole clause.
 
-Numbers begin with `wi`; `bi, ba, di, da, gi, ga, ni, na, zi, za`, `je, ja, ve, va, le, la` constitute 0 to 9, A to F. Append morphemes to compose numbers, such as `wibabi` for 10. `(wi)bu` is used to denote a decimal point.
+Numbers begin with `wi`; `bi, ba, di, da, gi, ga, ni, na, zi, za`,
+`je, ja, ve, va, le, la` constitute 0 to 9, A to F. Append morphemes to compose
+numbers, such as `wibabi` for 10. `(wi)bu` is used to denote a decimal point.
 
-`soft_and` can be used to allow contiguous forms of grammar, while enabling both constituent parts of the form to be their own entity. For example:  
-`they "forget mother soft_and child plural` - they forget the mother and the children of said mother
+`soft_and` can be used to allow contiguous forms of grammar, while enabling both
+constituent parts of the form to be their own entity. For example:  
+`they "forget mother soft_and child plural` - they forget the mother and the
+children of said mother
 
-The pronoun-verb repeated pattern acts as a chain of effects, for example: `I tell you tell them` - I tell you to tell them.
+The pronoun-verb repeated pattern acts as a chain of effects, for example:
+`I tell you tell them` - I tell you to tell them.
 
-Kin and relationships begin with `cq` then the following morphemes, which can be chained together as nouns:
+Kin and relationships begin with `cq` then the following morphemes, which can be
+chained together as nouns:
 
 | wqle | relation  |
 | ---- | --------- |
@@ -109,24 +125,27 @@ A conditional is expressed as: condition if_then result. For example:
 A song can make or ruin a person’s day if they let it get to them.  
 person let song affect reflexive if_then make or ruin day 'their
 
-`ctx1`, all things are definite/singular; `ctx2` small things are plural, big things are definite/singular; `ctx3`, all things are indefinite; `ctx4` all things are plural.
+`ctx1`, all things are definite/singular; `ctx2` small things are plural, big
+things are definite/singular; `ctx3`, all things are indefinite; `ctx4` all
+things are plural.
 
 ## Internal concepts
 
-|                                                          |
-| -------------------------------------------------------- |
 | This section details information a speaker need not know |
+| -------------------------------------------------------- |
+|                                                          |
 
 Morphemes are `CV`, where V can be a diphthong.
 
-Each word has a _genre_ depending on its head consonant and vowel. The genres are:
+Each word has a _genre_ depending on its head consonant and vowel. The genres
+are:
 
-| Genre      | Byte     | Result                         |
-| :--------- | -------- | :----------------------------- |
-| Noun       | 0xxx0xxx | Unvoiced consonant, lone vowel |
-| Adjective  | 0xxx1xxx | Unvoiced consonant, diphthong  |
-| (extended) | 1xxx0xxx | Voiced consonant, lone vowel   |
-| Verb       | 1xxx1xxx | Voiced consonant, diphthong    |
+| Genre      | Byte     | Result                               |
+| :--------- | -------- | :----------------------------------- |
+| Noun       | 0xxx0xxx | Unvoiced consonant, lone vowel       |
+| Adjective  | 0xxx1xxx | Unvoiced consonant, diphthong/hiatus |
+| (extended) | 1xxx0xxx | Voiced consonant, lone vowel         |
+| Verb       | 1xxx1xxx | Voiced consonant, diphthong/hiatus   |
 
 `(extended)` is used by non-head `CV` in longer words.
 
