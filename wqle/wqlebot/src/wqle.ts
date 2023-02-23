@@ -14,7 +14,7 @@ const ipa =
     " "
   );
 
-export function toIpa(wqle: string) {
+export function wordIpa(wqle: string) {
   let itxt = wqle;
   let ipaTxt = "";
   while (itxt.length > 0) {
@@ -27,6 +27,12 @@ export function toIpa(wqle: string) {
         break;
       }
     if (!found) itxt = itxt.slice(1);
+  }
+  const penult = ipaTxt.at(-2);
+  if (ipaTxt.endsWith("i") && penult && consonants.includes(penult)) {
+    const coda = ipaTxt.at(-2);
+    const ejective = coda && {"b": "pʼ", "d": "tʼ", "g": "kʼ"}[coda] || coda;
+    ipaTxt = ipaTxt.slice(0, -2) + ejective;
   }
   return ipaTxt;
 }

@@ -981,12 +981,6 @@
       "provision": "official"
     },
     {
-      "native": "pugx",
-      "foreign": [],
-      "genre": "noun",
-      "provision": "official"
-    },
-    {
       "native": "pugq",
       "foreign": [],
       "genre": "noun",
@@ -10107,12 +10101,6 @@
     },
     {
       "native": "mile",
-      "foreign": [],
-      "genre": "noun",
-      "provision": "official"
-    },
-    {
-      "native": "mila",
       "foreign": [],
       "genre": "noun",
       "provision": "official"
@@ -25540,7 +25528,8 @@
     {
       "native": "mau",
       "foreign": [
-        "question,?"
+        "question",
+        "?"
       ],
       "genre": "adjective",
       "provision": "official"
@@ -25606,7 +25595,10 @@
     },
     {
       "native": "sqi",
-      "foreign": [],
+      "foreign": [
+        "every",
+        "each"
+      ],
       "genre": "adjective",
       "provision": "official"
     },
@@ -25810,9 +25802,7 @@
     },
     {
       "native": "piubo",
-      "foreign": [
-        "featured"
-      ],
+      "foreign": [],
       "genre": "adjective",
       "provision": "official"
     },
@@ -35382,12 +35372,6 @@
     },
     {
       "native": "miule",
-      "foreign": [],
-      "genre": "adjective",
-      "provision": "official"
-    },
-    {
-      "native": "miula",
       "foreign": [],
       "genre": "adjective",
       "provision": "official"
@@ -45291,12 +45275,6 @@
       "provision": "official"
     },
     {
-      "native": "hianq",
-      "foreign": [],
-      "genre": "adjective",
-      "provision": "official"
-    },
-    {
       "native": "hiazi",
       "foreign": [],
       "genre": "adjective",
@@ -50891,7 +50869,7 @@
     {
       "native": "lqi",
       "foreign": [
-        "spoken to"
+        "speak to"
       ],
       "genre": "t. verb",
       "provision": "official"
@@ -50916,9 +50894,7 @@
     },
     {
       "native": "biubo",
-      "foreign": [
-        "features"
-      ],
+      "foreign": [],
       "genre": "t. verb",
       "provision": "official"
     },
@@ -60512,12 +60488,6 @@
       "provision": "official"
     },
     {
-      "native": "niula",
-      "foreign": [],
-      "genre": "t. verb",
-      "provision": "official"
-    },
-    {
       "native": "niulx",
       "foreign": [],
       "genre": "t. verb",
@@ -67397,12 +67367,6 @@
       "provision": "official"
     },
     {
-      "native": "jiavy",
-      "foreign": [],
-      "genre": "t. verb",
-      "provision": "official"
-    },
-    {
       "native": "jiavo",
       "foreign": [],
       "genre": "t. verb",
@@ -72365,12 +72329,6 @@
     },
     {
       "native": "vqiju",
-      "foreign": [],
-      "genre": "t. verb",
-      "provision": "official"
-    },
-    {
-      "native": "vqijy",
       "foreign": [],
       "genre": "t. verb",
       "provision": "official"
@@ -97383,12 +97341,6 @@
       "provision": "official"
     },
     {
-      "native": "vqijy",
-      "foreign": [],
-      "genre": "i. verb",
-      "provision": "official"
-    },
-    {
       "native": "vqijo",
       "foreign": [],
       "genre": "i. verb",
@@ -101473,6 +101425,107 @@
       "provision": "provisional",
       "by": "353221987058974724",
       "ts": 1676771422632
+    },
+    {
+      "native": "mila",
+      "foreign": [
+        "tastiness"
+      ],
+      "genre": "noun",
+      "provision": "provisional",
+      "by": "353221987058974724",
+      "ts": 1676843175532
+    },
+    {
+      "native": "miula",
+      "foreign": [
+        "tasty"
+      ],
+      "genre": "adjective",
+      "provision": "provisional",
+      "by": "353221987058974724",
+      "ts": 1676843196498
+    },
+    {
+      "native": "niula",
+      "foreign": [
+        "make tasty"
+      ],
+      "genre": "t. verb",
+      "provision": "provisional",
+      "by": "353221987058974724",
+      "ts": 1676846266350
+    },
+    {
+      "native": "jiavy",
+      "foreign": [
+        "deter"
+      ],
+      "genre": "t. verb",
+      "provision": "provisional",
+      "by": "353221987058974724",
+      "ts": 1676992062478
+    },
+    {
+      "native": "pugx",
+      "foreign": [
+        "lock"
+      ],
+      "genre": "noun",
+      "provision": "provisional",
+      "by": "353221987058974724",
+      "ts": 1676992179185
+    },
+    {
+      "native": "hianq",
+      "foreign": [
+        "honest"
+      ],
+      "genre": "adjective",
+      "provision": "provisional",
+      "by": "353221987058974724",
+      "ts": 1676992192192
+    },
+    {
+      "native": "cxlodi",
+      "foreign": [
+        "charot",
+        "just joking"
+      ],
+      "genre": "noun",
+      "provision": "provisional",
+      "by": "353221987058974724",
+      "ts": 1676993471654
+    },
+    {
+      "native": "vqijy",
+      "foreign": [
+        "kill"
+      ],
+      "genre": "t. verb",
+      "provision": "provisional",
+      "by": "353221987058974724",
+      "ts": 1677058404956
+    },
+    {
+      "native": "vqijy",
+      "foreign": [
+        "commit suicide"
+      ],
+      "genre": "i. verb",
+      "provision": "provisional",
+      "by": "353221987058974724",
+      "ts": 1677058451874
+    },
+    {
+      "native": "cilodi",
+      "foreign": [
+        "monkey"
+      ],
+      "genre": "noun",
+      "provision": "provisional",
+      "by": "353221987058974724",
+      "ts": 1677058514419
     }
   ]
 }

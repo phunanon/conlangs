@@ -52,6 +52,8 @@ may wish to stress between a CVC word and a V word in speech.
 When vocalised, speakers may omit the final vowel if they double the length of a
 matching penultimate vowel. E.g. tìbu /tiubu/ could be spoken /tiuːb/.
 
+A coda of one of /bdg/ may be ejective.
+
 Adjectives follow the word they describe.
 
 Contiguous nouns act as `noun [of] noun`. Pronouns are excluded from this.

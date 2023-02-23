@@ -12,7 +12,7 @@ import {
 } from "./dict";
 import { randomFreeWord, wordSplit } from "./dict";
 import { resetChannel } from "./discord-dict";
-import { determineGenre, toIpa, validWord } from "./wqle";
+import { determineGenre, wordIpa, validWord } from "./wqle";
 
 let token = "";
 let wordReqChSf = "";
@@ -144,7 +144,7 @@ client.on("messageCreate", async (message) => {
         }
         return ["compound", line.replaceAll(" ", "")];
       }
-      
+
       const genre = determineGenre(line);
       return genre
         ? genre === "verb"
@@ -200,6 +200,8 @@ client.on("interactionCreate", async (interaction) => {
   try {
     if (!interaction.isButton() || channelId !== classroomChSf) return;
 
+    console.log("classroom interaction", user.tag);
+
     const { reply, update } = await HandleFlashcardsMessage(
       [user.id, "user"],
       interaction.customId
@@ -214,7 +216,7 @@ client.on("interactionCreate", async (interaction) => {
 export const entryToMessage = (entry: Entry) => {
   const { native, foreign, genre, provision } = entry;
   const foreigns = foreign.join(", ");
-  const ipa = toIpa(native);
+  const ipa = wordIpa(native);
   const prov = provision === "provisional" ? `(provisional)` : "";
   const left = `${genre[0]}. ${native.padEnd(7)} /${(ipa + "/").padEnd(8)}`;
   return `\`${left}\` ${prov} ${foreigns} `;
