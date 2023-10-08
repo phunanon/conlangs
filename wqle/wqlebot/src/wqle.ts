@@ -7,35 +7,6 @@ const abc = [
 
 const vowels = [...abc[1], ...abc[3]];
 const consonants = [...abc[0], ...abc[2]];
-const cha =
-  "ì í à á ú ù ò ó i u y o e a x q p t k m s c h w b d g n z j v l".split(" ");
-const ipa =
-  "iu ui ia ai ua au iɒ ɒi i u e ɵ ɛ a ɶ ɒ p t k m s ʃ h w b d g n z ʒ v l".split(
-    " "
-  );
-
-export function wordIpa(wqle: string) {
-  let itxt = wqle;
-  let ipaTxt = "";
-  while (itxt.length > 0) {
-    let found = false;
-    for (const c in cha)
-      if (itxt.startsWith(cha[c])) {
-        ipaTxt += ipa[c];
-        itxt = itxt.slice(cha[c].length);
-        found = true;
-        break;
-      }
-    if (!found) itxt = itxt.slice(1);
-  }
-  const penult = ipaTxt.at(-2);
-  if (ipaTxt.endsWith("i") && penult && consonants.includes(penult)) {
-    const coda = ipaTxt.at(-2);
-    const ejective = coda && {"b": "pʼ", "d": "tʼ", "g": "kʼ"}[coda] || coda;
-    ipaTxt = ipaTxt.slice(0, -2) + ejective;
-  }
-  return ipaTxt;
-}
 
 function wordNibbles(wqleWord: string) {
   const nibbles: number[] = [];

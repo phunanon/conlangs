@@ -1,6 +1,6 @@
 import { TextChannel } from "discord.js";
-import { entryToMessage } from ".";
 import { Entry } from "./dict";
+import { entryToMessage } from "./translation-report";
 import { sortedByRootThenGenre } from "./wqle";
 
 type Dict = {
@@ -32,7 +32,7 @@ export async function resetChannel(entries: Entry[], channel: TextChannel) {
     batch.forEach((entry) => {
       dict[entry.native] = { sf, ts: Date.now() };
     });
-    await sleep(200);
+    await sleep(500);
   }
   await channel.send(
     `${entries.length.toLocaleString()}/${totalEntries.toLocaleString()} entries.`

@@ -19,8 +19,21 @@ const dict = [
 const add = [8,0,8,0];
 
 //IPA
-const cha = "ì í à á ú ù ò ó i u y o e a x q p t k m s c h w b d g n z j v l".split(" ");
-const ipa = "iu ui ia ai ua au iɒ ɒi i u e ɵ ɛ a ɶ ɒ p t k m s ʃ h w b d g n z ʒ v l".split(" ");
+const abc = [
+  "p t k m s c h w",
+  "i u y o e a x q",
+  "b d g n z j v l",
+  "iu ui ia ai ua au iq qi",
+].map((s) => s.split(" "));
+
+const vowels = [...abc[1], ...abc[3]];
+const consonants = [...abc[0], ...abc[2]];
+const cha =
+  "ì í à á ú ù ò ó i u y o e a x q p t k m s c h w b d g n z j v l".split(" ");
+const ipa =
+  "iu ui ia ai ua au iɒ ɒi i u e ɵ ɛ a ɶ ɒ p t k m s ʃ h w b d g n z ʒ v l".split(
+    " "
+  );
 cha.push(" ");
 ipa.push(" ");
 
@@ -30,11 +43,9 @@ const shorts = "ì í à á ú ù ò ó".split(" ");
 
 //Business
 
-function removePorI (word) {
+function removeP (word) {
   if (word.length == 2 && word[0] == "p")
     return word.substr(1);
-  if (word.length > 2 && word[word.length - 1] == "i")
-    return word.slice(0, -1);
   return word;
 }
 
@@ -59,7 +70,6 @@ function redo (input) {
   stxt = stxt.trim();
   //Without p- or -i
   nospaces = stxt.replace(/ /g, "");
-  stxt = stxt.split(" ").map(removePorI).join(" ");
 
   //IPA representation
   let itxt = stxt;
@@ -73,8 +83,17 @@ function redo (input) {
         found = true;
         break;
       }
+    console.log(found, itxt);
     if (!found) itxt = itxt.slice(1);
   }
+  const penult = ipaTxt.at(-2);
+  if (ipaTxt.length > 2 && ipaTxt.endsWith("i") && penult && consonants.includes(penult)) {
+    const coda = ipaTxt.at(-2);
+    const ejective = coda && {"b": "pʼ", "d": "tʼ", "g": "kʼ"}[coda] || coda;
+    ipaTxt = ipaTxt.slice(0, -2) + ejective;
+  }
+  stxt = stxt.split(" ").map(removeP).join(" ");
+  ipaTxt = ipaTxt.split(" ").map(removeP).join(" ");
   
   e("out").innerHTML += "<pre>###wqle\n[**"+ stxt +"**]()  \n/"+ ipaTxt +"/  \nOccupies "+ (hext.length / 2) +" bytes.</pre>";
   e("out").innerHTML += "<p>"+ nospaces +"</p>";

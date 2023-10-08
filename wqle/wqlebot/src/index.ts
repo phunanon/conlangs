@@ -1,32 +1,75 @@
-import { Client, GatewayIntentBits, TextChannel } from "discord.js";
-import { HandleFlashcardsMessage } from "./classroom";
-const {
-  promises: { readFile },
-} = require("fs");
 import {
-  appendProvisionalWord,
-  Entry,
-  lookupNativeWord,
-  lookupForeignWord,
-  allEntries,
-} from "./dict";
-import { randomFreeWord, wordSplit } from "./dict";
+  Client,
+  GatewayIntentBits,
+  SlashCommandBuilder,
+  TextChannel,
+} from "discord.js";
+import { HandleFlashcardsMessage } from "./classroom";
+import { readFile } from "fs/promises";
+import { allEntries } from "./dict";
+import { wordSplit } from "./dict";
 import { resetChannel } from "./discord-dict";
-import { determineGenre, wordIpa, validWord } from "./wqle";
+import { translateWordsReport } from "./translation-report";
+import { handleWordRequest } from "./word-request";
+import { showcase } from "./showcase";
+import { standardise } from "./wqle2";
 
 let token = "";
+let guildSf = "";
 let wordReqChSf = "";
 let transStrChSf = "";
 let classroomChSf = "";
 let dictChSf = "";
 
-async function loadConfig() {
-  ({ token, wordReqChSf, transStrChSf, classroomChSf, dictChSf } = JSON.parse(
-    await readFile("config.json")
-  ));
+async function main() {
+  //Load config
+  ({ token, guildSf, wordReqChSf, transStrChSf, classroomChSf, dictChSf } =
+    JSON.parse((await readFile("config.json")).toString()));
+  //Client set-up
+  client.once("ready", async () => {
+    const guild = await client.guilds.fetch(guildSf);
+    await guild?.commands.create(
+      new SlashCommandBuilder()
+        .setName("showcase")
+        .setDescription("Generate a showcase image of a wqle sentence")
+        .addStringOption((option) =>
+          option
+            .setName("sentence")
+            .setDescription("The wqle sentence to showcase")
+            .setRequired(true)
+        )
+    );
+    await guild?.commands.create(
+      new SlashCommandBuilder()
+        .setName("represent")
+        .setDescription("Generate representations of a wqle sentence")
+        .addStringOption((option) =>
+          option
+            .setName("sentence")
+            .setDescription("The wqle sentence to represent")
+            .setRequired(true)
+        )
+    );
+    client.on("interactionCreate", async (interaction) => {
+      if (!interaction.isCommand()) return;
+      const { commandName, options } = interaction;
+      if (commandName === "showcase") {
+        const sentence = options.get("sentence", true).value as string;
+        interaction.reply({
+          files: [{ attachment: showcase(sentence), name: "newName.png" }],
+        });
+      } else if (commandName === "represent") {
+        const sentence = options.get("sentence", true).value as string;
+        const lines = Object.entries(standardise(sentence)).map(
+          ([k, v]) => `${k}: ${v}`
+        );
+        interaction.reply(lines.join("\n"));
+      }
+    });
+  });
   client.login(token);
 }
-loadConfig();
+main();
 
 type ChannelRef = [string, "channel"];
 export type UserRef = [string, "user"];
@@ -90,100 +133,7 @@ client.on("messageCreate", async (message) => {
 
   //Handle word requests
   if (isInWordReqCh) {
-    const replyError = async (err?: string) =>
-      await message.reply(
-        err ??
-          `Must be two lines:
-1. the foreign word, or words seperated by commas
-2. and either e.g.: "n" "a" "t" "i" for a random noun, adjective, transitive verb, or intransitive verb; "[wqle]" or "t [wqle]" or "i [wqle]" for a particular wqle word`
-      );
-
-    const lines = content.trim().split("\n");
-    if (lines.length !== 2) {
-      await replyError();
-      return;
-    }
-
-    const foreign = lines[0]!.split(",").map((x) => x.trim().toLowerCase());
-    if (!foreign.length) {
-      await replyError();
-      return;
-    }
-
-    async function determineWordRequest(
-      line: string
-    ): Promise<string | [Entry["genre"], string]> {
-      const forNewWord = /^[nati]$/.test(line);
-      const forWqleVerb = /^[ti] \w+$/.test(line);
-
-      if (forWqleVerb) {
-        const [g, w] = line.split(" ") as ["i" | "t", string];
-        const genre = determineGenre(w);
-        return genre === "verb"
-          ? [`${g}. ${genre}`, w]
-          : `wqle word did not match ${g}. verb.`;
-      }
-
-      if (forNewWord) {
-        const genreKey: { [key: string]: Entry["genre"] } = {
-          n: "noun",
-          a: "adjective",
-          t: "t. verb",
-          i: "i. verb",
-        };
-        const genre = genreKey[line[0]!]!;
-        const native = (await randomFreeWord(genre)) ?? "none";
-        return [genre, native];
-      }
-
-      //For compounds
-      if (line.includes(" ")) {
-        const native = line.replaceAll(" ", "");
-        if (!validWord(native)) {
-          return `invalid compound word ${line}`;
-        }
-        return ["compound", line.replaceAll(" ", "")];
-      }
-
-      const genre = determineGenre(line);
-      return genre
-        ? genre === "verb"
-          ? `request a verb like "i ${line}" or "t ${line}".`
-          : [genre, line]
-        : `could not determine genre of ${line}`;
-    }
-
-    const result = await determineWordRequest(lines[1]!);
-    if (!Array.isArray(result)) {
-      await replyError(result);
-      return;
-    }
-    const [genre, native] = result;
-
-    const existingNative = await lookupNativeWord(native);
-    if (existingNative && existingNative.genre === genre) {
-      await channel.send(
-        `That word is already taken, meaning ${existingNative.foreign}.`
-      );
-      return;
-    }
-
-    if (native === "none") {
-      await channel.send(
-        "No more free words of that genre available! The dictionary is full of two-syllable words; try more syllables."
-      );
-      return;
-    }
-
-    await appendProvisionalWord({
-      native,
-      foreign,
-      genre,
-      provision: "provisional",
-      by: author.id,
-    });
-
-    await channel.send(await translateWordsReport([native]));
+    await handleWordRequest(message);
     return;
   }
 
@@ -197,6 +147,7 @@ client.on("messageCreate", async (message) => {
 //Handle classroom responses
 client.on("interactionCreate", async (interaction) => {
   const { user, channelId, channel } = interaction;
+  if (!channel || !("send" in channel)) return;
   try {
     if (!interaction.isButton() || channelId !== classroomChSf) return;
 
@@ -206,42 +157,9 @@ client.on("interactionCreate", async (interaction) => {
       [user.id, "user"],
       interaction.customId
     );
-    reply && (await channel?.send(reply));
+    reply && (await channel.send(reply));
     update && (await interaction.update(update));
   } catch (e) {
     console.error(e);
   }
 });
-
-export const entryToMessage = (entry: Entry) => {
-  const { native, foreign, genre, provision } = entry;
-  const foreigns = foreign.join(", ");
-  const ipa = wordIpa(native);
-  const prov = provision === "provisional" ? `(provisional)` : "";
-  const left = `${genre[0]}. ${native.padEnd(7)} /${(ipa + "/").padEnd(8)}`;
-  return `\`${left}\` ${prov} ${foreigns} `;
-};
-
-async function translateWordsReport(words: string[]) {
-  const translated: string[] = [];
-  const unknown = new Set<string>();
-  words = words.map((word) => word.toLowerCase());
-  const allEntries: Entry[] = [];
-  await Promise.all(
-    words.map(async (word) => {
-      const entries = await lookupForeignWord(word);
-      if (!entries.length) {
-        unknown.add(word);
-      } else {
-        const unique = entries.filter(
-          (entry) => !allEntries.some((e) => e.native === entry.native)
-        );
-        allEntries.push(...unique);
-      }
-    })
-  );
-  translated.push(...allEntries.map(entryToMessage));
-  return `${
-    unknown.size ? `Unknown: ${[...unknown].join(", ")}` : "."
-  }\n${translated.join("\n")}`;
-}

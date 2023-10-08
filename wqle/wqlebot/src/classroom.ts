@@ -8,7 +8,8 @@ import {
 import { UserRef } from ".";
 import { MakeJsonIo } from "./db";
 import { Entry, nthEntry, randomEntry } from "./dict";
-import { sortedByRootThenGenre, wordIpa } from "./wqle";
+import { sortedByRootThenGenre } from "./wqle";
+import { standardise } from "./wqle2";
 const { floor, ceil } = Math;
 
 type Score = number;
@@ -24,7 +25,8 @@ type Classroom = {
 const { read: readClass, write: writeClass } =
   MakeJsonIo<Classroom>("classroom");
 
-const fmt = (word: string) => `__${word}__ - ${wordIpa(word)}`;
+const fmt = (word: string) =>
+  `__${word}__ - ${standardise(word).abbreviatedIpa}`;
 const fj = (entry: Entry) => entry.foreign.join(", ");
 const d = () => Math.floor(Date.now() / 1000);
 const fmtScore = (score: number) =>
@@ -39,14 +41,6 @@ export async function HandleFlashcardsMessage(
   const user =
     flashcards.users[userSf] ?? (flashcards.users[userSf] = [1, d()]);
 
-  const reset = response === "reset";
-
-  //Reset the learner's progress
-  if (reset) {
-    user[0] = 0;
-    await writeClass(classroom);
-  }
-
   /** The answer to the previous question */
   const correct = response === flashcards.correct;
 
@@ -58,7 +52,10 @@ export async function HandleFlashcardsMessage(
   );
 
   const nextQuestion = async () => {
-    const choices = await randomChoices(fj(nextAskEntry), user[0]);
+    const choices = [
+      ...(await randomChoices(fj(nextAskEntry), user[0])),
+      "🤷",
+    ];
     flashcards.correct = nextAskEntry.foreign[0];
     flashcards.choices = choices;
     await writeClass(classroom);
@@ -71,7 +68,7 @@ export async function HandleFlashcardsMessage(
     if (nextLearnEntry) {
       const genre = nextLearnEntry.genre[0];
       fields.push({
-        name: "wani kxdi",
+        name: "wani wiu",
         value: `${fmt(nextLearnEntry.native)}\n${genre}. ${fj(nextLearnEntry)}`,
         inline: true,
       });
@@ -91,7 +88,8 @@ export async function HandleFlashcardsMessage(
     const sinceLastCorrect = d() - user[1];
     const newScore = user[0] + 0.5 - sinceLastCorrect / 60 / 60 / 8;
     const newRoundedScore = Math.floor(newScore * 4) / 4;
-    user[0] = user[0] > 10 ? Math.max(10, newRoundedScore) : newRoundedScore;
+    //Ensure you can't lose more than down to ten, if you already know ten
+    user[0] = Math.max(user[0] > 10 ? 10 : 0, newRoundedScore);
     user[1] = d();
     const { choices, correct: id } = flashcards;
     return {
@@ -145,6 +143,8 @@ function buttons(
           ? ButtonStyle.Success
           : incorrect === first
           ? ButtonStyle.Danger
+          : first === '🤷'
+          ? ButtonStyle.Secondary
           : ButtonStyle.Primary
       )
       .setDisabled(disabled);

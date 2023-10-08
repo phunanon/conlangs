@@ -66,7 +66,9 @@
       "native": "ti",
       "foreign": [
         "we (exclusive)",
-        "us (exclusive)"
+        "us (exclusive)",
+        "we",
+        "us"
       ],
       "genre": "noun",
       "provision": "official"
@@ -75,7 +77,9 @@
       "native": "tu",
       "foreign": [
         "we (inclusive)",
-        "us (exclusive)"
+        "us (exclusive)",
+        "we",
+        "us"
       ],
       "genre": "noun",
       "provision": "official"
@@ -3580,7 +3584,9 @@
     },
     {
       "native": "tidi",
-      "foreign": [],
+      "foreign": [
+        "possession"
+      ],
       "genre": "noun",
       "provision": "official"
     },
@@ -8703,7 +8709,9 @@
     },
     {
       "native": "kage",
-      "foreign": [],
+      "foreign": [
+        "interest"
+      ],
       "genre": "noun",
       "provision": "official"
     },
@@ -9697,7 +9705,9 @@
     },
     {
       "native": "kqlu",
-      "foreign": [],
+      "foreign": [
+        "end"
+      ],
       "genre": "noun",
       "provision": "official"
     },
@@ -11562,12 +11572,6 @@
     },
     {
       "native": "meje",
-      "foreign": [],
-      "genre": "noun",
-      "provision": "official"
-    },
-    {
-      "native": "meja",
       "foreign": [],
       "genre": "noun",
       "provision": "official"
@@ -17702,12 +17706,6 @@
       "provision": "official"
     },
     {
-      "native": "ceji",
-      "foreign": [],
-      "genre": "noun",
-      "provision": "official"
-    },
-    {
       "native": "ceju",
       "foreign": [],
       "genre": "noun",
@@ -19341,12 +19339,6 @@
     },
     {
       "native": "hijq",
-      "foreign": [],
-      "genre": "noun",
-      "provision": "official"
-    },
-    {
-      "native": "hivi",
       "foreign": [],
       "genre": "noun",
       "provision": "official"
@@ -25373,8 +25365,7 @@
     {
       "native": "pqi",
       "foreign": [
-        "plural",
-        "again"
+        "plural"
       ],
       "genre": "adjective",
       "provision": "official"
@@ -31981,7 +31972,9 @@
     },
     {
       "native": "kiudi",
-      "foreign": [],
+      "foreign": [
+        "distant past"
+      ],
       "genre": "adjective",
       "provision": "official"
     },
@@ -32078,7 +32071,9 @@
     },
     {
       "native": "kiunu",
-      "foreign": [],
+      "foreign": [
+        "distant future"
+      ],
       "genre": "adjective",
       "provision": "official"
     },
@@ -33974,7 +33969,9 @@
     },
     {
       "native": "kauge",
-      "foreign": [],
+      "foreign": [
+        "interesting"
+      ],
       "genre": "adjective",
       "provision": "official"
     },
@@ -34968,7 +34965,9 @@
     },
     {
       "native": "kqilu",
-      "foreign": [],
+      "foreign": [
+        "ended"
+      ],
       "genre": "adjective",
       "provision": "official"
     },
@@ -35018,73 +35017,112 @@
     },
     {
       "native": "miubu",
-      "foreign": [],
+      "foreign": [
+        "conditional"
+      ],
       "genre": "adjective",
       "provision": "official"
     },
     {
       "native": "miuby",
-      "foreign": [],
+      "foreign": [
+        "would"
+      ],
       "genre": "adjective",
       "provision": "official"
     },
     {
       "native": "miubo",
-      "foreign": [],
+      "foreign": [
+        "can",
+        "able"
+      ],
       "genre": "adjective",
       "provision": "official"
     },
     {
       "native": "miube",
-      "foreign": [],
+      "foreign": [
+        "will",
+        "shall"
+      ],
       "genre": "adjective",
       "provision": "official"
     },
     {
       "native": "miuba",
-      "foreign": [],
+      "foreign": [
+        "shall",
+        "will",
+        "offered",
+        "invited"
+      ],
       "genre": "adjective",
       "provision": "official"
     },
     {
       "native": "miubx",
-      "foreign": [],
+      "foreign": [
+        "could",
+        "may",
+        "maybe",
+        "might",
+        "possible"
+      ],
       "genre": "adjective",
       "provision": "official"
     },
     {
       "native": "miubq",
-      "foreign": [],
+      "foreign": [
+        "could",
+        "may",
+        "allowed"
+      ],
       "genre": "adjective",
       "provision": "official"
     },
     {
       "native": "miudi",
-      "foreign": [],
+      "foreign": [
+        "don't",
+        "avoid",
+        "prohibited"
+      ],
       "genre": "adjective",
       "provision": "official"
     },
     {
       "native": "miudu",
-      "foreign": [],
+      "foreign": [
+        "must",
+        "obligated"
+      ],
       "genre": "adjective",
       "provision": "official"
     },
     {
       "native": "miudy",
-      "foreign": [],
+      "foreign": [
+        "suggested"
+      ],
       "genre": "adjective",
       "provision": "official"
     },
     {
       "native": "miudo",
-      "foreign": [],
+      "foreign": [
+        "intended"
+      ],
       "genre": "adjective",
       "provision": "official"
     },
     {
       "native": "miude",
-      "foreign": [],
+      "foreign": [
+        "could",
+        "requested"
+      ],
       "genre": "adjective",
       "provision": "official"
     },
@@ -38067,12 +38105,6 @@
     },
     {
       "native": "mqilu",
-      "foreign": [],
-      "genre": "adjective",
-      "provision": "official"
-    },
-    {
-      "native": "mqily",
       "foreign": [],
       "genre": "adjective",
       "provision": "official"
@@ -44272,17 +44304,13 @@
     },
     {
       "native": "hiubi",
-      "foreign": [
-        "conditional"
-      ],
+      "foreign": [],
       "genre": "adjective",
       "provision": "official"
     },
     {
       "native": "hiubu",
-      "foreign": [
-        "would"
-      ],
+      "foreign": [],
       "genre": "adjective",
       "provision": "official"
     },
@@ -44296,108 +44324,61 @@
     },
     {
       "native": "hiubo",
-      "foreign": [
-        "can",
-        "able"
-      ],
+      "foreign": [],
       "genre": "adjective",
       "provision": "official"
     },
     {
       "native": "hiube",
-      "foreign": [
-        "will",
-        "shall"
-      ],
+      "foreign": [],
       "genre": "adjective",
       "provision": "official"
     },
     {
       "native": "hiuba",
-      "foreign": [
-        "shall",
-        "will",
-        "offered",
-        "invited"
-      ],
+      "foreign": [],
       "genre": "adjective",
       "provision": "official"
     },
     {
       "native": "hiubx",
-      "foreign": [
-        "could",
-        "may",
-        "maybe",
-        "might",
-        "possible"
-      ],
+      "foreign": [],
       "genre": "adjective",
       "provision": "official"
     },
     {
       "native": "hiubq",
-      "foreign": [
-        "could",
-        "may",
-        "maybe",
-        "might",
-        "slightly possible"
-      ],
-      "genre": "adjective",
-      "provision": "official"
-    },
-    {
-      "native": "hiudi",
-      "foreign": [
-        "could",
-        "may",
-        "allowed"
-      ],
+      "foreign": [],
       "genre": "adjective",
       "provision": "official"
     },
     {
       "native": "hiudu",
-      "foreign": [
-        "don't",
-        "avoid",
-        "prohibited"
-      ],
+      "foreign": [],
       "genre": "adjective",
       "provision": "official"
     },
     {
       "native": "hiudy",
-      "foreign": [
-        "must",
-        "obligated"
-      ],
+      "foreign": [],
       "genre": "adjective",
       "provision": "official"
     },
     {
       "native": "hiudo",
-      "foreign": [
-        "suggested"
-      ],
+      "foreign": [],
       "genre": "adjective",
       "provision": "official"
     },
     {
       "native": "hiude",
-      "foreign": [
-        "intended"
-      ],
+      "foreign": [],
       "genre": "adjective",
       "provision": "official"
     },
     {
       "native": "hiuda",
-      "foreign": [
-        "could",
-        "requested"
-      ],
+      "foreign": [],
       "genre": "adjective",
       "provision": "official"
     },
@@ -53993,7 +53974,9 @@
     },
     {
       "native": "diudi",
-      "foreign": [],
+      "foreign": [
+        "possess"
+      ],
       "genre": "t. verb",
       "provision": "official"
     },
@@ -60079,7 +60062,9 @@
     },
     {
       "native": "gqilu",
-      "foreign": [],
+      "foreign": [
+        "end"
+      ],
       "genre": "t. verb",
       "provision": "official"
     },
@@ -60267,7 +60252,9 @@
     },
     {
       "native": "niuni",
-      "foreign": [],
+      "foreign": [
+        "build"
+      ],
       "genre": "t. verb",
       "provision": "official"
     },
@@ -64973,12 +64960,6 @@
       "provision": "official"
     },
     {
-      "native": "zuazo",
-      "foreign": [],
-      "genre": "t. verb",
-      "provision": "official"
-    },
-    {
       "native": "zuaze",
       "foreign": [],
       "genre": "t. verb",
@@ -69437,12 +69418,6 @@
       "provision": "official"
     },
     {
-      "native": "viudi",
-      "foreign": [],
-      "genre": "t. verb",
-      "provision": "official"
-    },
-    {
       "native": "viudu",
       "foreign": [
         "prohibit"
@@ -72178,12 +72153,6 @@
       "provision": "official"
     },
     {
-      "native": "vqigi",
-      "foreign": [],
-      "genre": "t. verb",
-      "provision": "official"
-    },
-    {
       "native": "vqigu",
       "foreign": [],
       "genre": "t. verb",
@@ -72605,12 +72574,6 @@
     },
     {
       "native": "liuni",
-      "foreign": [],
-      "genre": "t. verb",
-      "provision": "official"
-    },
-    {
-      "native": "liunu",
       "foreign": [],
       "genre": "t. verb",
       "provision": "official"
@@ -79054,7 +79017,9 @@
     },
     {
       "native": "diudi",
-      "foreign": [],
+      "foreign": [
+        "possess"
+      ],
       "genre": "i. verb",
       "provision": "official"
     },
@@ -85116,7 +85081,9 @@
     },
     {
       "native": "gqilu",
-      "foreign": [],
+      "foreign": [
+        "end"
+      ],
       "genre": "i. verb",
       "provision": "official"
     },
@@ -94445,12 +94412,6 @@
       "provision": "official"
     },
     {
-      "native": "viudi",
-      "foreign": [],
-      "genre": "i. verb",
-      "provision": "official"
-    },
-    {
       "native": "viudu",
       "foreign": [],
       "genre": "i. verb",
@@ -94680,12 +94641,6 @@
     },
     {
       "native": "viujq",
-      "foreign": [],
-      "genre": "i. verb",
-      "provision": "official"
-    },
-    {
-      "native": "viuvi",
       "foreign": [],
       "genre": "i. verb",
       "provision": "official"
@@ -97180,12 +97135,6 @@
     },
     {
       "native": "vqidq",
-      "foreign": [],
-      "genre": "i. verb",
-      "provision": "official"
-    },
-    {
-      "native": "vqigi",
       "foreign": [],
       "genre": "i. verb",
       "provision": "official"
@@ -100610,11 +100559,10 @@
     {
       "native": "pqidi",
       "foreign": [
-        "interesting"
+        "again"
       ],
       "genre": "adjective",
-      "provision": "provisional",
-      "ts": 1658228346126
+      "provision": "official"
     },
     {
       "native": "kqby",
@@ -101526,6 +101474,163 @@
       "provision": "provisional",
       "by": "353221987058974724",
       "ts": 1677058514419
+    },
+    {
+      "native": "viudi",
+      "foreign": [
+        "go"
+      ],
+      "genre": "t. verb",
+      "provision": "provisional",
+      "by": "353221987058974724",
+      "ts": 1677231424032
+    },
+    {
+      "native": "viudi",
+      "foreign": [
+        "move"
+      ],
+      "genre": "i. verb",
+      "provision": "provisional",
+      "by": "353221987058974724",
+      "ts": 1677231445995
+    },
+    {
+      "native": "vqigi",
+      "foreign": [
+        "call"
+      ],
+      "genre": "t. verb",
+      "provision": "provisional",
+      "by": "353221987058974724",
+      "ts": 1677232203640
+    },
+    {
+      "native": "vqigi",
+      "foreign": [
+        "take a call"
+      ],
+      "genre": "i. verb",
+      "provision": "provisional",
+      "by": "353221987058974724",
+      "ts": 1677232226387
+    },
+    {
+      "native": "mqily",
+      "foreign": [
+        "particular"
+      ],
+      "genre": "adjective",
+      "provision": "provisional",
+      "by": "353221987058974724",
+      "ts": 1677239217776
+    },
+    {
+      "native": "hiudi",
+      "foreign": [
+        "direct"
+      ],
+      "genre": "adjective",
+      "provision": "provisional",
+      "by": "353221987058974724",
+      "ts": 1677239676550
+    },
+    {
+      "native": "ceji",
+      "foreign": [
+        "health"
+      ],
+      "genre": "noun",
+      "provision": "provisional",
+      "by": "353221987058974724",
+      "ts": 1677240053319
+    },
+    {
+      "native": "kaceji",
+      "foreign": [
+        "clinic"
+      ],
+      "genre": "compound",
+      "provision": "provisional",
+      "by": "353221987058974724",
+      "ts": 1677240067277
+    },
+    {
+      "native": "meja",
+      "foreign": [
+        "surgery"
+      ],
+      "genre": "noun",
+      "provision": "provisional",
+      "by": "353221987058974724",
+      "ts": 1677240104580
+    },
+    {
+      "native": "cimeja",
+      "foreign": [
+        "surgeon"
+      ],
+      "genre": "compound",
+      "provision": "provisional",
+      "by": "353221987058974724",
+      "ts": 1677240118592
+    },
+    {
+      "native": "cqzudi",
+      "foreign": [
+        "inheritence"
+      ],
+      "genre": "noun",
+      "provision": "provisional",
+      "by": "353221987058974724",
+      "ts": 1677405696854
+    },
+    {
+      "native": "hivi",
+      "foreign": [
+        "departure"
+      ],
+      "genre": "noun",
+      "provision": "provisional",
+      "by": "353221987058974724",
+      "ts": 1677488269210
+    },
+    {
+      "native": "viuvi",
+      "foreign": [
+        "depart",
+        "leave"
+      ],
+      "genre": "i. verb",
+      "provision": "provisional",
+      "by": "353221987058974724",
+      "ts": 1677488280132
+    },
+    {
+      "native": "zuazo",
+      "foreign": [
+        "buy"
+      ],
+      "genre": "t. verb",
+      "provision": "provisional",
+      "by": "353221987058974724",
+      "ts": 1677660413544
+    },
+    {
+      "native": "liunu",
+      "foreign": [],
+      "genre": "t. verb",
+      "provision": "official"
+    },
+    {
+      "native": "cogage",
+      "foreign": [
+        "donkey"
+      ],
+      "genre": "noun",
+      "provision": "provisional",
+      "by": "353221987058974724",
+      "ts": 1678279906318
     }
   ]
 }

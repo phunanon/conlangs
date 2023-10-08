@@ -4,7 +4,8 @@
   },
   "main": "out/index.js",
   "dependencies": {
-    "discord.js": "^14.0.1"
+    "canvas": "^2.11.0",
+    "discord.js": "^14.9.0"
   },
   "devDependencies": {
     "typescript": "^4.8.0-dev.20220717"
